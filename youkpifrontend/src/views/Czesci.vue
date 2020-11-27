@@ -123,12 +123,13 @@ export default {
   data () {
     return {
       // Settings
-      title: '',
+      title: 'Części',
       editTitle: 'Edytuj część',
       newTitle: 'Dodaj część',
       getAllApi: 'api/Parts/GetAll',
       postNewApi: 'api/Parts/Create',
       putEditApi: 'api/Parts/Update',
+      deleteApi: 'api/Parts/Delete',
       defaultItem: {
         id: '',
         nazwa: '',
@@ -177,7 +178,13 @@ export default {
       this.showDialog = false
       // Deletion of form errors
     },
-    deleteProduct (part, index) {
+    async deleteProduct (part, index) {
+      await this.$dialog.confirm({
+        text: 'Czy na pewno chcesz usunąć?',
+        title: 'Uwaga'
+      })
+      this.$http.delete(this.deleteApi, part)
+
       var indexOfPart = this.data.indexOf(part)
       this.data.splice(indexOfPart, 1)
     },

@@ -60,6 +60,21 @@ namespace YouKpiBackend.Controllers
             }
         }
 
+        [HttpDelete("[action]")]
+        public IActionResult Delete([FromBody]Czesci part)
+        {
+            try
+            {
+                _dbContext.Czesci.Remove(part);
+                _dbContext.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
     }
 }
 
