@@ -67,9 +67,18 @@
             :items="products"
             class="elevation-1"
             item-key="id"
-            loading="true"
-            search="search"
+            :loading="tableLoading"
+            :search="search"
           >
+            <template slot="item" slot-scope="props">
+              <tr>
+                <template v-for="(header, index) in headers">
+                  <td :key="index">
+                    {{ props.item[header.value] }}
+                  </td>
+                </template>
+              </tr>
+            </template>
           </v-data-table>
         </v-flex>
       </v-layout>
@@ -102,21 +111,24 @@ export default {
       ],
       products: [],
       search: '',
-      showNewProductDialog: false
+      showNewProductDialog: false,
+      tableLoading: false
     }
   },
   computed: {},
   watch: {},
   methods: {
     initialise () {
+      this.tableLoading = true
       this.getProducts()
     },
     getProducts () {
+      var $this = this
       this.$http.get(this.getAllProducts).then(Response => {
-        this.products = Response.data
+        $this.products = Response.data
+        this.tableLoading = false
       }).catch((e) => {
-        var a = 'aaa'
-        this.products = a
+        this.tableLoading = false
       })
     },
 
