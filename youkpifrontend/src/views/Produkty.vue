@@ -35,12 +35,17 @@
 </template>
 
 <script>
+// import * as v from '../main.js'
+
 export default {
   name: 'Produkty',
   components: {},
   props: {},
   data () {
     return {
+      // api
+      getAllProducts: 'api/Products/GetAllProducts',
+
       headers: [
         { text: 'Id', value: 'id' },
         { text: 'Typ wyrobu id', value: 'typWyrobuId' },
@@ -59,7 +64,17 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    initialise () {},
+    initialise () {
+      this.getProducts()
+    },
+    getProducts () {
+      this.$http.get(this.getAllProducts).then(Response => {
+        this.products = Response.data
+      }).catch((e) => {
+        var a = 'aaa'
+        this.products = a
+      })
+    },
 
     addProduct () {
 
