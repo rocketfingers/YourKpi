@@ -10,7 +10,7 @@
             <v-icon color="white">fa-user</v-icon>
           </v-btn>
         </template>
-        <span>Right tooltip</span>
+        <span>New User</span>
       </v-tooltip>
     </v-app-bar>
     <v-main>

@@ -5,6 +5,9 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import axios from 'axios'
+import dtMixin from './components/dtMixin.js'
+
+Vue.mixin(dtMixin)
 
 Vue.config.productionTip = false
 const axiosInstance = axios.create({
