@@ -17,14 +17,14 @@
         >
           <v-list-item>
             <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
+              <v-icon>fa-industry</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Produkty</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
             <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
+              <v-icon>fa-tools</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Części</v-list-item-title>
           </v-list-item>
