@@ -179,14 +179,16 @@ export default {
       // Deletion of form errors
     },
     async deleteProduct (part, index) {
-      await this.$dialog.confirm({
+      var res = await this.$dialog.confirm({
         text: 'Czy na pewno chcesz usunąć?',
         title: 'Uwaga'
       })
-      this.$http.delete(this.deleteApi, part)
+      if (res) {
+        this.$http.delete(this.deleteApi, part)
 
-      var indexOfPart = this.data.indexOf(part)
-      this.data.splice(indexOfPart, 1)
+        var indexOfPart = this.data.indexOf(part)
+        this.data.splice(indexOfPart, 1)
+      }
     },
     save () {
       // Native form submission is not yet supported

@@ -91,7 +91,7 @@
                       <v-flex xs6>
                         <v-icon
                           @click="deleteProduct(props.item, index)"
-                          color="black"
+                          color="red lighten-1"
                           >delete</v-icon
                         >
                       </v-flex>
@@ -205,9 +205,15 @@ export default {
     editProductAction (product) {
 
     },
-    deleteProduct (product, index) {
-      var indexOfProd = this.products.indexOf(product)
-      this.products.splice(indexOfProd, 1)
+    async deleteProduct (product, index) {
+      var res = await this.$dialog.confirm({
+        text: 'Czy na pewno chcesz usunąć?',
+        title: 'Uwaga'
+      })
+      if (res) {
+        var indexOfProd = this.products.indexOf(product)
+        this.products.splice(indexOfProd, 1)
+      }
     }
   },
   created () {

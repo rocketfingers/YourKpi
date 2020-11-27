@@ -12,7 +12,7 @@
             ></v-text-field>
           </v-flex>
           <v-flex xs12>
-            <v-select
+            <v-autocomplete
               outlined
               color
               label="Typ wyrobu id"
@@ -20,8 +20,7 @@
               item-text="id"
               item-value="id"
               v-model="currentProduct.typWyrobuId"
-              autocomplete
-            ></v-select>
+            ></v-autocomplete>
           </v-flex>
           <v-flex xs12>
             <v-text-field
