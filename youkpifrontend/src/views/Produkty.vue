@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-dialog v-model="showNewProductDialog" max-width="1200" persistent>
+    <v-dialog v-model="showNewProductDialog" max-width="1800" persistent>
       <v-card>
         <v-toolbar dark elevation-4 color="primary lighten-1">
-          <span class="headline">{{ orderTitle }}</span>
+          <span class="headline">{{ productTitle }}</span>
           <v-spacer></v-spacer>
           <v-btn icon @click="showNewProductDialog = false" dark>
             <v-icon>close</v-icon>
@@ -11,7 +11,13 @@
         </v-toolbar>
         <v-container grid-list-md>
           <v-layout align-center wrap>
-            <v-flex xs12 sm8 offset-sm2> </v-flex>
+            <v-flex xs12 sm8 offset-sm2>
+              <NewProduct
+                :currentProduct="currentProduct"
+                @editedProduct="editCurrentProductRes"
+                :productTypes="productTypes"
+              ></NewProduct>
+            </v-flex>
           </v-layout>
         </v-container>
         <v-card-actions class="blue lighten-5">
@@ -33,7 +39,7 @@
             large
             color="blue darken-1"
             text
-            @click.native="addProductAction()"
+            @click.native="saveProductAction()"
           >
             Zapisz
             <v-icon dark>save</v-icon>
@@ -67,9 +73,36 @@
             :items="products"
             class="elevation-1"
             item-key="id"
-            loading="true"
-            search="search"
+            :loading="tableLoading"
+            :search="search"
           >
+            <template slot="item" slot-scope="props">
+              <tr>
+                <template v-for="(header, index) in headers">
+                  <td :key="index" v-if="header.value == 'actions'">
+                    <v-layout>
+                      <v-flex xs6>
+                        <v-icon
+                          @click="editProduct(props.item, index)"
+                          color="green"
+                          >list</v-icon
+                        >
+                      </v-flex>
+                      <v-flex xs6>
+                        <v-icon
+                          @click="deleteProduct(props.item, index)"
+                          color="black"
+                          >delete</v-icon
+                        >
+                      </v-flex>
+                    </v-layout>
+                  </td>
+                  <td :key="index" v-else>
+                    {{ props.item[header.value] }}
+                  </td>
+                </template>
+              </tr>
+            </template>
           </v-data-table>
         </v-flex>
       </v-layout>
@@ -79,15 +112,19 @@
 
 <script>
 // import * as v from '../main.js'
+import NewProduct from '../components/NewProduct'
 
 export default {
   name: 'Produkty',
-  components: {},
+  components: { NewProduct: NewProduct },
   props: {},
   data () {
     return {
       // api
       getAllProducts: 'api/Products/GetAllProducts',
+      addProductApi: 'api/Products/AddProduct',
+      deleteProductApi: 'api/Products/DeleteProduct/',
+      getAllProductTypesApi: 'api/ProductTypes/GetAllProductTypes',
 
       headers: [
         { text: 'Id', value: 'id' },
@@ -102,29 +139,75 @@ export default {
       ],
       products: [],
       search: '',
-      showNewProductDialog: false
+      showNewProductDialog: false,
+      tableLoading: false,
+      productTitle: 'Dodaj produkt',
+      currentProduct: {},
+      editedIndex: -1,
+      productTypes: []
     }
   },
   computed: {},
   watch: {},
   methods: {
     initialise () {
+      this.tableLoading = true
       this.getProducts()
+      this.getProductTypes()
     },
     getProducts () {
+      var $this = this
       this.$http.get(this.getAllProducts).then(Response => {
-        this.products = Response.data
+        $this.products = Response.data
+        this.tableLoading = false
       }).catch((e) => {
-        var a = 'aaa'
-        this.products = a
+        this.tableLoading = false
+      })
+    },
+    getProductTypes () {
+      var $this = this
+      this.$http.get(this.getAllProductTypesApi).then(Response => {
+        $this.productTypes = Response.data
+      }).catch((e) => {
+      })
+    },
+    saveProductAction () {
+      if (this.editedIndex > 0) {
+        this.editProductAction()
+      } else {
+        this.addProductAction(this.currentProduct)
+      }
+      this.showNewProductDialog = false
+    },
+    addProduct () {
+      this.productTitle = 'Dodaj produkt'
+      this.currentProduct = {}
+      this.editedIndex = -1
+      this.showNewProductDialog = true
+    },
+    addProductAction (product) {
+      this.$http.post(this.addProductApi, product).then(Result => {
+        this.products.push(product)
+      }).catch(e => {
+
       })
     },
 
-    addProduct () {
+    editProduct (product, index) {
+      this.productTitle = 'Edytuj produkt'
+      this.editedIndex = index
       this.showNewProductDialog = true
+      this.currentProduct = product
     },
-    addProductAction () {
+    editCurrentProductRes (editedProduct) {
+      this.currentProduct = editedProduct
+    },
+    editProductAction (product) {
 
+    },
+    deleteProduct (product, index) {
+      var indexOfProd = this.products.indexOf(product)
+      this.products.splice(indexOfProd, 1)
     }
   },
   created () {

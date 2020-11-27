@@ -46,6 +46,9 @@ namespace YouKpiBackend
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), sqlServerOptions => sqlServerOptions.CommandTimeout(2700)));
 
 
+            services.AddScoped<YoukpiContext, YoukpiContext>();
+
+
             services.AddControllers();
         }
 
