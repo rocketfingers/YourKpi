@@ -50,7 +50,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="showProductPartsDialog" max-width="1800" persistent>
+    <v-dialog v-model="showProductPartsDialog" max-width="1000" persistent>
       <v-card>
         <v-toolbar dark elevation-4 color="primary lighten-1">
           <span class="headline">Czesci produktu</span>
@@ -62,7 +62,7 @@
         <v-container grid-list-md>
           <v-layout align-center wrap>
             <v-flex xs12 sm8 offset-sm2>
-              <ProductParts></ProductParts>
+              <ProductParts :currentProduct="currentProduct"></ProductParts>
             </v-flex>
           </v-layout>
         </v-container>
@@ -258,6 +258,8 @@ export default {
         })
     },
     showProductParts (product, index) {
+      this.currentProduct = product
+      this.editedIndex = index
       this.showProductPartsDialog = true
     },
     editProduct (product, index) {

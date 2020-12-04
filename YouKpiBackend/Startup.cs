@@ -47,7 +47,10 @@ namespace YouKpiBackend
 
 
             services.AddScoped<YoukpiContext, YoukpiContext>();
-
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             services.AddControllers();
         }

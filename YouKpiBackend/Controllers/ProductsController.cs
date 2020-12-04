@@ -24,7 +24,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Produkty.ToListAsync();
+                var res = await _ctx.Produkty.Include(p => p.ProduktCzesci).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
