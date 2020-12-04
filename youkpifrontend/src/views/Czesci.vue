@@ -32,7 +32,7 @@
                 <span class="headline">{{ formTitle }}</span>
               </v-toolbar>
               <v-card>
-                <v-form ref="form">
+                <v-form ref="newPartForm">
                   <NewPart
                     :editedItem="editedItem"
                     @editedProduct="editCurrentProductRes"
@@ -190,6 +190,9 @@ export default {
       }
     },
     save () {
+      if (!this.$refs.newPartForm.validate()) {
+        return
+      }
       // Native form submission is not yet supported
       if (this.editedIndex > -1) {
         this.$http.put(this.putEditApi,
