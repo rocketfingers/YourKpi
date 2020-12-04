@@ -183,10 +183,14 @@ export default {
         title: 'Uwaga'
       })
       if (res) {
-        this.$http.delete(this.deleteApi, part)
-
         var indexOfPart = this.data.indexOf(part)
-        this.data.splice(indexOfPart, 1)
+        this.$http.delete(this.deleteApi, {
+          params: { id: part.id }
+        })
+          .then(Result => {
+            this.data.splice(indexOfPart, 1)
+          }
+          )
       }
     },
     save () {

@@ -26,7 +26,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-               return Ok(await _dbContext.Czesci.ToListAsync());
+                return Ok(await _dbContext.Czesci.ToListAsync());
             }
             catch (Exception ex)
             {
@@ -34,14 +34,14 @@ namespace YouKpiBackend.Controllers
             }
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> Create([FromBody]Czesci part)
+        public async Task<IActionResult> Create([FromBody] Czesci part)
         {
             if (part == null)
             {
                 return BadRequest("Bad model");
             }
             try
-            {        
+            {
                 _dbContext.Czesci.Add(part);
                 await _dbContext.SaveChangesAsync();
 
@@ -54,9 +54,10 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpPut("[action]")]
-        public async Task<IActionResult> Update([FromBody]Czesci part)
+        public async Task<IActionResult> Update([FromBody] Czesci part)
         {
-            try { 
+            try
+            {
                 return NoContent();
             }
             catch (Exception ex)
@@ -66,12 +67,16 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpDelete("[action]")]
-        public IActionResult Delete([FromBody]Czesci part)
+        public async Task<IActionResult> Delete(string id)
         {
             try
             {
-                _dbContext.Czesci.Remove(part);
-                _dbContext.SaveChangesAsync();
+                var partEntity = _dbContext.Czesci.FirstOrDefault(c => c.Id == id);
+                if (partEntity != null)
+                {
+                    _dbContext.Czesci.Remove(partEntity);
+                    await _dbContext.SaveChangesAsync();
+                }
                 return Ok();
             }
             catch (Exception ex)
