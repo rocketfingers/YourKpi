@@ -125,7 +125,8 @@ export default {
       // api
       getAllProducts: 'api/Products/GetAllProducts',
       addProductApi: 'api/Products/AddProduct',
-      deleteProductApi: 'api/Products/DeleteProduct/',
+      editProductApi: 'api/Products/EditProduct',
+      deleteProductApi: 'api/Products/DeleteById',
       getAllProductTypesApi: 'api/ProductTypes/GetAllProductTypes',
 
       headers: [
@@ -179,12 +180,9 @@ export default {
         .catch((e) => {})
     },
     saveProductAction () {
-      /* eslint-disable no-debugger */
-      debugger
-      /* eslint-enable no-debugger */
-      // if (!this.$refs.newProductForm.validate()) {
-      //   return
-      // }
+      if (!this.$refs.newProductForm.validate()) {
+        return
+      }
       if (this.editedIndex > 0) {
         this.editProductAction()
       } else {
@@ -193,21 +191,22 @@ export default {
       this.showNewProductDialog = false
     },
     addProduct () {
+      if (this.$refs.newProductForm) {
+        this.$refs.newProductForm.reset()
+      }
       this.productTitle = 'Dodaj produkt'
       this.currentProduct = {}
       this.editedIndex = -1
       this.showNewProductDialog = true
     },
     addProductAction (product) {
-      /* eslint-disable no-debugger */
-      debugger
-      /* eslint-enable no-debugger */
       this.$http
         .post(this.addProductApi, product)
         .then((Result) => {
           this.products.push(product)
         })
-        .catch((e) => {})
+        .catch((e) => {
+        })
     },
 
     editProduct (product, index) {
@@ -219,7 +218,13 @@ export default {
     editCurrentProductRes (editedProduct) {
       this.currentProduct = editedProduct
     },
-    editProductAction (product) {},
+    editProductAction (product) {
+      this.$http
+        .put(this.editProductApi, product)
+        .then((Result) => {
+        })
+        .catch((e) => {})
+    },
     async deleteProduct (product, index) {
       var res = await this.$dialog.confirm({
         text: 'Czy na pewno chcesz usunąć?',
@@ -227,7 +232,13 @@ export default {
       })
       if (res) {
         var indexOfProd = this.products.indexOf(product)
-        this.products.splice(indexOfProd, 1)
+        this.$http.delete(this.deleteProductApi, {
+          params: { id: product.id }
+        })
+          .then(Result => {
+            this.products.splice(indexOfProd, 1)
+          }
+          )
       }
     }
   },
