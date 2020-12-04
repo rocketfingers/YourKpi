@@ -35,6 +35,7 @@
                 <v-form ref="newPartForm">
                   <NewPart
                     :editedItem="editedItem"
+                    :editMode="editMode"
                     @editedProduct="editCurrentProductRes"
                   ></NewPart>
                 </v-form>
@@ -148,7 +149,8 @@ export default {
         { text: 'GatPodstawowy', value: 'gatPodstawowy' },
         { text: 'NumerRysNorma', value: 'numerRysNorma' },
         { text: 'Akcje', value: 'actions' }
-      ]
+      ],
+      editMode: false
     }
   },
   computed: {
@@ -167,6 +169,8 @@ export default {
   },
   methods: {
     editItem (item) {
+      this.editMode = true
+
       this.editedIndex = this.data.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.showDialog = true
@@ -175,6 +179,7 @@ export default {
       if (this.$refs.newPartForm) {
         this.$refs.newPartForm.reset()
       }
+      this.editMode = false
       this.editedItem = Object.assign({}, this.defaultItem)
       this.editedIndex = -1
       this.showDialog = false

@@ -8,6 +8,7 @@
               outlined
               color
               label="Id"
+              :disabled="editMode"
               required
               :rules="[requiredRule]"
               v-model="currentProduct.id"
@@ -102,7 +103,8 @@ export default {
   },
   props: {
     currentProduct: Object,
-    productTypes: Array
+    productTypes: Array,
+    editMode: Boolean
   },
   data () {
     return {

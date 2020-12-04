@@ -15,6 +15,7 @@
               <v-form ref="newProductForm">
                 <NewProduct
                   :currentProduct="currentProduct"
+                  :editMode="editMode"
                   @editedProduct="editCurrentProductRes"
                   :productTypes="productTypes"
                 ></NewProduct>
@@ -148,7 +149,8 @@ export default {
       productTitle: 'Dodaj produkt',
       currentProduct: {},
       editedIndex: -1,
-      productTypes: []
+      productTypes: [],
+      editMode: false
     }
   },
   computed: {},
@@ -195,6 +197,7 @@ export default {
       if (this.$refs.newProductForm) {
         this.$refs.newProductForm.reset()
       }
+      this.editMode = false
       this.productTitle = 'Dodaj produkt'
       this.currentProduct = {}
       this.editedIndex = -1
@@ -212,6 +215,7 @@ export default {
 
     editProduct (product, index) {
       this.productTitle = 'Edytuj produkt'
+      this.editMode = true
       this.editedIndex = index
       this.showNewProductDialog = true
       this.currentProduct = product

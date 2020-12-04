@@ -7,6 +7,7 @@
             <v-text-field
               v-model="editedItem.id"
               outlined
+              :disabled="editMode"
               :rules="[requiredRule]"
               label="Id"
             ></v-text-field>
@@ -47,7 +48,8 @@ export default {
   components: {
   },
   props: {
-    editedItem: Object
+    editedItem: Object,
+    editMode: Boolean
   },
   data () {
     return {
