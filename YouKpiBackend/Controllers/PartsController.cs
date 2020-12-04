@@ -34,12 +34,17 @@ namespace YouKpiBackend.Controllers
             }
         }
         [HttpPost("[action]")]
-        public IActionResult Create([FromBody]Czesci part)
+        public async Task<IActionResult> Create([FromBody]Czesci part)
         {
+            if (part == null)
+            {
+                return BadRequest("Bad model");
+            }
             try
             {        
                 _dbContext.Czesci.Add(part);
-                _dbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
+
                 return Created("", part);
             }
             catch (Exception ex)

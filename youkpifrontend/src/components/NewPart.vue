@@ -7,6 +7,7 @@
             <v-text-field
               v-model="editedItem.id"
               outlined
+              :rules="[requiredRule]"
               label="Id"
             ></v-text-field>
           </v-flex>
@@ -14,6 +15,7 @@
             <v-text-field
               v-model="editedItem.nazwa"
               outlined
+              :rules="[requiredRule]"
               label="Nazwa"
             ></v-text-field>
           </v-flex>
@@ -21,6 +23,7 @@
             <v-text-field
               v-model="editedItem.gatPodstawowy"
               outlined
+              :rules="[requiredRule]"
               label="Gatunek podstawowy"
             ></v-text-field>
           </v-flex>
@@ -28,6 +31,7 @@
             <v-text-field
               v-model="editedItem.numerRysNorma"
               outlined
+              :rules="[requiredRule]"
               label="Numer rysunku norma"
             ></v-text-field>
           </v-flex>
