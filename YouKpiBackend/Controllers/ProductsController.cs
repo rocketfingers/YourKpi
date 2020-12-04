@@ -73,7 +73,6 @@ namespace YouKpiBackend.Controllers
                 _ctx.SaveChanges();
 
                 return NoContent();
-
             }
             catch (Exception ex)
             {

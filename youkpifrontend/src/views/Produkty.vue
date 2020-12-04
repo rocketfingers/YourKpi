@@ -24,23 +24,23 @@
         </v-container>
         <v-card-actions class="blue lighten-5">
           <v-btn
-            outlined
-            rounded
+            outline
+            round
             large
             color="blue darken-1"
-            text
+            flat
             @click.native="showNewProductDialog = false"
           >
-            Zamknij
+            Anuluj
             <v-icon dark>cancel</v-icon>
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            outlined
-            rounded
+            outline
+            round
             large
             color="blue darken-1"
-            text
+            flat
             @click.native="saveProductAction"
           >
             Zapisz
@@ -87,7 +87,8 @@
                         <v-icon
                           @click="editProduct(props.item, index)"
                           color="green"
-                          >list</v-icon
+                          class="mr-2"
+                          >edit</v-icon
                         >
                       </v-flex>
                       <v-flex xs6>
