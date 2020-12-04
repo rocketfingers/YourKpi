@@ -172,6 +172,9 @@ export default {
       this.showDialog = true
     },
     close () {
+      if (this.$refs.newPartForm) {
+        this.$refs.newPartForm.reset()
+      }
       this.editedItem = Object.assign({}, this.defaultItem)
       this.editedIndex = -1
       this.showDialog = false

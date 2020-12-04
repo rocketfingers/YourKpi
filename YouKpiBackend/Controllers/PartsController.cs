@@ -54,15 +54,26 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpPut("[action]")]
-        public async Task<IActionResult> Update([FromBody] Czesci part)
+        public async Task<IActionResult> Update([FromBody] Czesci entity)
         {
+            if (entity == null)
+            {
+                return BadRequest("Bad model");
+            }
             try
             {
+                var part = _dbContext.Czesci.FirstOrDefault(p => p.Id == entity.Id);
+                part.Nazwa = entity.Nazwa;
+                part.GatPodstawowy = entity.GatPodstawowy;
+                part.NumerRysNorma = entity.NumerRysNorma;
+
+                await _dbContext.SaveChangesAsync();
+
                 return NoContent();
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
