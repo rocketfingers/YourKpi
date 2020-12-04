@@ -8,6 +8,8 @@
               outlined
               color
               label="Id"
+              required
+              :rules="[requiredRule]"
               v-model="currentProduct.id"
             ></v-text-field>
           </v-flex>
@@ -15,10 +17,12 @@
             <v-autocomplete
               outlined
               color
+              :rules="[requiredRule]"
               label="Typ wyrobu id"
               :items="productTypes"
               item-text="id"
               item-value="id"
+              required
               v-model="currentProduct.typWyrobuId"
             ></v-autocomplete>
           </v-flex>
@@ -26,6 +30,7 @@
             <v-text-field
               outlined
               color
+              :rules="[requiredRule]"
               label="Numer Rys Norma"
               v-model="currentProduct.numerRysNorma"
             ></v-text-field>
@@ -33,10 +38,12 @@
           <v-flex xs12>
             <v-text-field
               outlined
+              :rules="[requiredRule, numberRule]"
               color
               label="DN"
               type="number"
-              v-model="currentProduct.dn"
+              min="0"
+              v-model.number="currentProduct.dn"
             ></v-text-field>
           </v-flex>
         </v-layout>
@@ -48,14 +55,17 @@
             <v-text-field
               outlined
               color
+              :rules="[requiredRule, numberRule]"
               label="PN"
               type="number"
-              v-model="currentProduct.pn"
+              min="0"
+              v-model.number="currentProduct.pn"
             ></v-text-field>
           </v-flex>
           <v-flex xs12>
             <v-text-field
               outlined
+              :rules="[requiredRule]"
               color
               label="ANSI"
               v-model="currentProduct.ansi"
@@ -65,6 +75,7 @@
             <v-text-field
               outlined
               color
+              :rules="[requiredRule]"
               label="Wersja"
               v-model="currentProduct.wersja"
             ></v-text-field>
@@ -73,6 +84,7 @@
             <v-text-field
               outlined
               color
+              :rules="[requiredRule]"
               label="Uszczelnienie"
               v-model="currentProduct.uszczelnienie"
             ></v-text-field>
@@ -94,6 +106,12 @@ export default {
   },
   data () {
     return {
+      requiredRule: (v) => !!v || 'To pole jest wymagane',
+      numberRule: val => {
+        if (val < 0) return 'Wprowadz dodatnia wartosc'
+        return true
+      }
+
     }
   },
   computed: {

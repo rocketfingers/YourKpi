@@ -12,11 +12,13 @@
         <v-container grid-list-md>
           <v-layout align-center wrap>
             <v-flex xs12 sm8 offset-sm2>
-              <NewProduct
-                :currentProduct="currentProduct"
-                @editedProduct="editCurrentProductRes"
-                :productTypes="productTypes"
-              ></NewProduct>
+              <v-form ref="newProductForm">
+                <NewProduct
+                  :currentProduct="currentProduct"
+                  @editedProduct="editCurrentProductRes"
+                  :productTypes="productTypes"
+                ></NewProduct>
+              </v-form>
             </v-flex>
           </v-layout>
         </v-container>
@@ -39,7 +41,7 @@
             large
             color="blue darken-1"
             text
-            @click.native="saveProductAction()"
+            @click.native="saveProductAction"
           >
             Zapisz
             <v-icon dark>save</v-icon>
@@ -157,21 +159,32 @@ export default {
     },
     getProducts () {
       var $this = this
-      this.$http.get(this.getAllProducts).then(Response => {
-        $this.products = Response.data
-        this.tableLoading = false
-      }).catch((e) => {
-        this.tableLoading = false
-      })
+      this.$http
+        .get(this.getAllProducts)
+        .then((Response) => {
+          $this.products = Response.data
+          this.tableLoading = false
+        })
+        .catch((e) => {
+          this.tableLoading = false
+        })
     },
     getProductTypes () {
       var $this = this
-      this.$http.get(this.getAllProductTypesApi).then(Response => {
-        $this.productTypes = Response.data
-      }).catch((e) => {
-      })
+      this.$http
+        .get(this.getAllProductTypesApi)
+        .then((Response) => {
+          $this.productTypes = Response.data
+        })
+        .catch((e) => {})
     },
     saveProductAction () {
+      /* eslint-disable no-debugger */
+      debugger
+      /* eslint-enable no-debugger */
+      // if (!this.$refs.newProductForm.validate()) {
+      //   return
+      // }
       if (this.editedIndex > 0) {
         this.editProductAction()
       } else {
@@ -186,11 +199,15 @@ export default {
       this.showNewProductDialog = true
     },
     addProductAction (product) {
-      this.$http.post(this.addProductApi, product).then(Result => {
-        this.products.push(product)
-      }).catch(e => {
-
-      })
+      /* eslint-disable no-debugger */
+      debugger
+      /* eslint-enable no-debugger */
+      this.$http
+        .post(this.addProductApi, product)
+        .then((Result) => {
+          this.products.push(product)
+        })
+        .catch((e) => {})
     },
 
     editProduct (product, index) {
@@ -202,9 +219,7 @@ export default {
     editCurrentProductRes (editedProduct) {
       this.currentProduct = editedProduct
     },
-    editProductAction (product) {
-
-    },
+    editProductAction (product) {},
     async deleteProduct (product, index) {
       var res = await this.$dialog.confirm({
         text: 'Czy na pewno chcesz usunąć?',
