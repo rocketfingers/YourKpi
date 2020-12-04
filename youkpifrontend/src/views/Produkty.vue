@@ -50,6 +50,38 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="showProductPartsDialog" max-width="1800" persistent>
+      <v-card>
+        <v-toolbar dark elevation-4 color="primary lighten-1">
+          <span class="headline">Czesci produktu</span>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="showProductPartsDialog = false" dark>
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-container grid-list-md>
+          <v-layout align-center wrap>
+            <v-flex xs12 sm8 offset-sm2>
+              <ProductParts></ProductParts>
+            </v-flex>
+          </v-layout>
+        </v-container>
+        <v-card-actions class="blue lighten-5">
+          <v-spacer></v-spacer>
+          <v-btn
+            outline
+            round
+            large
+            color="blue darken-1"
+            flat
+            @click.native="showProductPartsDialog = false"
+          >
+            Zamknij
+            <v-icon dark>cancel</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-container>
       <v-layout row wrap elevation-3>
         <v-flex xs12>
@@ -84,7 +116,15 @@
                 <template v-for="(header, index) in headers">
                   <td :key="index" v-if="header.value == 'actions'">
                     <v-layout>
-                      <v-flex xs6>
+                      <v-flex xs>
+                        <v-icon
+                          @click="showProductParts(props.item, index)"
+                          color="blue"
+                          class="mr-2"
+                          >search</v-icon
+                        >
+                      </v-flex>
+                      <v-flex xs>
                         <v-icon
                           @click="editProduct(props.item, index)"
                           color="green"
@@ -92,7 +132,7 @@
                           >edit</v-icon
                         >
                       </v-flex>
-                      <v-flex xs6>
+                      <v-flex xs4>
                         <v-icon
                           @click="deleteProduct(props.item, index)"
                           color="red lighten-1"
@@ -117,10 +157,14 @@
 <script>
 // import * as v from '../main.js'
 import NewProduct from '../components/NewProduct'
+import ProductParts from '../components/ProductParts'
 
 export default {
   name: 'Produkty',
-  components: { NewProduct: NewProduct },
+  components: {
+    NewProduct: NewProduct,
+    ProductParts: ProductParts
+  },
   props: {},
   data () {
     return {
@@ -145,6 +189,7 @@ export default {
       products: [],
       search: '',
       showNewProductDialog: false,
+      showProductPartsDialog: false,
       tableLoading: false,
       productTitle: 'Dodaj produkt',
       currentProduct: {},
@@ -212,7 +257,9 @@ export default {
         .catch((e) => {
         })
     },
-
+    showProductParts (product, index) {
+      this.showProductPartsDialog = true
+    },
     editProduct (product, index) {
       this.productTitle = 'Edytuj produkt'
       this.editMode = true
