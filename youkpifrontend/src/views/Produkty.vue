@@ -184,7 +184,7 @@ export default {
         return
       }
       if (this.editedIndex > 0) {
-        this.editProductAction()
+        this.editProductAction(this.currentProduct)
       } else {
         this.addProductAction(this.currentProduct)
       }

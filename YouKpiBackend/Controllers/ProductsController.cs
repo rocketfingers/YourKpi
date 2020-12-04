@@ -62,10 +62,18 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
-                var res = _ctx.Produkty.Add(entity);
+                var product = _ctx.Produkty.FirstOrDefault(p => p.Id == entity.Id);
+                product.TypWyrobuId = entity.TypWyrobuId;
+                product.NumerRysNorma = entity.NumerRysNorma;
+                product.Dn = entity.Dn;
+                product.Pn = entity.Pn;
+                product.Ansi = entity.Ansi;
+                product.Wersja = entity.Wersja;
+                product.Uszczelnienie = entity.Uszczelnienie;
                 _ctx.SaveChanges();
 
-                return Created("", res);
+                return NoContent();
+
             }
             catch (Exception ex)
             {
