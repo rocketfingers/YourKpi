@@ -1,8 +1,15 @@
 <template>
   <v-app id="inspire">
-    <v-app-bar app color="primary lighten-1" dense>
+    <v-app-bar app color="primary" dense>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title class="white--text">YouKPI</v-toolbar-title>
+      <v-img
+        class="mx-2"
+        src="./assets/logo.png"
+        max-height="40"
+        max-width="120"
+        contain
+      ></v-img>
+      <!-- <v-toolbar-title class="ml-1 white--text">YouKPI</v-toolbar-title> -->
       <v-spacer></v-spacer>
       <v-tooltip right>
         <template v-slot:activator="{ on }">
@@ -44,6 +51,12 @@
               <v-icon>fa-tools</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Części</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="$router.push({ name: 'TypWyrobu' })">
+            <v-list-item-icon>
+              <v-icon>fa-wrench</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Typ wyrobu</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>

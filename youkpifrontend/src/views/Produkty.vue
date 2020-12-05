@@ -29,7 +29,7 @@
             round
             large
             color="blue darken-1"
-            flat
+            text
             @click.native="showNewProductDialog = false"
           >
             Anuluj
@@ -41,7 +41,7 @@
             round
             large
             color="blue darken-1"
-            flat
+            text
             @click.native="saveProductAction"
           >
             Zapisz
@@ -173,7 +173,7 @@ export default {
       addProductApi: 'api/Products/AddProduct',
       editProductApi: 'api/Products/EditProduct',
       deleteProductApi: 'api/Products/DeleteById',
-      getAllProductTypesApi: 'api/ProductTypes/GetAllProductTypes',
+      getAllProductTypesApi: 'api/ProductTypes/GetAll',
 
       headers: [
         { text: 'Id', value: 'id' },

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Produkty from '../views/Produkty.vue'
 import Czesci from '../views/Czesci.vue'
+import TypWyrobu from '../views/TypWyrobu.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -20,7 +21,13 @@ const routes = [
     path: '/czesci',
     name: 'Czesci',
     component: Czesci
+  },
+  {
+    path: '/typwyrobu',
+    name: 'TypWyrobu',
+    component: TypWyrobu
   }
+
   // {
   // path: '/about',
   // name: 'About',
