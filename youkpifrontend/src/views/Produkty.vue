@@ -10,14 +10,15 @@
           </v-btn>
         </v-toolbar>
         <v-container grid-list-md>
-          <v-layout align-center wrap>
-            <v-flex xs12 sm8 offset-sm2>
+          <v-layout row wrap justify-space-around>
+            <v-flex xs11>
               <v-form ref="newProductForm">
                 <NewProduct
                   :currentProduct="currentProduct"
                   :editMode="editMode"
                   @editedProduct="editCurrentProductRes"
                   :productTypes="productTypes"
+                  :parts="parts"
                 ></NewProduct>
               </v-form>
             </v-flex>
@@ -50,21 +51,20 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="showProductPartsDialog" max-width="1000" persistent>
+    <v-dialog v-model="showProductPartsDialog" max-width="1200" persistent>
       <v-card>
         <v-toolbar dark elevation-4 color="primary lighten-1">
-          <span class="headline">Czesci produktu</span>
+          <span class="headline">Czesci produktu: {{ currentProduct.id }}</span>
           <v-spacer></v-spacer>
           <v-btn icon @click="showProductPartsDialog = false" dark>
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
         <v-container grid-list-md>
-          <v-layout align-center wrap>
-            <v-flex xs12 sm8 offset-sm2>
-              <ProductParts :currentProduct="currentProduct"></ProductParts>
-            </v-flex>
-          </v-layout>
+          <ProductParts
+            :currentProduct="currentProduct"
+            :readonly="true"
+          ></ProductParts>
         </v-container>
         <v-card-actions class="blue lighten-5">
           <v-spacer></v-spacer>
@@ -116,15 +116,16 @@
                 <template v-for="(header, index) in headers">
                   <td :key="index" v-if="header.value == 'actions'">
                     <v-layout>
-                      <v-flex xs>
+                      <v-flex xs4>
                         <v-icon
+                          v-show="props.item.produktCzesci.length > 0"
                           @click="showProductParts(props.item, index)"
                           color="blue"
                           class="mr-2"
                           >search</v-icon
                         >
                       </v-flex>
-                      <v-flex xs>
+                      <v-flex xs4>
                         <v-icon
                           @click="editProduct(props.item, index)"
                           color="green"
@@ -174,6 +175,7 @@ export default {
       editProductApi: 'api/Products/EditProduct',
       deleteProductApi: 'api/Products/DeleteById',
       getAllProductTypesApi: 'api/ProductTypes/GetAll',
+      getAllPartsApi: 'api/Parts/GetAll',
 
       headers: [
         { text: 'Id', value: 'id' },
@@ -192,10 +194,11 @@ export default {
       showProductPartsDialog: false,
       tableLoading: false,
       productTitle: 'Dodaj produkt',
-      currentProduct: {},
+      currentProduct: { produktCzesci: [] },
       editedIndex: -1,
       productTypes: [],
-      editMode: false
+      editMode: false,
+      parts: []
     }
   },
   computed: {},
@@ -204,7 +207,12 @@ export default {
     initialise () {
       this.tableLoading = true
       this.getProducts()
+      this.getParts()
       this.getProductTypes()
+    },
+    getParts () {
+      this.$http.get(this.getAllPartsApi)
+        .then(Response => { this.parts = Response.data })
     },
     getProducts () {
       var $this = this
@@ -244,7 +252,7 @@ export default {
       }
       this.editMode = false
       this.productTitle = 'Dodaj produkt'
-      this.currentProduct = {}
+      this.currentProduct = { produktCzesci: [] }
       this.editedIndex = -1
       this.showNewProductDialog = true
     },
@@ -263,7 +271,7 @@ export default {
       this.showProductPartsDialog = true
     },
     editProduct (product, index) {
-      this.productTitle = 'Edytuj produkt'
+      this.productTitle = 'Edytuj produkt ' + product.id
       this.editMode = true
       this.editedIndex = index
       this.showNewProductDialog = true

@@ -93,18 +93,30 @@
         </v-layout>
       </v-flex>
     </v-layout>
+    <v-layout>
+      <v-flex xs12>
+        <ProductParts
+          :currentProduct="currentProduct"
+          :parts="parts"
+        ></ProductParts>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
 <script>
+import ProductParts from '../components/ProductParts'
+
 export default {
   name: 'NewProduct',
   components: {
+    ProductParts: ProductParts
   },
   props: {
     currentProduct: Object,
     productTypes: Array,
-    editMode: Boolean
+    editMode: Boolean,
+    parts: Array
   },
   data () {
     return {
