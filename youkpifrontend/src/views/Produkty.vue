@@ -26,11 +26,9 @@
         </v-container>
         <v-card-actions class="blue lighten-5">
           <v-btn
-            outline
-            round
             large
             color="blue darken-1"
-            text
+            flat
             @click.native="showNewProductDialog = false"
           >
             Anuluj
@@ -38,11 +36,9 @@
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            outline
-            round
+            flat
             large
             color="blue darken-1"
-            text
             @click.native="saveProductAction"
           >
             Zapisz
@@ -69,11 +65,8 @@
         <v-card-actions class="blue lighten-5">
           <v-spacer></v-spacer>
           <v-btn
-            outline
-            round
             large
             color="blue darken-1"
-            flat
             @click.native="showProductPartsDialog = false"
           >
             Zamknij
@@ -117,28 +110,46 @@
                   <td :key="index" v-if="header.value == 'actions'">
                     <v-layout>
                       <v-flex xs4>
-                        <v-icon
-                          v-show="props.item.produktCzesci.length > 0"
-                          @click="showProductParts(props.item, index)"
-                          color="blue"
-                          class="mr-2"
-                          >search</v-icon
-                        >
+                        <v-tooltip bottom>
+                          <template v-slot:activator="{ on }">
+                            <v-icon
+                              v-on="on"
+                              v-show="props.item.produktCzesci.length > 0"
+                              @click="showProductParts(props.item, index)"
+                              color="blue"
+                              class="mr-2"
+                              >search</v-icon
+                            >
+                          </template>
+                          <span>Podglad czesci</span>
+                        </v-tooltip>
                       </v-flex>
                       <v-flex xs4>
-                        <v-icon
-                          @click="editProduct(props.item, index)"
-                          color="green"
-                          class="mr-2"
-                          >edit</v-icon
-                        >
+                        <v-tooltip bottom>
+                          <template v-slot:activator="{ on }">
+                            <v-icon
+                              v-on="on"
+                              @click="editProduct(props.item, index)"
+                              color="green"
+                              class="mr-2"
+                              >edit</v-icon
+                            >
+                          </template>
+                          <span>Edycja</span>
+                        </v-tooltip>
                       </v-flex>
                       <v-flex xs4>
-                        <v-icon
-                          @click="deleteProduct(props.item, index)"
-                          color="red lighten-1"
-                          >delete</v-icon
-                        >
+                        <v-tooltip bottom>
+                          <template v-slot:activator="{ on }">
+                            <v-icon
+                              v-on="on"
+                              @click="deleteProduct(props.item, index)"
+                              color="red lighten-1"
+                              >delete</v-icon
+                            ></template
+                          >
+                          <span>Usun</span>
+                        </v-tooltip>
                       </v-flex>
                     </v-layout>
                   </td>
@@ -212,7 +223,9 @@ export default {
     },
     getParts () {
       this.$http.get(this.getAllPartsApi)
-        .then(Response => { this.parts = Response.data })
+        .then(Response => {
+          this.parts = Response.data
+        })
     },
     getProducts () {
       var $this = this
