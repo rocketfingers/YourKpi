@@ -20,7 +20,7 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
@@ -34,7 +34,7 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> AddProduct([FromBody] Produkty entity)
+        public async Task<IActionResult> Create([FromBody] Produkty entity)
         {
             if (entity == null)
             {
@@ -54,7 +54,7 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpPut("[action]")]
-        public async Task<IActionResult> EditProduct([FromBody] Produkty entity)
+        public async Task<IActionResult> Update([FromBody] Produkty entity)
         {
             if (entity == null)
             {
@@ -81,7 +81,7 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpDelete("[action]")]
-        public async Task<IActionResult> DeleteById(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             try
             {

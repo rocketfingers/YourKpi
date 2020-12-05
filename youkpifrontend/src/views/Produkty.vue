@@ -170,10 +170,10 @@ export default {
   data () {
     return {
       // api
-      getAllProducts: 'api/Products/GetAllProducts',
-      addProductApi: 'api/Products/AddProduct',
-      editProductApi: 'api/Products/EditProduct',
-      deleteProductApi: 'api/Products/DeleteById',
+      getAllProducts: 'api/Products/GetAll',
+      addProductApi: 'api/Products/Create',
+      editProductApi: 'api/Products/Update',
+      deleteProductApi: 'api/Products/Delete',
       getAllProductTypesApi: 'api/ProductTypes/GetAll',
       getAllPartsApi: 'api/Parts/GetAll',
 
