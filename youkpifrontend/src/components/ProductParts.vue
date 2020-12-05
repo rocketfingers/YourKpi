@@ -141,15 +141,15 @@ export default {
         this.$set(part, 'isEdited', true)
       }
     },
-    async deletePart (part, index) {
-      var res = await this.$dialog.confirm({
-        text: 'Czy na pewno chcesz usunąć:  ' + part.czesciId + '?',
-        title: 'Uwaga'
-      })
-      if (res) {
-        var indexOfPart = this.currentProduct.produktCzesci.indexOf(part)
-        this.currentProduct.produktCzesci.splice(indexOfPart, 1)
-      }
+    deletePart (part, index) {
+      // var res = await this.$dialog.confirm({
+      //   text: 'Czy na pewno chcesz usunąć:  ' + part.czesciId + '?',
+      //   title: 'Uwaga'
+      // })
+      // if (res) {
+      var indexOfPart = this.currentProduct.produktCzesci.indexOf(part)
+      this.currentProduct.produktCzesci.splice(indexOfPart, 1)
+    //   }
     }
   },
   created () {

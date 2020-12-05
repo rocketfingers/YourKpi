@@ -62,7 +62,7 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
-                var product = _ctx.Produkty.FirstOrDefault(p => p.Id == entity.Id);
+                var product = _ctx.Produkty.Include(p => p.ProduktCzesci).FirstOrDefault(p => p.Id == entity.Id);
                 product.TypWyrobuId = entity.TypWyrobuId;
                 product.NumerRysNorma = entity.NumerRysNorma;
                 product.Dn = entity.Dn;
@@ -70,6 +70,16 @@ namespace YouKpiBackend.Controllers
                 product.Ansi = entity.Ansi;
                 product.Wersja = entity.Wersja;
                 product.Uszczelnienie = entity.Uszczelnienie;
+
+                product.ProduktCzesci.ToList().ForEach(p =>
+                {
+                    _ctx.Entry(p).State = EntityState.Deleted;
+                });
+                entity.ProduktCzesci.ToList().ForEach(part =>
+                {
+                    part.ProduktyId = product.Id;
+                    product.ProduktCzesci.Add(part);
+                });
                 _ctx.SaveChanges();
 
                 return NoContent();
@@ -85,9 +95,13 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var product = _ctx.Produkty.FirstOrDefault(p => p.Id == id);
+                var product = _ctx.Produkty.Include(p => p.ProduktCzesci).FirstOrDefault(p => p.Id == id);
                 if (product != null)
                 {
+                    product.ProduktCzesci.ToList().ForEach(p =>
+                    {
+                        _ctx.Entry(p).State = EntityState.Deleted;
+                    });
                     _ctx.Produkty.Remove(product);
                     await _ctx.SaveChangesAsync();
                 }
