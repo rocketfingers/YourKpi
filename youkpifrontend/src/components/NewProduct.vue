@@ -122,7 +122,7 @@ export default {
     return {
       requiredRule: (v) => !!v || 'To pole jest wymagane',
       numberRule: val => {
-        if (val < 0) return 'Wprowadz dodatnia wartosc'
+        if (val < 0) return 'Wprowadź wartość dodatnią'
         return true
       }
 

@@ -50,7 +50,7 @@
     <v-dialog v-model="showProductPartsDialog" max-width="1200" persistent>
       <v-card>
         <v-toolbar dark elevation-4 color="primary lighten-1">
-          <span class="headline">Czesci produktu: {{ currentProduct.id }}</span>
+          <span class="headline">Części produktu: {{ currentProduct.id }}</span>
           <v-spacer></v-spacer>
           <v-btn icon @click="showProductPartsDialog = false" dark>
             <v-icon>close</v-icon>
@@ -91,7 +91,7 @@
               v-model="search"
             ></v-text-field>
             <v-btn color="primary" dark class="mb-2" @click="addProduct()"
-              >Dodaj</v-btn
+              >Nowy</v-btn
             >
           </v-toolbar>
         </v-flex>
@@ -121,7 +121,7 @@
                               >search</v-icon
                             >
                           </template>
-                          <span>Podglad czesci</span>
+                          <span>Podgląd części</span>
                         </v-tooltip>
                       </v-flex>
                       <v-flex xs4>
@@ -148,7 +148,7 @@
                               >delete</v-icon
                             ></template
                           >
-                          <span>Usun</span>
+                          <span>Usuń</span>
                         </v-tooltip>
                       </v-flex>
                     </v-layout>

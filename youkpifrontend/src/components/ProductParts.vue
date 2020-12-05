@@ -29,6 +29,7 @@
           :items="currentProduct.produktCzesci"
           :search="search"
         >
+          <template v-if="readonly" v-slot:header.actions="{}"> </template>
           <template slot="item" slot-scope="props">
             <tr>
               <template v-for="(header, index) in headers">
@@ -103,18 +104,18 @@ export default {
   data () {
     return {
       headers: [
-        { text: 'Id czesci', value: 'czesciId' },
-        { text: 'Ilosc sztuk', value: 'iloscSztuk' },
-        { text: 'Akcje', value: 'actions' }
+        { text: 'Id części', value: 'czesciId', visible: true },
+        { text: 'Ilość sztuk', value: 'iloscSztuk', visible: true },
+        { text: 'Akcje', value: 'actions', visible: true }
       ],
       search: '',
       requiredRule: (v) => !!v || 'To pole jest wymagane',
       numberRule: val => {
-        if (val < 0) return 'Wprowadz dodatnia wartosc'
+        if (val < 0) return 'Wprowadź wartość dodatnią'
         return true
       },
       intRule: val => {
-        if (val.includes(',') || val.includes('.')) return 'Wprowadz wartosc calkowita'
+        if (val.includes(',') || val.includes('.')) return 'Wprowadź wartość całkowitą'
         return true
       }
     }
@@ -126,13 +127,16 @@ export default {
   },
   methods: {
     addPartToProduct () {
+      if (!this.currentProduct.produktCzesci) {
+        this.$set(this.currentProduct, 'produktCzesci', [])
+      }
       this.currentProduct.produktCzesci.unshift({ czesciId: '', iloscSztuk: '', actions: '', isEdited: true })
     },
     async editPart (part) {
       if (part.isEdited) {
         if (part.czesciId.length === 0 || part.czesciId.iloscSztuk === 0) {
           await this.$dialog.confirm({
-            text: 'Uzupelnij dane!'
+            text: 'Uzupełnij dane!'
           })
         } else {
           this.$set(part, 'isEdited', false)
