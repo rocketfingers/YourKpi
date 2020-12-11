@@ -58,6 +58,12 @@
             </v-list-item-icon>
             <v-list-item-title>Typ wyrobu</v-list-item-title>
           </v-list-item>
+          <v-list-item @click="$router.push({ name: 'Oferta' })">
+            <v-list-item-icon>
+              <v-icon>fa-shopping-basket</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Oferta</v-list-item-title>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>

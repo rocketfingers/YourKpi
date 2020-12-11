@@ -6,8 +6,15 @@ namespace YouKpiBackend.ModelsEntity
 {
     public partial class Client
     {
+        public Client()
+        {
+            Offer = new HashSet<Offer>();
+        }
+
         public int Id { get; set; }
         public string Nip { get; set; }
         public string Name { get; set; }
+
+        public virtual ICollection<Offer> Offer { get; set; }
     }
 }

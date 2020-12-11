@@ -8,6 +8,7 @@ namespace YouKpiBackend.ModelsEntity
     {
         public Produkty()
         {
+            OfferLines = new HashSet<OfferLines>();
             ProduktCzesci = new HashSet<ProduktCzesci>();
         }
 
@@ -19,7 +20,10 @@ namespace YouKpiBackend.ModelsEntity
         public string Ansi { get; set; }
         public string Wersja { get; set; }
         public string Uszczelnienie { get; set; }
+        public decimal? Cena { get; set; }
+        public string Waluta { get; set; }
 
+        public virtual ICollection<OfferLines> OfferLines { get; set; }
         public virtual ICollection<ProduktCzesci> ProduktCzesci { get; set; }
     }
 }
