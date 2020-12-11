@@ -14,5 +14,7 @@ namespace YouKpiBackend.ModelsEntity
         public decimal Waga { get; set; }
         public string WagaJednostka { get; set; }
         public int? Dn { get; set; }
+        public int TempMin { get; set; }
+        public int TempMax { get; set; }
     }
 }

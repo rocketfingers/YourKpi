@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +12,7 @@ using YouKpiBackend.ModelsEntity;
 namespace YouKpiBackend.Controllers
 {
     [Route("api/[controller]")]
-
+    [Authorize]
     public class PartsController : ControllerBase
     {
         private readonly YoukpiContext _dbContext;

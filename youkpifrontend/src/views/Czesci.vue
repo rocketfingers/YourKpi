@@ -1,111 +1,103 @@
 <template>
   <div>
-    <v-container>
-      <v-layout row wrap elevation-3>
-        <v-flex xs12>
-          <v-toolbar flat color="white">
-            <v-toolbar-title>{{ title }}</v-toolbar-title>
-            <v-divider class="mx-2" inset vertical></v-divider>
-            <v-spacer></v-spacer>
-            <v-text-field
-              append-icon="search"
-              label="Search"
-              single-line
-              hide-details
-              class="elevation-1"
-              v-model="searchTable"
-            ></v-text-field>
-            <v-dialog v-model="showDialog" width="auto" max-width="none">
-              <template v-slot:activator="{ on, attrs }">
+    <v-layout row wrap elevation-3>
+      <v-flex xs12>
+        <v-toolbar flat color="white">
+          <v-toolbar-title>{{ title }}</v-toolbar-title>
+          <v-divider class="mx-2" inset vertical></v-divider>
+          <v-spacer></v-spacer>
+          <v-text-field
+            append-icon="search"
+            label="Search"
+            single-line
+            hide-details
+            class="elevation-1"
+            v-model="searchTable"
+          ></v-text-field>
+          <v-dialog v-model="showDialog" width="auto" max-width="none">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn v-on="on" v-bind="attrs" color="primary" dark class="mb-2">
+                Nowy
+              </v-btn>
+            </template>
+
+            <v-toolbar dark elevation-4 color="primary lighten-1">
+              <span class="headline">{{ formTitle }}</span>
+            </v-toolbar>
+            <v-card>
+              <v-form ref="newPartForm">
+                <NewPart
+                  :editedItem="editedItem"
+                  :editMode="editMode"
+                  @editedProduct="editCurrentProductRes"
+                ></NewPart>
+              </v-form>
+              <v-card-actions class="blue lighten-5">
                 <v-btn
-                  v-on="on"
-                  v-bind="attrs"
-                  color="primary"
-                  dark
-                  class="mb-2"
+                  outline
+                  round
+                  large
+                  color="blue darken-1"
+                  flat
+                  @click="showDialog = false"
+                  >Anuluj<v-icon dark>cancel</v-icon></v-btn
                 >
-                  Nowy
-                </v-btn>
-              </template>
+                <v-spacer></v-spacer>
+                <v-btn
+                  outline
+                  round
+                  large
+                  color="blue darken-1"
+                  flat
+                  @click.native="save"
+                  >Zapisz<v-icon dark>save</v-icon></v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-toolbar>
+        <v-data-table
+          :headers="headers"
+          :items="data"
+          :search="searchTable"
+          :loading="tableLoading"
+          :footer-props="footer"
+          class="elevation-2"
+        >
+          <template slot="item" slot-scope="props">
+            <tr>
+              <!-- Columns settings  -->
+              <td class="text-xs-left">{{ props.item.id }}</td>
+              <td class="text-xs-left">{{ props.item.nazwa }}</td>
+              <td class="text-xs-left">{{ props.item.gatPodstawowy }}</td>
+              <td class="text-xs-left">{{ props.item.numerRysNorma }}</td>
+              <td class="justify-center px-0">
+                <v-layout>
+                  <v-flex xs6>
+                    <v-icon
+                      class="mr-2"
+                      color="green"
+                      @click="editItem(props.item)"
+                    >
+                      edit
+                    </v-icon>
+                  </v-flex>
+                  <v-flex xs6>
+                    <v-icon
+                      @click="deleteProduct(props.item, index)"
+                      color="red lighten-1"
+                      >delete</v-icon
+                    >
+                  </v-flex>
+                </v-layout>
+              </td>
+            </tr>
 
-              <v-toolbar dark elevation-4 color="primary lighten-1">
-                <span class="headline">{{ formTitle }}</span>
-              </v-toolbar>
-              <v-card>
-                <v-form ref="newPartForm">
-                  <NewPart
-                    :editedItem="editedItem"
-                    :editMode="editMode"
-                    @editedProduct="editCurrentProductRes"
-                  ></NewPart>
-                </v-form>
-                <v-card-actions class="blue lighten-5">
-                  <v-btn
-                    outline
-                    round
-                    large
-                    color="blue darken-1"
-                    flat
-                    @click="showDialog = false"
-                    >Anuluj<v-icon dark>cancel</v-icon></v-btn
-                  >
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    outline
-                    round
-                    large
-                    color="blue darken-1"
-                    flat
-                    @click.native="save"
-                    >Zapisz<v-icon dark>save</v-icon></v-btn
-                  >
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-toolbar>
-          <v-data-table
-            :headers="headers"
-            :items="data"
-            :search="searchTable"
-            :loading="tableLoading"
-            :footer-props="footer"
-            class="elevation-2"
-          >
-            <template slot="item" slot-scope="props">
-              <tr>
-                <!-- Columns settings  -->
-                <td class="text-xs-left">{{ props.item.id }}</td>
-                <td class="text-xs-left">{{ props.item.nazwa }}</td>
-                <td class="text-xs-left">{{ props.item.gatPodstawowy }}</td>
-                <td class="text-xs-left">{{ props.item.numerRysNorma }}</td>
-                <td class="justify-center px-0">
-                  <v-layout>
-                    <v-flex xs6>
-                      <v-icon
-                        class="mr-2"
-                        color="green"
-                        @click="editItem(props.item)"
-                      >
-                        edit
-                      </v-icon>
-                    </v-flex>
-                    <v-flex xs6>
-                      <v-icon
-                        @click="deleteProduct(props.item, index)"
-                        color="red lighten-1"
-                        >delete</v-icon
-                      >
-                    </v-flex>
-                  </v-layout>
-                </td>
-              </tr>
-
-              <tr></tr
-            ></template>
-          </v-data-table>
-        </v-flex>
-      </v-layout>
-    </v-container>
+            <tr></tr
+          ></template>
+        </v-data-table>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 

@@ -7,6 +7,7 @@ import vuetify from './plugins/vuetify'
 import axios from 'axios'
 import dtMixin from './components/dtMixin.js'
 import VuetifyDialog from 'vuetify-dialog'
+import auth from './auth'
 Vue.mixin(dtMixin)
 
 Vue.config.productionTip = false
@@ -49,6 +50,36 @@ Vue.use(VuetifyDialog, {
     width: 500
   }
 
+})
+
+axiosInstance.interceptors.request.use(
+  config => {
+    var token = window.localStorage.getItem('token')
+    console.log('interceptor')
+    config.headers = {
+      Authorization: `Bearer ${token}`
+    }
+    return config
+  },
+  error => Promise.reject(error)
+)
+axiosInstance.interceptors.response.use(function (response) {
+  return response
+}, function (err) {
+  if (err.response === undefined) {
+    store.commit('SETERRORSNACK', err.message)
+  } else if (err.response.status === 401) {
+    if (store.getters.getCurrentPath !== '/login') {
+      auth.logout()
+    }
+  } else if (err.response.status === 403) {
+    if (store.getters.getCurrentPath !== '/main') {
+      store.commit('SETERRORSNACK', 'You are not authrized to this resource')
+    }
+  } else {
+    store.commit('SETERRORSNACK', err.response.data)
+  }
+  return Promise.reject(err)
 })
 new Vue({
   router,

@@ -17,12 +17,21 @@ namespace YouKpiBackend.DbContexts
         {
         }
 
+        public virtual DbSet<BusiessArea> BusiessArea { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Czesci> Czesci { get; set; }
+        public virtual DbSet<MozliweStatusyOferty> MozliweStatusyOferty { get; set; }
+        public virtual DbSet<MozliwyDn> MozliwyDn { get; set; }
+        public virtual DbSet<MozliwyOrderType> MozliwyOrderType { get; set; }
+        public virtual DbSet<MożliwaGrupaProcesu> MożliwaGrupaProcesu { get; set; }
+        public virtual DbSet<OfertaTyp> OfertaTyp { get; set; }
         public virtual DbSet<OfertyView> OfertyView { get; set; }
         public virtual DbSet<Offer> Offer { get; set; }
         public virtual DbSet<OfferLines> OfferLines { get; set; }
-        public virtual DbSet<Processes> Processes { get; set; }
+        public virtual DbSet<Pracownik> Pracownik { get; set; }
+        public virtual DbSet<PracownikOfertaProcesy> PracownikOfertaProcesy { get; set; }
+        public virtual DbSet<PracownikProcess> PracownikProcess { get; set; }
+        public virtual DbSet<Process> Process { get; set; }
         public virtual DbSet<ProduktCzesci> ProduktCzesci { get; set; }
         public virtual DbSet<Produkty> Produkty { get; set; }
         public virtual DbSet<ProduktyOld> ProduktyOld { get; set; }
@@ -33,13 +42,25 @@ namespace YouKpiBackend.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<BusiessArea>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Client>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(100)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Nip)
@@ -70,6 +91,69 @@ namespace YouKpiBackend.DbContexts
                     .IsRequired()
                     .HasMaxLength(30)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Wymiary).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<MozliweStatusyOferty>(entity =>
+            {
+                entity.Property(e => e.Status)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<MozliwyDn>(entity =>
+            {
+                entity.HasKey(e => e.Dn);
+
+                entity.ToTable("MozliwyDN");
+
+                entity.Property(e => e.Dn)
+                    .HasColumnName("DN")
+                    .ValueGeneratedNever();
+            });
+
+            modelBuilder.Entity<MozliwyOrderType>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.OrderType)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<MożliwaGrupaProcesu>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<OfertaTyp>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.OfferId)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Type)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<OfertyView>(entity =>
@@ -173,8 +257,6 @@ namespace YouKpiBackend.DbContexts
 
                 entity.Property(e => e.Offerrer).HasMaxLength(50);
 
-                entity.Property(e => e.Order).HasMaxLength(50);
-
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
 
                 entity.Property(e => e.OrderType)
@@ -183,11 +265,7 @@ namespace YouKpiBackend.DbContexts
 
                 entity.Property(e => e.PlannedEnd).HasColumnType("datetime");
 
-                entity.Property(e => e.ProcessesId).HasMaxLength(50);
-
                 entity.Property(e => e.ProjectsId).HasMaxLength(50);
-
-                entity.Property(e => e.QueryDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Status).HasMaxLength(50);
             });
@@ -226,79 +304,90 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.W).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Processes>(entity =>
+            modelBuilder.Entity<Pracownik>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .HasMaxLength(15);
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.BpbenchProcessQual)
-                    .HasColumnName("BPBenchProcessQual")
-                    .HasMaxLength(200);
+                entity.Property(e => e.Email)
+                    .HasMaxLength(10)
+                    .IsFixedLength();
 
-                entity.Property(e => e.BpbenchQualNorm)
-                    .HasColumnName("BPBenchQualNorm")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.BpbenchQualSoft)
-                    .HasColumnName("BPBenchQualSoft")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.Bpbenchmark1)
-                    .HasColumnName("BPBenchmark_1")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.Bpbenchmark2)
-                    .HasColumnName("BPBenchmark_2")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.Bpbenchmark3)
-                    .HasColumnName("BPBenchmark_3")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.BpkapaBench)
-                    .HasColumnName("BPKapaBench")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.BpmainAccount)
-                    .HasColumnName("BPMainAccount")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.Bppep)
-                    .HasColumnName("BPPep")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.Bpprocess)
-                    .HasColumnName("BPProcess")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.BpprocessParent)
-                    .HasColumnName("BPProcessParent")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.BpprocessSub)
-                    .HasColumnName("BPProcessSub")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.BpproductProcess)
-                    .HasColumnName("BPProductProcess")
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.Bpregion)
-                    .HasColumnName("BPRegion")
-                    .HasMaxLength(20);
+                entity.Property(e => e.Login)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Owner).HasMaxLength(200);
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(70)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.SeqDays).HasColumnName("seqDays");
+                entity.Property(e => e.Salt).HasMaxLength(20);
+            });
 
-                entity.Property(e => e.SeqHrs).HasColumnName("SeqHRS");
+            modelBuilder.Entity<PracownikOfertaProcesy>(entity =>
+            {
+                entity.HasNoKey();
 
-                entity.Property(e => e.SpiceDescription).HasMaxLength(200);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.OfferId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProcessId)
+                    .HasColumnName("ProcessID")
+                    .HasMaxLength(10)
+                    .IsFixedLength();
+            });
+
+            modelBuilder.Entity<PracownikProcess>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.ProcessId)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.HasOne(d => d.Pracownik)
+                    .WithMany()
+                    .HasForeignKey(d => d.PracownikId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PracownikProcess_Pracownik");
+            });
+
+            modelBuilder.Entity<Process>(entity =>
+            {
+                entity.Property(e => e.Id).HasMaxLength(30);
+
+                entity.Property(e => e.BusinessArea)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.KontoGłówne).HasMaxLength(50);
+
+                entity.Property(e => e.NazwaGrupyProcesu)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.NazwaProcesu)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.TypZlecenia)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength()
+                    .HasDefaultValueSql("('R')");
             });
 
             modelBuilder.Entity<ProduktCzesci>(entity =>
@@ -467,6 +556,8 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnName("ProcessesID")
                     .HasMaxLength(50);
 
+                entity.Property(e => e.Sekwencja).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.StepName)
                     .IsRequired()
                     .HasMaxLength(200);
@@ -509,6 +600,10 @@ namespace YouKpiBackend.DbContexts
                 entity.HasNoKey();
 
                 entity.Property(e => e.Dn).HasColumnName("DN");
+
+                entity.Property(e => e.TempMax).HasDefaultValueSql("((120))");
+
+                entity.Property(e => e.TempMin).HasDefaultValueSql("((-60))");
 
                 entity.Property(e => e.TypWyrobuId)
                     .IsRequired()

@@ -7,13 +7,10 @@ namespace YouKpiBackend.ModelsEntity
     public partial class Offer
     {
         public string Id { get; set; }
-        public string ProcessesId { get; set; }
         public string ProjectsId { get; set; }
         public string Status { get; set; }
-        public string Order { get; set; }
         public string OrderType { get; set; }
         public DateTime? OfferDate { get; set; }
-        public DateTime? QueryDate { get; set; }
         public string ClientsId { get; set; }
         public string Offerrer { get; set; }
         public DateTime? OrderDate { get; set; }

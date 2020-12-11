@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,6 +11,7 @@ using YouKpiBackend.ModelsEntity;
 
 namespace YouKpiBackend.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ProductTypesController : Controller
     {

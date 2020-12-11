@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Produkty from '../views/Produkty.vue'
 import Czesci from '../views/Czesci.vue'
 import TypWyrobu from '../views/TypWyrobu.vue'
+import Login from '../views/Login.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -26,6 +27,16 @@ const routes = [
     path: '/typwyrobu',
     name: 'TypWyrobu',
     component: TypWyrobu
+  },
+  {
+    path: '/typwyrobu',
+    name: 'TypWyrobu',
+    component: TypWyrobu
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 
   // {

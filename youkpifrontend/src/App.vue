@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-app-bar app color="primary" dense>
+    <v-app-bar v-if="this.$route.name !== 'Login'" app color="primary" dense>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       <v-img
         class="mx-2"
@@ -11,13 +11,13 @@
       ></v-img>
       <!-- <v-toolbar-title class="ml-1 white--text">YouKPI</v-toolbar-title> -->
       <v-spacer></v-spacer>
-      <v-tooltip right>
+      <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on" icon>
-            <v-icon color="white">fa-user</v-icon>
+          <v-btn v-on="on" icon @click="logout()">
+            <v-icon color="white">fa-sign-out-alt</v-icon>
           </v-btn>
         </template>
-        <span>New User</span>
+        <span>{{ $store.getters.UserName }}</span>
       </v-tooltip>
     </v-app-bar>
     <v-main>
@@ -66,10 +66,25 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld'
-
+// eslint-disable-next-line no-unused-vars
+import auth from './auth'
 export default {
   name: 'App',
-
+  created: function () {
+    this.$store.watch(
+      state => state.snackErrorText,
+      () => {
+        const msg = this.$store.getters.GetError
+        if (msg !== '' && this.$route.name !== 'Login') {
+          this.$dialog.error({
+            text: msg,
+            title: 'Error'
+          })
+          this.$store.commit('SETERRORSNACK', '')
+        }
+      }
+    )
+  },
   components: {
     // HelloWorld
   },
@@ -77,6 +92,16 @@ export default {
   data: () => ({
     drawer: false,
     group: null
-  })
+  }),
+  methods: {
+    logout () {
+      auth.logout()
+    }
+  }
 }
 </script>
+<style >
+.container {
+  height: 100%;
+}
+</style>

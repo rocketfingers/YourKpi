@@ -15,6 +15,7 @@ namespace YouKpiBackend.ModelsEntity
         public string Nazwa { get; set; }
         public string GatPodstawowy { get; set; }
         public string NumerRysNorma { get; set; }
+        public string Wymiary { get; set; }
 
         public virtual ICollection<ProduktCzesci> ProduktCzesci { get; set; }
     }

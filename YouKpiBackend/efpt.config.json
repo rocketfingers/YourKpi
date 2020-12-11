@@ -14,12 +14,42 @@
    "Tables": [
       {
          "HasPrimaryKey": true,
+         "Name": "[dbo].[BusiessArea]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "[dbo].[Client]",
          "ObjectType": 0
       },
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[Czesci]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[MozliweStatusyOferty]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[MozliwyDN]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[MozliwyOrderType]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[MożliwaGrupaProcesu]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[OfertaTyp]",
          "ObjectType": 0
       },
       {
@@ -39,7 +69,22 @@
       },
       {
          "HasPrimaryKey": true,
-         "Name": "[dbo].[Processes]",
+         "Name": "[dbo].[Pracownik]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[PracownikOfertaProcesy]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[PracownikProcess]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Process]",
          "ObjectType": 0
       },
       {
