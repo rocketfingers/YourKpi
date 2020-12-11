@@ -26,7 +26,7 @@
         </v-toolbar>
         <v-data-table
           :headers="headers"
-          :items="currentOffer.produktCzesci"
+          :items="currentOffer.offerLines"
           :search="search"
         >
           <template v-if="readonly" v-slot:header.actions="{}"> </template>
