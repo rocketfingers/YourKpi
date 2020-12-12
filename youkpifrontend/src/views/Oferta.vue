@@ -18,9 +18,13 @@
                   :editMode="editMode"
                   @editedoffer="editcurrentOfferRes"
                   :offerTypes="offerTypes"
-                  :parts="parts"
+                  :projects="projects"
                 ></NewOffer> -->
-                <NewOffer :currentOffer="currentOffer"></NewOffer>
+                <NewOffer
+                  :currentOffer="currentOffer"
+                  :projects="projects"
+                  :customers="customers"
+                ></NewOffer>
               </v-form>
             </v-flex>
           </v-layout>
@@ -48,27 +52,27 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!-- <v-dialog v-model="showofferPartsDialog" max-width="1200" persistent>
+    <!-- <v-dialog v-model="showofferprojectsDialog" max-width="1200" persistent>
       <v-card>
         <v-toolbar dark elevation-4 color="primary lighten-1">
           <span class="headline">Części produktu: {{ currentOffer.id }}</span>
           <v-spacer></v-spacer>
-          <v-btn icon @click="showofferPartsDialog = false" dark>
+          <v-btn icon @click="showofferprojectsDialog = false" dark>
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
         <v-container grid-list-md>
-          <offerParts
+          <offerprojects
             :currentOffer="currentOffer"
             :readonly="true"
-          ></offerParts>
+          ></offerprojects>
         </v-container>
         <v-card-actions class="blue lighten-5">
           <v-spacer></v-spacer>
           <v-btn
             large
             color="blue darken-1"
-            @click.native="showofferPartsDialog = false"
+            @click.native="showofferprojectsDialog = false"
           >
             Zamknij
             <v-icon dark>cancel</v-icon>
@@ -76,118 +80,141 @@
         </v-card-actions>
       </v-card>
     </v-dialog> -->
-    <v-container>
-      <v-layout row wrap elevation-3>
-        <v-flex xs12>
-          <v-toolbar flat color="white">
-            <v-toolbar-title>Oferta</v-toolbar-title>
-            <v-divider class="mx-2" inset vertical></v-divider>
-            <v-spacer></v-spacer>
-            <v-text-field
-              append-icon="search"
-              label="Wyszukaj"
-              single-line
-              hide-details
-              class="elevation-1"
-              v-model="search"
-            ></v-text-field>
-            <v-btn color="primary" dark class="mb-2" @click="addOffer()"
-              >Nowy</v-btn
-            >
-          </v-toolbar>
-        </v-flex>
-        <v-flex xs12>
-          <v-data-table
-            :headers="headers"
-            :items="items"
+    <v-layout row wrap elevation-3>
+      <v-flex xs12>
+        <v-toolbar flat color="white">
+          <v-toolbar-title>Oferta</v-toolbar-title>
+          <v-divider class="mx-2" inset vertical></v-divider>
+          <v-spacer></v-spacer>
+          <v-text-field
+            append-icon="search"
+            label="Wyszukaj"
+            single-line
+            hide-details
             class="elevation-1"
-            item-key="id"
-            :loading="tableLoading"
-            :search="search"
+            v-model="search"
+          ></v-text-field>
+          <v-btn color="primary" dark class="mb-2" @click="addOffer()"
+            >Nowy</v-btn
           >
-            <template slot="item" slot-scope="props">
-              <tr>
-                <template v-for="(header, index) in headers">
-                  <td :key="index" v-if="header.value == 'actions'">
-                    <v-layout>
-                      <v-flex xs4>
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on }">
-                            <v-icon
-                              v-on="on"
-                              v-show="props.item.produktCzesci.length > 0"
-                              @click="showOffer(props.item, index)"
-                              color="blue"
-                              class="mr-2"
-                              >search</v-icon
-                            >
-                          </template>
-                          <span>Podgląd części</span>
-                        </v-tooltip>
-                      </v-flex>
-                      <v-flex xs4>
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on }">
-                            <v-icon
-                              v-on="on"
-                              @click="editOffer(props.item, index)"
-                              color="green"
-                              class="mr-2"
-                              >edit</v-icon
-                            >
-                          </template>
-                          <span>Edycja</span>
-                        </v-tooltip>
-                      </v-flex>
-                      <v-flex xs4>
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on }">
-                            <v-icon
-                              v-on="on"
-                              @click="deleteOffer(props.item, index)"
-                              color="red lighten-1"
-                              >delete</v-icon
-                            ></template
+        </v-toolbar>
+      </v-flex>
+      <v-flex xs12>
+        <v-data-table
+          :headers="headers"
+          :items="items"
+          class="elevation-1"
+          :expanded.sync="expanded"
+          item-key="id"
+          :loading="tableLoading"
+          :search="search"
+        >
+          <template slot="item" slot-scope="props">
+            <tr>
+              <template v-for="(header, index) in headers">
+                <td :key="index" v-if="header.value === 'expand'">
+                  <v-icon @click="expandRow(props)" v-show="!props.isExpanded"
+                    >fa-arrow-down</v-icon
+                  >
+                  <v-icon @click="expandRow(props)" v-show="props.isExpanded"
+                    >fa-arrow-up</v-icon
+                  >
+                </td>
+                <td :key="index" v-else-if="header.value === 'actions'">
+                  <v-layout>
+                    <v-flex xs4>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <v-icon
+                            v-on="on"
+                            v-show="props.item.produktCzesci.length > 0"
+                            @click="showOffer(props.item, index)"
+                            color="blue"
+                            class="mr-2"
+                            >search</v-icon
                           >
-                          <span>Usuń</span>
-                        </v-tooltip>
-                      </v-flex>
-                    </v-layout>
-                  </td>
-                  <td :key="index" v-else>
-                    {{ props.item[header.value] }}
-                  </td>
-                </template>
-              </tr>
-            </template>
-          </v-data-table>
-        </v-flex>
-      </v-layout>
-    </v-container>
+                        </template>
+                        <span>Podgląd części</span>
+                      </v-tooltip>
+                    </v-flex>
+                    <v-flex xs4>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <v-icon
+                            v-on="on"
+                            @click="editOffer(props.item, index)"
+                            color="green"
+                            class="mr-2"
+                            >edit</v-icon
+                          >
+                        </template>
+                        <span>Edycja</span>
+                      </v-tooltip>
+                    </v-flex>
+                    <v-flex xs4>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <v-icon
+                            v-on="on"
+                            @click="deleteOffer(props.item, index)"
+                            color="red lighten-1"
+                            >delete</v-icon
+                          ></template
+                        >
+                        <span>Usuń</span>
+                      </v-tooltip>
+                    </v-flex>
+                  </v-layout>
+                </td>
+                <td :key="index" v-else>
+                  {{ props.item[header.value] }}
+                </td>
+              </template>
+            </tr>
+          </template>
+          <template v-slot:expanded-item="{ headers, item }">
+            <td :colspan="headers.length">
+              <v-layout justify-space-around>
+                <v-flex xs11>
+                  <OfferLines
+                    :currentOffer="item"
+                    :editMode="false"
+                  ></OfferLines>
+                </v-flex>
+              </v-layout>
+            </td>
+          </template>
+        </v-data-table>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
 <script>
 import NewOffer from '../components/NewOffer'
+import OfferLines from '../components/OfferLines'
 
 export default {
   name: 'Produkty',
   components: {
-    NewOffer: NewOffer
-    // offerParts: offerParts
+    NewOffer: NewOffer,
+    OfferLines: OfferLines
   },
   props: {},
   data () {
     return {
       // api
       getAllOffer: 'api/Offer/GetAll',
-      addofferApi: 'api/offers/Create',
+      addOfferApi: 'api/offers/Create',
       editofferApi: 'api/offers/Update',
       deleteofferApi: 'api/offers/Delete',
       getAllofferTypesApi: 'api/offerTypes/GetAll',
-      getAllPartsApi: 'api/Parts/GetAll',
+      getAllProjectsApi: 'api/Project/GetAll',
+      getAllCustomersApi: 'api/Customer/GetAll',
+      expanded: [],
 
       headers: [
+        { text: 'Rozwiń', value: 'expand' },
         { text: 'Id', value: 'id' },
         { text: 'Nazwa', value: 'name' },
         { text: 'Projekt Id', value: 'projectId' },
@@ -197,19 +224,21 @@ export default {
         { text: 'Klient Id', value: 'clientId' },
         { text: 'Data zamówienia', value: 'orderDate' },
         { text: 'Planowane zakończenie', value: 'plannedEnd' },
+        { text: 'Suma', value: 'sum' },
         { text: 'Akcje', value: 'actions' }
       ],
       items: [],
       search: '',
       showNewOfferDialog: false,
-      showofferPartsDialog: false,
+      showofferprojectsDialog: false,
       tableLoading: false,
       offerTitle: 'Dodaj ofertę',
       currentOffer: { produktCzesci: [] },
       editedIndex: -1,
       offerTypes: [],
       editMode: false,
-      parts: []
+      projects: [],
+      customers: []
     }
   },
   computed: {},
@@ -218,21 +247,42 @@ export default {
     initialise () {
       this.tableLoading = true
       this.getOffer()
-      // this.getParts()
-      // this.getofferTypes()
+      this.getProjects()
+      this.getCustomers()
     },
-    // getParts () {
-    //   this.$http.get(this.getAllPartsApi)
-    //     .then(Response => {
-    //       this.parts = Response.data
-    //     })
-    // },
+    getProjects () {
+      this.$http.get(this.getAllProjectsApi)
+        .then(Response => {
+          this.projects = Response.data
+          this.projects.forEach(p => {
+            p.showName = p.id + ', ' + p.description
+          })
+        })
+    },
+    getCustomers () {
+      this.$http.get(this.getAllCustomersApi)
+        .then(Response => {
+          this.customers = Response.data
+          this.customers.forEach(p => {
+            p.showName = p.id + ', ' + p.name + ', ' + p.nip
+          })
+        })
+    },
+    expandRow (item) {
+      // eslint-disable-next-line no-debugger
+      // debugger
+
+      item.expand(!item.isExpanded)
+    },
     getOffer () {
       var $this = this
       this.$http
         .get(this.getAllOffer)
         .then((Response) => {
           $this.items = Response.data
+          $this.items.forEach(i => {
+            i.sum = 0
+          })
           this.tableLoading = false
         })
         .catch((e) => {
@@ -271,7 +321,7 @@ export default {
     },
     addOfferAction (offer) {
       this.$http
-        .post(this.addofferApi, offer)
+        .post(this.addOfferApi, offer)
         .then((Result) => {
           this.items.push(offer)
         })
@@ -281,7 +331,7 @@ export default {
     showOffer (offer, index) {
       this.currentOffer = offer
       this.editedIndex = index
-      this.showofferPartsDialog = true
+      this.showofferprojectsDialog = true
     },
     editOffer (offer, index) {
       this.offerTitle = 'Edytuj ofertę ' + offer.name

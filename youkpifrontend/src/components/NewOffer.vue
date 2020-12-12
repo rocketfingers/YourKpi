@@ -29,21 +29,22 @@
               color
               :rules="[requiredRule]"
               label="Projekt Id"
-              :items="projectIds"
-              item-text="id"
+              :items="projects"
+              item-text="showName"
               item-value="id"
               required
               v-model="currentOffer.projectId"
             ></v-autocomplete>
           </v-flex>
           <v-flex xs12>
-            <v-text-field
+            <v-select
+              label="Status"
               outlined
               :rules="[requiredRule]"
               color
-              label="Status"
-              v-model.number="currentOffer.status"
-            ></v-text-field>
+              v-model="currentOffer.status"
+              :items="['w trakcie', 'otwarte', 'zakończony']"
+            ></v-select>
           </v-flex>
           <v-flex xs12>
             <v-text-field
@@ -69,13 +70,17 @@
             ></v-text-field>
           </v-flex>
           <v-flex xs12>
-            <v-text-field
+            <v-autocomplete
               outlined
-              :rules="[requiredRule]"
               color
+              :rules="[requiredRule]"
               label="Klient"
+              :items="customers"
+              item-text="showName"
+              item-value="id"
+              required
               v-model="currentOffer.clientId"
-            ></v-text-field>
+            ></v-autocomplete>
           </v-flex>
           <v-flex xs12>
             <v-text-field
@@ -116,7 +121,9 @@ export default {
   },
   props: {
     currentOffer: Object,
-    editMode: Boolean
+    editMode: Boolean,
+    projects: Array,
+    customers: Array
   },
   data () {
     return {

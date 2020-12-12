@@ -75,94 +75,92 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-container>
-      <v-layout row wrap elevation-3>
-        <v-flex xs12>
-          <v-toolbar flat color="white">
-            <v-toolbar-title>Produkty</v-toolbar-title>
-            <v-divider class="mx-2" inset vertical></v-divider>
-            <v-spacer></v-spacer>
-            <v-text-field
-              append-icon="search"
-              label="Wyszukaj"
-              single-line
-              hide-details
-              class="elevation-1"
-              v-model="search"
-            ></v-text-field>
-            <v-btn color="primary" dark class="mb-2" @click="addProduct()"
-              >Nowy</v-btn
-            >
-          </v-toolbar>
-        </v-flex>
-        <v-flex xs12>
-          <v-data-table
-            :headers="headers"
-            :items="products"
+    <v-layout row wrap elevation-3>
+      <v-flex xs12>
+        <v-toolbar flat color="white">
+          <v-toolbar-title>Produkty</v-toolbar-title>
+          <v-divider class="mx-2" inset vertical></v-divider>
+          <v-spacer></v-spacer>
+          <v-text-field
+            append-icon="search"
+            label="Wyszukaj"
+            single-line
+            hide-details
             class="elevation-1"
-            item-key="id"
-            :loading="tableLoading"
-            :search="search"
+            v-model="search"
+          ></v-text-field>
+          <v-btn color="primary" dark class="mb-2" @click="addProduct()"
+            >Nowy</v-btn
           >
-            <template slot="item" slot-scope="props">
-              <tr>
-                <template v-for="(header, index) in headers">
-                  <td :key="index" v-if="header.value == 'actions'">
-                    <v-layout>
-                      <v-flex xs4>
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on }">
-                            <v-icon
-                              v-on="on"
-                              v-show="props.item.produktCzesci.length > 0"
-                              @click="showProductParts(props.item, index)"
-                              color="blue"
-                              class="mr-2"
-                              >search</v-icon
-                            >
-                          </template>
-                          <span>Podgląd części</span>
-                        </v-tooltip>
-                      </v-flex>
-                      <v-flex xs4>
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on }">
-                            <v-icon
-                              v-on="on"
-                              @click="editProduct(props.item, index)"
-                              color="green"
-                              class="mr-2"
-                              >edit</v-icon
-                            >
-                          </template>
-                          <span>Edycja</span>
-                        </v-tooltip>
-                      </v-flex>
-                      <v-flex xs4>
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on }">
-                            <v-icon
-                              v-on="on"
-                              @click="deleteProduct(props.item, index)"
-                              color="red lighten-1"
-                              >delete</v-icon
-                            ></template
+        </v-toolbar>
+      </v-flex>
+      <v-flex xs12>
+        <v-data-table
+          :headers="headers"
+          :items="products"
+          class="elevation-1"
+          item-key="id"
+          :loading="tableLoading"
+          :search="search"
+        >
+          <template slot="item" slot-scope="props">
+            <tr>
+              <template v-for="(header, index) in headers">
+                <td :key="index" v-if="header.value == 'actions'">
+                  <v-layout>
+                    <v-flex xs4>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <v-icon
+                            v-on="on"
+                            v-show="props.item.produktCzesci.length > 0"
+                            @click="showProductParts(props.item, index)"
+                            color="blue"
+                            class="mr-2"
+                            >search</v-icon
                           >
-                          <span>Usuń</span>
-                        </v-tooltip>
-                      </v-flex>
-                    </v-layout>
-                  </td>
-                  <td :key="index" v-else>
-                    {{ props.item[header.value] }}
-                  </td>
-                </template>
-              </tr>
-            </template>
-          </v-data-table>
-        </v-flex>
-      </v-layout>
-    </v-container>
+                        </template>
+                        <span>Podgląd części</span>
+                      </v-tooltip>
+                    </v-flex>
+                    <v-flex xs4>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <v-icon
+                            v-on="on"
+                            @click="editProduct(props.item, index)"
+                            color="green"
+                            class="mr-2"
+                            >edit</v-icon
+                          >
+                        </template>
+                        <span>Edycja</span>
+                      </v-tooltip>
+                    </v-flex>
+                    <v-flex xs4>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <v-icon
+                            v-on="on"
+                            @click="deleteProduct(props.item, index)"
+                            color="red lighten-1"
+                            >delete</v-icon
+                          ></template
+                        >
+                        <span>Usuń</span>
+                      </v-tooltip>
+                    </v-flex>
+                  </v-layout>
+                </td>
+                <td :key="index" v-else>
+                  {{ props.item[header.value] }}
+                </td>
+              </template>
+            </tr>
+          </template>
+        </v-data-table>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 

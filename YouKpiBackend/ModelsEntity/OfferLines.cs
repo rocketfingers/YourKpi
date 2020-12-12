@@ -16,5 +16,6 @@ namespace YouKpiBackend.ModelsEntity
         public string Sale { get; set; }
 
         public virtual Produkty Product { get; set; }
+        public virtual Offer Offer { get; set; }
     }
 }
