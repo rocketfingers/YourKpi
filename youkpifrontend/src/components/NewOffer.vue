@@ -66,7 +66,8 @@
               color
               :rules="[requiredRule]"
               label="Data oferty"
-              v-model.number="currentOffer.offerDate"
+              type="date"
+              v-model="currentOffer.offerDate"
             ></v-text-field>
           </v-flex>
           <v-flex xs12>
@@ -87,6 +88,7 @@
               outlined
               color
               :rules="[requiredRule]"
+              type="date"
               label="Data zamówienia"
               v-model="currentOffer.orderDate"
             ></v-text-field>
@@ -96,6 +98,7 @@
               outlined
               color
               :rules="[requiredRule]"
+              type="date"
               label="Planowane zakończenie"
               v-model="currentOffer.plannedEnd"
             ></v-text-field>

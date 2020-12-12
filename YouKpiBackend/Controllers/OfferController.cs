@@ -35,25 +35,25 @@ namespace YouKpiBackend.Controllers
             }
         }
 
-        //[HttpPost("[action]")]
-        //public async Task<IActionResult> Create([FromBody] Produkty entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        return BadRequest("Bad model");
-        //    }
-        //    try
-        //    {
-        //        var res = _ctx.Produkty.Add(entity);
-        //        _ctx.SaveChanges();
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Create([FromBody] Offer entity)
+        {
+            if (entity == null)
+            {
+                return BadRequest("Bad model");
+            }
+            try
+            {
+                var res = _ctx.Offer.Add(entity);
+                _ctx.SaveChanges();
 
-        //        return Created("", entity);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        //    }
-        //}
+                return Created("", entity);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
 
         //[HttpPut("[action]")]
         //public async Task<IActionResult> Update([FromBody] Produkty entity)

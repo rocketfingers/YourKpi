@@ -14,15 +14,13 @@
             <v-flex xs11>
               <v-form ref="newOfferForm">
                 <!-- <NewOffer
-                  :currentOffer="currentOffer"
-                  :editMode="editMode"
-                  @editedoffer="editcurrentOfferRes"
                   :offerTypes="offerTypes"
-                  :projects="projects"
                 ></NewOffer> -->
                 <NewOffer
                   :currentOffer="currentOffer"
                   :projects="projects"
+                  :editMode="editMode"
+                  @editedOffer="editcurrentOfferRes"
                   :customers="customers"
                 ></NewOffer>
               </v-form>
@@ -44,7 +42,7 @@
             flat
             large
             color="blue darken-1"
-            @click.native="saveofferAction"
+            @click.native="saveOfferAction"
           >
             Zapisz
             <v-icon dark>save</v-icon>
@@ -121,22 +119,7 @@
                   >
                 </td>
                 <td :key="index" v-else-if="header.value === 'actions'">
-                  <v-layout>
-                    <v-flex xs4>
-                      <v-tooltip bottom>
-                        <template v-slot:activator="{ on }">
-                          <v-icon
-                            v-on="on"
-                            v-show="props.item.produktCzesci.length > 0"
-                            @click="showOffer(props.item, index)"
-                            color="blue"
-                            class="mr-2"
-                            >search</v-icon
-                          >
-                        </template>
-                        <span>Podgląd części</span>
-                      </v-tooltip>
-                    </v-flex>
+                  <v-layout justify-space-between>
                     <v-flex xs4>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
@@ -205,9 +188,9 @@ export default {
     return {
       // api
       getAllOffer: 'api/Offer/GetAll',
-      addOfferApi: 'api/offers/Create',
-      editofferApi: 'api/offers/Update',
-      deleteofferApi: 'api/offers/Delete',
+      addOfferApi: 'api/Offer/Create',
+      editofferApi: 'api/Offer/Update',
+      deleteofferApi: 'api/Offer/Delete',
       getAllofferTypesApi: 'api/offerTypes/GetAll',
       getAllProjectsApi: 'api/Project/GetAll',
       getAllCustomersApi: 'api/Customer/GetAll',
@@ -281,6 +264,10 @@ export default {
         .then((Response) => {
           $this.items = Response.data
           $this.items.forEach(i => {
+            i.offerDate = this.formatDateTime(i.offerDate)
+            i.orderDate = this.formatDateTime(i.orderDate)
+            i.plannedEnd = this.formatDateTime(i.plannedEnd)
+
             i.sum = 0
           })
           this.tableLoading = false
@@ -298,10 +285,13 @@ export default {
     //     })
     //     .catch((e) => {})
     // },
-    saveofferAction () {
+    saveOfferAction () {
       if (!this.$refs.newOfferForm.validate()) {
         return
       }
+      // eslint-disable-next-line no-debugger
+      debugger
+
       if (this.editedIndex > 0) {
         this.editofferAction(this.currentOffer)
       } else {
@@ -340,8 +330,8 @@ export default {
       this.showNewOfferDialog = true
       this.currentOffer = offer
     },
-    editcurrentOfferRes (editedoffer) {
-      this.currentOffer = editedoffer
+    editcurrentOfferRes (editedOffer) {
+      this.currentOffer = editedOffer
     },
     editofferAction (offer) {
       this.$http
@@ -349,6 +339,24 @@ export default {
         .then((Result) => {
         })
         .catch((e) => {})
+    },
+    formatDateTime (date) {
+      if (date) {
+        if (date instanceof Date) {
+          return (
+            date.getFullYear() +
+            '-' +
+            (date.getMonth() + 1) +
+            '-' +
+            date.getDate()
+          )
+        }
+        if (date.toString().includes('T')) {
+          return date.toString().split('T')[0]
+        }
+
+        return date
+      }
     },
     async deleteoffer (offer, index) {
       var res = await this.$dialog.confirm({

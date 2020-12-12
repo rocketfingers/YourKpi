@@ -97,7 +97,8 @@ export default {
   components: {
   },
   props: {
-    currentOffer: Object
+    currentOffer: Object,
+    readonly: Boolean
   },
   data () {
     return {
