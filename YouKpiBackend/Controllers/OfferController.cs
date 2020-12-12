@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
+using YouKpiBackend.ViewModels;
 
 namespace YouKpiBackend.Controllers
 {
@@ -26,8 +27,9 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Offer.Include(p=>p.OfferLines).Include(p=>p.Clients).ToListAsync();
-                return Ok(res.OrderByDescending(p=>p.Id));
+                var res = await _ctx.Offer.Include(p => p.Clients).Include(p => p.OfferLines).ToListAsync();
+                //var res = await _ctx.Offer.Include(p => p.Clients).Include(p => p.OfferLines).ThenInclude(p => p.Product).ToListAsync();
+                return Ok(res.OrderByDescending(p => p.Id));
             }
             catch (Exception ex)
             {
@@ -56,65 +58,89 @@ namespace YouKpiBackend.Controllers
             }
         }
 
-        //[HttpPut("[action]")]
-        //public async Task<IActionResult> Update([FromBody] Produkty entity)
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Update([FromBody] Offer entity)
+        {
+            if (entity == null)
+            {
+                return BadRequest("Bad model");
+            }
+            try
+            {
+                var offer = _ctx.Offer.Include(p => p.OfferLines).FirstOrDefault(p => p.Id == entity.Id);
+                offer.Name = entity.Name;
+                offer.OfferDate = entity.OfferDate;
+                offer.Offerrer = entity.Offerrer;
+                offer.OrderDate = entity.OrderDate;
+                offer.ProjectsId = entity.ProjectsId;
+                offer.Status = entity.Status;
+                offer.OrderType = entity.OrderType;
+                offer.ClientsId = entity.ClientsId;
+                offer.PlannedEnd = entity.PlannedEnd;
+
+                //product.ProduktCzesci.ToList().ForEach(p =>
+                //{
+                //    _ctx.Entry(p).State = EntityState.Deleted;
+                //});
+                //entity.ProduktCzesci.ToList().ForEach(part =>
+                //{
+                //    part.ProduktyId = product.Id;
+                //    product.ProduktCzesci.Add(part);
+                //});
+                _ctx.SaveChanges();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var offer = _ctx.Offer.Include(p => p.OfferLines).FirstOrDefault(p => p.Id == id);
+                if (offer != null)
+                {
+                    offer.OfferLines.ToList().ForEach(p =>
+                    {
+                        _ctx.Entry(p).State = EntityState.Deleted;
+                    });
+                    _ctx.Offer.Remove(offer);
+                    await _ctx.SaveChangesAsync();
+                }
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        //private List<OfferViewModel> MapViewModel(List<Offer> offersEntity)
         //{
-        //    if (entity == null)
-        //    {
-        //        return BadRequest("Bad model");
-        //    }
-        //    try
-        //    {
-        //        var product = _ctx.Produkty.Include(p => p.ProduktCzesci).FirstOrDefault(p => p.Id == entity.Id);
-        //        product.TypWyrobuId = entity.TypWyrobuId;
-        //        product.NumerRysNorma = entity.NumerRysNorma;
-        //        product.Dn = entity.Dn;
-        //        product.Pn = entity.Pn;
-        //        product.Ansi = entity.Ansi;
-        //        product.Wersja = entity.Wersja;
-        //        product.Uszczelnienie = entity.Uszczelnienie;
+        //    var offersViewModels = new List<OfferViewModel>();
 
-        //        product.ProduktCzesci.ToList().ForEach(p =>
-        //        {
-        //            _ctx.Entry(p).State = EntityState.Deleted;
-        //        });
-        //        entity.ProduktCzesci.ToList().ForEach(part =>
-        //        {
-        //            part.ProduktyId = product.Id;
-        //            product.ProduktCzesci.Add(part);
-        //        });
-        //        _ctx.SaveChanges();
-
-        //        return NoContent();
-        //    }
-        //    catch (Exception ex)
+        //    foreach (var offer in offersEntity)
         //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        //        var offerViewModel = new OfferViewModel()
+        //        {
+        //            Status = offer.Status,
+        //            ClientsId = offer.ClientsId,
+        //            Id = offer.Id,
+        //            Name = offer.Name,
+        //            OfferDate = offer.OfferDate,
+        //            Offerrer = offer.Offerrer,
+        //            OrderDate = offer.OrderDate,
+        //            PlannedEnd = offer.PlannedEnd
+        //        };
+        //        offersViewModels.Add(offerViewModel);
         //    }
+        //    return offersViewModels;
         //}
 
-        //[HttpDelete("[action]")]
-        //public async Task<IActionResult> Delete(string id)
-        //{
-        //    try
-        //    {
-        //        var product = _ctx.Produkty.Include(p => p.ProduktCzesci).FirstOrDefault(p => p.Id == id);
-        //        if (product != null)
-        //        {
-        //            product.ProduktCzesci.ToList().ForEach(p =>
-        //            {
-        //                _ctx.Entry(p).State = EntityState.Deleted;
-        //            });
-        //            _ctx.Produkty.Remove(product);
-        //            await _ctx.SaveChangesAsync();
-        //        }
-        //        return Ok();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, ex.Message);
-        //    }
-        //}
     }
 }
 

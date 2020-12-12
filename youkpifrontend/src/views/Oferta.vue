@@ -199,8 +199,8 @@ export default {
       // api
       getAllOffer: 'api/Offer/GetAll',
       addOfferApi: 'api/Offer/Create',
-      editofferApi: 'api/Offer/Update',
-      deleteofferApi: 'api/Offer/Delete',
+      editOfferApi: 'api/Offer/Update',
+      deleteOfferApi: 'api/Offer/Delete',
       getAllofferTypesApi: 'api/offerTypes/GetAll',
       getAllProjectsApi: 'api/Project/GetAll',
       getAllCustomersApi: 'api/Customer/GetAll',
@@ -278,6 +278,12 @@ export default {
             i.offerDate = this.formatDateTime(i.offerDate)
             i.orderDate = this.formatDateTime(i.orderDate)
             i.plannedEnd = this.formatDateTime(i.plannedEnd)
+            if (i.projectsId) {
+              i.project = this.projects.find(p => p.id === i.projectsId)
+            }
+            if (i.clientsId) {
+              i.client = this.customers.find(c => c.id === i.clientsId)
+            }
             i.sum = 0
           })
           this.tableLoading = false
@@ -348,7 +354,7 @@ export default {
     },
     editofferAction (offer) {
       this.$http
-        .put(this.editofferApi, offer)
+        .put(this.editOfferApi, offer)
         .then((Result) => {
         })
         .catch((e) => {})
@@ -371,18 +377,18 @@ export default {
         return date
       }
     },
-    async deleteoffer (offer, index) {
+    async deleteOffer (offer, index) {
       var res = await this.$dialog.confirm({
         text: 'Czy na pewno chcesz usunąć?',
         title: 'Uwaga'
       })
       if (res) {
-        var indexOfProd = this.items.indexOf(offer)
-        this.$http.delete(this.deleteofferApi, {
+        var indexOfOffer = this.items.indexOf(offer)
+        this.$http.delete(this.deleteOfferApi, {
           params: { id: offer.id }
         })
           .then(Result => {
-            this.items.splice(indexOfProd, 1)
+            this.items.splice(indexOfOffer, 1)
           }
           )
       }
