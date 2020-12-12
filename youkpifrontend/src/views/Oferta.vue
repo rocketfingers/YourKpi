@@ -202,6 +202,7 @@ export default {
       projects: [],
       customers: [],
       products: []
+
     }
   },
   computed: {},
@@ -296,10 +297,15 @@ export default {
       this.showNewOfferDialog = true
     },
     addOfferAction (offer) {
+      var $this = this
       this.$http
         .post(this.addOfferApi, offer)
         .then((Result) => {
-          this.items.push(offer)
+          // eslint-disable-next-line no-debugger
+          debugger
+          offer.id = Result.data.id
+          $this.items.unshift(offer)
+          $this.initialise()
         })
         .catch((e) => {
         })

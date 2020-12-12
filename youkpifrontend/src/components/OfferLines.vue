@@ -164,19 +164,17 @@ export default {
       if (!this.currentOffer.offerLines) {
         this.$set(this.currentOffer, 'offerLines', [])
       }
-      this.currentOffer.offerLines.unshift({ id: -1, productId: '', quantity: '', w: '', medium: '', additionalEquipment: '', sale: '', actions: '', isEdited: true })
+      this.currentOffer.offerLines.unshift({ id: 0, productId: '', quantity: '', w: '', medium: '', additionalEquipment: '', sale: '', actions: '', isEdited: true })
     },
     async editOffer (offer) {
-      // eslint-disable-next-line no-debugger
-      debugger
       if (offer.isEdited) {
-        // if (offer.productId.length === 0 || offer.quantity === 0 || offer.w.length === 0 || offer.medium.length === 0 || offer.additionalEquipment.length === 0 || offer.sale === 0) {
-        await this.$dialog.confirm({
-          text: 'Uzupełnij dane!'
-        })
-        // } else {
-        this.$set(offer, 'isEdited', false)
-        // }
+        if (offer.productId.length === 0 || offer.quantity === 0 || offer.w.length === 0 || offer.medium.length === 0 || offer.additionalEquipment.length === 0 || offer.sale === 0) {
+          await this.$dialog.confirm({
+            text: 'Uzupełnij dane!'
+          })
+        } else {
+          this.$set(offer, 'isEdited', false)
+        }
       } else {
         this.$set(offer, 'isEdited', true)
       }
