@@ -26,8 +26,8 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Offer.Include(o=>o.OfferLines).ToListAsync();
-                return Ok(res);
+                var res = await _ctx.Offer.Include(p=>p.OfferLines).Include(p=>p.Clients).ToListAsync();
+                return Ok(res.OrderByDescending(p=>p.Id));
             }
             catch (Exception ex)
             {
@@ -45,6 +45,7 @@ namespace YouKpiBackend.Controllers
             try
             {
                 var res = _ctx.Offer.Add(entity);
+                entity.Id = res.Entity.Id;
                 _ctx.SaveChanges();
 
                 return Created("", entity);

@@ -108,9 +108,19 @@
           :search="search"
         >
           <template slot="item" slot-scope="props">
-            <tr>
+            <tr :class="props.isExpanded ? 'primary lighten-5' : 'white'">
               <template v-for="(header, index) in headers">
-                <td :key="index" v-if="header.value === 'expand'">
+                <td :key="index" v-if="header.value === 'clientsId'">
+                  {{ props.item.clients.name }}
+                </td>
+                <td :key="index" v-else-if="header.value === 'projectsId'">
+                  {{
+                    props.item.projectsId === "NULL"
+                      ? ""
+                      : props.item.projectsId
+                  }}
+                </td>
+                <td :key="index" v-else-if="header.value === 'expand'">
                   <v-icon @click="expandRow(props)" v-show="!props.isExpanded"
                     >fa-arrow-down</v-icon
                   >
@@ -161,7 +171,7 @@
                 <v-flex xs11>
                   <OfferLines
                     :currentOffer="item"
-                    :editMode="false"
+                    :readonly="true"
                   ></OfferLines>
                 </v-flex>
               </v-layout>
@@ -200,11 +210,11 @@ export default {
         { text: 'Rozwiń', value: 'expand' },
         { text: 'Id', value: 'id' },
         { text: 'Nazwa', value: 'name' },
-        { text: 'Projekt Id', value: 'projectId' },
+        { text: 'Projekt Id', value: 'projectsId' },
         { text: 'Status', value: 'status' },
         { text: 'Typ zamówienia', value: 'orderType' },
         { text: 'Data oferty', value: 'offerDate' },
-        { text: 'Klient Id', value: 'clientId' },
+        { text: 'Klient', value: 'clientsId' },
         { text: 'Data zamówienia', value: 'orderDate' },
         { text: 'Planowane zakończenie', value: 'plannedEnd' },
         { text: 'Suma', value: 'sum' },
@@ -254,6 +264,7 @@ export default {
     expandRow (item) {
       // eslint-disable-next-line no-debugger
       // debugger
+      item.color = 'blue'
 
       item.expand(!item.isExpanded)
     },
@@ -267,7 +278,6 @@ export default {
             i.offerDate = this.formatDateTime(i.offerDate)
             i.orderDate = this.formatDateTime(i.orderDate)
             i.plannedEnd = this.formatDateTime(i.plannedEnd)
-
             i.sum = 0
           })
           this.tableLoading = false
@@ -290,7 +300,10 @@ export default {
         return
       }
       // eslint-disable-next-line no-debugger
-      debugger
+      // debugger
+
+      this.currentOffer.clientsId = this.currentOffer.client.id
+      this.currentOffer.projectsId = this.currentOffer.project.id
 
       if (this.editedIndex > 0) {
         this.editofferAction(this.currentOffer)

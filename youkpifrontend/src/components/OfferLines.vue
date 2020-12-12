@@ -1,9 +1,16 @@
 
 <template>
   <div>
-    <v-layout row wrap justify-space-around elevation-3 width="100%">
+    <v-layout
+      row
+      wrap
+      justify-space-around
+      elevation-3
+      width="100%"
+      class="mb-5"
+    >
       <v-flex xs12>
-        <v-toolbar flat color="white">
+        <v-toolbar flat color="white" v-if="!readonly">
           <v-toolbar-title>Offer Lines</v-toolbar-title>
           <v-divider class="mx-2" inset vertical></v-divider>
           <v-spacer></v-spacer>
@@ -28,6 +35,7 @@
           :headers="headers"
           :items="currentOffer.offerLines"
           :search="search"
+          :hide-default-footer="readonly"
         >
           <template v-if="readonly" v-slot:header.actions="{}"> </template>
           <template slot="item" slot-scope="props">

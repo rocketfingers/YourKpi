@@ -3,7 +3,7 @@
     <v-layout row wrap justify-space-around>
       <v-flex xs5>
         <v-layout row wrap>
-          <v-flex xs12>
+          <!-- <v-flex xs12>
             <v-text-field
               outlined
               color
@@ -13,7 +13,7 @@
               :rules="[requiredRule]"
               v-model="currentOffer.id"
             ></v-text-field>
-          </v-flex>
+          </v-flex> -->
           <v-flex xs12>
             <v-text-field
               outlined
@@ -31,9 +31,9 @@
               label="Projekt Id"
               :items="projects"
               item-text="showName"
-              item-value="id"
+              return-object
               required
-              v-model="currentOffer.projectId"
+              v-model="currentOffer.project"
             ></v-autocomplete>
           </v-flex>
           <v-flex xs12>
@@ -78,9 +78,9 @@
               label="Klient"
               :items="customers"
               item-text="showName"
-              item-value="id"
+              return-object
               required
-              v-model="currentOffer.clientId"
+              v-model="currentOffer.client"
             ></v-autocomplete>
           </v-flex>
           <v-flex xs12>
