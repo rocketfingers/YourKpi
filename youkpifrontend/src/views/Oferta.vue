@@ -13,9 +13,6 @@
           <v-layout row wrap justify-space-around>
             <v-flex xs11>
               <v-form ref="newOfferForm">
-                <!-- <NewOffer
-                  :offerTypes="offerTypes"
-                ></NewOffer> -->
                 <NewOffer
                   :currentOffer="currentOffer"
                   :projects="projects"
@@ -50,34 +47,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!-- <v-dialog v-model="showofferprojectsDialog" max-width="1200" persistent>
-      <v-card>
-        <v-toolbar dark elevation-4 color="primary lighten-1">
-          <span class="headline">Części produktu: {{ currentOffer.id }}</span>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="showofferprojectsDialog = false" dark>
-            <v-icon>close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-container grid-list-md>
-          <offerprojects
-            :currentOffer="currentOffer"
-            :readonly="true"
-          ></offerprojects>
-        </v-container>
-        <v-card-actions class="blue lighten-5">
-          <v-spacer></v-spacer>
-          <v-btn
-            large
-            color="blue darken-1"
-            @click.native="showofferprojectsDialog = false"
-          >
-            Zamknij
-            <v-icon dark>cancel</v-icon>
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog> -->
     <v-layout row wrap elevation-3>
       <v-flex xs12>
         <v-toolbar flat color="white">
@@ -262,10 +231,6 @@ export default {
         })
     },
     expandRow (item) {
-      // eslint-disable-next-line no-debugger
-      // debugger
-      item.color = 'blue'
-
       item.expand(!item.isExpanded)
     },
     getOffer () {
@@ -284,7 +249,7 @@ export default {
             if (i.clientsId) {
               i.client = this.customers.find(c => c.id === i.clientsId)
             }
-            i.sum = 0
+            i.sum = ''
           })
           this.tableLoading = false
         })
@@ -292,22 +257,13 @@ export default {
           this.tableLoading = false
         })
     },
-    // getofferTypes () {
-    //   var $this = this
-    //   this.$http
-    //     .get(this.getAllofferTypesApi)
-    //     .then((Response) => {
-    //       $this.offerTypes = Response.data
-    //     })
-    //     .catch((e) => {})
-    // },
+
     saveOfferAction () {
+      // eslint-disable-next-line no-debugger
+      // debuggers
       if (!this.$refs.newOfferForm.validate()) {
         return
       }
-      // eslint-disable-next-line no-debugger
-      // debugger
-
       this.currentOffer.clientsId = this.currentOffer.client.id
       this.currentOffer.projectsId = this.currentOffer.project.id
 
