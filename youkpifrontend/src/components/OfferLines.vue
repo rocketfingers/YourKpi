@@ -139,7 +139,7 @@ export default {
         { text: 'W', value: 'w', visible: true },
         { text: 'Medium', value: 'medium', visible: true },
         { text: 'Dodatkowe wyposażenie', value: 'additionalEquipment', visible: true },
-        { text: 'Sprzedaź', value: 'sale', visible: true },
+        { text: 'Sale', value: 'sale', visible: true },
         { text: 'Akcje', value: 'actions', visible: true }
       ],
       search: '',

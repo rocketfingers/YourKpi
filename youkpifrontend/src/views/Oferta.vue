@@ -301,8 +301,6 @@ export default {
       this.$http
         .post(this.addOfferApi, offer)
         .then((Result) => {
-          // eslint-disable-next-line no-debugger
-          debugger
           offer.id = Result.data.id
           $this.items.unshift(offer)
           $this.initialise()
