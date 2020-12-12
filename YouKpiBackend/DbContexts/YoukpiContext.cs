@@ -30,7 +30,6 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<Offer> Offer { get; set; }
         public virtual DbSet<OfferLines> OfferLines { get; set; }
         public virtual DbSet<OfferLinesOld> OfferLinesOld { get; set; }
-        public virtual DbSet<OfferOfferLinesConnection> OfferOfferLinesConnection { get; set; }
         public virtual DbSet<Pracownik> Pracownik { get; set; }
         public virtual DbSet<PracownikOfertaProcesy> PracownikOfertaProcesy { get; set; }
         public virtual DbSet<PracownikProcess> PracownikProcess { get; set; }
@@ -348,26 +347,6 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Sale).HasMaxLength(50);
 
                 entity.Property(e => e.W).HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<OfferOfferLinesConnection>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.Property(e => e.OfferId).HasColumnName("OfferID");
-
-                entity.Property(e => e.OfferLineId).ValueGeneratedOnAdd();
-
-                entity.HasOne(d => d.Offer)
-                    .WithMany()
-                    .HasForeignKey(d => d.OfferId)
-                    .HasConstraintName("FK__OfferOffe__Offer__7E02B4CC");
-
-                entity.HasOne(d => d.OfferLine)
-                    .WithMany()
-                    .HasForeignKey(d => d.OfferLineId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OfferOffe__Offer__01D345B0");
             });
 
             modelBuilder.Entity<Pracownik>(entity =>
