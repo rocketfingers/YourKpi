@@ -108,7 +108,10 @@
     </v-layout>
     <v-layout>
       <v-flex xs12>
-        <OfferLines :currentOffer="currentOffer"></OfferLines>
+        <OfferLines
+          :currentOffer="currentOffer"
+          :products="products"
+        ></OfferLines>
       </v-flex>
     </v-layout>
   </div>
@@ -126,7 +129,8 @@ export default {
     currentOffer: Object,
     editMode: Boolean,
     projects: Array,
-    customers: Array
+    customers: Array,
+    products: Array
   },
   data () {
     return {

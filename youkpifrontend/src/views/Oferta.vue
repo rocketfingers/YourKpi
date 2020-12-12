@@ -9,21 +9,20 @@
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-container grid-list-md>
-          <v-layout row wrap justify-space-around>
-            <v-flex xs11>
-              <v-form ref="newOfferForm">
-                <NewOffer
-                  :currentOffer="currentOffer"
-                  :projects="projects"
-                  :editMode="editMode"
-                  @editedOffer="editcurrentOfferRes"
-                  :customers="customers"
-                ></NewOffer>
-              </v-form>
-            </v-flex>
-          </v-layout>
-        </v-container>
+        <v-layout row wrap justify-space-around class="ma-4">
+          <v-flex xs11>
+            <v-form ref="newOfferForm">
+              <NewOffer
+                :currentOffer="currentOffer"
+                :projects="projects"
+                :editMode="editMode"
+                @editedOffer="editcurrentOfferRes"
+                :customers="customers"
+                :products="products"
+              ></NewOffer>
+            </v-form>
+          </v-flex>
+        </v-layout>
         <v-card-actions class="blue lighten-5">
           <v-btn
             large
@@ -173,6 +172,7 @@ export default {
       getAllofferTypesApi: 'api/offerTypes/GetAll',
       getAllProjectsApi: 'api/Project/GetAll',
       getAllCustomersApi: 'api/Customer/GetAll',
+      getAllProductsApi: 'api/Products/GetAllSimple',
       expanded: [],
 
       headers: [
@@ -200,7 +200,8 @@ export default {
       offerTypes: [],
       editMode: false,
       projects: [],
-      customers: []
+      customers: [],
+      products: []
     }
   },
   computed: {},
@@ -208,9 +209,17 @@ export default {
   methods: {
     initialise () {
       this.tableLoading = true
-      this.getOffer()
       this.getProjects()
-      this.getCustomers()
+    },
+    getProducts () {
+      this.$http.get(this.getAllProductsApi)
+        .then(Response => {
+          this.products = Response.data
+          this.products.forEach(p => {
+            p.showName = p.id + ', ' + p.name
+          })
+          this.getOffer()
+        })
     },
     getProjects () {
       this.$http.get(this.getAllProjectsApi)
@@ -219,6 +228,7 @@ export default {
           this.projects.forEach(p => {
             p.showName = p.id + ', ' + p.description
           })
+          this.getCustomers()
         })
     },
     getCustomers () {
@@ -228,6 +238,7 @@ export default {
           this.customers.forEach(p => {
             p.showName = p.id + ', ' + p.name + ', ' + p.nip
           })
+          this.getProducts()
         })
     },
     expandRow (item) {

@@ -46,9 +46,9 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
-                var res = _ctx.Offer.Add(entity);
+                var res = _ctx.Add(entity);
                 entity.Id = res.Entity.Id;
-                _ctx.SaveChanges();
+                await _ctx.SaveChangesAsync();
 
                 return Created("", entity);
             }
@@ -67,7 +67,7 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
-                var offer = _ctx.Offer.Include(p => p.OfferLines).FirstOrDefault(p => p.Id == entity.Id);
+                var offer = await _ctx.Offer.Include(p => p.OfferLines).ThenInclude(p => p.Product).Include(p => p.Clients).FirstOrDefaultAsync(p => p.Id == entity.Id);
                 offer.Name = entity.Name;
                 offer.OfferDate = entity.OfferDate;
                 offer.Offerrer = entity.Offerrer;
@@ -77,17 +77,16 @@ namespace YouKpiBackend.Controllers
                 offer.OrderType = entity.OrderType;
                 offer.ClientsId = entity.ClientsId;
                 offer.PlannedEnd = entity.PlannedEnd;
+                offer.OfferLines.ToList().ForEach(p =>
+                {
+                    _ctx.Entry(p).State = EntityState.Deleted;
+                });
 
-                //product.ProduktCzesci.ToList().ForEach(p =>
-                //{
-                //    _ctx.Entry(p).State = EntityState.Deleted;
-                //});
-                //entity.ProduktCzesci.ToList().ForEach(part =>
-                //{
-                //    part.ProduktyId = product.Id;
-                //    product.ProduktCzesci.Add(part);
-                //});
-                _ctx.SaveChanges();
+                entity.OfferLines.ToList().ForEach(p =>
+                {
+                    offer.OfferLines.Add(p);
+                });
+                await _ctx.SaveChangesAsync();
 
                 return NoContent();
             }

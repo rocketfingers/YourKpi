@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
+using YouKpiBackend.ViewModels;
 
 namespace YouKpiBackend.Controllers
 {
@@ -27,6 +28,22 @@ namespace YouKpiBackend.Controllers
             try
             {
                 var res = await _ctx.Produkty.Include(p => p.ProduktCzesci).ToListAsync();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllSimple()
+        {
+            try
+            {
+                var res = await _ctx.Produkty.Select(p => new ProductSimpleViewModel()
+                {
+                    Id = p.Id,
+                }).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)

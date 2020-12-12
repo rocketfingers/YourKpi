@@ -26,7 +26,7 @@
             color="primary"
             dark
             class="mb-2"
-            @click="addPartToProduct()"
+            @click="addOfferLineToOffer()"
             v-if="!readonly"
             >Dodaj</v-btn
           >
@@ -36,24 +36,25 @@
           :items="currentOffer.offerLines"
           :search="search"
           :hide-default-footer="readonly"
+          calculate-widths
         >
           <template v-if="readonly" v-slot:header.actions="{}"> </template>
           <template slot="item" slot-scope="props">
             <tr>
               <template v-for="(header, index) in headers">
                 <td :key="index" v-if="header.value == 'actions' && !readonly">
-                  <v-layout>
+                  <v-layout justify-space-between>
                     <v-flex xs4>
                       <v-icon
                         v-show="props.item.isEdited"
-                        @click="editPart(props.item, index)"
+                        @click="editOffer(props.item, index)"
                         color="orange"
                         class="mr-2"
                         >check</v-icon
                       >
                       <v-icon
                         v-show="!props.item.isEdited"
-                        @click="editPart(props.item, index)"
+                        @click="editOffer(props.item, index)"
                         color="green"
                         class="mr-2"
                         >edit</v-icon
@@ -61,7 +62,7 @@
                     </v-flex>
                     <v-flex xs4>
                       <v-icon
-                        @click="deletePart(props.item, index)"
+                        @click="deleteOffer(props.item, index)"
                         color="red lighten-1"
                         >delete</v-icon
                       >
@@ -71,19 +72,39 @@
                 <td v-else :key="index">
                   <template v-if="props.item.isEdited && !readonly">
                     <v-autocomplete
-                      v-if="header.value == 'czesciId'"
+                      v-if="header.value == 'productId'"
                       color
-                      :items="parts"
+                      :items="products"
                       item-text="id"
                       item-value="id"
                       :rules="[requiredRule]"
-                      v-model="props.item.czesciId"
+                      v-model="props.item.productId"
                     ></v-autocomplete>
                     <v-text-field
-                      v-else-if="header.value == 'iloscSztuk'"
-                      v-model="props.item.iloscSztuk"
+                      v-else-if="header.value == 'quantity'"
+                      v-model="props.item.quantity"
                       type="number"
                       :rules="[requiredRule, numberRule, intRule]"
+                    ></v-text-field>
+                    <v-text-field
+                      v-else-if="header.value == 'w'"
+                      v-model="props.item.w"
+                      :rules="[requiredRule]"
+                    ></v-text-field>
+                    <v-text-field
+                      v-else-if="header.value == 'medium'"
+                      v-model="props.item.medium"
+                      :rules="[requiredRule]"
+                    ></v-text-field>
+                    <v-text-field
+                      v-else-if="header.value == 'additionalEquipment'"
+                      v-model="props.item.additionalEquipment"
+                      :rules="[requiredRule]"
+                    ></v-text-field>
+                    <v-text-field
+                      v-else-if="header.value == 'sale'"
+                      v-model="props.item.sale"
+                      :rules="[requiredRule]"
                     ></v-text-field>
                   </template>
                   <template v-else>
@@ -101,17 +122,18 @@
 
 <script>
 export default {
-  name: 'ProductParts',
+  name: 'Productoffers',
   components: {
   },
   props: {
     currentOffer: Object,
-    readonly: Boolean
+    readonly: Boolean,
+    products: Array
   },
   data () {
     return {
       headers: [
-        { text: 'Id', value: 'id', visible: true },
+        // { text: 'Id', value: 'id', visible: true },
         { text: 'ProductID', value: 'productId', visible: true },
         { text: 'Ilość', value: 'quantity', visible: true },
         { text: 'W', value: 'w', visible: true },
@@ -138,33 +160,35 @@ export default {
 
   },
   methods: {
-    addPartToProduct () {
-      if (!this.currentOffer.produktCzesci) {
-        this.$set(this.currentOffer, 'produktCzesci', [])
+    addOfferLineToOffer () {
+      if (!this.currentOffer.offerLines) {
+        this.$set(this.currentOffer, 'offerLines', [])
       }
-      this.currentOffer.produktCzesci.unshift({ czesciId: '', iloscSztuk: '', actions: '', isEdited: true })
+      this.currentOffer.offerLines.unshift({ id: -1, productId: '', quantity: '', w: '', medium: '', additionalEquipment: '', sale: '', actions: '', isEdited: true })
     },
-    async editPart (part) {
-      if (part.isEdited) {
-        if (part.czesciId.length === 0 || part.czesciId.iloscSztuk === 0) {
-          await this.$dialog.confirm({
-            text: 'Uzupełnij dane!'
-          })
-        } else {
-          this.$set(part, 'isEdited', false)
-        }
+    async editOffer (offer) {
+      // eslint-disable-next-line no-debugger
+      debugger
+      if (offer.isEdited) {
+        // if (offer.productId.length === 0 || offer.quantity === 0 || offer.w.length === 0 || offer.medium.length === 0 || offer.additionalEquipment.length === 0 || offer.sale === 0) {
+        await this.$dialog.confirm({
+          text: 'Uzupełnij dane!'
+        })
+        // } else {
+        this.$set(offer, 'isEdited', false)
+        // }
       } else {
-        this.$set(part, 'isEdited', true)
+        this.$set(offer, 'isEdited', true)
       }
     },
-    deletePart (part, index) {
+    deleteOffer (offer, index) {
       // var res = await this.$dialog.confirm({
-      //   text: 'Czy na pewno chcesz usunąć:  ' + part.czesciId + '?',
+      //   text: 'Czy na pewno chcesz usunąć:  ' + offer.czesciId + '?',
       //   title: 'Uwaga'
       // })
       // if (res) {
-      var indexOfPart = this.currentOffer.produktCzesci.indexOf(part)
-      this.currentOffer.produktCzesci.splice(indexOfPart, 1)
+      var indexOfOffer = this.currentOffer.offerLines.indexOf(offer)
+      this.currentOffer.offerLines.splice(indexOfOffer, 1)
     //   }
     }
   },
