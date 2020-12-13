@@ -108,38 +108,38 @@ namespace YouKpiBackend.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        [HttpGet("[action]")]
-        public async Task<IActionResult> GetAllUserProcess()
-        {
-            try
-            {
-                var lst = await _dbContext.ToListAsync();
-                var mappedList = _mapper.Map<List<PracownikViewModel>>(lst);
-                return Ok(mappedList);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-        [HttpDelete("[action]")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            try
-            {
-                var partEntity = _dbContext.Pracownik.FirstOrDefault(c => c.Id == id);
-                if (partEntity != null)
-                {
-                    _dbContext.Pracownik.Remove(partEntity);
-                    await _dbContext.SaveChangesAsync();
-                }
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
-        }
+        //[HttpGet("[action]")]
+        //public async Task<IActionResult> GetAllUserProcess()
+        //{
+        //    try
+        //    {
+        //        var lst = await _dbContext.ToListAsync();
+        //        var mappedList = _mapper.Map<List<PracownikViewModel>>(lst);
+        //        return Ok(mappedList);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        //    }
+        //}
+        //[HttpDelete("[action]")]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    try
+        //    {
+        //        var partEntity = _dbContext.Pracownik.FirstOrDefault(c => c.Id == id);
+        //        if (partEntity != null)
+        //        {
+        //            _dbContext.Pracownik.Remove(partEntity);
+        //            await _dbContext.SaveChangesAsync();
+        //        }
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, ex.Message);
+        //    }
+        //}
 
     }
 }

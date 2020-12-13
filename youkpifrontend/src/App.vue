@@ -77,6 +77,18 @@ import auth from './auth'
 export default {
   name: 'App',
   created: function () {
+    // eslint-disable-next-line no-debugger
+    debugger
+
+    // jezeli jestesmy na jakiejs stronie i nie ma tokena
+    const token = window.localStorage.getItem('token')
+    const constTokenExists = window.localStorage.getItem('token') !== 'undefined'
+    if (this.$route.name !== 'Login' && !constTokenExists) {
+      this.$router.replace({ name: 'Login' })
+    } else if (constTokenExists) {
+      auth.loginWithToken(token)
+    }
+
     this.$store.watch(
       state => state.error,
       () => {
