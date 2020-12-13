@@ -148,14 +148,15 @@
 
                 <td class="justify-center px-0">
                   <v-layout>
-                    <v-flex xs6>
+                    <v-flex xs4>
                       <v-icon
-                        @click="deleteProduct(props.item)"
-                        color="red lighten-1"
-                        >universal-access</v-icon
+                        class="mr-2"
+                        @click="openUserProcessDialog(props.item)"
+                        color="primary lighten-1"
+                        >fa-universal-access</v-icon
                       >
                     </v-flex>
-                    <v-flex xs6>
+                    <v-flex xs4>
                       <v-icon
                         class="mr-2"
                         color="green"
@@ -164,7 +165,7 @@
                         edit
                       </v-icon>
                     </v-flex>
-                    <v-flex xs6>
+                    <v-flex xs4>
                       <v-icon
                         @click="deleteProduct(props.item)"
                         color="red lighten-1"
@@ -181,15 +182,45 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <v-dialog
+      v-model="showDialogUserProcess"
+      v-if="showDialogUserProcess"
+      width="auto"
+      max-width="none"
+    >
+      <v-toolbar dark elevation-4 color="primary lighten-1">
+        <span class="headline">Processy użytkownika {{ editedItem.name }}</span>
+      </v-toolbar>
+      <v-card>
+        <v-form ref="newForm">
+          <v-card-text>
+            <UserProcess :userId="editedItem.id"> </UserProcess>
+          </v-card-text>
+        </v-form>
+        <v-card-actions class="blue lighten-5">
+          <v-btn
+            outlined
+            rounded
+            large
+            color="blue darken-1"
+            text
+            @click="showDialogUserProcess = false"
+            >Wyjdź<v-icon dark>cancel</v-icon></v-btn
+          >
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
 import * as v from '../main.js'
-
+import UserProcess from '../components/UserProcess'
 export default {
-  name: '',
+  name: 'Pracowncy',
   components: {
+    UserProcess: UserProcess
   },
   props: {
   },
@@ -212,6 +243,8 @@ export default {
       showDialog: false,
       data: [],
       currentId: 0,
+      // dialogProcesy
+      showDialogUserProcess: false,
       // Columns headers
       headers: [
         { text: 'Id', value: 'id' },
@@ -242,6 +275,10 @@ export default {
     }
   },
   methods: {
+    openUserProcessDialog (item) {
+      this.editedItem = Object.assign({}, item)
+      this.showDialogUserProcess = true
+    },
     editItem (item) {
       this.editMode = true
 
@@ -266,7 +303,7 @@ export default {
       })
       if (res) {
         var indexOfPart = this.data.indexOf(part)
-        this.$http.delete(this.deleteApi, {
+        v.axiosInstance.delete(this.deleteApi, {
           params: { id: part.id }
         })
           .then(Result => {
