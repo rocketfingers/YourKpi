@@ -64,6 +64,7 @@
             </v-list-item-icon>
             <v-list-item-title>Typ wyrobu</v-list-item-title>
           </v-list-item>
+          <v-divider></v-divider>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -77,9 +78,6 @@ import auth from './auth'
 export default {
   name: 'App',
   created: function () {
-    // eslint-disable-next-line no-debugger
-    debugger
-
     // jezeli jestesmy na jakiejs stronie i nie ma tokena
     const token = window.localStorage.getItem('token')
     const constTokenExists = window.localStorage.getItem('token') !== 'undefined'
@@ -92,8 +90,6 @@ export default {
     this.$store.watch(
       state => state.error,
       () => {
-        // eslint-disable-next-line no-debugger
-        debugger
         const msg = this.$store.getters.GetError
         if (msg !== '' && this.$route.name !== 'Login') {
           this.$dialog.error({
