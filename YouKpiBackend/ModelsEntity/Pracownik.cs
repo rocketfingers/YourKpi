@@ -9,6 +9,7 @@ namespace YouKpiBackend.ModelsEntity
         public Pracownik()
         {
             Offer = new HashSet<Offer>();
+            PracownikProcess = new HashSet<PracownikProcess>();
         }
 
         public int Id { get; set; }
@@ -22,5 +23,6 @@ namespace YouKpiBackend.ModelsEntity
         public string Salt { get; set; }
 
         public virtual ICollection<Offer> Offer { get; set; }
+        public virtual ICollection<PracownikProcess> PracownikProcess { get; set; }
     }
 }

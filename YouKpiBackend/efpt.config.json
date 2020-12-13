@@ -59,11 +59,6 @@
       },
       {
          "HasPrimaryKey": true,
-         "Name": "[dbo].[OfertyView]",
-         "ObjectType": 0
-      },
-      {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Offer]",
          "ObjectType": 0
       },
@@ -75,11 +70,6 @@
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[OfferLines_old]",
-         "ObjectType": 0
-      },
-      {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[OfferOfferLinesConnection]",
          "ObjectType": 0
       },
       {
