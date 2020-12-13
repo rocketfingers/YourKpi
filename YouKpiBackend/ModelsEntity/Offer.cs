@@ -6,14 +6,23 @@ namespace YouKpiBackend.ModelsEntity
 {
     public partial class Offer
     {
-        public string Id { get; set; }
+        public Offer()
+        {
+            OfferLines = new HashSet<OfferLines>();
+        }
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string ProjectsId { get; set; }
         public string Status { get; set; }
         public string OrderType { get; set; }
         public DateTime? OfferDate { get; set; }
-        public string ClientsId { get; set; }
-        public string Offerrer { get; set; }
+        public int ClientsId { get; set; }
+        public int? Offerrer { get; set; }
         public DateTime? OrderDate { get; set; }
         public DateTime? PlannedEnd { get; set; }
+
+        public virtual ICollection<OfferLines> OfferLines { get; set; }
+        public virtual Client Clients { get; set; }
+        public virtual Pracownik OfferrerNavigation { get; set; }
     }
 }

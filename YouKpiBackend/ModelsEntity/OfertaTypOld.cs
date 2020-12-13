@@ -4,12 +4,10 @@ using System.Collections.Generic;
 
 namespace YouKpiBackend.ModelsEntity
 {
-    public partial class OfertaTyp
+    public partial class OfertaTypOld
     {
         public int Id { get; set; }
-        public int OfferId { get; set; }
+        public string OfferId { get; set; }
         public string Type { get; set; }
-
-        public virtual Offer Offer { get; set; }
     }
 }

@@ -6,6 +6,8 @@ import Czesci from '../views/Czesci.vue'
 import TypWyrobu from '../views/TypWyrobu.vue'
 import Login from '../views/Login.vue'
 import Pracownicy from '../views/Pracownicy.vue'
+import Oferta from '../views/Oferta.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -38,6 +40,11 @@ const routes = [
     path: '/typwyrobu',
     name: 'TypWyrobu',
     component: TypWyrobu
+  },
+  {
+    path: '/oferta',
+    name: 'Oferta',
+    component: Oferta
   },
   {
     path: '/login',

@@ -6,6 +6,11 @@ namespace YouKpiBackend.ModelsEntity
 {
     public partial class Pracownik
     {
+        public Pracownik()
+        {
+            Offer = new HashSet<Offer>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public int TrybPracy { get; set; }
@@ -15,5 +20,7 @@ namespace YouKpiBackend.ModelsEntity
         public string Password { get; set; }
         public string Email { get; set; }
         public string Salt { get; set; }
+
+        public virtual ICollection<Offer> Offer { get; set; }
     }
 }

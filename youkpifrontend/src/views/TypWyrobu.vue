@@ -1,171 +1,163 @@
 <template>
   <div>
-    <v-container>
-      <v-layout row wrap elevation-3>
-        <v-flex xs12>
-          <v-toolbar flat color="white">
-            <v-toolbar-title>{{ title }}</v-toolbar-title>
-            <v-divider class="mx-2" inset vertical></v-divider>
-            <v-spacer></v-spacer>
-            <v-text-field
-              append-icon="search"
-              label="Search"
-              single-line
-              hide-details
-              class="elevation-1"
-              v-model="searchTable"
-            ></v-text-field>
-            <v-dialog v-model="showDialog" width="auto" max-width="none">
-              <template v-slot:activator="{ on, attrs }">
+    <v-layout row wrap elevation-3>
+      <v-flex xs12>
+        <v-toolbar flat color="white">
+          <v-toolbar-title>{{ title }}</v-toolbar-title>
+          <v-divider class="mx-2" inset vertical></v-divider>
+          <v-spacer></v-spacer>
+          <v-text-field
+            append-icon="search"
+            label="Search"
+            single-line
+            hide-details
+            class="elevation-1"
+            v-model="searchTable"
+          ></v-text-field>
+          <v-dialog v-model="showDialog" width="auto" max-width="none">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn v-on="on" v-bind="attrs" color="primary" dark class="mb-2">
+                Nowy
+              </v-btn>
+            </template>
+
+            <v-toolbar dark elevation-4 color="primary lighten-1">
+              <span class="headline">{{ formTitle }}</span>
+            </v-toolbar>
+            <v-card>
+              <v-form ref="newForm">
+                <v-card-text>
+                  <v-container v-if="showDialog" grid-list-md>
+                    <v-layout wrap>
+                      <v-flex xs12 sm8 offset-sm2>
+                        <v-text-field
+                          outlined
+                          color
+                          label="Id"
+                          :disabled="editMode"
+                          required
+                          v-model="editedItem.id"
+                        ></v-text-field>
+                      </v-flex>
+                      <v-flex xs12 sm8 offset-sm2>
+                        <v-autocomplete
+                          outlined
+                          color
+                          label="Id grupy wyrobu"
+                          :items="['Kołnierzowe', 'Gwintowane', 'Spawane']"
+                          required
+                          v-model="editedItem.idgrupyWyrobu"
+                        ></v-autocomplete>
+                      </v-flex>
+                      <v-flex xs12 sm8 offset-sm2>
+                        <v-autocomplete
+                          outlined
+                          color
+                          label="Typ wkonstrukcji"
+                          :items="[
+                            'międzykołnierzowe',
+                            'dwuczęsciowe',
+                            'trzyczęściowa',
+                            'regulacyjny',
+                            'trójdrogowy',
+                          ]"
+                          required
+                          v-model="editedItem.typKonstrukcji"
+                        ></v-autocomplete>
+                      </v-flex>
+                      <v-flex xs12 sm8 offset-sm2>
+                        <v-autocomplete
+                          outlined
+                          color
+                          label="Typ przelotu"
+                          :items="['pełny', 'zredukowany']"
+                          required
+                          v-model="editedItem.typPrzelotu"
+                        ></v-autocomplete>
+                      </v-flex>
+                      <v-flex xs12 sm8 offset-sm2>
+                        <v-select
+                          outlined
+                          color
+                          item-text="name"
+                          item-value="name"
+                          label="Typ kuli"
+                          :items="[{ id: 1, name: 'pływajaca' }]"
+                          required
+                          v-model="editedItem.typKuli"
+                        ></v-select>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-card-text>
+              </v-form>
+              <v-card-actions class="blue lighten-5">
                 <v-btn
-                  v-on="on"
-                  v-bind="attrs"
-                  color="primary"
-                  dark
-                  class="mb-2"
+                  outlined
+                  rounded
+                  large
+                  color="blue darken-1"
+                  text
+                  @click="showDialog = false"
+                  >Anuluj<v-icon dark>cancel</v-icon></v-btn
                 >
-                  Nowy
-                </v-btn>
-              </template>
+                <v-spacer></v-spacer>
+                <v-btn
+                  outlineed
+                  rounded
+                  large
+                  color="blue darken-1"
+                  text
+                  @click.native="save"
+                  >Zapisz<v-icon dark>save</v-icon></v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-toolbar>
+        <v-data-table
+          :headers="headers"
+          :items="data"
+          :search="searchTable"
+          :loading="tableLoading"
+          :footer-props="footer"
+          class="elevation-2"
+        >
+          <template slot="item" slot-scope="props">
+            <tr>
+              <!-- Columns settings  -->
+              <td class="text-xs-left">{{ props.item.id }}</td>
+              <td class="text-xs-left">{{ props.item.idgrupyWyrobu }}</td>
+              <td class="text-xs-left">{{ props.item.typKonstrukcji }}</td>
+              <td class="text-xs-left">{{ props.item.typKuli }}</td>
+              <td class="text-xs-left">{{ props.item.typPrzelotu }}</td>
+              <td class="justify-center px-0">
+                <v-layout>
+                  <v-flex xs6>
+                    <v-icon
+                      class="mr-2"
+                      color="green"
+                      @click="editItem(props.item)"
+                    >
+                      edit
+                    </v-icon>
+                  </v-flex>
+                  <v-flex xs6>
+                    <v-icon
+                      @click="deleteProduct(props.item)"
+                      color="red lighten-1"
+                      >delete</v-icon
+                    >
+                  </v-flex>
+                </v-layout>
+              </td>
+            </tr>
 
-              <v-toolbar dark elevation-4 color="primary lighten-1">
-                <span class="headline">{{ formTitle }}</span>
-              </v-toolbar>
-              <v-card>
-                <v-form ref="newForm">
-                  <v-card-text>
-                    <v-container v-if="showDialog" grid-list-md>
-                      <v-layout wrap>
-                        <v-flex xs12 sm8 offset-sm2>
-                          <v-text-field
-                            outlined
-                            color
-                            label="Id"
-                            :disabled="editMode"
-                            required
-                            v-model="editedItem.id"
-                          ></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm8 offset-sm2>
-                          <v-autocomplete
-                            outlined
-                            color
-                            label="Id grupy wyrobu"
-                            :items="['Kołnierzowe', 'Gwintowane', 'Spawane']"
-                            required
-                            v-model="editedItem.idgrupyWyrobu"
-                          ></v-autocomplete>
-                        </v-flex>
-                        <v-flex xs12 sm8 offset-sm2>
-                          <v-autocomplete
-                            outlined
-                            color
-                            label="Typ wkonstrukcji"
-                            :items="[
-                              'międzykołnierzowe',
-                              'dwuczęsciowe',
-                              'trzyczęściowa',
-                              'regulacyjny',
-                              'trójdrogowy',
-                            ]"
-                            required
-                            v-model="editedItem.typKonstrukcji"
-                          ></v-autocomplete>
-                        </v-flex>
-                        <v-flex xs12 sm8 offset-sm2>
-                          <v-autocomplete
-                            outlined
-                            color
-                            label="Typ przelotu"
-                            :items="['pełny', 'zredukowany']"
-                            required
-                            v-model="editedItem.typPrzelotu"
-                          ></v-autocomplete>
-                        </v-flex>
-                        <v-flex xs12 sm8 offset-sm2>
-                          <v-select
-                            outlined
-                            color
-                            item-text="name"
-                            item-value="name"
-                            label="Typ kuli"
-                            :items="[{ id: 1, name: 'pływajaca' }]"
-                            required
-                            v-model="editedItem.typKuli"
-                          ></v-select>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
-                  </v-card-text>
-                </v-form>
-                <v-card-actions class="blue lighten-5">
-                  <v-btn
-                    outlined
-                    rounded
-                    large
-                    color="blue darken-1"
-                    text
-                    @click="showDialog = false"
-                    >Anuluj<v-icon dark>cancel</v-icon></v-btn
-                  >
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    outlineed
-                    rounded
-                    large
-                    color="blue darken-1"
-                    text
-                    @click.native="save"
-                    >Zapisz<v-icon dark>save</v-icon></v-btn
-                  >
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-toolbar>
-          <v-data-table
-            :headers="headers"
-            :items="data"
-            :search="searchTable"
-            :loading="tableLoading"
-            :footer-props="footer"
-            class="elevation-2"
-          >
-            <template slot="item" slot-scope="props">
-              <tr>
-                <!-- Columns settings  -->
-                <td class="text-xs-left">{{ props.item.id }}</td>
-                <td class="text-xs-left">{{ props.item.idgrupyWyrobu }}</td>
-                <td class="text-xs-left">{{ props.item.typKonstrukcji }}</td>
-                <td class="text-xs-left">{{ props.item.typKuli }}</td>
-                <td class="text-xs-left">{{ props.item.typPrzelotu }}</td>
-                <td class="justify-center px-0">
-                  <v-layout>
-                    <v-flex xs6>
-                      <v-icon
-                        class="mr-2"
-                        color="green"
-                        @click="editItem(props.item)"
-                      >
-                        edit
-                      </v-icon>
-                    </v-flex>
-                    <v-flex xs6>
-                      <v-icon
-                        @click="deleteProduct(props.item)"
-                        color="red lighten-1"
-                        >delete</v-icon
-                      >
-                    </v-flex>
-                  </v-layout>
-                </td>
-              </tr>
-
-              <tr></tr
-            ></template>
-          </v-data-table>
-        </v-flex>
-      </v-layout>
-    </v-container>
+            <tr></tr
+          ></template>
+        </v-data-table>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
@@ -273,8 +265,6 @@ export default {
         this.$http.post(this.postNewApi,
           this.editedItem)
           .then(Result => {
-            // eslint-disable-next-line no-debugger
-            debugger
             this.editedItem.id = Result.data.id
             this.data.push(Result.data)
             this.close()

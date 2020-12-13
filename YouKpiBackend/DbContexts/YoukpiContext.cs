@@ -25,9 +25,11 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<MozliwyOrderType> MozliwyOrderType { get; set; }
         public virtual DbSet<MożliwaGrupaProcesu> MożliwaGrupaProcesu { get; set; }
         public virtual DbSet<OfertaTyp> OfertaTyp { get; set; }
+        public virtual DbSet<OfertaTypOld> OfertaTypOld { get; set; }
         public virtual DbSet<OfertyView> OfertyView { get; set; }
         public virtual DbSet<Offer> Offer { get; set; }
         public virtual DbSet<OfferLines> OfferLines { get; set; }
+        public virtual DbSet<OfferLinesOld> OfferLinesOld { get; set; }
         public virtual DbSet<Pracownik> Pracownik { get; set; }
         public virtual DbSet<PracownikOfertaProcesy> PracownikOfertaProcesy { get; set; }
         public virtual DbSet<PracownikProcess> PracownikProcess { get; set; }
@@ -144,6 +146,27 @@ namespace YouKpiBackend.DbContexts
 
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
+                entity.Property(e => e.Type)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.HasOne(d => d.Offer)
+                    .WithMany()
+                    .HasForeignKey(d => d.OfferId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OfertaTyp__Offer__7A3223E8");
+            });
+
+            modelBuilder.Entity<OfertaTypOld>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("OfertaTyp_old");
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
                 entity.Property(e => e.OfferId)
                     .IsRequired()
                     .HasMaxLength(30)
@@ -247,15 +270,11 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<Offer>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
+                entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.ClientsId).HasMaxLength(50);
-
                 entity.Property(e => e.OfferDate).HasColumnType("datetime");
-
-                entity.Property(e => e.Offerrer).HasMaxLength(50);
 
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
 
@@ -268,16 +287,50 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.ProjectsId).HasMaxLength(50);
 
                 entity.Property(e => e.Status).HasMaxLength(50);
+
+                entity.HasOne(d => d.Clients)
+                    .WithMany(p => p.Offer)
+                    .HasForeignKey(d => d.ClientsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Offer__ClientsId__73852659");
+
+                entity.HasOne(d => d.OfferrerNavigation)
+                    .WithMany(p => p.Offer)
+                    .HasForeignKey(d => d.Offerrer)
+                    .HasConstraintName("FK__Offer__Offerrer__719CDDE7");
             });
 
             modelBuilder.Entity<OfferLines>(entity =>
             {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Medium).HasMaxLength(150);
+
+                entity.Property(e => e.ProductId)
+                    .IsRequired()
+                    .HasColumnName("ProductID")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Sale).HasMaxLength(50);
+
+                entity.Property(e => e.W).HasMaxLength(50);
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.OfferLines)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OfferLine__Produ__70A8B9AE");
+            });
+
+            modelBuilder.Entity<OfferLinesOld>(entity =>
+            {
+                entity.ToTable("OfferLines_old");
+
                 entity.HasIndex(e => e.Id)
                     .HasName("IX_OfferLines");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Currency).HasMaxLength(4);
 
                 entity.Property(e => e.Medium).HasMaxLength(150);
 
@@ -287,19 +340,11 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PricePerPiece).HasMaxLength(50);
-
                 entity.Property(e => e.ProductId)
                     .HasColumnName("ProductID")
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Sale).HasMaxLength(50);
-
-                entity.Property(e => e.StepId).HasColumnName("StepID");
-
-                entity.Property(e => e.TempMax).HasMaxLength(50);
-
-                entity.Property(e => e.TempMin).HasMaxLength(50);
 
                 entity.Property(e => e.W).HasMaxLength(50);
             });
@@ -422,6 +467,8 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnName("ANSI")
                     .HasMaxLength(5);
 
+                entity.Property(e => e.Cena).HasColumnType("decimal(18, 2)");
+
                 entity.Property(e => e.Dn).HasColumnName("DN");
 
                 entity.Property(e => e.NumerRysNorma)
@@ -438,6 +485,8 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Uszczelnienie)
                     .IsRequired()
                     .HasMaxLength(20);
+
+                entity.Property(e => e.Waluta).HasMaxLength(5);
 
                 entity.Property(e => e.Wersja)
                     .IsRequired()
