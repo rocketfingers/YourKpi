@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -67,7 +68,8 @@ namespace YouKpiBackend
                     ResponseCompressionDefaults.MimeTypes.Concat(
                         new[] { "application/json" });
             });
-
+            // Add automapper
+            services.AddAutoMapper(typeof(MappingProfile));
             //DB
             services.AddDbContext<YoukpiContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), sqlServerOptions => sqlServerOptions.CommandTimeout(2700)));

@@ -5,6 +5,7 @@ import Produkty from '../views/Produkty.vue'
 import Czesci from '../views/Czesci.vue'
 import TypWyrobu from '../views/TypWyrobu.vue'
 import Login from '../views/Login.vue'
+import Pracownicy from '../views/Pracownicy.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +28,11 @@ const routes = [
     path: '/typwyrobu',
     name: 'TypWyrobu',
     component: TypWyrobu
+  },
+  {
+    path: '/pracownicy',
+    name: 'Pracownicy',
+    component: Pracownicy
   },
   {
     path: '/typwyrobu',

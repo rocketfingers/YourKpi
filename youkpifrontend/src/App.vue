@@ -39,6 +39,12 @@
             <v-list-item-subtitle> Home </v-list-item-subtitle>
           </v-list-item>
           <v-divider></v-divider>
+          <v-list-item @click="$router.push({ name: 'Pracownicy' })">
+            <v-list-item-icon>
+              <v-icon>fa-users</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Pracownicy</v-list-item-title>
+          </v-list-item>
           <v-list-item @click="$router.push({ name: 'Produkty' })">
             <v-list-item-icon>
               <v-icon>fa-industry</v-icon>
@@ -72,8 +78,10 @@ export default {
   name: 'App',
   created: function () {
     this.$store.watch(
-      state => state.snackErrorText,
+      state => state.error,
       () => {
+        // eslint-disable-next-line no-debugger
+        debugger
         const msg = this.$store.getters.GetError
         if (msg !== '' && this.$route.name !== 'Login') {
           this.$dialog.error({
