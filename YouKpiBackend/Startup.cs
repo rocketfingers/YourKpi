@@ -96,7 +96,10 @@ namespace YouKpiBackend
             app.UseCors(MyAllowSpecificOrigins);
 
             // app.UseHttpsRedirection();
-
+            if (env.IsProduction())
+            {
+                app.UseHttpsRedirection();
+            }
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
