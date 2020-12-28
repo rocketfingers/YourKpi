@@ -35,5 +35,72 @@ namespace YouKpiBackend.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Create([FromBody] Maszyny entity)
+        {
+            if (entity == null)
+            {
+                return BadRequest("Bad model");
+            }
+            try
+            {
+                var res = _ctx.Maszyny.Add(entity);
+                _ctx.SaveChanges();
+
+                return Created("", entity);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Update([FromBody] Maszyny entity)
+        {
+            if (entity == null)
+            {
+                return BadRequest("Bad model");
+            }
+            try
+            {
+                var machine = _ctx.Maszyny.FirstOrDefault(p => p.Id == entity.Id);
+                machine.MiejscePracy = entity.MiejscePracy;
+                machine.Nazwa = entity.Nazwa;
+                machine.Opis = entity.Opis;
+                machine.OsX = entity.OsX;
+                machine.OsY = entity.OsY;
+                machine.OsZ = entity.OsZ;
+                machine.Rodzaj = entity.Rodzaj;
+                machine.TrybPracy = entity.TrybPracy;
+                await _ctx.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            try
+            {
+                var item = _ctx.Maszyny.FirstOrDefault(p => p.Id == id);
+                if (item != null)
+                {
+                    _ctx.Maszyny.Remove(item);
+                    await _ctx.SaveChangesAsync();
+                }
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

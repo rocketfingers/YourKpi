@@ -207,7 +207,9 @@ export default {
       editedIndex: -1,
       productTypes: [],
       editMode: false,
-      parts: []
+      parts: [],
+      emptyProduct: { produktCzesci: [] }
+
     }
   },
   computed: {},
@@ -258,12 +260,10 @@ export default {
       this.showNewProductDialog = false
     },
     addProduct () {
-      if (this.$refs.newProductForm) {
-        this.$refs.newProductForm.reset()
-      }
+      this.currentProduct = { produktCzesci: [] }
+
       this.editMode = false
       this.productTitle = 'Dodaj produkt'
-      this.currentProduct = { produktCzesci: [] }
       this.editedIndex = -1
       this.showNewProductDialog = true
     },

@@ -40,36 +40,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!--
-    <v-dialog v-model="showProductPartsDialog" max-width="1200" persistent>
-      <v-card>
-        <v-toolbar dark elevation-4 color="primary lighten-1">
-          <span class="headline">Części produktu: {{ currentItem.id }}</span>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="showProductPartsDialog = false" dark>
-            <v-icon>close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-container grid-list-md>
-          <ProductParts
-            :currentItem="currentItem"
-            :readonly="true"
-          ></ProductParts>
-        </v-container>
-        <v-card-actions class="blue lighten-5">
-          <v-spacer></v-spacer>
-          <v-btn
-            large
-            color="blue darken-1"
-            @click.native="showProductPartsDialog = false"
-          >
-            Zamknij
-            <v-icon dark>cancel</v-icon>
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    -->
+
     <v-layout row wrap elevation-3>
       <v-flex xs12>
         <v-toolbar flat color="white">
@@ -155,14 +126,12 @@ export default {
     return {
       // api
       getAll: 'api/ReasonCode/GetAll',
-      // addProductApi: 'api/Products/Create',
-      // editProductApi: 'api/Products/Update',
-      // deleteProductApi: 'api/Products/Delete',
-      // getAllProductTypesApi: 'api/ProductTypes/GetAll',
-      // getAllPartsApi: 'api/Parts/GetAll',
+      addApi: 'api/ReasonCode/Create',
+      editApi: 'api/ReasonCode/Update',
+      deleteApi: 'api/ReasonCode/Delete',
 
       headers: [
-        { text: 'Id', value: 'id' },
+        // { text: 'Id', value: 'id' },
         { text: 'Id difference', value: 'idDifferenceReasonCode' },
         { text: 'Opis', value: 'opis' },
         { text: 'Akcje', value: 'actions' }
@@ -199,50 +168,18 @@ export default {
           this.tableLoading = false
         })
     },
-    // initialise () {
-    //   this.tableLoading = true
-    //   this.getProducts()
-    //   this.getParts()
-    //   this.getProductTypes()
-    // },
-    // getParts () {
-    //   this.$http.get(this.getAllPartsApi)
-    //     .then(Response => {
-    //       this.parts = Response.data
-    //     })
-    // },
-    // getProducts () {
-    //   var $this = this
-    //   this.$http
-    //     .get(this.getAllProducts)
-    //     .then((Response) => {
-    //       $this.products = Response.data
-    //       this.tableLoading = false
-    //     })
-    //     .catch((e) => {
-    //       this.tableLoading = false
-    //     })
-    // },
-    // getProductTypes () {
-    //   var $this = this
-    //   this.$http
-    //     .get(this.getAllProductTypesApi)
-    //     .then((Response) => {
-    //       $this.productTypes = Response.data
-    //     })
-    //     .catch((e) => {})
-    // },
-    // saveAction () {
-    //   if (!this.$refs.newForm.validate()) {
-    //     return
-    //   }
-    //   if (this.editedIndex > 0) {
-    //     this.editProductAction(this.currentItem)
-    //   } else {
-    //     this.addProductAction(this.currentItem)
-    //   }
-    //   this.showNewDialog = false
-    // },
+
+    saveAction () {
+      if (!this.$refs.newForm.validate()) {
+        return
+      }
+      if (this.editedIndex > 0) {
+        this.editAction(this.currentItem)
+      } else {
+        this.addAction(this.currentItem)
+      }
+      this.showNewDialog = false
+    },
     add () {
       if (this.$refs.newForm) {
         this.$refs.newForm.reset()
@@ -253,53 +190,49 @@ export default {
       this.editedIndex = -1
       this.showNewDialog = true
     },
-    // addProductAction (product) {
-    //   this.$http
-    //     .post(this.addProductApi, product)
-    //     .then((Result) => {
-    //       this.products.push(product)
-    //     })
-    //     .catch((e) => {
-    //     })
-    // },
-    // showProductParts (product, index) {
-    //   this.currentItem = product
-    //   this.editedIndex = index
-    //   this.showProductPartsDialog = true
-    // },
+    addAction (item) {
+      this.$http
+        .post(this.addApi, item)
+        .then((Result) => {
+          this.items.push(Result.data)
+        })
+        .catch((e) => {
+        })
+    },
+
     edit (item, index) {
       this.formTitle = 'Edytuj ' + item.idDifferenceReasonCode
       this.editMode = true
       this.editedIndex = index
       this.showNewDialog = true
       this.currentItem = item
+    },
+    editCurrentProductRes (editedProduct) {
+      this.currentItem = editedProduct
+    },
+    editAction (item) {
+      this.$http
+        .put(this.editApi, item)
+        .then((Result) => {
+        })
+        .catch((e) => {})
+    },
+    async deleteItem (item, index) {
+      var res = await this.$dialog.confirm({
+        text: 'Czy na pewno chcesz usunąć?',
+        title: 'Uwaga'
+      })
+      if (res) {
+        var indexOfItem = this.items.indexOf(item)
+        this.$http.delete(this.deleteApi, {
+          params: { id: item.id }
+        })
+          .then(Result => {
+            this.items.splice(indexOfItem, 1)
+          }
+          )
+      }
     }
-    // editcurrentItemRes (editedProduct) {
-    //   this.currentItem = editedProduct
-    // },
-    // editProductAction (product) {
-    //   this.$http
-    //     .put(this.editProductApi, product)
-    //     .then((Result) => {
-    //     })
-    //     .catch((e) => {})
-    // },
-    // async deleteProduct (product, index) {
-    //   var res = await this.$dialog.confirm({
-    //     text: 'Czy na pewno chcesz usunąć?',
-    //     title: 'Uwaga'
-    //   })
-    //   if (res) {
-    //     var indexOfProd = this.products.indexOf(product)
-    //     this.$http.delete(this.deleteProductApi, {
-    //       params: { id: product.id }
-    //     })
-    //       .then(Result => {
-    //         this.products.splice(indexOfProd, 1)
-    //       }
-    //       )
-    //   }
-    // }
   },
   created () {
     this.initialise()

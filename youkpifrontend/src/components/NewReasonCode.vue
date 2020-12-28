@@ -9,6 +9,8 @@
               color
               label="Id difference"
               :disabled="editMode"
+              type="number"
+              min="0"
               required
               :rules="[requiredRule]"
               v-model="currentItem.idDifferenceReasonCode"

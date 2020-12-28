@@ -41,6 +41,15 @@
               v-model="currentItem.trybPracy"
             ></v-text-field>
           </v-flex>
+          <v-flex xs12>
+            <v-text-field
+              outlined
+              :rules="[requiredRule]"
+              color
+              label="Rodzaj"
+              v-model="currentItem.rodzaj"
+            ></v-text-field>
+          </v-flex>
         </v-layout>
       </v-flex>
       <v-flex xs1> </v-flex>
