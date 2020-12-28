@@ -29,6 +29,11 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "[dbo].[Maszyny]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "[dbo].[MozliweStatusyOferty]",
          "ObjectType": 0
       },
@@ -74,6 +79,11 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "[dbo].[OrderRealisation]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "[dbo].[Pracownik]",
          "ObjectType": 0
       },
@@ -90,6 +100,11 @@
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[Process]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ProcessSteps]",
          "ObjectType": 0
       },
       {
@@ -114,6 +129,11 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "[dbo].[ReasonCodes]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "[dbo].[Steps]",
          "ObjectType": 0
       },
@@ -126,11 +146,6 @@
          "HasPrimaryKey": true,
          "Name": "[dbo].[TypWyrobuIdDn]",
          "ObjectType": 0
-      },
-      {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[OfferAll]",
-         "ObjectType": 1
       }
    ],
    "UseDatabaseNames": false,
