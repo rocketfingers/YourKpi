@@ -9,10 +9,11 @@ import dtMixin from './components/dtMixin.js'
 import VuetifyDialog from 'vuetify-dialog'
 import auth from './auth'
 Vue.mixin(dtMixin)
+const backendAdress = process.env.VUE_APP_BACKEND
 
 Vue.config.productionTip = false
 const axiosInstance = axios.create({
-  baseURL: 'https://youkpibackend.azurewebsites.net',
+  baseURL: backendAdress,
   timeout: 150000000
 })
 Vue.prototype.$http = axiosInstance
