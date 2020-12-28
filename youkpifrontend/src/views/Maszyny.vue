@@ -1,11 +1,11 @@
 <template>
   <div>
-    <!-- <v-dialog v-model="showNewProductDialog" max-width="1800" persistent>
+    <v-dialog v-model="showNewDialog" max-width="1800" persistent>
       <v-card>
         <v-toolbar dark elevation-4 color="primary lighten-1">
-          <span class="headline">{{ productTitle }}</span>
+          <span class="headline">{{ title }}</span>
           <v-spacer></v-spacer>
-          <v-btn icon @click="showNewProductDialog = false" dark>
+          <v-btn icon @click="showNewDialog = false" dark>
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -13,13 +13,11 @@
           <v-layout row wrap justify-space-around>
             <v-flex xs11>
               <v-form ref="newProductForm">
-                <NewProduct
-                  :currentProduct="currentProduct"
+                <NewMachine
+                  :currentItem="currentItem"
                   :editMode="editMode"
                   @editedProduct="editCurrentProductRes"
-                  :productTypes="productTypes"
-                  :parts="parts"
-                ></NewProduct>
+                ></NewMachine>
               </v-form>
             </v-flex>
           </v-layout>
@@ -29,7 +27,7 @@
             large
             color="blue darken-1"
             flat
-            @click.native="showNewProductDialog = false"
+            @click.native="showNewDialog = false"
           >
             Anuluj
             <v-icon dark>cancel</v-icon>
@@ -47,10 +45,10 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="showProductPartsDialog" max-width="1200" persistent>
+    <!--   <v-dialog v-model="showProductPartsDialog" max-width="1200" persistent>
       <v-card>
         <v-toolbar dark elevation-4 color="primary lighten-1">
-          <span class="headline">Części produktu: {{ currentProduct.id }}</span>
+          <span class="headline">Części produktu: {{ currentItem.id }}</span>
           <v-spacer></v-spacer>
           <v-btn icon @click="showProductPartsDialog = false" dark>
             <v-icon>close</v-icon>
@@ -58,7 +56,7 @@
         </v-toolbar>
         <v-container grid-list-md>
           <ProductParts
-            :currentProduct="currentProduct"
+            :currentItem="currentItem"
             :readonly="true"
           ></ProductParts>
         </v-container>
@@ -148,15 +146,12 @@
 </template>
 
 <script>
-// import * as v from '../main.js'
-// import NewProduct from '../components/NewProduct'
-// import ProductParts from '../components/ProductParts'
+import NewMachine from '../components/NewMachine'
 
 export default {
   name: 'Produkty',
   components: {
-    // NewProduct: NewProduct,
-    // ProductParts: ProductParts
+    NewMachine: NewMachine
   },
   props: {},
   data () {
@@ -183,11 +178,11 @@ export default {
       ],
       items: [],
       search: '',
-      showNewProductDialog: false,
+      showNewDialog: false,
       showProductPartsDialog: false,
       tableLoading: false,
-      productTitle: 'Dodaj produkt',
-      currentProduct: { produktCzesci: [] },
+      title: 'Dodaj',
+      currentItem: { },
       editedIndex: -1,
       editMode: false
     }
@@ -210,7 +205,7 @@ export default {
         .catch((e) => {
           this.tableLoading = false
         })
-    }
+    },
     // initialise () {
     //   this.tableLoading = true
     //   this.getProducts()
@@ -249,22 +244,22 @@ export default {
     //     return
     //   }
     //   if (this.editedIndex > 0) {
-    //     this.editProductAction(this.currentProduct)
+    //     this.editProductAction(this.currentItem)
     //   } else {
-    //     this.addProductAction(this.currentProduct)
+    //     this.addProductAction(this.currentItem)
     //   }
-    //   this.showNewProductDialog = false
+    //   this.showNewDialog = false
     // },
-    // addProduct () {
-    //   if (this.$refs.newProductForm) {
-    //     this.$refs.newProductForm.reset()
-    //   }
-    //   this.editMode = false
-    //   this.productTitle = 'Dodaj produkt'
-    //   this.currentProduct = { produktCzesci: [] }
-    //   this.editedIndex = -1
-    //   this.showNewProductDialog = true
-    // },
+    add () {
+      if (this.$refs.newForm) {
+        this.$refs.newForm.reset()
+      }
+      this.editMode = false
+      this.formTitle = 'Dodaj'
+      this.currentItem = { }
+      this.editedIndex = -1
+      this.showNewDialog = true
+    },
     // addProductAction (product) {
     //   this.$http
     //     .post(this.addProductApi, product)
@@ -275,19 +270,19 @@ export default {
     //     })
     // },
     // showProductParts (product, index) {
-    //   this.currentProduct = product
+    //   this.currentItem = product
     //   this.editedIndex = index
     //   this.showProductPartsDialog = true
     // },
-    // editProduct (product, index) {
-    //   this.productTitle = 'Edytuj produkt ' + product.id
-    //   this.editMode = true
-    //   this.editedIndex = index
-    //   this.showNewProductDialog = true
-    //   this.currentProduct = product
-    // },
+    edit (item, index) {
+      this.formTitle = 'Edytuj ' + item.idDifferenceReasonCode
+      this.editMode = true
+      this.editedIndex = index
+      this.showNewDialog = true
+      this.currentItem = item
+    }
     // editCurrentProductRes (editedProduct) {
-    //   this.currentProduct = editedProduct
+    //   this.currentItem = editedProduct
     // },
     // editProductAction (product) {
     //   this.$http
