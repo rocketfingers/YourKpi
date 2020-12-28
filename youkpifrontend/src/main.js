@@ -12,7 +12,8 @@ Vue.mixin(dtMixin)
 
 Vue.config.productionTip = false
 const axiosInstance = axios.create({
-  baseURL: 'https://youkpibackend.azurewebsites.net',
+  // baseURL: 'https://youkpibackend.azurewebsites.net',
+  baseURL: 'http://localhost:5000',
   timeout: 150000000
 })
 Vue.prototype.$http = axiosInstance

@@ -7,6 +7,8 @@ import TypWyrobu from '../views/TypWyrobu.vue'
 import Login from '../views/Login.vue'
 import Pracownicy from '../views/Pracownicy.vue'
 import Oferta from '../views/Oferta.vue'
+import Maszyny from '../views/Maszyny.vue'
+import ReasonCodes from '../views/ReasonCodes.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +47,16 @@ const routes = [
     path: '/oferta',
     name: 'Oferta',
     component: Oferta
+  },
+  {
+    path: '/maszyny',
+    name: 'Maszyny',
+    component: Maszyny
+  },
+  {
+    path: '/reasonCodes',
+    name: 'ReasonCodes',
+    component: ReasonCodes
   },
   {
     path: '/login',
