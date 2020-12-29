@@ -287,9 +287,9 @@ export default {
       this.showNewOfferDialog = false
     },
     addOffer () {
-      if (this.$refs.newOfferForm) {
-        this.$refs.newOfferForm.reset()
-      }
+      // if (this.$refs.newOfferForm) { //powoduje blad w dodawaniu zagniezdzonych obiektow, vue jakby traci referencje
+      //   this.$refs.newOfferForm.reset()
+      // }
       this.editMode = false
       this.offerTitle = 'Dodaj ofertę'
       this.currentOffer = { }

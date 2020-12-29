@@ -6,11 +6,18 @@ namespace YouKpiBackend.ModelsEntity
 {
     public partial class Process
     {
+        public Process()
+        {
+            ProcessSteps = new HashSet<ProcessSteps>();
+        }
+
         public string Id { get; set; }
         public string NazwaGrupyProcesu { get; set; }
         public string BusinessArea { get; set; }
         public string NazwaProcesu { get; set; }
         public string KontoGłówne { get; set; }
         public string TypZlecenia { get; set; }
+
+        public virtual ICollection<ProcessSteps> ProcessSteps { get; set; }
     }
 }

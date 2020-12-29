@@ -19,7 +19,13 @@ var _TypWyrobu = _interopRequireDefault(require("../views/TypWyrobu.vue"));
 
 var _Login = _interopRequireDefault(require("../views/Login.vue"));
 
+var _Pracownicy = _interopRequireDefault(require("../views/Pracownicy.vue"));
+
 var _Oferta = _interopRequireDefault(require("../views/Oferta.vue"));
+
+var _Maszyny = _interopRequireDefault(require("../views/Maszyny.vue"));
+
+var _ReasonCodes = _interopRequireDefault(require("../views/ReasonCodes.vue"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -42,6 +48,10 @@ var routes = [{
   name: 'TypWyrobu',
   component: _TypWyrobu["default"]
 }, {
+  path: '/pracownicy',
+  name: 'Pracownicy',
+  component: _Pracownicy["default"]
+}, {
   path: '/typwyrobu',
   name: 'TypWyrobu',
   component: _TypWyrobu["default"]
@@ -49,6 +59,14 @@ var routes = [{
   path: '/oferta',
   name: 'Oferta',
   component: _Oferta["default"]
+}, {
+  path: '/maszyny',
+  name: 'Maszyny',
+  component: _Maszyny["default"]
+}, {
+  path: '/reasonCodes',
+  name: 'ReasonCodes',
+  component: _ReasonCodes["default"]
 }, {
   path: '/login',
   name: 'Login',
