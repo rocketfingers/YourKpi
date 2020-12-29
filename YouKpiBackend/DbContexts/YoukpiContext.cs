@@ -20,6 +20,7 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<BusiessArea> BusiessArea { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Czesci> Czesci { get; set; }
+        public virtual DbSet<Komponenty> Komponenty { get; set; }
         public virtual DbSet<Maszyny> Maszyny { get; set; }
         public virtual DbSet<MozliweStatusyOferty> MozliweStatusyOferty { get; set; }
         public virtual DbSet<MozliwyDn> MozliwyDn { get; set; }
@@ -36,6 +37,7 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<PracownikProcess> PracownikProcess { get; set; }
         public virtual DbSet<Process> Process { get; set; }
         public virtual DbSet<ProcessSteps> ProcessSteps { get; set; }
+        public virtual DbSet<ProdExe> ProdExe { get; set; }
         public virtual DbSet<ProduktCzesci> ProduktCzesci { get; set; }
         public virtual DbSet<Produkty> Produkty { get; set; }
         public virtual DbSet<ProduktyOld> ProduktyOld { get; set; }
@@ -87,6 +89,8 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
+                entity.Property(e => e.KomponentId).HasColumnName("KOMPONENT_ID");
+
                 entity.Property(e => e.Nazwa)
                     .IsRequired()
                     .HasMaxLength(100)
@@ -98,6 +102,53 @@ namespace YouKpiBackend.DbContexts
                     .IsUnicode(false);
 
                 entity.Property(e => e.Wymiary).HasMaxLength(50);
+
+                entity.HasOne(d => d.Komponent)
+                    .WithMany(p => p.Czesci)
+                    .HasForeignKey(d => d.KomponentId)
+                    .HasConstraintName("FK__Czesci__KOMPONEN__2739D489");
+            });
+
+            modelBuilder.Entity<Komponenty>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CenaJednostkowa)
+                    .HasColumnName("CENA_JEDNOSTKOWA")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.GatunekPodst)
+                    .HasColumnName("GATUNEK_PODST")
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ilosc)
+                    .HasColumnName("ILOSC")
+                    .HasColumnType("decimal(11, 6)");
+
+                entity.Property(e => e.Jednostka)
+                    .HasColumnName("JEDNOSTKA")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.KomponentId)
+                    .HasColumnName("KOMPONENT_ID")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nazwa)
+                    .HasColumnName("NAZWA")
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProcessId)
+                    .HasColumnName("PROCESS_ID")
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.Wymiar)
+                    .HasColumnName("WYMIAR")
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Maszyny>(entity =>
@@ -557,6 +608,48 @@ namespace YouKpiBackend.DbContexts
                     .HasConstraintName("FK_PROCESS_ID");
             });
 
+            modelBuilder.Entity<ProdExe>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("ProdExe");
+
+                entity.Property(e => e.Dn).HasColumnName("DN");
+
+                entity.Property(e => e.IdentyfikatorProcesu).HasMaxLength(30);
+
+                entity.Property(e => e.IdentyfikatorWyrobu)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IdentyfikatorZamowienia)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Klient)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NazwaProcesu).HasMaxLength(200);
+
+                entity.Property(e => e.NumerKlienta)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.PlannedEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.TypWyrobu)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Wersja)
+                    .HasColumnName("wersja")
+                    .HasMaxLength(5);
+
+                entity.Property(e => e.ZakonczenieData).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<ProduktCzesci>(entity =>
             {
                 entity.Property(e => e.CzesciId)
@@ -730,9 +823,9 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<Steps>(entity =>
             {
-                entity.HasNoKey();
-
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.ProcessesId)
                     .IsRequired()
@@ -780,18 +873,17 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<TypWyrobuIdDn>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.TypWyrobuId);
+
+                entity.Property(e => e.TypWyrobuId)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Dn).HasColumnName("DN");
 
                 entity.Property(e => e.TempMax).HasDefaultValueSql("((120))");
 
                 entity.Property(e => e.TempMin).HasDefaultValueSql("((-60))");
-
-                entity.Property(e => e.TypWyrobuId)
-                    .IsRequired()
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Waga).HasColumnType("decimal(18, 2)");
 

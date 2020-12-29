@@ -29,6 +29,11 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "[dbo].[Komponenty]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "[dbo].[Maszyny]",
          "ObjectType": 0
       },
@@ -105,6 +110,11 @@
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[ProcessSteps]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ProdExe]",
          "ObjectType": 0
       },
       {

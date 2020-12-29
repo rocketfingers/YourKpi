@@ -27,7 +27,20 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                return Ok(await _dbContext.Czesci.ToListAsync());
+                return Ok(await _dbContext.Czesci.Include(p => p.Komponent).ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            try
+            {
+                var res = await _dbContext.Czesci.Include(p => p.Komponent).Where(p => p.Id == id).FirstOrDefaultAsync();
+                return Ok(res);
             }
             catch (Exception ex)
             {
@@ -43,8 +56,9 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
-                _dbContext.Czesci.Add(part);
+                var res = _dbContext.Czesci.Add(part);
                 await _dbContext.SaveChangesAsync();
+                part.Id = res.Entity.Id;
 
                 return Created("", part);
             }
@@ -63,10 +77,11 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
-                var part = _dbContext.Czesci.FirstOrDefault(p => p.Id == entity.Id);
+                var part = _dbContext.Czesci.Include(p => p.Komponent).FirstOrDefault(p => p.Id == entity.Id);
                 part.Nazwa = entity.Nazwa;
                 part.GatPodstawowy = entity.GatPodstawowy;
                 part.NumerRysNorma = entity.NumerRysNorma;
+                part.KomponentId = entity.KomponentId;
 
                 await _dbContext.SaveChangesAsync();
 

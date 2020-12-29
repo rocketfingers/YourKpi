@@ -9,6 +9,7 @@ import Pracownicy from '../views/Pracownicy.vue'
 import Oferta from '../views/Oferta.vue'
 import Maszyny from '../views/Maszyny.vue'
 import ReasonCodes from '../views/ReasonCodes.vue'
+import Komponenty from '../views/Komponenty.vue'
 
 Vue.use(VueRouter)
 
@@ -57,6 +58,11 @@ const routes = [
     path: '/reasonCodes',
     name: 'ReasonCodes',
     component: ReasonCodes
+  },
+  {
+    path: '/components',
+    name: 'Components',
+    component: Komponenty
   },
   {
     path: '/login',

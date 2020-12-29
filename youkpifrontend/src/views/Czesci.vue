@@ -30,6 +30,9 @@
                   :editedItem="editedItem"
                   :editMode="editMode"
                   @editedProduct="editCurrentProductRes"
+                  :components="components"
+                  :readonly="false"
+                  :processes="processes"
                 ></NewPart>
               </v-form>
               <v-card-actions class="blue lighten-5">
@@ -71,6 +74,12 @@
               <td class="text-xs-left">{{ props.item.nazwa }}</td>
               <td class="text-xs-left">{{ props.item.gatPodstawowy }}</td>
               <td class="text-xs-left">{{ props.item.numerRysNorma }}</td>
+              <td class="text-xs-left">
+                <v-icon v-show="props.item.hasComponent" color="green"
+                  >check</v-icon
+                >
+              </td>
+
               <td class="justify-center px-0">
                 <v-layout>
                   <v-flex xs6>
@@ -119,9 +128,12 @@ export default {
       editTitle: 'Edytuj część',
       newTitle: 'Dodaj część',
       getAllApi: 'api/Parts/GetAll',
+      getAllComponents: 'api/Component/GetAll',
       postNewApi: 'api/Parts/Create',
       putEditApi: 'api/Parts/Update',
       deleteApi: 'api/Parts/Delete',
+      getAllProcesses: 'api/Process/GetAll',
+
       defaultItem: {
         id: '',
         nazwa: '',
@@ -140,9 +152,13 @@ export default {
         { text: 'Nazwa', value: 'nazwa' },
         { text: 'GatPodstawowy', value: 'gatPodstawowy' },
         { text: 'NumerRysNorma', value: 'numerRysNorma' },
+        { text: 'Przypisano komponent', value: 'hasComponent' },
+
         { text: 'Akcje', value: 'actions' }
       ],
-      editMode: false
+      editMode: false,
+      components: [],
+      processes: []
     }
   },
   computed: {
@@ -167,10 +183,30 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.showDialog = true
     },
+    editCurrentProductRes (edited) {
+      // eslint-disable-next-line no-debugger
+      debugger
+      this.editedItem = edited
+    },
+    getProcesses () {
+      var $this = this
+      this.$http
+        .get(this.getAllProcesses)
+        .then((Response) => {
+          $this.processes = Response.data
+          $this.processes.forEach(p => {
+            p.showName = p.id + ', ' + p.nazwaProcesu
+          })
+          this.tableLoading = false
+        })
+        .catch((e) => {
+          this.tableLoading = false
+        })
+    },
     close () {
-      if (this.$refs.newPartForm) {
-        this.$refs.newPartForm.reset()
-      }
+      // if (this.$refs.newPartForm) {
+      //   this.$refs.newPartForm.reset()
+      // }
       this.editMode = false
       this.editedItem = Object.assign({}, this.defaultItem)
       this.editedIndex = -1
@@ -193,6 +229,26 @@ export default {
           )
       }
     },
+    getComponents () {
+      var $this = this
+      this.$http
+        .get(this.getAllComponents)
+        .then((Response) => {
+          $this.components = Response.data
+          $this.components.forEach(p => {
+            p.showName = p.komponentId + ', ' + p.nazwa + ', ' + p.gatunekPodst
+            if (p.czesci.length > 0) {
+              p.czesc = p.czesci[0].id
+            } else {
+              p.czesc = 'nie przypisano'
+            }
+          })
+          $this.getProcesses()
+        })
+        .catch((e) => {
+          this.tableLoading = false
+        })
+    },
     save () {
       if (!this.$refs.newPartForm.validate()) {
         return
@@ -206,6 +262,8 @@ export default {
           this.close()
         })
       } else {
+        // eslint-disable-next-line no-debugger
+        debugger
         this.$http.post(this.postNewApi,
           this.editedItem)
           .then(Result => {
@@ -220,7 +278,17 @@ export default {
     this.editedItem = Object.assign({}, this.defaultItem)
 
     v.axiosInstance.get(this.getAllApi)
-      .then(Response => { this.data = Response.data; this.tableLoading = false })
+      .then(Response => {
+        this.data = Response.data
+        this.data.forEach(p => {
+          if (p.komponent != null) {
+            p.hasComponent = true
+          } else {
+            p.komponent = {}
+          }
+        })
+        this.getComponents()
+      })
   },
   destroyed () {
   }
