@@ -70,7 +70,9 @@
           v-if="!hideComponent"
           clearable
           :disabled="readonly"
-          v-model="editedItem.komponentId"
+          return-object
+          @change="changeComponent"
+          v-model="editedItem.komponent"
         ></v-autocomplete>
       </v-flex>
       <!-- <v-flex xs1>
@@ -149,6 +151,11 @@ export default {
   methods: {
     editCurrentProductRes (editedProduct) {
       this.editedItem.komponent = editedProduct
+    },
+    changeComponent () {
+      if (this.editedItem.komponent) {
+        this.editedItem.komponentId = this.editedItem.komponent.id
+      }
     }
   },
   created () {

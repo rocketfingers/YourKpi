@@ -248,14 +248,18 @@ export default {
         })
     },
     showPart (parts) {
-      this.showPartDialog = true
-      this.partEditMode = true
+      // eslint-disable-next-line no-debugger
+      debugger
+
       if (parts.length > 0) {
+        this.showPartDialog = true
+        this.partEditMode = true
         this.getPartById(parts[0].id)
       }
     },
     getPartById (partId) {
       var $this = this
+      partId = partId.replace('/', '%2F')
       this.$http
         .get(this.getPart + partId)
         .then((Response) => {

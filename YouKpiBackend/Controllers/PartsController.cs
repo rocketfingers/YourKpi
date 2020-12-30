@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
+using YouKpiBackend.Extensions;
 using YouKpiBackend.ModelsEntity;
 
 namespace YouKpiBackend.Controllers
@@ -34,15 +35,17 @@ namespace YouKpiBackend.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             try
             {
-                var res = await _dbContext.Czesci.Include(p => p.Komponent).Where(p => p.Id == id).FirstOrDefaultAsync();
+                var encodedId = id.Replace("%2F", "");
+                var res = await _dbContext.Czesci.Where(p => p.Id.Replace("/","") == encodedId.RmNlTrim()).FirstOrDefaultAsync();
                 return Ok(res);
             }
-            catch (Exception ex)
+            catch (Exception ex) 
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
