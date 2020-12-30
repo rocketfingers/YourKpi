@@ -63,7 +63,7 @@
           outlined
           color
           label="Komponent"
-          :items="components"
+          :items="componentsToAutocomplete"
           item-text="showName"
           item-value="id"
           required
@@ -136,6 +136,20 @@ export default {
     }
   },
   computed: {
+    componentsToAutocomplete (val) {
+      // // eslint-disable-next-line no-debugger
+      // debugger
+      var $this = this
+      var cmps = this.components.filter(c => {
+        if (c.czesci) {
+          if (c.czesci.length > 0 && $this.editedItem.komponentId !== c.id) {
+            return false
+          }
+        }
+        return true
+      })
+      return cmps
+    }
   },
   watch: {
     editedItem (val) {

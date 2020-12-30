@@ -59,7 +59,13 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
+                if(part.KomponentId!=0)
+                {
+                    await UpdateComponent(part.Komponent);
+                }
+                part.Komponent = null; 
                 var res = _dbContext.Czesci.Add(part);
+                
                 await _dbContext.SaveChangesAsync();
                 part.Id = res.Entity.Id;
 
@@ -68,6 +74,26 @@ namespace YouKpiBackend.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
+            }
+        }
+
+        private async Task UpdateComponent(Komponenty entity)
+        {
+            if (entity != null)
+            {
+             
+                var component = _dbContext.Komponenty.FirstOrDefault(p => p.Id == entity.Id);
+
+                component.CenaJednostkowa = entity.CenaJednostkowa;
+                component.GatunekPodst = entity.GatunekPodst;
+                component.Ilosc = entity.Ilosc;
+                component.Jednostka = entity.Jednostka;
+                component.Nazwa = entity.Nazwa;
+                component.ProcessId = entity.ProcessId;
+                component.KomponentId = entity.KomponentId;
+                component.Wymiar = entity.Wymiar;
+
+                await _dbContext.SaveChangesAsync();
             }
         }
 
@@ -80,6 +106,10 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
+                if (entity.KomponentId != 0)
+                {
+                    await UpdateComponent(entity.Komponent);
+                }
                 var part = _dbContext.Czesci.Include(p => p.Komponent).FirstOrDefault(p => p.Id == entity.Id);
                 part.Nazwa = entity.Nazwa;
                 part.GatPodstawowy = entity.GatPodstawowy;

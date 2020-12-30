@@ -36,6 +36,20 @@ namespace YouKpiBackend.Controllers
             }
         }
 
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllUnassign()
+        {
+            try
+            {
+                var res = await _ctx.Komponenty.Include(p => p.Czesci).ToListAsync();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+        
         [HttpPost("[action]")]
         public async Task<IActionResult> Create([FromBody] Komponenty entity)
         {

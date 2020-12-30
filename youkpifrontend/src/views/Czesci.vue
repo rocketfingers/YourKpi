@@ -128,7 +128,7 @@ export default {
       editTitle: 'Edytuj część',
       newTitle: 'Dodaj część',
       getAllApi: 'api/Parts/GetAll',
-      getAllComponents: 'api/Component/GetAll',
+      getAllFreeComponents: 'api/Component/GetAllUnassign',
       postNewApi: 'api/Parts/Create',
       putEditApi: 'api/Parts/Update',
       deleteApi: 'api/Parts/Delete',
@@ -184,8 +184,6 @@ export default {
       this.showDialog = true
     },
     editCurrentProductRes (edited) {
-      // eslint-disable-next-line no-debugger
-      debugger
       this.editedItem = edited
     },
     getProcesses () {
@@ -232,9 +230,10 @@ export default {
     getComponents () {
       var $this = this
       this.$http
-        .get(this.getAllComponents)
+        .get(this.getAllFreeComponents)
         .then((Response) => {
           $this.components = Response.data
+
           $this.components.forEach(p => {
             p.showName = p.komponentId + ', ' + p.nazwa + ', ' + p.gatunekPodst
             if (p.czesci.length > 0) {
@@ -242,6 +241,10 @@ export default {
             } else {
               p.czesc = 'nie przypisano'
             }
+          })
+          $this.components.unshift({
+            showName: 'zdefiniuj nowy komponent',
+            id: 0
           })
           $this.getProcesses()
         })
