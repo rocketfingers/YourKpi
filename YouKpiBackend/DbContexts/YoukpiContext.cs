@@ -29,11 +29,13 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<OfertaTyp> OfertaTyp { get; set; }
         public virtual DbSet<OfertaTypOld> OfertaTypOld { get; set; }
         public virtual DbSet<Offer> Offer { get; set; }
+        public virtual DbSet<OfferLineProcess> OfferLineProcess { get; set; }
         public virtual DbSet<OfferLines> OfferLines { get; set; }
         public virtual DbSet<OfferLinesOld> OfferLinesOld { get; set; }
+        public virtual DbSet<OfferProcess> OfferProcess { get; set; }
         public virtual DbSet<OrderRealisation> OrderRealisation { get; set; }
         public virtual DbSet<Pracownik> Pracownik { get; set; }
-        public virtual DbSet<PracownikOfertaProcesy> PracownikOfertaProcesy { get; set; }
+        public virtual DbSet<PracownikCzasStep> PracownikCzasStep { get; set; }
         public virtual DbSet<PracownikProcess> PracownikProcess { get; set; }
         public virtual DbSet<Process> Process { get; set; }
         public virtual DbSet<ProcessSteps> ProcessSteps { get; set; }
@@ -43,6 +45,7 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<ProduktyOld> ProduktyOld { get; set; }
         public virtual DbSet<Projects> Projects { get; set; }
         public virtual DbSet<ReasonCodes> ReasonCodes { get; set; }
+        public virtual DbSet<StepOfferWykonanie> StepOfferWykonanie { get; set; }
         public virtual DbSet<Steps> Steps { get; set; }
         public virtual DbSet<TypWyrobu> TypWyrobu { get; set; }
         public virtual DbSet<TypWyrobuIdDn> TypWyrobuIdDn { get; set; }
@@ -306,6 +309,30 @@ namespace YouKpiBackend.DbContexts
                     .HasConstraintName("FK__Offer__Offerrer__3C69FB99");
             });
 
+            modelBuilder.Entity<OfferLineProcess>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.OfferLineId).HasColumnName("OFFER_LINE_ID");
+
+                entity.Property(e => e.ProcessId)
+                    .IsRequired()
+                    .HasColumnName("PROCESS_ID")
+                    .HasMaxLength(30);
+
+                entity.HasOne(d => d.OfferLine)
+                    .WithMany(p => p.OfferLineProcess)
+                    .HasForeignKey(d => d.OfferLineId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OfferLine__OFFER__40058253");
+
+                entity.HasOne(d => d.Process)
+                    .WithMany(p => p.OfferLineProcess)
+                    .HasForeignKey(d => d.ProcessId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OfferLine__PROCE__3F115E1A");
+            });
+
             modelBuilder.Entity<OfferLines>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -358,6 +385,30 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Sale).HasMaxLength(50);
 
                 entity.Property(e => e.W).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<OfferProcess>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.OfferId).HasColumnName("OFFER_ID");
+
+                entity.Property(e => e.ProcessId)
+                    .IsRequired()
+                    .HasColumnName("PROCESS_ID")
+                    .HasMaxLength(30);
+
+                entity.HasOne(d => d.Offer)
+                    .WithMany(p => p.OfferProcess)
+                    .HasForeignKey(d => d.OfferId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OfferProc__OFFER__42E1EEFE");
+
+                entity.HasOne(d => d.Process)
+                    .WithMany(p => p.OfferProcess)
+                    .HasForeignKey(d => d.ProcessId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OfferProc__PROCE__43D61337");
             });
 
             modelBuilder.Entity<OrderRealisation>(entity =>
@@ -528,21 +579,11 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Salt).HasMaxLength(20);
             });
 
-            modelBuilder.Entity<PracownikOfertaProcesy>(entity =>
+            modelBuilder.Entity<PracownikCzasStep>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
-                entity.Property(e => e.OfferId)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ProcessId)
-                    .HasColumnName("ProcessID")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                entity.Property(e => e.OfferLinesId).HasColumnName("OfferLinesID");
             });
 
             modelBuilder.Entity<PracownikProcess>(entity =>
@@ -819,6 +860,15 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnName("OPIS")
                     .HasMaxLength(1000)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<StepOfferWykonanie>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.OfferLineId).HasColumnName("OfferLineID");
+
+                entity.Property(e => e.ProcessStepId).HasColumnName("ProcessStepID");
             });
 
             modelBuilder.Entity<Steps>(entity =>

@@ -111,6 +111,7 @@
         <OfferLines
           :currentOffer="currentOffer"
           :products="products"
+          :processes="processes"
         ></OfferLines>
       </v-flex>
     </v-layout>
@@ -130,7 +131,8 @@ export default {
     editMode: Boolean,
     projects: Array,
     customers: Array,
-    products: Array
+    products: Array,
+    processes: Array
   },
   data () {
     return {

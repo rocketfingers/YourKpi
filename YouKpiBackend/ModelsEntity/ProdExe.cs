@@ -21,5 +21,7 @@ namespace YouKpiBackend.ModelsEntity
         public int? Dn { get; set; }
         public int? IloscWyrobow { get; set; }
         public string Wersja { get; set; }
+        public int CzasSpedzony { get; set; }
+        public int? WykonaneStepy { get; set; }
     }
 }

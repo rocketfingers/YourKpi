@@ -10,6 +10,7 @@ namespace YouKpiBackend.ModelsEntity
         {
             OfertaTyp = new HashSet<OfertaTyp>();
             OfferLines = new HashSet<OfferLines>();
+            OfferProcess = new HashSet<OfferProcess>();
         }
 
         public int Id { get; set; }
@@ -27,5 +28,6 @@ namespace YouKpiBackend.ModelsEntity
         public virtual Pracownik OfferrerNavigation { get; set; }
         public virtual ICollection<OfertaTyp> OfertaTyp { get; set; }
         public virtual ICollection<OfferLines> OfferLines { get; set; }
+        public virtual ICollection<OfferProcess> OfferProcess { get; set; }
     }
 }

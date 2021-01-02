@@ -19,6 +19,7 @@
                 @editedOffer="editcurrentOfferRes"
                 :customers="customers"
                 :products="products"
+                :processes="processes"
               ></NewOffer>
             </v-form>
           </v-flex>
@@ -173,6 +174,7 @@ export default {
       getAllProjectsApi: 'api/Project/GetAll',
       getAllCustomersApi: 'api/Customer/GetAll',
       getAllProductsApi: 'api/Products/GetAllSimple',
+      getAllProcesses: 'api/Process/GetAll',
       expanded: [],
 
       headers: [
@@ -201,8 +203,8 @@ export default {
       editMode: false,
       projects: [],
       customers: [],
-      products: []
-
+      products: [],
+      processes: []
     }
   },
   computed: {},
@@ -262,6 +264,21 @@ export default {
               i.client = this.customers.find(c => c.id === i.clientsId)
             }
             i.sum = ''
+          })
+          this.getProcesses()
+        })
+        .catch((e) => {
+          this.tableLoading = false
+        })
+    },
+    getProcesses () {
+      var $this = this
+      this.$http
+        .get(this.getAllProcesses)
+        .then((Response) => {
+          $this.processes = Response.data
+          $this.processes.forEach(p => {
+            p.showName = p.id + ', ' + p.nazwaProcesu
           })
           this.tableLoading = false
         })

@@ -74,12 +74,22 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "[dbo].[OfferLineProcess]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "[dbo].[OfferLines]",
          "ObjectType": 0
       },
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[OfferLines_old]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[OfferProcess]",
          "ObjectType": 0
       },
       {
@@ -94,7 +104,7 @@
       },
       {
          "HasPrimaryKey": true,
-         "Name": "[dbo].[PracownikOfertaProcesy]",
+         "Name": "[dbo].[PracownikCzasStep]",
          "ObjectType": 0
       },
       {
@@ -140,6 +150,11 @@
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[ReasonCodes]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[StepOfferWykonanie]",
          "ObjectType": 0
       },
       {
