@@ -171,7 +171,7 @@
 
           <v-flex xs3 md2>
             <v-btn
-              v-show="currentOffer.status == 'otwarte'"
+              v-show="!currentOffer.status"
               color="primary"
               dark
               class="mb-2"
@@ -182,8 +182,9 @@
           </v-flex>
           <v-spacer></v-spacer>
           <v-flex xs3 md2>
+            <!-- v-show="currentOffer.status" -->
+
             <v-checkbox
-              v-show="currentOffer.status"
               v-model="showOfferProcesses"
               label="Pokaż procesy"
             ></v-checkbox>
@@ -317,15 +318,34 @@ export default {
     checkStatus () {
       switch (this.currentOffer.status) {
         case 'otwarte':
-          this.currentOffer.status = 'w trakcie'
-          return
+          if (!this.currentOffer.offerProcess) {
+            var res = this.$dialog.confirm({
+              text: 'Aby przejść do realizacji należy wybrać i zrealizować procesy dla ofery',
+              title: 'Uwaga'
+            })
+            if (res) {
+            }
+          } else {
+            this.currentOffer.status = 'w trakcie'
+
+            return
+          } break
         case 'w trakcie':
           this.currentOffer.status = 'zakończony'
           return
         case 'zakończony':
           return
       }
-      this.currentOffer.status = 'otwarte'
+      if (this.currentOffer.offerProcess.length <= 0) {
+        var res2 = this.$dialog.confirm({
+          text: 'Aby otworzyć ofertę należy wybrać procesy dla ofery',
+          title: 'Uwaga'
+        })
+        if (res2) {
+        }
+      } else {
+        this.currentOffer.status = 'otwarte'
+      }
     },
     saveOfferProcesses () {
       this.showProcessSelectorDialog = false

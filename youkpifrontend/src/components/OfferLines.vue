@@ -78,7 +78,7 @@
           :headers="headers"
           :items="currentOffer.offerLines"
           :expanded.sync="expanded"
-          item-key="id"
+          item-key="tempId"
           :search="search"
           :hide-default-footer="readonly"
           calculate-widths
@@ -86,6 +86,9 @@
           <template v-if="readonly" v-slot:header.actions="{}"> </template>
           <template slot="item" slot-scope="props">
             <tr :class="props.isExpanded ? 'primary lighten-5' : 'white'">
+              <!-- <td>
+                {{ props.item.tempId }}
+              </td> -->
               <template v-for="(header, index) in headers">
                 <td :key="index" v-if="header.value == 'actions' && !readonly">
                   <v-layout justify-space-between>
@@ -94,7 +97,7 @@
                         <template v-slot:activator="{ on }">
                           <v-icon
                             v-on="on"
-                            @click="selectProcesses(props.item, index)"
+                            @click="selectProcesses(props, props.item, index)"
                             color="blue lighten-1"
                             >search</v-icon
                           >
@@ -198,14 +201,14 @@
               </template>
             </tr>
           </template>
-          <template v-slot:expanded-item="{ headers }">
+          <template v-slot:expanded-item="{ headers, item }">
             <td :colspan="headers.length">
               <v-layout justify-space-around>
                 <v-flex xs11>
                   <v-card elevation-3>
                     <v-data-table
                       :headers="expandedHeaders"
-                      :items="selectedOfferLineProcesses"
+                      :items="item.fullProcesses"
                     >
                       <template slot="item" slot-scope="props">
                         <tr>
@@ -253,7 +256,7 @@ export default {
   data () {
     return {
       headers: [
-        // { text: 'Id', value: 'id', visible: true },
+        // { text: 'Id', value: 'tempId', visible: true },
         { text: 'Rozwiń', value: 'expand', visible: true },
         { text: 'ProductID', value: 'productId', visible: true },
         { text: 'Ilość', value: 'quantity', visible: true },
@@ -289,15 +292,16 @@ export default {
     }
   },
   computed: {
-    selectedOfferLineProcesses () {
-      var selPro = []
-      var $this = this
-      this.currentOfferLine.offerLineProcess.forEach(p => {
-        var item = $this.processes.find(pr => pr.id === p.processId)
-        selPro.push(item)
-      })
-      return selPro
-    },
+    // selectedOfferLineProcesses () {
+    //   var selPro = []
+    //   var $this = this
+    //   this.currentOfferLine.offerLineProcess.forEach(p => {
+    //     var item = $this.processes.find(pr => pr.id === p.processId)
+    //     selPro.push(item)
+    //   })
+    //   item.fullProcesses = selPro
+    //   return selPro
+    // },
     filteredProcesses () {
       var filProcesses = this.processes.filter(p => {
         if (p.typZlecenia.toUpperCase().trim().includes('O') || p.typZlecenia === '0') {
@@ -314,11 +318,26 @@ export default {
 
   },
   methods: {
+    getSelectedOfferLineProcesses (item) {
+      var selPro = []
+      var $this = this
+      // eslint-disable-next-line no-debugger
+      debugger
+      if (!item.offerLineProcess) {
+        item.offerLineProcess = []
+      }
+      item.offerLineProcess.forEach(p => {
+        var obj = $this.processes.find(pr => pr.id === p.processId)
+        selPro.push(obj)
+      })
+      return selPro
+    },
     addOfferLineToOffer () {
       if (!this.currentOffer.offerLines) {
         this.$set(this.currentOffer, 'offerLines', [])
       }
-      this.currentOffer.offerLines.unshift({ id: 0, productId: '', quantity: '', w: '', medium: '', additionalEquipment: '', sale: '', actions: '', isEdited: true })
+
+      this.currentOffer.offerLines.unshift({ id: 0, tempId: -1 - this.currentOffer.offerLines.length, productId: '', quantity: '', w: '', medium: '', additionalEquipment: '', sale: '', actions: '', isEdited: true, offerLineProcess: [] })
     },
     async editOffer (offer) {
       if (offer.isEdited) {
@@ -335,6 +354,7 @@ export default {
     },
     expandRow (item) {
       this.currentOfferLine = item.item
+      item.item.fullProcesses = this.getSelectedOfferLineProcesses(item.item)
       item.expand(!item.isExpanded)
     },
     deleteOffer (offer, index) {
@@ -364,7 +384,8 @@ export default {
         })
       }
     },
-    selectProcesses (offer, index) {
+    selectProcesses (props, offer, index) {
+      props.expand(false)
       this.currentOfferLine = offer
       this.selectedProcesses = []
       this.processesSelectorTitle = 'Wybierz procesy' + ' (Produkt: ' + offer.productId + ')'

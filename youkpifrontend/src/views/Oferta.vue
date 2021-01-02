@@ -264,6 +264,11 @@ export default {
               i.client = this.customers.find(c => c.id === i.clientsId)
             }
             i.sum = ''
+            if (i.offerLines) {
+              i.offerLines.forEach(p => {
+                p.tempId = p.id
+              })
+            }
           })
           this.getProcesses()
         })
@@ -309,7 +314,7 @@ export default {
       // }
       this.editMode = false
       this.offerTitle = 'Dodaj ofertę'
-      this.currentOffer = { offerProcess: [] }
+      this.currentOffer = { offerProcess: [], status: '' }
       this.editedIndex = -1
       this.showNewOfferDialog = true
     },
