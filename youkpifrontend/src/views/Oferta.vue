@@ -309,7 +309,7 @@ export default {
       // }
       this.editMode = false
       this.offerTitle = 'Dodaj ofertę'
-      this.currentOffer = { }
+      this.currentOffer = { offerProcess: [] }
       this.editedIndex = -1
       this.showNewOfferDialog = true
     },

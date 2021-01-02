@@ -14,8 +14,8 @@
           <v-flex xs11>
             <v-form ref="newOfferForm">
               <ProcessSelector
-                :processes="processes"
-                :offerLine="currentOfferLine"
+                :filteredProcesses="filteredProcesses"
+                :parentItem="currentOfferLine"
                 @editedOfferLine="editOfferLineProcesses"
               >
               </ProcessSelector>
@@ -85,7 +85,7 @@
         >
           <template v-if="readonly" v-slot:header.actions="{}"> </template>
           <template slot="item" slot-scope="props">
-            <tr>
+            <tr :class="props.isExpanded ? 'primary lighten-5' : 'white'">
               <template v-for="(header, index) in headers">
                 <td :key="index" v-if="header.value == 'actions' && !readonly">
                   <v-layout justify-space-between>
@@ -297,6 +297,17 @@ export default {
         selPro.push(item)
       })
       return selPro
+    },
+    filteredProcesses () {
+      var filProcesses = this.processes.filter(p => {
+        if (p.typZlecenia.toUpperCase().trim().includes('O') || p.typZlecenia === '0') {
+          return false
+        }
+        return true
+      })
+
+      // offerLineProcess
+      return filProcesses
     }
   },
   watch: {
@@ -355,7 +366,8 @@ export default {
     },
     selectProcesses (offer, index) {
       this.currentOfferLine = offer
-      this.processesSelectorTitle = this.processesSelectorTitle + ' (Produkt: ' + offer.productId + ')'
+      this.selectedProcesses = []
+      this.processesSelectorTitle = 'Wybierz procesy' + ' (Produkt: ' + offer.productId + ')'
       this.showProcessSelectorDialog = true
     },
     saveOfferProcesses () {
