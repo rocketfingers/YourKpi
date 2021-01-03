@@ -1,15 +1,18 @@
 <template>
-  <div class="home">Witamy w YouKPI</div>
+  <div>
+    <h2 class="home">Witamy w YouKPI</h2>
+    <ProdExe />
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import ProdExe from '../components/ProdExe.vue'
 
 export default {
   name: 'Home',
   components: {
-    // HelloWorld
+    ProdExe
   }
 }
 </script>

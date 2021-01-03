@@ -8,6 +8,7 @@ namespace YouKpiBackend.ModelsEntity
     {
         public Process()
         {
+            OfferLineProcess = new HashSet<OfferLineProcess>();
             ProcessSteps = new HashSet<ProcessSteps>();
         }
 
@@ -18,6 +19,7 @@ namespace YouKpiBackend.ModelsEntity
         public string KontoGłówne { get; set; }
         public string TypZlecenia { get; set; }
 
+        public virtual ICollection<OfferLineProcess> OfferLineProcess { get; set; }
         public virtual ICollection<ProcessSteps> ProcessSteps { get; set; }
     }
 }

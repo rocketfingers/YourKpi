@@ -6,6 +6,11 @@ namespace YouKpiBackend.ModelsEntity
 {
     public partial class OfferLines
     {
+        public OfferLines()
+        {
+            OfferLineProcess = new HashSet<OfferLineProcess>();
+        }
+
         public int Id { get; set; }
         public int? OfferId { get; set; }
         public string ProductId { get; set; }
@@ -17,5 +22,6 @@ namespace YouKpiBackend.ModelsEntity
 
         public virtual Offer Offer { get; set; }
         public virtual Produkty Product { get; set; }
+        public virtual ICollection<OfferLineProcess> OfferLineProcess { get; set; }
     }
 }

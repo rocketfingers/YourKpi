@@ -29,6 +29,11 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "[dbo].[Komponenty]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "[dbo].[Maszyny]",
          "ObjectType": 0
       },
@@ -69,6 +74,11 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "[dbo].[OfferLineProcess]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "[dbo].[OfferLines]",
          "ObjectType": 0
       },
@@ -89,7 +99,7 @@
       },
       {
          "HasPrimaryKey": true,
-         "Name": "[dbo].[PracownikOfertaProcesy]",
+         "Name": "[dbo].[PracownikCzasStep]",
          "ObjectType": 0
       },
       {
@@ -105,6 +115,11 @@
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[ProcessSteps]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[ProdExe]",
          "ObjectType": 0
       },
       {
@@ -130,6 +145,11 @@
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[ReasonCodes]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[StepOfferWykonanie]",
          "ObjectType": 0
       },
       {
