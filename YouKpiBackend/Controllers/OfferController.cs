@@ -27,7 +27,11 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Offer.Include(p => p.Clients).Include(p => p.OfferLines).ToListAsync();
+                var res = await _ctx.Offer.Include(p => p.Clients)
+                    .Include(p => p.OfferProcess)
+                    .Include(p => p.OfferLines)
+                    .ThenInclude(p => p.OfferLineProcess)
+                    .ToListAsync();
                 //var res = await _ctx.Offer.Include(p => p.Clients).Include(p => p.OfferLines).ThenInclude(p => p.Product).ToListAsync();
                 return Ok(res.OrderByDescending(p => p.Id));
             }
@@ -67,7 +71,37 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
-                var offer = await _ctx.Offer.Include(p => p.OfferLines).ThenInclude(p => p.Product).Include(p => p.Clients).FirstOrDefaultAsync(p => p.Id == entity.Id);
+                var offer = await _ctx.Offer
+                    .Include(p => p.OfferProcess)
+                    .Include(p => p.OfferLines)
+                    .ThenInclude(p => p.Product)
+                    .Include(p => p.OfferLines)
+                    .ThenInclude(p => p.OfferLineProcess)
+                    .Include(p => p.Clients)
+                    .FirstOrDefaultAsync(p => p.Id == entity.Id);
+
+                //await UpdateOfferLines(entity.OfferLines.ToList(), offer);
+
+
+                offer.OfferLines.ToList().ForEach(p =>
+                {
+                    p.OfferLineProcess.ToList().ForEach(olp =>
+                    {
+                        _ctx.Entry(olp).State = EntityState.Deleted;
+                    });
+                    _ctx.Entry(p).State = EntityState.Deleted;
+                });
+                offer.OfferProcess.ToList().ForEach(olp =>
+                {
+                    _ctx.Entry(olp).State = EntityState.Deleted;
+                });
+
+                foreach (var item in entity.OfferLines.ToList())
+                {
+                    item.OfferId = offer.Id;
+                    offer.OfferLines.Add(item);
+                }
+
                 offer.Name = entity.Name;
                 offer.OfferDate = entity.OfferDate;
                 offer.Offerrer = entity.Offerrer;
@@ -77,15 +111,8 @@ namespace YouKpiBackend.Controllers
                 offer.OrderType = entity.OrderType;
                 offer.ClientsId = entity.ClientsId;
                 offer.PlannedEnd = entity.PlannedEnd;
-                offer.OfferLines.ToList().ForEach(p =>
-                {
-                    _ctx.Entry(p).State = EntityState.Deleted;
-                });
-
-                entity.OfferLines.ToList().ForEach(p =>
-                {
-                    offer.OfferLines.Add(p);
-                });
+                offer.OfferProcess = entity.OfferProcess;
+                 
                 await _ctx.SaveChangesAsync();
 
                 return NoContent();
@@ -95,6 +122,8 @@ namespace YouKpiBackend.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+ 
 
         [HttpDelete("[action]")]
         public async Task<IActionResult> Delete(int id)

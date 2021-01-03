@@ -83,6 +83,12 @@
             </v-list-item-icon>
             <v-list-item-title>Reason codes</v-list-item-title>
           </v-list-item>
+          <v-list-item @click="$router.push({ name: 'Components' })">
+            <v-list-item-icon>
+              <v-icon>fa-cubes</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Komponenty</v-list-item-title>
+          </v-list-item>
           <v-divider></v-divider>
         </v-list-item-group>
       </v-list>

@@ -89,6 +89,11 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "[dbo].[OfferProcess]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "[dbo].[OrderRealisation]",
          "ObjectType": 0
       },

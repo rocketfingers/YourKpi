@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace YouKpiBackend.ModelsEntity
 {
+<<<<<<< HEAD:YouKpiBackend/ModelsEntity/PracownikCzasStep.cs
     public partial class PracownikCzasStep
     {
         public int Id { get; set; }
@@ -11,5 +12,15 @@ namespace YouKpiBackend.ModelsEntity
         public int ProcessStepsId { get; set; }
         public int PracownikId { get; set; }
         public int LiczbaMinut { get; set; }
+=======
+    public partial class OfferProcess
+    {
+        public int Id { get; set; }
+        public int OfferId { get; set; }
+        public string ProcessId { get; set; }
+
+        public virtual Offer Offer { get; set; }
+        public virtual Process Process { get; set; }
+>>>>>>> d4ad46cc4ea85339f5ffaa37665c09864dfe7a17:YouKpiBackend/ModelsEntity/OfferProcess.cs
     }
 }
