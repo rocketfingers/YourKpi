@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 namespace YouKpiBackend.ModelsEntity
 {
-    public partial class PracownikCzasStep
+    public partial class OfferProcess
     {
         public int Id { get; set; }
-        public int OfferLinesId { get; set; }
-        public int ProcessStepsId { get; set; }
-        public int PracownikId { get; set; }
-        public int LiczbaMinut { get; set; }
+        public int OfferId { get; set; }
+        public string ProcessId { get; set; }
+
+        public virtual Offer Offer { get; set; }
+        public virtual Process Process { get; set; }
     }
 }

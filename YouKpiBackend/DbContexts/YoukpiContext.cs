@@ -32,6 +32,7 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<OfferLineProcess> OfferLineProcess { get; set; }
         public virtual DbSet<OfferLines> OfferLines { get; set; }
         public virtual DbSet<OfferLinesOld> OfferLinesOld { get; set; }
+        public virtual DbSet<OfferProcess> OfferProcess { get; set; }
         public virtual DbSet<OrderRealisation> OrderRealisation { get; set; }
         public virtual DbSet<Pracownik> Pracownik { get; set; }
         public virtual DbSet<PracownikCzasStep> PracownikCzasStep { get; set; }
@@ -384,6 +385,30 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Sale).HasMaxLength(50);
 
                 entity.Property(e => e.W).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<OfferProcess>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.OfferId).HasColumnName("OFFER_ID");
+
+                entity.Property(e => e.ProcessId)
+                    .IsRequired()
+                    .HasColumnName("PROCESS_ID")
+                    .HasMaxLength(30);
+
+                entity.HasOne(d => d.Offer)
+                    .WithMany(p => p.OfferProcess)
+                    .HasForeignKey(d => d.OfferId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OfferProc__OFFER__42E1EEFE");
+
+                entity.HasOne(d => d.Process)
+                    .WithMany(p => p.OfferProcess)
+                    .HasForeignKey(d => d.ProcessId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OfferProc__PROCE__43D61337");
             });
 
             modelBuilder.Entity<OrderRealisation>(entity =>
