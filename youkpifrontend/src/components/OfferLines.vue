@@ -14,6 +14,7 @@
           <v-flex xs11>
             <v-form ref="newOfferForm">
               <ProcessSelector
+                v-if="!readonly"
                 :filteredProcesses="filteredProcesses"
                 :parentItem="currentOfferLine"
                 @editedOfferLine="editOfferLineProcesses"
