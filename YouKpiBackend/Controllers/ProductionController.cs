@@ -24,6 +24,8 @@ namespace YouKpiBackend.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("[action]")]
+
         public async Task<IActionResult> GetProductionReport()
         {
             try
