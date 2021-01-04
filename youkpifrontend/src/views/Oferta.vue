@@ -84,8 +84,8 @@
                 </td>
                 <td :key="index" v-else-if="header.value === 'projectsId'">
                   {{
-                    props.item.projectsId === 'NULL'
-                      ? ''
+                    props.item.projectsId === "NULL"
+                      ? ""
                       : props.item.projectsId
                   }}
                 </td>
@@ -140,6 +140,7 @@
                 <v-flex xs11>
                   <OfferLines
                     :currentOffer="item"
+                    :processes="processes"
                     :readonly="true"
                   ></OfferLines>
                 </v-flex>
