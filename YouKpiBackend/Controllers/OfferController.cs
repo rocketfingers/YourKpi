@@ -130,14 +130,25 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var offer = _ctx.Offer.Include(p => p.OfferLines).FirstOrDefault(p => p.Id == id);
+                var offer = _ctx.Offer.Include(p => p.OfferProcess).Include(p => p.OfferLines).ThenInclude(p => p.OfferLineProcess).FirstOrDefault(p => p.Id == id);
                 if (offer != null)
                 {
                     offer.OfferLines.ToList().ForEach(p =>
                     {
+                        foreach (var item in p.OfferLineProcess)
+                        {
+                            _ctx.Entry(item).State = EntityState.Deleted;
+                        }
+                        
                         _ctx.Entry(p).State = EntityState.Deleted;
                     });
+
+                    foreach (var op in offer.OfferProcess)
+                    {
+                        _ctx.Entry(op).State = EntityState.Deleted;
+                    }
                     _ctx.Offer.Remove(offer);
+
                     await _ctx.SaveChangesAsync();
                 }
                 return Ok();
