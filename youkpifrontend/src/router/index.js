@@ -10,6 +10,7 @@ import Oferta from '../views/Oferta.vue'
 import Maszyny from '../views/Maszyny.vue'
 import ReasonCodes from '../views/ReasonCodes.vue'
 import Komponenty from '../views/Komponenty.vue'
+import Procesy from '../views/Procesy.vue'
 
 Vue.use(VueRouter)
 
@@ -63,6 +64,11 @@ const routes = [
     path: '/components',
     name: 'Components',
     component: Komponenty
+  },
+  {
+    path: '/processes',
+    name: 'Procesy',
+    component: Procesy
   },
   {
     path: '/login',

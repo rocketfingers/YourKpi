@@ -75,7 +75,7 @@ export default {
       },
       headers: [
         { text: 'Id', value: 'id', visible: true },
-        { text: 'Nazwa grupy procesu', value: 'nazwGrupyProcesu', visible: true },
+        { text: 'Nazwa grupy procesu', value: 'nazwaGrupyProcesu', visible: true },
         { text: 'Business area', value: 'businessArea', visible: true },
         { text: 'Nazwa procesu', value: 'nazwaProcesu', visible: true },
         { text: 'Typ zlecenia', value: 'typZlecenia', visible: true }

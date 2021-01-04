@@ -29,6 +29,8 @@ var _ReasonCodes = _interopRequireDefault(require("../views/ReasonCodes.vue"));
 
 var _Komponenty = _interopRequireDefault(require("../views/Komponenty.vue"));
 
+var _Procesy = _interopRequireDefault(require("../views/Procesy.vue"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vueRouter["default"]);
@@ -73,6 +75,10 @@ var routes = [{
   path: '/components',
   name: 'Components',
   component: _Komponenty["default"]
+}, {
+  path: '/processes',
+  name: 'Procesy',
+  component: _Procesy["default"]
 }, {
   path: '/login',
   name: 'Login',
