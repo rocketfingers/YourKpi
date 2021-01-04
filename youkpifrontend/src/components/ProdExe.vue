@@ -92,15 +92,146 @@
               </template>
             </tr>
           </template>
-          <template v-slot:expanded-item="{ headers, item }">
+          <template v-slot:expanded-item="{ headers }">
             <td :colspan="headers.length">
-              <v-layout justify-space-around>
-                <v-flex xs11>{{ item.id }} </v-flex>
+              <v-layout justify-start>
+                <v-flex xs11>
+                  <v-data-table
+                    :headers="stepsHeaders"
+                    :items="stepsData"
+                    class="elevation-1"
+                    :loading="stepsLoading"
+                    hide-default-footer
+                  >
+                    <template slot="item" slot-scope="props">
+                      <tr>
+                        <template v-for="header in stepsHeaders">
+                          <!-- Columns settings  -->
+                          <td
+                            :key="header.value"
+                            v-if="header.value === 'zakonczone'"
+                          >
+                            {{ props.item.zakonczone ? 'Tak' : 'Nie' }}
+                          </td>
+
+                          <td
+                            :key="header.value"
+                            class="justify-center px-0"
+                            v-else-if="header.value === 'actions'"
+                          >
+                            <v-layout>
+                              <v-flex xs6>
+                                <v-tooltip bottom>
+                                  <template v-slot:activator="{ on, attrs }">
+                                    <v-icon
+                                      class="mr-2"
+                                      color="primary"
+                                      @click="registerTime(props.item)"
+                                      v-bind="attrs"
+                                      v-on="on"
+                                    >
+                                      fa-hourglass-half
+                                    </v-icon>
+                                  </template>
+                                  <span>Zarejestruj czas</span>
+                                </v-tooltip>
+                              </v-flex>
+                              <v-flex xs6>
+                                <v-tooltip bottom>
+                                  <template v-slot:activator="{ on, attrs }">
+                                    <v-icon
+                                      class="mr-2"
+                                      color="primary"
+                                      @click="closeStep(props.item)"
+                                      v-bind="attrs"
+                                      v-on="on"
+                                    >
+                                      fa-step-forward
+                                    </v-icon>
+                                  </template>
+                                  <span>Zamknij step</span>
+                                </v-tooltip>
+                              </v-flex>
+                            </v-layout>
+                          </td>
+                          <td :key="header.value" class="text-xs-center" v-else>
+                            {{ props.item[header.value] }}
+                          </td>
+                        </template>
+                      </tr>
+                    </template>
+                  </v-data-table>
+                </v-flex>
               </v-layout>
             </td>
           </template>
         </v-data-table>
       </v-flex>
+    </v-layout>
+    <v-layout row justify-center>
+      <v-dialog
+        v-model="dialogZamknijStep"
+        v-if="dialogZamknijStep"
+        persistent
+        max-width="600"
+      >
+        <v-card>
+          <v-card-title class="headline"
+            >Proces: {{ currentItem.nazwaProcesu }} - Step:
+            {{ currentStepItem.stepNum }} -
+            {{ currentStepItem.stepName }}</v-card-title
+          >
+          <v-card-text>
+            <v-layout row wrap>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="currentStepItem.liczbaPomiarow"
+                  outlined
+                  label="Liczba pomiarów"
+                  type="Number"
+                  min="0"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="currentStepItem.liczbaPomiarowNok"
+                  outlined
+                  type="Number"
+                  min="0"
+                  label="Liczba pomiarów Nok"
+                ></v-text-field>
+              </v-flex> </v-layout
+          ></v-card-text>
+          <v-card-actions class="blue lighten-5">
+            <v-btn
+              outlined
+              rounded
+              large
+              color="blue darken-1"
+              text
+              @click="dialogZamknijStep = false"
+              >Anuluj<v-icon dark>cancel</v-icon></v-btn
+            >
+            <v-spacer></v-spacer>
+            <v-btn
+              outlined
+              rounded
+              large
+              color="blue darken-1"
+              text
+              @click.native="saveZamknijStep()"
+              >Zapisz<v-icon dark>save</v-icon></v-btn
+            >
+            <v-btn
+              rounded
+              large
+              color="blue darken-1"
+              @click.native="saveCloseZamknijStep()"
+              >Zapisz i zamknij<v-icon dark>save</v-icon></v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-layout>
   </div>
 </template>
@@ -121,41 +252,45 @@ export default {
       expanded: [],
       // Settings
       title: 'Akcje do wykonania',
-      editTitle: 'Edytuj typ wyrobu',
-      newTitle: 'Dodaj  typ wyrobu',
       getAllApi: 'api/Production/GetMainPage',
-      postNewApi: 'api/ProductTypes/Create',
-      putEditApi: 'api/ProductTypes/Update',
-      deleteApi: 'api/ProductTypes/Delete',
-      defaultItem: {
-        id: ''
-      },
       // Settings
-      editedItem: {},
-      editedIndex: -1,
       showDialog: false,
       data: [],
+      stepsData: [],
+      stepsLoading: false,
+      stepsHeaders: [
+        { text: 'Step ', value: 'stepNum' },
+        { text: 'Nazwa stepu', value: 'stepName' },
+        { text: 'Sekwencja', value: 'sekwencja' },
+        { text: 'Liczba pomiarów', value: 'liczbaPomiarow' },
+        { text: 'Liczba pomiarów Nok', value: 'liczbaPomiarowNok' },
+        { text: 'Zakończone', value: 'zakonczone' },
+        { text: 'Akcje', value: 'actions' }
+      ],
       currentId: 0,
       // Columns headers
       headers: [
         { text: 'Rozwiń', value: 'expand' },
         { text: 'Id', value: 'id' },
+        { text: 'Nazwa procesu', value: 'nazwaProcesu' },
         { text: 'Id zamówienia', value: 'identyfikatorZamowienia' },
         { text: 'Wiersz oferty', value: 'wierszOferty' },
         { text: 'Klient', value: 'klient' },
         { text: 'Numer Klienta', value: 'numerKlienta' },
         { text: 'Data końcowa', value: 'plannedEnd' },
-        { text: 'Nazwa procesu', value: 'nazwaProcesu' },
         { text: 'Id wyrobu', value: 'identyfikatorWyrobu' },
         { text: 'Typ wyrobu', value: 'typWyrobu' },
         { text: 'Dn', value: 'dn' },
         { text: 'Ilosc wyrobow', value: 'iloscWyrobow' },
         { text: 'Wersja', value: 'wersja' },
         { text: 'Czas spędzony', value: 'czasSpedzony' },
-        { text: 'Wykonanie', value: 'wykonaneStepy' },
-        { text: 'Akcje', value: 'actions' }
+        { text: 'Wykonanie', value: 'wykonaneStepy' }
       ],
-      editMode: false
+      editMode: false,
+      // dialogi
+      currentItem: {},
+      currentStepItem: {},
+      dialogZamknijStep: false
     }
   },
   computed: {
@@ -173,7 +308,35 @@ export default {
     }
   },
   methods: {
+    saveZamknijStep () {
+      this.dialogZamknijStep = false
+    },
+    async saveCloseZamknijStep () {
+      var res = await this.$dialog.confirm({
+        text: 'Czy na pewno chcesz zamknąć ten step?',
+        title: 'Uwaga'
+      })
+      if (res) {
+        this.currentItem.wykonaneStepy++
+        this.currentStepItem.zakonczone = true
+        this.saveZamknijStep()
+      }
+    },
+    closeStep (item) {
+      this.currentStepItem = item
+      this.dialogZamknijStep = true
+    },
     expandRow (item) {
+      // eslint-disable-next-line no-debugger
+      debugger
+      if (!item.isExpanded) {
+        this.currentItem = item.item
+        this.stepsLoading = true
+        this.stepsData = []
+        v.axiosInstance.get('api/Production/GetSteps?offerLineId=' + item.item.offerLineId + '&processId=' + item.item.processId)
+          .then(Response => { this.stepsData = Response.data; this.stepsLoading = false })
+      }
+
       item.expand(!item.isExpanded)
     }
   },

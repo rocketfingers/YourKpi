@@ -8,9 +8,10 @@ namespace YouKpiBackend.ModelsEntity
     {
         public int Id { get; set; }
         public int OfferLineId { get; set; }
-        public int ProcessStepId { get; set; }
+        public string ProcessId { get; set; }
         public int LiczbaPomiarow { get; set; }
         public int LiczbaPomiarowNok { get; set; }
         public bool Zakonczonie { get; set; }
+        public int Step { get; set; }
     }
 }

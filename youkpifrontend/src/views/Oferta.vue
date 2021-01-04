@@ -89,7 +89,14 @@
                       : props.item.projectsId
                   }}
                 </td>
-
+                <td :key="index" v-else-if="header.value === 'expand'">
+                  <v-icon @click="expandRow(props)" v-show="!props.isExpanded"
+                    >fa-arrow-down</v-icon
+                  >
+                  <v-icon @click="expandRow(props)" v-show="props.isExpanded"
+                    >fa-arrow-up</v-icon
+                  >
+                </td>
                 <td :key="index" v-else-if="header.value === 'actions'">
                   <v-layout justify-space-between>
                     <v-flex xs4>

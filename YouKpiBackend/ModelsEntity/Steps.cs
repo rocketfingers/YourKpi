@@ -8,7 +8,7 @@ namespace YouKpiBackend.ModelsEntity
     {
         public int Id { get; set; }
         public string StepName { get; set; }
-        public string StepNum { get; set; }
+        public int StepNum { get; set; }
         public string ProcessesId { get; set; }
         public int Sekwencja { get; set; }
     }
