@@ -4,15 +4,12 @@ using System.Collections.Generic;
 
 namespace YouKpiBackend.ModelsEntity
 {
-    public partial class Steps
+    public partial class StepsToDelete
     {
         public int Id { get; set; }
-        public string StepId { get; set; }
         public string StepName { get; set; }
         public int StepNum { get; set; }
         public string ProcessesId { get; set; }
         public int Sekwencja { get; set; }
-
-        public virtual Process Processes { get; set; }
     }
 }

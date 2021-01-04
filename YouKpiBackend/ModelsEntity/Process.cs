@@ -10,6 +10,8 @@ namespace YouKpiBackend.ModelsEntity
         {
             OfferLineProcess = new HashSet<OfferLineProcess>();
             OfferProcess = new HashSet<OfferProcess>();
+            ProcessStepsToDelete = new HashSet<ProcessStepsToDelete>();
+            Steps = new HashSet<Steps>();
         }
 
         public string Id { get; set; }
@@ -21,5 +23,7 @@ namespace YouKpiBackend.ModelsEntity
 
         public virtual ICollection<OfferLineProcess> OfferLineProcess { get; set; }
         public virtual ICollection<OfferProcess> OfferProcess { get; set; }
+        public virtual ICollection<ProcessStepsToDelete> ProcessStepsToDelete { get; set; }
+        public virtual ICollection<Steps> Steps { get; set; }
     }
 }

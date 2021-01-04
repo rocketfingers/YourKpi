@@ -99,6 +99,11 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "[dbo].[ProcessStepsToDelete]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "[dbo].[ProdExe]",
          "ObjectType": 0
       },
@@ -135,6 +140,16 @@
       {
          "HasPrimaryKey": true,
          "Name": "[dbo].[Steps]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[StepsMachines]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[StepsToDelete]",
          "ObjectType": 0
       },
       {

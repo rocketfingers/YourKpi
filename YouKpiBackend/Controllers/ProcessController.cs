@@ -27,7 +27,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Process.ToListAsync();
+                var res = await _ctx.Process.Include(p=> p.Steps).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
