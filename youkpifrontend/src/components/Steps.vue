@@ -91,19 +91,6 @@
                         <template v-slot:activator="{ on }">
                           <v-icon
                             v-on="on"
-                            @click="selectProcesses(props, props.item, index)"
-                            color="blue lighten-1"
-                            >search</v-icon
-                          >
-                        </template>
-                        <span>Pokaż procesy</span>
-                      </v-tooltip>
-                    </v-flex>
-                    <v-flex xs4>
-                      <v-tooltip bottom>
-                        <template v-slot:activator="{ on }">
-                          <v-icon
-                            v-on="on"
                             v-show="props.item.isEdited"
                             @click="editOffer(props.item, index)"
                             color="orange"
@@ -152,40 +139,37 @@
                 </td>
                 <td v-else :key="index">
                   <template v-if="props.item.isEdited && !readonly">
-                    <v-autocomplete
-                      v-if="header.value == 'productId'"
-                      color
-                      :items="products"
-                      item-text="id"
-                      item-value="id"
-                      :rules="[requiredRule]"
-                      v-model="props.item.productId"
-                    ></v-autocomplete>
                     <v-text-field
-                      v-else-if="header.value == 'quantity'"
-                      v-model="props.item.quantity"
+                      v-if="header.value == 'stepId'"
+                      v-model="props.item.stepId"
+                      disabled
+                      :rules="[requiredRule, numberRule]"
+                    ></v-text-field>
+                    <v-text-field
+                      v-else-if="header.value == 'stepName'"
+                      v-model="props.item.stepName"
+                      :rules="[requiredRule]"
+                    ></v-text-field>
+                    <v-text-field
+                      v-else-if="header.value == 'stepNum'"
+                      v-model="props.item.stepNum"
+                      @input="caluculateStepId(props.item)"
                       type="number"
-                      :rules="[requiredRule, numberRule, intRule]"
+                      min="0"
+                      :rules="[requiredRule, intRule]"
                     ></v-text-field>
                     <v-text-field
-                      v-else-if="header.value == 'w'"
-                      v-model="props.item.w"
+                      disabled
+                      v-else-if="header.value == 'processesId'"
+                      v-model="props.item.processesId"
                       :rules="[requiredRule]"
                     ></v-text-field>
                     <v-text-field
-                      v-else-if="header.value == 'medium'"
-                      v-model="props.item.medium"
-                      :rules="[requiredRule]"
-                    ></v-text-field>
-                    <v-text-field
-                      v-else-if="header.value == 'additionalEquipment'"
-                      v-model="props.item.additionalEquipment"
-                      :rules="[requiredRule]"
-                    ></v-text-field>
-                    <v-text-field
-                      v-else-if="header.value == 'sale'"
-                      v-model="props.item.sale"
-                      :rules="[requiredRule]"
+                      v-else-if="header.value == 'sekwencja'"
+                      v-model="props.item.sekwencja"
+                      type="number"
+                      min="0"
+                      :rules="[requiredRule, intRule]"
                     ></v-text-field>
                   </template>
                   <template v-else>
@@ -250,8 +234,8 @@ export default {
         { text: 'Nazwa', value: 'stepName', visible: true },
         { text: 'Numer kroku', value: 'stepNum', visible: true },
         { text: 'Id procesu', value: 'processesId', visible: true },
-        { text: 'Sekwencja', value: 'sekwencja', visible: true }
-        // { text: 'Akcje', value: 'actions', visible: true }
+        { text: 'Sekwencja', value: 'sekwencja', visible: true },
+        { text: 'Akcje', value: 'actions', visible: true }
       ],
 
       search: '',
@@ -275,7 +259,7 @@ export default {
     // selectedOfferLineProcesses () {
     //   var selPro = []
     //   var $this = this
-    //   this.currentProcessLine.offerLineProcess.forEach(p => {
+    //   this.currentProcessLine.processLineProcess.forEach(p => {
     //     var item = $this.processes.find(pr => pr.id === p.processId)
     //     selPro.push(item)
     //   })
@@ -290,7 +274,7 @@ export default {
         return true
       })
 
-      // offerLineProcess
+      // processLineProcess
       return filProcesses
     }
   },
@@ -298,15 +282,18 @@ export default {
 
   },
   methods: {
+    caluculateStepId (item) {
+      item.stepId = item.processesId + '.' + item.stepNum
+    },
     getSelectedOfferLineProcesses (item) {
       var selPro = []
       var $this = this
       // eslint-disable-next-line no-debugger
       debugger
-      if (!item.offerLineProcess) {
-        item.offerLineProcess = []
+      if (!item.processLineProcess) {
+        item.processLineProcess = []
       }
-      item.offerLineProcess.forEach(p => {
+      item.processLineProcess.forEach(p => {
         var obj = $this.processes.find(pr => pr.id === p.processId)
         selPro.push(obj)
       })
@@ -316,20 +303,26 @@ export default {
       if (!this.currentProcess.steps) {
         this.$set(this.currentProcess, 'steps', [])
       }
-
-      this.currentProcess.steps.unshift({ id: 0, tempId: -1 - this.currentProcess.steps.length, productId: '', quantity: '', w: '', medium: '', additionalEquipment: '', sale: '', actions: '', isEdited: true, offerLineProcess: [] })
+      if (!this.currentProcess.id) {
+        this.$dialog.confirm({
+          text: 'Dodaj id procesu!',
+          title: 'Uwaga'
+        })
+      } else {
+        this.currentProcess.steps.unshift({ id: 0, tempId: -1 - this.currentProcess.steps.length, actions: '', isEdited: true, stepName: '', stepNum: '', processesId: this.currentProcess.id })
+      }
     },
-    async editOffer (offer) {
-      if (offer.isEdited) {
-        if (offer.productId.length === 0 || offer.quantity === 0 || offer.w.length === 0 || offer.medium.length === 0 || offer.additionalEquipment.length === 0 || offer.sale === 0) {
+    async editOffer (process) {
+      if (process.isEdited) {
+        if (process.stepName.length === 0 || process.stepNum.length === 0 || process.sekwencja.length === 0) {
           await this.$dialog.confirm({
             text: 'Uzupełnij dane!'
           })
         } else {
-          this.$set(offer, 'isEdited', false)
+          this.$set(process, 'isEdited', false)
         }
       } else {
-        this.$set(offer, 'isEdited', true)
+        this.$set(process, 'isEdited', true)
       }
     },
     expandRow (item) {
@@ -337,38 +330,38 @@ export default {
       item.item.fullProcesses = this.getSelectedOfferLineProcesses(item.item)
       item.expand(!item.isExpanded)
     },
-    deleteOffer (offer, index) {
+    deleteOffer (process, index) {
       // var res = await this.$dialog.confirm({
-      //   text: 'Czy na pewno chcesz usunąć:  ' + offer.czesciId + '?',
+      //   text: 'Czy na pewno chcesz usunąć:  ' + process.czesciId + '?',
       //   title: 'Uwaga'
       // })
       // if (res) {
-      var indexOfOffer = this.currentProcess.steps.indexOf(offer)
+      var indexOfOffer = this.currentProcess.steps.indexOf(process)
       this.currentProcess.steps.splice(indexOfOffer, 1)
     //   }
     },
-    editOfferLineProcesses (offerLine, selectedProcesses) {
+    editOfferLineProcesses (processLine, selectedProcesses) {
       if (this.currentProcess.steps) {
         this.currentProcess.steps.forEach(ol => {
-          if (ol.id === offerLine.id) {
-            ol.offerLineProcess = []
+          if (ol.id === processLine.id) {
+            ol.processLineProcess = []
             selectedProcesses.forEach(sp => {
               var item = {
-                // id: sp.offerLineProcessId,
-                offerLineId: ol.id,
+                // id: sp.processLineProcessId,
+                processLineId: ol.id,
                 processId: sp.id
               }
-              ol.offerLineProcess.push(item)
+              ol.processLineProcess.push(item)
             })
           }
         })
       }
     },
-    selectProcesses (props, offer, index) {
+    selectProcesses (props, process, index) {
       props.expand(false)
-      this.currentProcessLine = offer
+      this.currentProcessLine = process
       this.selectedProcesses = []
-      this.processesSelectorTitle = 'Wybierz procesy' + ' (Produkt: ' + offer.productId + ')'
+      this.processesSelectorTitle = 'Wybierz procesy' + ' (Produkt: ' + process.productId + ')'
       this.showProcessSelectorDialog = true
     },
     saveOfferProcesses () {

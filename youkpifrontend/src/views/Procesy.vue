@@ -15,7 +15,7 @@
               <NewProcess
                 :editedProcess="editedProcess"
                 :editMode="editMode"
-                @editedOffer="editedProcessRes"
+                @editedProcess="editedProcessRes"
               ></NewProcess>
             </v-form>
           </v-flex>
@@ -149,15 +149,10 @@ export default {
       // api
       addApi: 'api/Process/Create',
       getAllProcesses: 'api/Process/GetAll',
+      deleteProcessApi: 'api/Process/Delete',
+      editProcessApi: 'api/Process/Update',
 
-      // editProcessApi: 'api/Offer/Update',
-      // deleteProcessApi: 'api/Offer/Delete',
-      // getAllofferTypesApi: 'api/offerTypes/GetAll',
-      // getAllProjectsApi: 'api/Project/GetAll',
-      // getAllCustomersApi: 'api/Customer/GetAll',
-      // getAllProductsApi: 'api/Products/GetAllSimple',
       expanded: [],
-
       headers: [
         { text: 'Rozwiń', value: 'expand', visible: true },
         { text: 'Id', value: 'id', visible: true },
@@ -171,17 +166,11 @@ export default {
       items: [],
       search: '',
       showNewDialog: false,
-      // showofferprojectsDialog: false,
       tableLoading: false,
       title: 'Dodaj proces',
       editedProcess: { steps: [] },
-      editedIndex: -1
-      // offerTypes: [],
-      // editMode: false,
-      // projects: [],
-      // customers: [],
-      // products: [],
-      // processes: []
+      editedIndex: -1,
+      editMode: false
     }
   },
   computed: {},
@@ -210,14 +199,9 @@ export default {
       item.expand(!item.isExpanded)
     },
     saveProcessAction () {
-      // eslint-disable-next-line no-debugger
-      // debuggers
       if (!this.$refs.newProcessForm.validate()) {
         return
       }
-      // this.editedProcess.clientsId = this.editedProcess.client.id
-      // this.editedProcess.projectsId = this.editedProcess.project.id
-
       if (this.editedIndex > 0) {
         this.editoProcessAction(this.editedProcess)
       } else {
@@ -254,11 +238,7 @@ export default {
         })
         .catch((e) => {})
     },
-    // showOffer (offer, index) {
-    //   this.editedProcess = offer
-    //   this.editedIndex = index
-    //   this.showofferprojectsDialog = true
-    // },
+
     editProcess (process, index) {
       this.title = 'Edytuj process ' + process.id
       this.editMode = true

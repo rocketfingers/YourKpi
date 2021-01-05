@@ -35,5 +35,84 @@ namespace YouKpiBackend.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Create([FromBody] Process entity)
+        {
+            if (entity == null)
+            {
+                return BadRequest("Bad model");
+            }
+            try
+            {
+                var res = _ctx.Process.Add(entity);
+                _ctx.SaveChanges();
+
+                return Created("", entity);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Update([FromBody] Process entity)
+        {
+            if (entity == null)
+            {
+                return BadRequest("Bad model");
+            }
+            try
+            {
+                var processEntity = _ctx.Process.Include(p => p.Steps).FirstOrDefault(c => c.Id == entity.Id);
+                processEntity.Steps.ToList().ForEach(p =>
+                {
+                    _ctx.Entry(p).State = EntityState.Deleted;
+                });
+
+                processEntity.TypZlecenia = entity.TypZlecenia;
+                processEntity.BusinessArea= entity.BusinessArea;
+                processEntity.NazwaGrupyProcesu = entity.NazwaGrupyProcesu;
+                processEntity.NazwaProcesu = entity.NazwaProcesu;
+                processEntity.Steps = entity.Steps;
+
+                await  _ctx.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            try
+            {
+                
+                var processEntity = _ctx.Process.Include(p => p.Steps).FirstOrDefault (c => c.Id == id);
+                processEntity.Steps.ToList().ForEach(p =>
+                {
+                    _ctx.Entry(p).State = EntityState.Deleted;
+                });
+                if (processEntity != null)
+                {
+                    _ctx.Process.Remove(processEntity);
+                    await _ctx.SaveChangesAsync();
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
     }
 }
