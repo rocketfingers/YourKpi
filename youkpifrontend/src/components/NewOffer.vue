@@ -160,6 +160,7 @@
           <v-flex xs3 md2>
             <v-btn
               color="primary"
+              :disabled="disableChangeStatusBtn"
               dark
               class="mb-2"
               @click="checkStatus()"
@@ -171,7 +172,7 @@
 
           <v-flex xs3 md2>
             <v-btn
-              v-show="!currentOffer.status"
+              v-show="currentOffer.status === 'otwarte'"
               color="primary"
               dark
               class="mb-2"
@@ -262,6 +263,7 @@ export default {
       statuses: ['otwarte', 'w trakcie', 'zakończony'],
       processesSelectorTitle: '',
       showOfferProcesses: false,
+
       expandedHeaders: [
         // { text: 'Id', value: 'id', visible: true },
         { text: 'Proces id', value: 'id', visible: true },
@@ -273,6 +275,12 @@ export default {
     }
   },
   computed: {
+    disableChangeStatusBtn () {
+      if (this.currentOffer.status === 'zakończony') {
+        return true
+      }
+      return false
+    },
     btnChangeStatusText () {
       var res = 'Rozpocznij'
       switch (this.currentOffer.status) {
@@ -315,19 +323,60 @@ export default {
     }
   },
   methods: {
+    beforeSaveValidation () {
+      // eslint-disable-next-line no-debugger
+      // debuggers
+
+      if (!this.currentOffer.offerLines) {
+        this.$dialog.confirm({
+          text: 'Aby zapisać ofertę dodaj pozycje do Offer lines!',
+          title: 'Uwaga'
+        })
+        return false
+      }
+      if (this.currentOffer.offerLines.length === 0) {
+        this.$dialog.confirm({
+          text: 'Aby zapisać ofertę dodaj pozycje do Offer lines!',
+          title: 'Uwaga'
+        })
+        return false
+      }
+      if (!this.currentOffer.offerProcess) {
+        this.$dialog.confirm({
+          text: 'Aby zapisać ofertę dodaj procesy!',
+          title: 'Uwaga'
+        })
+        return false
+      }
+      if (this.currentOffer.offerProcess.length <= 0) {
+        this.$dialog.confirm({
+          text: 'Aby zapisać ofertę dodaj procesy!',
+          title: 'Uwaga'
+        })
+        return false
+      }
+      var emptyOfferLines = this.currentOffer.offerLines.filter(p =>
+        p.offerLineProcess.length === 0
+      )
+
+      if (emptyOfferLines.length > 0) {
+        this.$dialog.confirm({
+          text: 'Aby zapisać ofertę dodaj procesy (w offer lines)!',
+          title: 'Uwaga'
+        })
+        return false
+      }
+      return true
+    },
     checkStatus () {
       switch (this.currentOffer.status) {
         case 'otwarte':
-          if (!this.currentOffer.offerProcess) {
-            this.$dialog.confirm({
-              text: 'Aby przejść do realizacji należy wybrać i zrealizować procesy dla ofery',
-              title: 'Uwaga'
-            })
-          } else {
+          if (this.beforeSaveValidation()) {
             this.currentOffer.status = 'w trakcie'
 
             return
           } break
+
         case 'w trakcie':
           this.currentOffer.status = 'zakończony'
           return

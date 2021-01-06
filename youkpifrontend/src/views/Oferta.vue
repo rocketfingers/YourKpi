@@ -97,6 +97,9 @@
                     >fa-arrow-up</v-icon
                   >
                 </td>
+                <td :key="index" v-else-if="header.value === 'processesNo'">
+                  {{ calculateProcesses(props.item) }}
+                </td>
                 <td :key="index" v-else-if="header.value === 'actions'">
                   <v-layout justify-space-between>
                     <v-flex xs4>
@@ -190,6 +193,7 @@ export default {
         { text: 'Data zamówienia', value: 'orderDate' },
         { text: 'Planowane zakończenie', value: 'plannedEnd' },
         { text: 'Suma', value: 'sum' },
+        { text: 'Liczba procesów', value: 'processesNo', visible: true },
         { text: 'Akcje', value: 'actions' }
       ],
       items: [],
@@ -292,28 +296,67 @@ export default {
           this.tableLoading = false
         })
     },
+    calculateProcesses (item) {
+      var offerProcessesNo = 0
+      // eslint-disable-next-line no-debugger
+      // debugger
+      if (item.offerLines) {
+        item.offerLines.forEach(p => {
+          offerProcessesNo = p.offerLineProcess.length + offerProcessesNo
+        })
+      }
 
-    saveOfferAction () {
+      return item.offerProcess.length + ' + ' + offerProcessesNo
+    },
+    beforeSaveValidation () {
       // eslint-disable-next-line no-debugger
       // debuggers
       if (!this.$refs.newOfferForm.validate()) {
-        return
+        return false
       }
       if (!this.currentOffer.offerLines) {
         this.$dialog.confirm({
           text: 'Aby zapisać ofertę dodaj pozycje do Offer lines!',
           title: 'Uwaga'
         })
-        return
+        return false
+      }
+      if (this.currentOffer.offerLines.length === 0) {
+        this.$dialog.confirm({
+          text: 'Aby zapisać ofertę dodaj pozycje do Offer lines!',
+          title: 'Uwaga'
+        })
+        return false
       }
       if (!this.currentOffer.offerProcess) {
         this.$dialog.confirm({
           text: 'Aby zapisać ofertę dodaj procesy!',
           title: 'Uwaga'
         })
-        return
+        return false
       }
+      if (this.currentOffer.offerProcess.length <= 0) {
+        this.$dialog.confirm({
+          text: 'Aby zapisać ofertę dodaj procesy!',
+          title: 'Uwaga'
+        })
+        return false
+      }
+      var emptyOfferLines = this.currentOffer.offerLines.filter(p =>
+        p.offerLineProcess.length === 0
+      )
 
+      if (emptyOfferLines.length > 0) {
+        this.$dialog.confirm({
+          text: 'Aby zapisać ofertę dodaj procesy (w offer lines)!',
+          title: 'Uwaga'
+        })
+        return false
+      }
+      return true
+    },
+    saveOfferAction () {
+      if (!this.beforeSaveValidation()) return
       this.currentOffer.clientsId = this.currentOffer.client.id
       this.currentOffer.projectsId = this.currentOffer.project.id
 

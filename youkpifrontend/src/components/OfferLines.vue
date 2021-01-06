@@ -149,6 +149,9 @@
                     </v-flex>
                   </v-layout>
                 </td>
+                <td :key="index" v-else-if="header.value === 'processesNo'">
+                  {{ props.item.offerLineProcess.length }}
+                </td>
                 <td :key="index" v-else-if="header.value === 'expand'">
                   <v-icon @click="expandRow(props)" v-show="!props.isExpanded"
                     >fa-arrow-down</v-icon
@@ -265,6 +268,7 @@ export default {
         { text: 'Medium', value: 'medium', visible: true },
         { text: 'Dodatkowe wyposażenie', value: 'additionalEquipment', visible: true },
         { text: 'Sale', value: 'sale', visible: true },
+        { text: 'Liczba procesów', value: 'processesNo', visible: true },
         { text: 'Akcje', value: 'actions', visible: true }
       ],
       expandedHeaders: [
@@ -323,7 +327,7 @@ export default {
       var selPro = []
       var $this = this
       // eslint-disable-next-line no-debugger
-      debugger
+      // debugger
       if (!item.offerLineProcess) {
         item.offerLineProcess = []
       }
