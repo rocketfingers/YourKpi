@@ -202,12 +202,19 @@ export default {
       if (!this.$refs.newProcessForm.validate()) {
         return
       }
-      if (this.editedIndex > 0) {
-        this.editoProcessAction(this.editedProcess)
+      if (this.editedProcess.steps.length < 10) {
+        this.$dialog.confirm({
+          text: 'Dodaj minimum 10 kroków do procesu!',
+          title: 'Uwaga'
+        })
       } else {
-        this.addAction(this.editedProcess)
+        if (this.editedIndex > 0) {
+          this.editoProcessAction(this.editedProcess)
+        } else {
+          this.addAction(this.editedProcess)
+        }
+        this.showNewDialog = false
       }
-      this.showNewDialog = false
     },
     add () {
       // if (this.$refs.newProcessForm) { //powoduje blad w dodawaniu zagniezdzonych obiektow, vue jakby traci referencje
@@ -215,7 +222,7 @@ export default {
       // }
       this.editMode = false
       this.title = 'Dodaj proces'
-      this.currentProcess = { steps: [] }
+      this.editedProcess = { steps: [] }
       this.editedIndex = -1
       this.showNewDialog = true
     },

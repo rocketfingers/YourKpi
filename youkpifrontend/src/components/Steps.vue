@@ -75,6 +75,7 @@
           item-key="tempId"
           :search="search"
           :hide-default-footer="readonly"
+          disable-sort
           calculate-widths
         >
           <template v-if="readonly" v-slot:header.actions="{}"> </template>
@@ -289,7 +290,7 @@ export default {
       var selPro = []
       var $this = this
       // eslint-disable-next-line no-debugger
-      debugger
+      // debugger
       if (!item.processLineProcess) {
         item.processLineProcess = []
       }
