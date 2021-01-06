@@ -242,6 +242,7 @@ export default {
       this.$http
         .put(this.editProcessApi, process)
         .then((Result) => {
+          this.initialise()
         })
         .catch((e) => {})
     },

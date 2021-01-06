@@ -67,7 +67,7 @@ const routes = [
   },
   {
     path: '/processes',
-    name: 'Procesy',
+    name: 'Księga procesów',
     component: Procesy
   },
   {

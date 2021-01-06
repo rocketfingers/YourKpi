@@ -77,7 +77,7 @@ var routes = [{
   component: _Komponenty["default"]
 }, {
   path: '/processes',
-  name: 'Procesy',
+  name: 'Księga procesów',
   component: _Procesy["default"]
 }, {
   path: '/login',

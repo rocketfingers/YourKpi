@@ -299,6 +299,21 @@ export default {
       if (!this.$refs.newOfferForm.validate()) {
         return
       }
+      if (!this.currentOffer.offerLines) {
+        this.$dialog.confirm({
+          text: 'Aby zapisać ofertę dodaj pozycje do Offer lines!',
+          title: 'Uwaga'
+        })
+        return
+      }
+      if (!this.currentOffer.offerProcess) {
+        this.$dialog.confirm({
+          text: 'Aby zapisać ofertę dodaj procesy!',
+          title: 'Uwaga'
+        })
+        return
+      }
+
       this.currentOffer.clientsId = this.currentOffer.client.id
       this.currentOffer.projectsId = this.currentOffer.project.id
 
@@ -315,7 +330,7 @@ export default {
       // }
       this.editMode = false
       this.offerTitle = 'Dodaj ofertę'
-      this.currentOffer = { offerProcess: [], status: '' }
+      this.currentOffer = { offerProcess: [], status: 'otwarte' }
       this.editedIndex = -1
       this.showNewOfferDialog = true
     },

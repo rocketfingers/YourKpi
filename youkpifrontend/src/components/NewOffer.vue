@@ -319,12 +319,10 @@ export default {
       switch (this.currentOffer.status) {
         case 'otwarte':
           if (!this.currentOffer.offerProcess) {
-            var res = this.$dialog.confirm({
+            this.$dialog.confirm({
               text: 'Aby przejść do realizacji należy wybrać i zrealizować procesy dla ofery',
               title: 'Uwaga'
             })
-            if (res) {
-            }
           } else {
             this.currentOffer.status = 'w trakcie'
 

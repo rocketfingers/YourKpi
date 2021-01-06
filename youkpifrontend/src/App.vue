@@ -89,11 +89,11 @@
             </v-list-item-icon>
             <v-list-item-title>Komponenty</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="$router.push({ name: 'Procesy' })">
+          <v-list-item @click="$router.push({ name: 'Księga procesów' })">
             <v-list-item-icon>
               <v-icon>fa-tasks</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Procesy</v-list-item-title>
+            <v-list-item-title>Księga procesów</v-list-item-title>
           </v-list-item>
           <v-divider></v-divider>
         </v-list-item-group>

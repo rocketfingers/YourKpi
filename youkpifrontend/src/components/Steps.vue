@@ -74,7 +74,6 @@
           :expanded.sync="expanded"
           item-key="tempId"
           :search="search"
-          :hide-default-footer="readonly"
           disable-sort
           calculate-widths
         >
