@@ -64,13 +64,22 @@
           :items="items"
           class="elevation-1"
           item-key="id"
+          :expanded.sync="expanded"
           :loading="tableLoading"
           :search="search"
         >
           <template slot="item" slot-scope="props">
             <tr>
               <template v-for="(header, index) in headers">
-                <td :key="index" v-if="header.value == 'actions'">
+                <td :key="index" v-if="header.value === 'expand'">
+                  <v-icon @click="expandRow(props)" v-show="!props.isExpanded"
+                    >fa-arrow-down</v-icon
+                  >
+                  <v-icon @click="expandRow(props)" v-show="props.isExpanded"
+                    >fa-arrow-up</v-icon
+                  >
+                </td>
+                <!-- <td :key="index" v-if="header.value == 'actions'">
                   <v-layout>
                     <v-flex xs4>
                       <v-tooltip bottom>
@@ -100,12 +109,21 @@
                       </v-tooltip>
                     </v-flex>
                   </v-layout>
-                </td>
+                </td> -->
                 <td :key="index" v-else>
                   {{ props.item[header.value] }}
                 </td>
               </template>
             </tr>
+          </template>
+          <template v-slot:expanded-item="{ headers, item }">
+            <td :colspan="headers.length">
+              <v-layout justify-space-around>
+                <v-flex xs11>
+                  {{ item }}
+                </v-flex>
+              </v-layout>
+            </td>
           </template>
         </v-data-table>
       </v-flex>
@@ -129,15 +147,17 @@ export default {
       addApi: 'api/ReasonCode/Create',
       editApi: 'api/ReasonCode/Update',
       deleteApi: 'api/ReasonCode/Delete',
+      expanded: [],
 
       headers: [
         // { text: 'Id', value: 'id' },
+        { text: 'Rozwiń', value: 'expand' },
         { text: 'Step id', value: 'stepId' },
         { text: 'Nazwa', value: 'stepName' },
         { text: 'Numer', value: 'stepNum' },
-        { text: 'Proces id', value: 'processId' },
-        { text: 'Sekwencja', value: 'sekwencja' },
-        { text: 'Akcje', value: 'actions' }
+        { text: 'Proces id', value: 'processesId' },
+        { text: 'Sekwencja', value: 'sekwencja' }
+        // { text: 'Akcje', value: 'actions' }
       ],
       items: [],
       search: '',
@@ -158,6 +178,10 @@ export default {
     initialise () {
       this.tableLoading = true
       this.getItems()
+    },
+
+    expandRow (item) {
+      item.expand(!item.isExpanded)
     },
     getItems () {
       var $this = this

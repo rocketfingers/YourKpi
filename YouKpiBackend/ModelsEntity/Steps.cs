@@ -6,6 +6,11 @@ namespace YouKpiBackend.ModelsEntity
 {
     public partial class Steps
     {
+        public Steps()
+        {
+            StepsMachines = new HashSet<StepsMachines>();
+        }
+
         public int Id { get; set; }
         public string StepId { get; set; }
         public string StepName { get; set; }
@@ -14,5 +19,6 @@ namespace YouKpiBackend.ModelsEntity
         public int Sekwencja { get; set; }
 
         public virtual Process Processes { get; set; }
+        public virtual ICollection<StepsMachines> StepsMachines { get; set; }
     }
 }

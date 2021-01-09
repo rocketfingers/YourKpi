@@ -6,6 +6,11 @@ namespace YouKpiBackend.ModelsEntity
 {
     public partial class Maszyny
     {
+        public Maszyny()
+        {
+            StepsMachines = new HashSet<StepsMachines>();
+        }
+
         public string Id { get; set; }
         public string Nazwa { get; set; }
         public string Rodzaj { get; set; }
@@ -15,5 +20,7 @@ namespace YouKpiBackend.ModelsEntity
         public decimal? OsY { get; set; }
         public decimal? OsZ { get; set; }
         public string MiejscePracy { get; set; }
+
+        public virtual ICollection<StepsMachines> StepsMachines { get; set; }
     }
 }

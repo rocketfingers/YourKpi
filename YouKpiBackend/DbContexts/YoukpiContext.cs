@@ -376,7 +376,33 @@ namespace YouKpiBackend.DbContexts
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.CzasStart).HasColumnType("datetime");
+
+                entity.Property(e => e.CzasStop).HasColumnType("datetime");
+
                 entity.Property(e => e.OfferLinesId).HasColumnName("OfferLinesID");
+
+                entity.Property(e => e.ProcessId)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.HasOne(d => d.OfferLines)
+                    .WithMany(p => p.PracownikCzasStep)
+                    .HasForeignKey(d => d.OfferLinesId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PracownikCzasStep_OfferLines");
+
+                entity.HasOne(d => d.Pracownik)
+                    .WithMany(p => p.PracownikCzasStep)
+                    .HasForeignKey(d => d.PracownikId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PracownikCzasStep_Pracownik");
+
+                entity.HasOne(d => d.Process)
+                    .WithMany(p => p.PracownikCzasStep)
+                    .HasForeignKey(d => d.ProcessId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PracownikCzasStep_Process");
             });
 
             modelBuilder.Entity<PracownikProcess>(entity =>
@@ -670,12 +696,16 @@ namespace YouKpiBackend.DbContexts
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.ClosedOn).HasColumnType("datetime");
+
                 entity.Property(e => e.OfferLineId).HasColumnName("OfferLineID");
 
                 entity.Property(e => e.ProcessId)
                     .IsRequired()
                     .HasColumnName("ProcessID")
                     .HasMaxLength(30);
+
+                entity.Property(e => e.StartedOn).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Steps>(entity =>
@@ -702,9 +732,24 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<StepsMachines>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.Property(e => e.MachineId)
+                    .HasColumnName("MACHINE_ID")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StepId).HasColumnName("STEP_ID");
+
+                entity.HasOne(d => d.Machine)
+                    .WithMany(p => p.StepsMachines)
+                    .HasForeignKey(d => d.MachineId)
+                    .HasConstraintName("FK__StepsMach__MACHI__671F4F74");
+
+                entity.HasOne(d => d.Step)
+                    .WithMany(p => p.StepsMachines)
+                    .HasForeignKey(d => d.StepId)
+                    .HasConstraintName("FK__StepsMach__STEP___662B2B3B");
             });
 
             modelBuilder.Entity<StepsToDelete>(entity =>

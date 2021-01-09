@@ -7,7 +7,10 @@ namespace YouKpiBackend.ModelsEntity
     public partial class StepsMachines
     {
         public int Id { get; set; }
-        public int StepId { get; set; }
-        public int MaszynyId { get; set; }
+        public int? StepId { get; set; }
+        public string MachineId { get; set; }
+
+        public virtual Maszyny Machine { get; set; }
+        public virtual Steps Step { get; set; }
     }
 }
