@@ -95,6 +95,12 @@
             </v-list-item-icon>
             <v-list-item-title>Księga procesów</v-list-item-title>
           </v-list-item>
+          <v-list-item @click="$router.push({ name: 'Steps machines' })">
+            <v-list-item-icon>
+              <v-icon>fa-shoe-prints</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Steps machines</v-list-item-title>
+          </v-list-item>
           <v-divider></v-divider>
         </v-list-item-group>
       </v-list>
