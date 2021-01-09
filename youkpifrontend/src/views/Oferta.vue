@@ -116,6 +116,22 @@
                         <span>Edycja</span>
                       </v-tooltip>
                     </v-flex>
+
+                    <v-flex xs4>
+                      <v-layout row wrap class="justify-center layout">
+                        <v-tooltip bottom>
+                          <template v-slot:activator="{ on }">
+                            <v-icon
+                              v-on="on"
+                              color="green"
+                              @click="downloadPdf(props.item)"
+                              >far fa-file-pdf</v-icon
+                            >
+                          </template>
+                          <span>Pobierz pdf</span>
+                        </v-tooltip>
+                      </v-layout>
+                    </v-flex>
                     <v-flex xs4>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
@@ -179,6 +195,7 @@ export default {
       getAllCustomersApi: 'api/Customer/GetAll',
       getAllProductsApi: 'api/Products/GetAllSimple',
       getAllProcesses: 'api/Process/GetAll',
+      getOfferFile: 'api/Offer/GetPdf/',
       expanded: [],
 
       headers: [
@@ -218,6 +235,54 @@ export default {
     initialise () {
       this.tableLoading = true
       this.getProjects()
+    },
+    downloadPdf (item) {
+      if (item.id) {
+        this.openPdf(this.getOfferFile + item.id, 'Oferta')
+      }
+    },
+    openPdf (url, windowName, windowParams) {
+      if (url) {
+        if (!windowName) {
+          windowName = ''
+        }
+        if (!windowParams) {
+          windowName =
+            'toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,width=960,height=500'
+        }
+        this.$http({
+          url,
+          method: 'GET',
+          responseType: 'blob'
+        })
+          .then(response => {
+            if (response.data) {
+              if (response.data.size > 0) {
+                var fileURL = window.URL.createObjectURL(
+                  new Blob([response.data], { type: 'application/pdf' })
+                )
+                var win = window.open(fileURL, windowName, windowParams)
+
+                if (window.focus) {
+                  win.focus()
+                }
+              } else {
+                this.showWarning('Plik nie istnieje')
+              }
+            } else {
+              this.showWarning('Plik nie istnieje')
+            }
+          })
+          .catch(e => {
+            this.showWarning('Plik nie istnieje')
+          })
+      }
+    },
+    showWarning (msg) {
+      this.$dialog.confirm({
+        text: msg,
+        title: 'Uwaga'
+      })
     },
     getProducts () {
       this.$http.get(this.getAllProductsApi)

@@ -40,50 +40,50 @@ namespace YouKpiBackend.Controllers
             }
         }
 
-        [HttpPost("[action]")]
-        public async Task<IActionResult> SaveStep([FromBody] SaveCompleteStepViewModel model)
-        {
+        //[HttpPost("[action]")]
+        //public async Task<IActionResult> SaveStep([FromBody] SaveCompleteStepViewModel model)
+        //{
             
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Bad model");
-            }
-            try
-            {
-                var find = await _dbContext.StepOfferWykonanie.FirstOrDefaultAsync(p => 
-                    p.OfferLineId == model.OfferLineId
-                    && p.Step == model.StepNum 
-                    && p.ProcessId == model.ProcessId);
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest("Bad model");
+        //    }
+        //    try
+        //    {
+        //        var find = await _dbContext.StepOfferWykonanie.FirstOrDefaultAsync(p => 
+        //            p.OfferLineId == model.OfferLineId
+        //            && p.Step == model.StepNum 
+        //            && p.ProcessId == model.ProcessId);
 
-                if (find != null)
-                {
-                    find.LiczbaPomiarowNok = model.LiczbaPomiarowNok;
-                    find.LiczbaPomiarow = model.LiczbaPomiarow;
-                    find.Zakonczonie = model.Zakonczenie;
-                }
-                else
-                {
-                    var itemToAdd = new StepOfferWykonanie()
-                    {
-                        LiczbaPomiarow = model.LiczbaPomiarow,
-                        LiczbaPomiarowNok = model.LiczbaPomiarowNok,
-                        Zakonczonie = model.Zakonczenie,
-                        ProcessId = model.ProcessId,
-                        OfferLineId = model.OfferLineId,
-                        Step = model.StepNum
-                    };
-                    _dbContext.StepOfferWykonanie.Add(itemToAdd);
-                }
-                await _dbContext.SaveChangesAsync();
+        //        if (find != null)
+        //        {
+        //            find.LiczbaPomiarowNok = model.LiczbaPomiarowNok;
+        //            find.LiczbaPomiarow = model.LiczbaPomiarow;
+        //            find.Zakonczonie = model.Zakonczenie;
+        //        }
+        //        else
+        //        {
+        //            var itemToAdd = new StepOfferWykonanie()
+        //            {
+        //                LiczbaPomiarow = model.LiczbaPomiarow,
+        //                LiczbaPomiarowNok = model.LiczbaPomiarowNok,
+        //                Zakonczonie = model.Zakonczenie,
+        //                ProcessId = model.ProcessId,
+        //                OfferLineId = model.OfferLineId,
+        //                Step = model.StepNum
+        //            };
+        //            _dbContext.StepOfferWykonanie.Add(itemToAdd);
+        //        }
+        //        await _dbContext.SaveChangesAsync();
 
-                //var res = await _ctx.Offer.Include(p => p.Clients).Include(p => p.OfferLines).ThenInclude(p => p.Product).ToListAsync();
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
+        //        //var res = await _ctx.Offer.Include(p => p.Clients).Include(p => p.OfferLines).ThenInclude(p => p.Product).ToListAsync();
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        //    }
+        //}
 
         [HttpGet("[action]")]
         public async Task<IActionResult> GetMainPage()
