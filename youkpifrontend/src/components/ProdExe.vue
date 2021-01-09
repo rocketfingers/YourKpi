@@ -46,46 +46,6 @@
                     >fa-arrow-up</v-icon
                   >
                 </td>
-                <td
-                  :key="header.value"
-                  class="justify-center px-0"
-                  v-else-if="header.value === 'actions'"
-                >
-                  <v-layout>
-                    <v-flex xs6>
-                      <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-icon
-                            class="mr-2"
-                            color="primary"
-                            @click="registerTime(props.item)"
-                            v-bind="attrs"
-                            v-on="on"
-                          >
-                            fa-hourglass-half
-                          </v-icon>
-                        </template>
-                        <span>Zarejestruj czas</span>
-                      </v-tooltip>
-                    </v-flex>
-                    <v-flex xs6>
-                      <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-icon
-                            class="mr-2"
-                            color="primary"
-                            @click="closeStep(props.item)"
-                            v-bind="attrs"
-                            v-on="on"
-                          >
-                            fa-step-forward
-                          </v-icon>
-                        </template>
-                        <span>Zamknij step</span>
-                      </v-tooltip>
-                    </v-flex>
-                  </v-layout>
-                </td>
                 <td :key="header.value" class="text-xs-center" v-else>
                   {{ props.item[header.value] }}
                 </td>
@@ -129,6 +89,7 @@
                                       @click="registerTime(props.item)"
                                       v-bind="attrs"
                                       v-on="on"
+                                      :disabled="props.item.zakonczone"
                                     >
                                       fa-hourglass-half
                                     </v-icon>
@@ -145,6 +106,7 @@
                                       @click="closeStep(props.item)"
                                       v-bind="attrs"
                                       v-on="on"
+                                      :disabled="props.item.zakonczone"
                                     >
                                       fa-step-forward
                                     </v-icon>
@@ -176,7 +138,11 @@
         max-width="600"
       >
         <v-card>
-          <v-card-title class="headline"
+          <v-card-title
+            dark
+            elevation-4
+            color="primary lighten-1"
+            class="headline"
             >Proces: {{ currentItem.nazwaProcesu }} - Step:
             {{ currentStepItem.stepNum }} -
             {{ currentStepItem.stepName }}</v-card-title
@@ -185,7 +151,7 @@
             <v-layout row wrap>
               <v-flex xs12>
                 <v-text-field
-                  v-model="currentStepItem.liczbaPomiarow"
+                  v-model="liczbaPomiarow"
                   outlined
                   label="Liczba pomiarów"
                   type="Number"
@@ -194,7 +160,7 @@
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="currentStepItem.liczbaPomiarowNok"
+                  v-model="liczbaPomiarowNok"
                   outlined
                   type="Number"
                   min="0"
@@ -219,7 +185,7 @@
               large
               color="blue darken-1"
               text
-              @click.native="saveZamknijStep()"
+              @click.native="saveStep()"
               >Zapisz<v-icon dark>save</v-icon></v-btn
             >
             <v-btn
@@ -290,6 +256,8 @@ export default {
       // dialogi
       currentItem: {},
       currentStepItem: {},
+      liczbaPomiarow: 0,
+      liczbaPomiarowNok: 0,
       dialogZamknijStep: false
     }
   },
@@ -308,27 +276,48 @@ export default {
     }
   },
   methods: {
-    saveZamknijStep () {
+    genModel () {
+      return {
+        ProcessId: this.currentItem.processId,
+        OfferLineId: this.currentItem.offerLineId,
+        StepNum: this.currentStepItem.stepNum,
+        LiczbaPomiarow: this.liczbaPomiarow,
+        LiczbaPomiarowNok: this.liczbaPomiarowNok
+      }
+    },
+    async saveStep () {
+      var model = this.genModel()
+      // eslint-disable-next-line no-debugger
+      debugger
+      model.Zakonczenie = false
+      await v.axiosInstance.post('api/Production/SaveStep', model)
+      this.currentStepItem.liczbaPomiarow = this.liczbaPomiarow
+      this.currentStepItem.liczbaPomiarowNok = this.liczbaPomiarowNok
       this.dialogZamknijStep = false
     },
     async saveCloseZamknijStep () {
+      var model = this.genModel()
+      model.Zakonczenie = true
       var res = await this.$dialog.confirm({
         text: 'Czy na pewno chcesz zamknąć ten step?',
         title: 'Uwaga'
       })
       if (res) {
+        await v.axiosInstance.post('api/Production/SaveStep', model)
+        this.currentStepItem.liczbaPomiarow = this.liczbaPomiarow
+        this.currentStepItem.liczbaPomiarowNok = this.liczbaPomiarowNok
         this.currentItem.wykonaneStepy++
         this.currentStepItem.zakonczone = true
-        this.saveZamknijStep()
+        this.dialogZamknijStep = false
       }
     },
     closeStep (item) {
       this.currentStepItem = item
+      this.liczbaPomiarow = item.liczbaPomiarow
+      this.liczbaPomiarowNok = item.liczbaPomiarowNok
       this.dialogZamknijStep = true
     },
     expandRow (item) {
-      // eslint-disable-next-line no-debugger
-      debugger
       if (!item.isExpanded) {
         this.currentItem = item.item
         this.stepsLoading = true
