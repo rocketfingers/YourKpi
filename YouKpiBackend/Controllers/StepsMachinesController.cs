@@ -25,7 +25,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Steps.ToListAsync();
+                var res = await _ctx.Steps.Include(p => p.StepsMachines).ThenInclude(p => p.Machine).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
