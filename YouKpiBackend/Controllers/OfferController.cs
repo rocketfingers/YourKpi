@@ -2,17 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PdfSharpCore.Drawing;
-using PdfSharpCore.Pdf;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.BusinessLibrary.Offer;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
-using YouKpiBackend.ViewModels;
 
 namespace YouKpiBackend.Controllers
 {
@@ -199,8 +194,6 @@ namespace YouKpiBackend.Controllers
                 return StatusCode(501, ex.Message);
             }
         }
-
-
     }
 }
 
