@@ -1,5 +1,28 @@
 <template>
   <div>
+    <v-layout
+      row
+      wrap
+      align-center
+      justify-space-around
+      class="elevation-3"
+      mb-3
+    >
+      <v-flex>
+        <v-layout row wrap align-center justify-space-around>
+          <v-flex md5 xs12 ma-3>
+            <v-layout row wrap align-center justify-space-around>
+              <v-autocomplete
+                v-model="selectedProcesses"
+                :items="processesArray"
+                multiple
+                label="Id procesu"
+              ></v-autocomplete>
+            </v-layout>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+    </v-layout>
     <v-layout row wrap elevation-3>
       <v-flex xs12>
         <v-toolbar flat color="white">
@@ -19,7 +42,7 @@
       <v-flex xs12>
         <v-data-table
           :headers="headers"
-          :items="items"
+          :items="filteredItems"
           class="elevation-1"
           item-key="id"
           :expanded.sync="expanded"
@@ -27,7 +50,7 @@
           :search="search"
         >
           <template slot="item" slot-scope="props">
-            <tr>
+            <tr :class="props.isExpanded ? 'primary lighten-5' : 'white'">
               <template v-for="(header, index) in headers">
                 <td :key="index" v-if="header.value === 'expand'">
                   <v-icon @click="expandRow(props)" v-show="!props.isExpanded"
@@ -49,7 +72,8 @@
                 <v-flex xs11>
                   <StepsMachines
                     :currentMachine="item"
-                    :readonly="true"
+                    :readonly="false"
+                    :machines="machines"
                   ></StepsMachines>
                 </v-flex>
               </v-layout>
@@ -74,9 +98,8 @@ export default {
     return {
       // api
       getAll: 'api/StepsMachines/GetAll',
-      addApi: 'api/ReasonCode/Create',
-      editApi: 'api/ReasonCode/Update',
-      deleteApi: 'api/ReasonCode/Delete',
+      getAllMachines: 'api/Machine/GetAll',
+
       expanded: [],
 
       headers: [
@@ -90,22 +113,41 @@ export default {
       ],
       items: [],
       search: '',
-      showNewDialog: false,
-      showProductPartsDialog: false,
       tableLoading: false,
-      formTitle: 'Dodaj produkt',
-      currentItem: { produktCzesci: [] },
-      editedIndex: -1,
-      productTypes: [],
       editMode: false,
-      parts: []
+      machines: [],
+      selectedProcesses: []
     }
   },
-  computed: {},
+  computed: {
+    processesArray () {
+      var processes = []
+      this.items.forEach(i => {
+        if (!processes.includes(i.processesId) && i.processesId != null) {
+          processes.push(i.processesId)
+        }
+      })
+      // eslint-disable-next-line no-debugger
+      // debugger
+      return processes
+    },
+    filteredItems () {
+      var res = this.items
+      if (this.selectedProcesses.length > 0) {
+        res = this.items.filter(i => {
+          if (this.selectedProcesses.includes(i.processesId)) {
+            return true
+          }
+        })
+      }
+      return res
+    }
+  },
   watch: {},
   methods: {
     initialise () {
       this.tableLoading = true
+      this.getMachines()
       this.getItems()
     },
     expandRow (item) {
@@ -117,13 +159,32 @@ export default {
         .get(this.getAll)
         .then((Response) => {
           $this.items = Response.data
-          this.tableLoading = false
+          $this.items.forEach(i => {
+            i.stepsMachines = []
+          }
+          )
+          $this.tableLoading = false
         })
         .catch((e) => {
-          this.tableLoading = false
+          $this.tableLoading = false
+        })
+    },
+    getMachines () {
+      var $this = this
+      this.$http
+        .get(this.getAllMachines)
+        .then((Response) => {
+          $this.machines = Response.data
+          $this.machines.forEach(i => {
+            i.showName = i.id + ', ' + i.nazwa
+            i.actions = ''
+          })
+        })
+        .catch((e) => {
         })
     }
   },
+
   created () {
     this.initialise()
   },
