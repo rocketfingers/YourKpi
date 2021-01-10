@@ -16,7 +16,19 @@
                 v-model="selectedProcesses"
                 :items="processesArray"
                 multiple
+                clearable
                 label="Id procesu"
+              ></v-autocomplete>
+            </v-layout>
+          </v-flex>
+          <v-flex md5 xs12 ma-3>
+            <v-layout row wrap align-center justify-space-around>
+              <v-autocomplete
+                v-model="selectedMachines"
+                :items="usedMachinesArray"
+                multiple
+                clearable
+                label="Id maszyny"
               ></v-autocomplete>
             </v-layout>
           </v-flex>
@@ -71,8 +83,8 @@
               <v-layout justify-space-around>
                 <v-flex xs11>
                   <StepsMachines
-                    :currentMachine="item"
                     :readonly="false"
+                    :currentStep="item"
                     :machines="machines"
                   ></StepsMachines>
                 </v-flex>
@@ -116,10 +128,26 @@ export default {
       tableLoading: false,
       editMode: false,
       machines: [],
-      selectedProcesses: []
+      selectedProcesses: [],
+      selectedMachines: [],
+      currentStep: {}
     }
   },
   computed: {
+    usedMachinesArray () {
+      var usedMachines = []
+      this.items.forEach(i => {
+        if (i.stepsMachines) {
+          i.stepsMachines.forEach(sm => {
+            if (!usedMachines.includes(sm.machineId) && sm.machineId != null) {
+              usedMachines.push(sm.machineId)
+            }
+          })
+        }
+      })
+
+      return usedMachines
+    },
     processesArray () {
       var processes = []
       this.items.forEach(i => {
@@ -140,6 +168,19 @@ export default {
           }
         })
       }
+      if (this.selectedMachines.length > 0) {
+        res = res.filter(i => {
+          if (i.stepsMachines) {
+            if (i.stepsMachines.some(sm => {
+              if (this.selectedMachines.some(selMach => selMach === sm.machineId)) {
+                return true
+              }
+            })) {
+              return true
+            }
+          }
+        })
+      }
       return res
     }
   },
@@ -151,6 +192,7 @@ export default {
       this.getItems()
     },
     expandRow (item) {
+      this.currentStep = item.item
       item.expand(!item.isExpanded)
     },
     getItems () {
@@ -160,7 +202,14 @@ export default {
         .then((Response) => {
           $this.items = Response.data
           $this.items.forEach(i => {
-            i.stepsMachines = []
+            if (!i.stepsMachines) {
+              i.stepsMachines = []
+            } else {
+              i.stepsMachines.forEach(j => {
+                j.showName = j.id + ', ' + j.nazwa
+                j.actions = ''
+              })
+            }
           }
           )
           $this.tableLoading = false

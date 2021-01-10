@@ -34,65 +34,43 @@ namespace YouKpiBackend.Controllers
             }
         }
 
-        //[HttpPost("[action]")]
-        //public async Task<IActionResult> Create([FromBody] ReasonCodes entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        return BadRequest("Bad model");
-        //    }
-        //    try
-        //    {
-        //        var res = _ctx.ReasonCodes.Add(entity);
-        //        _ctx.SaveChanges();
-        //        entity.Id = res.Entity.Id;
-        //        return Created("", entity);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        //    }
-        //}
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Create([FromBody] StepsMachines entity)
+        {
+            if (entity == null)
+            {
+                return BadRequest("Bad model");
+            }
+            try
+            {
+                var res = _ctx.StepsMachines.Add(entity);
+                _ctx.SaveChanges();
+                entity.Id = res.Entity.Id;
+                return Created("", entity);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
 
-        //[HttpPut("[action]")]
-        //public async Task<IActionResult> Update([FromBody] ReasonCodes entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        return BadRequest("Bad model");
-        //    }
-        //    try
-        //    {
-        //        var reasonCode = _ctx.ReasonCodes.FirstOrDefault(p => p.Id == entity.Id);
-        //        reasonCode.Opis = entity.Opis;
-        //        reasonCode.IdDifferenceReasonCode = entity.IdDifferenceReasonCode;
-        //        await _ctx.SaveChangesAsync();
-
-        //        return NoContent();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        //    }
-        //}
-
-        //[HttpDelete("[action]")]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    try
-        //    {
-        //        var item = _ctx.ReasonCodes.FirstOrDefault(p => p.Id == id);
-        //        if (item != null)
-        //        {
-        //            _ctx.ReasonCodes.Remove(item);
-        //            await _ctx.SaveChangesAsync();
-        //        }
-        //        return Ok();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, ex.Message);
-        //    }
-        //}
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var item = _ctx.StepsMachines.FirstOrDefault(p => p.Id == id);
+                if (item != null)
+                {
+                    _ctx.StepsMachines.Remove(item);
+                    await _ctx.SaveChangesAsync();
+                }
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

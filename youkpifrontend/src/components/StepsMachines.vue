@@ -12,7 +12,7 @@
         </v-toolbar>
         <v-layout row wrap justify-space-around class="ma-4">
           <v-flex xs11>
-            <v-form ref="newOfferForm">
+            <v-form>
               <v-autocomplete
                 color
                 :items="machines"
@@ -69,7 +69,7 @@
         </v-toolbar>
         <v-data-table
           :headers="headers"
-          :items="currentMachine.stepsMachines"
+          :items="currentStep.stepsMachines"
           item-key="tempId"
           :search="search"
           :hide-default-footer="readonly"
@@ -97,7 +97,7 @@
                 </td>
                 <td v-else :key="index">
                   <template>
-                    {{ props.item[header.value] }}
+                    {{ props.item.machine[header.value] }}
                   </template>
                 </td>
               </template>
@@ -116,12 +116,16 @@ export default {
   components: {
   },
   props: {
-    currentMachine: Object,
     readonly: Boolean,
-    machines: Array
+    machines: Array,
+    currentStep: Object
   },
   data () {
     return {
+      // api
+      addStepsMachineApi: 'api/StepsMachines/Create',
+      deleteStepsMachineApi: 'api/StepsMachines/Delete',
+
       headers: [
         { text: 'Id', value: 'id' },
         { text: 'Nazwa', value: 'nazwa' },
@@ -146,7 +150,6 @@ export default {
       },
       showAddMachineDialog: false,
       processesSelectorTitle: 'Wybierz procesy',
-      currentMachineLine: {},
       selectedMachine: {}
     }
   },
@@ -156,23 +159,52 @@ export default {
   },
   methods: {
     addMachine () {
+      // eslint-disable-next-line no-debugger
+      // debugger
+      this.selectedMachine = ''
       this.showAddMachineDialog = true
     },
-    async deleteMachine (machine, index) {
+    async deleteMachine (stepMachine, index) {
       var res = await this.$dialog.confirm({
-        text: 'Czy na pewno chcesz usunąć:  ' + machine.showName + '?',
+        text: 'Czy na pewno chcesz usunąć:  ' + stepMachine.machine.id + ', ' + stepMachine.machine.nazwa + '?',
         title: 'Uwaga'
       })
       if (res) {
-        var indexOfMachine = this.currentMachine.stepsMachines.indexOf(machine)
-        this.currentMachine.stepsMachines.splice(indexOfMachine, 1)
+        var indexOfMachine = this.currentStep.stepsMachines.indexOf(stepMachine)
+
+        this.$http.delete(this.deleteStepsMachineApi, {
+          params: { id: stepMachine.id }
+        })
+          .then(Result => {
+            this.currentStep.stepsMachines.splice(indexOfMachine, 1)
+          })
       }
     },
     addMachineAction () {
-      this.currentMachine.stepsMachines.unshift(this.selectedMachine)
-
+      var $this = this
+      if (!this.selectedMachine.showName) {
+        this.$dialog.confirm({
+          text: 'Nie wybrano maszyny',
+          title: 'Uwaga'
+        })
+      }
+      // eslint-disable-next-line no-debugger
+      // debugger
+      var stepMachineObj = { machineId: $this.selectedMachine.id, stepId: this.currentStep.id }
+      this.$http
+        .post(this.addStepsMachineApi, stepMachineObj)
+        .then((Result) => {
+          stepMachineObj.id = Result.data.id
+          stepMachineObj.machine = $this.selectedMachine
+          stepMachineObj.machine.showName = stepMachineObj.machine.id + stepMachineObj.machine.nazwa
+          stepMachineObj.machine.actions = ''
+          $this.currentStep.stepsMachines.unshift(stepMachineObj)
+        })
+        .catch((e) => {
+        })
       this.showAddMachineDialog = false
     }
+
   },
   created () {
   },
