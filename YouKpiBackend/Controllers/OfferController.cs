@@ -3,12 +3,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using YouKpiBackend.BusinessLibrary.Offer;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
-using YouKpiBackend.ViewModels;
 
 namespace YouKpiBackend.Controllers
 {
@@ -17,9 +16,12 @@ namespace YouKpiBackend.Controllers
     public class OfferController : Controller
     {
         private readonly YoukpiContext _ctx;
-        public OfferController(YoukpiContext ctx)
+        private readonly OfferPdfService _offerPdfService;
+
+        public OfferController(YoukpiContext ctx, OfferPdfService offerPdfService)
         {
             _ctx = ctx;
+            _offerPdfService = offerPdfService;
         }
 
         [HttpGet("[action]")]
@@ -112,7 +114,7 @@ namespace YouKpiBackend.Controllers
                 offer.ClientsId = entity.ClientsId;
                 offer.PlannedEnd = entity.PlannedEnd;
                 offer.OfferProcess = entity.OfferProcess;
-                 
+
                 await _ctx.SaveChangesAsync();
 
                 return NoContent();
@@ -123,7 +125,7 @@ namespace YouKpiBackend.Controllers
             }
         }
 
- 
+
 
         [HttpDelete("[action]")]
         public async Task<IActionResult> Delete(int id)
@@ -139,7 +141,7 @@ namespace YouKpiBackend.Controllers
                         {
                             _ctx.Entry(item).State = EntityState.Deleted;
                         }
-                        
+
                         _ctx.Entry(p).State = EntityState.Deleted;
                     });
 
@@ -179,7 +181,19 @@ namespace YouKpiBackend.Controllers
         //    }
         //    return offersViewModels;
         //}
-
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> GetPdf(int id)
+        {
+            try
+            {
+                var bytes = await _offerPdfService.GeneratePdf(id);
+                return File(bytes, "application/octet-stream", "faktura.pdf");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(501, ex.Message);
+            }
+        }
     }
 }
 

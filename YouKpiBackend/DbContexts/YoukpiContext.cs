@@ -732,9 +732,24 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<StepsMachines>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.Property(e => e.MachineId)
+                    .HasColumnName("MACHINE_ID")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StepId).HasColumnName("STEP_ID");
+
+                entity.HasOne(d => d.Machine)
+                    .WithMany(p => p.StepsMachines)
+                    .HasForeignKey(d => d.MachineId)
+                    .HasConstraintName("FK__StepsMach__MACHI__671F4F74");
+
+                entity.HasOne(d => d.Step)
+                    .WithMany(p => p.StepsMachines)
+                    .HasForeignKey(d => d.StepId)
+                    .HasConstraintName("FK__StepsMach__STEP___662B2B3B");
             });
 
             modelBuilder.Entity<StepsToDelete>(entity =>

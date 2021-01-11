@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using YouKpiBackend.BusinessLibrary;
+using YouKpiBackend.BusinessLibrary.Offer;
 using YouKpiBackend.DbContexts;
 
 namespace YouKpiBackend
@@ -82,8 +83,13 @@ namespace YouKpiBackend
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
+            AddServices(services);
 
             services.AddControllers();
+        }
+        private static void AddServices(IServiceCollection services)
+        {
+            services.AddScoped<OfferPdfService, OfferPdfService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

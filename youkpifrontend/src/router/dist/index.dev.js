@@ -31,6 +31,8 @@ var _Komponenty = _interopRequireDefault(require("../views/Komponenty.vue"));
 
 var _Procesy = _interopRequireDefault(require("../views/Procesy.vue"));
 
+var _StepsView = _interopRequireDefault(require("../views/StepsView.vue"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vueRouter["default"]);
@@ -79,6 +81,10 @@ var routes = [{
   path: '/processes',
   name: 'Księga procesów',
   component: _Procesy["default"]
+}, {
+  path: '/stepsmachines',
+  name: 'Steps machines',
+  component: _StepsView["default"]
 }, {
   path: '/login',
   name: 'Login',
