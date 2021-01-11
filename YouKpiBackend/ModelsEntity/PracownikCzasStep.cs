@@ -8,8 +8,15 @@ namespace YouKpiBackend.ModelsEntity
     {
         public int Id { get; set; }
         public int OfferLinesId { get; set; }
-        public int ProcessStepsId { get; set; }
+        public string ProcessId { get; set; }
         public int PracownikId { get; set; }
         public int LiczbaMinut { get; set; }
+        public DateTime? CzasStart { get; set; }
+        public DateTime? CzasStop { get; set; }
+        public int Step { get; set; }
+
+        public virtual OfferLines OfferLines { get; set; }
+        public virtual Pracownik Pracownik { get; set; }
+        public virtual Process Process { get; set; }
     }
 }

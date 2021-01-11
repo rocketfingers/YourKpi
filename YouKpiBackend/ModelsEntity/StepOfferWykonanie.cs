@@ -13,5 +13,8 @@ namespace YouKpiBackend.ModelsEntity
         public int LiczbaPomiarowNok { get; set; }
         public bool Zakonczonie { get; set; }
         public int Step { get; set; }
+        public int? ClosesBy { get; set; }
+        public DateTime? ClosedOn { get; set; }
+        public DateTime? StartedOn { get; set; }
     }
 }

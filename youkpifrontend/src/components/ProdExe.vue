@@ -62,6 +62,7 @@
                     class="elevation-1"
                     :loading="stepsLoading"
                     hide-default-footer
+                    :footer-props="footerStepTable"
                   >
                     <template slot="item" slot-scope="props">
                       <tr>
@@ -72,15 +73,55 @@
                             v-if="header.value === 'zakonczone'"
                           >
                             {{ props.item.zakonczone ? 'Tak' : 'Nie' }}
+                            <v-icon
+                              :color="
+                                getStatusColor(props.item.plannedStartStatus)
+                              "
+                              >fa-circle</v-icon
+                            >
                           </td>
-
+                          <td
+                            :key="header.value"
+                            v-else-if="header.value === 'stepStarted'"
+                          >
+                            {{ props.item.stepStarted ? 'Tak' : 'Nie' }}
+                          </td>
+                          <td
+                            :key="header.value"
+                            v-else-if="header.value === 'stepUsedBySomeoneElse'"
+                          >
+                            {{
+                              props.item.stepUsedBySomeoneElse ? 'Tak' : 'Nie'
+                            }}
+                          </td>
+                          <td
+                            :key="header.value"
+                            v-else-if="header.value === 'shouldStartBefore'"
+                          >
+                            {{
+                              formatDateTimeYYYYMMDD(
+                                props.item.shouldStartBefore
+                              )
+                            }}
+                          </td>
                           <td
                             :key="header.value"
                             class="justify-center px-0"
                             v-else-if="header.value === 'actions'"
                           >
                             <v-layout>
-                              <v-flex xs6>
+                              <v-flex xs3>
+                                <v-progress-circular
+                                  v-if="
+                                    !props.item.zakonczone &&
+                                    props.item.stepStartedByMe
+                                  "
+                                  indeterminate
+                                  color="purple"
+                                ></v-progress-circular>
+                              </v-flex>
+
+                              <v-flex xs3>
                                 <v-tooltip bottom>
                                   <template v-slot:activator="{ on, attrs }">
                                     <v-icon
@@ -89,15 +130,38 @@
                                       @click="registerTime(props.item)"
                                       v-bind="attrs"
                                       v-on="on"
-                                      :disabled="props.item.zakonczone"
+                                      :disabled="
+                                        props.item.zakonczone ||
+                                        props.item.stepStartedByMe
+                                      "
                                     >
-                                      fa-hourglass-half
+                                      hourglass_top
                                     </v-icon>
                                   </template>
-                                  <span>Zarejestruj czas</span>
+                                  <span>Zacznij rejestrowanie czas</span>
                                 </v-tooltip>
                               </v-flex>
-                              <v-flex xs6>
+                              <v-flex xs3>
+                                <v-tooltip bottom>
+                                  <template v-slot:activator="{ on, attrs }">
+                                    <v-icon
+                                      class="mr-2"
+                                      color="primary"
+                                      @click="registerTime(props.item)"
+                                      v-bind="attrs"
+                                      v-on="on"
+                                      :disabled="
+                                        props.item.zakonczone ||
+                                        !props.item.stepStartedByMe
+                                      "
+                                    >
+                                      hourglass_bottom
+                                    </v-icon>
+                                  </template>
+                                  <span>Zakończ rejestrowanie czasu</span>
+                                </v-tooltip>
+                              </v-flex>
+                              <v-flex xs3>
                                 <v-tooltip bottom>
                                   <template v-slot:activator="{ on, attrs }">
                                     <v-icon
@@ -106,9 +170,12 @@
                                       @click="closeStep(props.item)"
                                       v-bind="attrs"
                                       v-on="on"
-                                      :disabled="props.item.zakonczone"
+                                      :disabled="
+                                        props.item.zakonczone ||
+                                        !props.item.stepStarted
+                                      "
                                     >
-                                      fa-step-forward
+                                      arrow_forward_ios
                                     </v-icon>
                                   </template>
                                   <span>Zamknij step</span>
@@ -223,6 +290,7 @@ export default {
       showDialog: false,
       data: [],
       stepsData: [],
+      footerStepTable: { 'items-per-page-options': [-1] },
       stepsLoading: false,
       stepsHeaders: [
         { text: 'Step ', value: 'stepNum' },
@@ -230,6 +298,9 @@ export default {
         { text: 'Sekwencja', value: 'sekwencja' },
         { text: 'Liczba pomiarów', value: 'liczbaPomiarow' },
         { text: 'Liczba pomiarów Nok', value: 'liczbaPomiarowNok' },
+        { text: 'Step rozpoczęty', value: 'stepStarted' },
+        { text: 'Używany przez innego pracowanika', value: 'stepUsedBySomeoneElse' },
+        { text: 'Max rozpoczęcie', value: 'shouldStartBefore' },
         { text: 'Zakończone', value: 'zakonczone' },
         { text: 'Akcje', value: 'actions' }
       ],
@@ -276,7 +347,53 @@ export default {
     }
   },
   methods: {
-    genModel () {
+    formatDateTimeYYYYMMDD (date) {
+      if (date) {
+        if (date instanceof Date) {
+          return (
+            date.getFullYear() +
+            '-' +
+            (date.getMonth() + 1) +
+            '-' +
+            date.getDate()
+          )
+        }
+        if (date.toString().includes('T')) {
+          return date.toString().split('T')[0]
+        }
+
+        return date
+      }
+    },
+    getStatusColor (number) {
+      if (number === 0) {
+        return 'green'
+      }
+      if (number === 1) {
+        return 'orange'
+      }
+      if (number === 2) {
+        return 'red'
+      }
+      return 'yellow lighten-5'
+    },
+    async registerTime (item) {
+      this.currentStepItem = item
+      const this2 = this
+      const model = {
+        ProcessId: this.currentItem.processId,
+        OfferLineId: this.currentItem.offerLineId,
+        StepNum: this.currentStepItem.stepNum
+      }
+      var res = await v.axiosInstance.put('api/Production/TimeStartStop', model)
+      if (this2.currentStepItem.stepStarted === false) {
+        this2.currentStepItem.stepStarted = true
+      }
+      this2.currentItem.czasSpedzony = this2.currentItem.czasSpedzony + res.data
+      item.stepStartedByMe = !item.stepStartedByMe
+    },
+
+    genModelSaveStep () {
       return {
         ProcessId: this.currentItem.processId,
         OfferLineId: this.currentItem.offerLineId,
@@ -286,7 +403,7 @@ export default {
       }
     },
     async saveStep () {
-      var model = this.genModel()
+      var model = this.genModelSaveStep()
       // eslint-disable-next-line no-debugger
       debugger
       model.Zakonczenie = false
@@ -296,7 +413,7 @@ export default {
       this.dialogZamknijStep = false
     },
     async saveCloseZamknijStep () {
-      var model = this.genModel()
+      var model = this.genModelSaveStep()
       model.Zakonczenie = true
       var res = await this.$dialog.confirm({
         text: 'Czy na pewno chcesz zamknąć ten step?',
@@ -306,6 +423,7 @@ export default {
         await v.axiosInstance.post('api/Production/SaveStep', model)
         this.currentStepItem.liczbaPomiarow = this.liczbaPomiarow
         this.currentStepItem.liczbaPomiarowNok = this.liczbaPomiarowNok
+        this.currentStepItem.StepUsedBySomeoneElse = false
         this.currentItem.wykonaneStepy++
         this.currentStepItem.zakonczone = true
         this.dialogZamknijStep = false

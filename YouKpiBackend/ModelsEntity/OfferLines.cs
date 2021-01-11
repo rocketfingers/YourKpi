@@ -9,6 +9,7 @@ namespace YouKpiBackend.ModelsEntity
         public OfferLines()
         {
             OfferLineProcess = new HashSet<OfferLineProcess>();
+            PracownikCzasStep = new HashSet<PracownikCzasStep>();
         }
 
         public int Id { get; set; }
@@ -23,5 +24,6 @@ namespace YouKpiBackend.ModelsEntity
         public virtual Offer Offer { get; set; }
         public virtual Produkty Product { get; set; }
         public virtual ICollection<OfferLineProcess> OfferLineProcess { get; set; }
+        public virtual ICollection<PracownikCzasStep> PracownikCzasStep { get; set; }
     }
 }

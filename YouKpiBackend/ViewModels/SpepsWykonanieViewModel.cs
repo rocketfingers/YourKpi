@@ -14,5 +14,19 @@ namespace YouKpiBackend.ViewModels
         public int LiczbaPomiarow { get; set; }
         public int LiczbaPomiarowNok { get; set; }
         public bool Zakonczone { get; set; }
+        public bool StepStarted { get; set; }
+        public bool StepStartedByMe { get; set; }
+        public bool StepUsedBySomeoneElse { get; set; }
+        public DateTime? StartedDate { get; set; }
+        public DateTime? ShouldStartBefore { get; set; }
+        public TimeToEnd PlannedStartStatus { get; set; }
+
+    }
+    public enum TimeToEnd
+    {
+        OnTime = 0,
+        AlmostRed = 1,
+        Red = 2,
+            Unknown = 3
     }
 }
