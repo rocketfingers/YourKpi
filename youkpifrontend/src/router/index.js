@@ -11,7 +11,7 @@ import Maszyny from '../views/Maszyny.vue'
 import ReasonCodes from '../views/ReasonCodes.vue'
 import Komponenty from '../views/Komponenty.vue'
 import Procesy from '../views/Procesy.vue'
-import StepsView from '../views/StepsMachines.vue.vue'
+import StepsView from '../views/StepsMachines.vue'
 
 Vue.use(VueRouter)
 
