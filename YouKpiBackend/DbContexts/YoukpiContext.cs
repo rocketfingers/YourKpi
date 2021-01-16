@@ -102,12 +102,20 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Tj)
+                    .HasColumnName("TJ")
+                    .HasColumnType("decimal(6, 2)");
+
+                entity.Property(e => e.Tpz)
+                    .HasColumnName("TPZ")
+                    .HasColumnType("decimal(6, 2)");
+
                 entity.Property(e => e.Wymiary).HasMaxLength(50);
 
                 entity.HasOne(d => d.Komponent)
                     .WithMany(p => p.Czesci)
                     .HasForeignKey(d => d.KomponentId)
-                    .HasConstraintName("FK__Czesci__KOMPONEN__2739D489");
+                    .HasConstraintName("FK__Czesci__KOMPONEN__0697FACD");
             });
 
             modelBuilder.Entity<Komponenty>(entity =>
@@ -264,7 +272,7 @@ namespace YouKpiBackend.DbContexts
                     .WithMany(p => p.Offer)
                     .HasForeignKey(d => d.ClientsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Offer__ClientsId__09A971A2");
+                    .HasConstraintName("FK__Offer__ClientsId__078C1F06");
 
                 entity.HasOne(d => d.OfferrerNavigation)
                     .WithMany(p => p.Offer)
@@ -293,7 +301,7 @@ namespace YouKpiBackend.DbContexts
                     .WithMany(p => p.OfferLineProcess)
                     .HasForeignKey(d => d.ProcessId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OfferLine__PROCE__3F115E1A");
+                    .HasConstraintName("FK__OfferLine__PROCE__09746778");
             });
 
             modelBuilder.Entity<OfferLines>(entity =>
@@ -315,13 +323,13 @@ namespace YouKpiBackend.DbContexts
                 entity.HasOne(d => d.Offer)
                     .WithMany(p => p.OfferLines)
                     .HasForeignKey(d => d.OfferId)
-                    .HasConstraintName("FK__OfferLine__Offer__0B91BA14");
+                    .HasConstraintName("FK__OfferLine__Offer__32767D0B");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OfferLines)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OfferLine__Produ__0C85DE4D");
+                    .HasConstraintName("FK__OfferLine__Produ__0B5CAFEA");
             });
 
             modelBuilder.Entity<OfferProcess>(entity =>
@@ -345,7 +353,7 @@ namespace YouKpiBackend.DbContexts
                     .WithMany(p => p.OfferProcess)
                     .HasForeignKey(d => d.ProcessId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OfferProc__PROCE__43D61337");
+                    .HasConstraintName("FK__OfferProc__PROCE__0D44F85C");
             });
 
             modelBuilder.Entity<Pracownik>(entity =>
@@ -744,12 +752,12 @@ namespace YouKpiBackend.DbContexts
                 entity.HasOne(d => d.Machine)
                     .WithMany(p => p.StepsMachines)
                     .HasForeignKey(d => d.MachineId)
-                    .HasConstraintName("FK__StepsMach__MACHI__671F4F74");
+                    .HasConstraintName("FK__StepsMach__MACHI__0E391C95");
 
                 entity.HasOne(d => d.Step)
                     .WithMany(p => p.StepsMachines)
                     .HasForeignKey(d => d.StepId)
-                    .HasConstraintName("FK__StepsMach__STEP___662B2B3B");
+                    .HasConstraintName("FK__StepsMach__STEP___0F2D40CE");
             });
 
             modelBuilder.Entity<StepsToDelete>(entity =>

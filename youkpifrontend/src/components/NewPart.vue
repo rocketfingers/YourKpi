@@ -23,6 +23,17 @@
                   label="Nazwa"
                 ></v-text-field>
               </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="editedItem.tpz"
+                  outlined
+                  :disabled="readonly"
+                  :rules="[requiredRule, tpztjRule]"
+                  type="number"
+                  min="0"
+                  label="TPZ"
+                ></v-text-field>
+              </v-flex>
             </v-layout>
           </v-flex>
           <v-flex xs1> </v-flex>
@@ -44,6 +55,17 @@
                   :disabled="readonly"
                   :rules="[requiredRule]"
                   label="Numer rysunku norma"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="editedItem.tj"
+                  outlined
+                  :disabled="readonly"
+                  :rules="[requiredRule, tpztjRule]"
+                  type="number"
+                  min="0"
+                  label="TJ"
                 ></v-text-field>
               </v-flex>
             </v-layout>
@@ -129,6 +151,11 @@ export default {
       requiredRule: (v) => !!v || 'To pole jest wymagane',
       numberRule: val => {
         if (val < 0) return 'Wprowadz dodatnia wartosc'
+        return true
+      },
+      tpztjRule: val => {
+        if (val < 0) return 'Wprowadz dodatnia wartosc'
+        if (val > 200) return 'Maksymalna wartość: 200'
         return true
       },
       showComponent: true,

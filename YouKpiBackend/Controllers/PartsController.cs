@@ -115,6 +115,8 @@ namespace YouKpiBackend.Controllers
                 part.GatPodstawowy = entity.GatPodstawowy;
                 part.NumerRysNorma = entity.NumerRysNorma;
                 part.KomponentId = entity.KomponentId;
+                part.Tpz = entity.Tpz;
+                part.Tj = entity.Tj;
 
                 await _dbContext.SaveChangesAsync();
 

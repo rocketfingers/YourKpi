@@ -17,6 +17,8 @@ namespace YouKpiBackend.ModelsEntity
         public string NumerRysNorma { get; set; }
         public string Wymiary { get; set; }
         public int? KomponentId { get; set; }
+        public decimal? Tpz { get; set; }
+        public decimal? Tj { get; set; }
 
         public virtual Komponenty Komponent { get; set; }
         public virtual ICollection<ProduktCzesci> ProduktCzesci { get; set; }

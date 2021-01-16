@@ -79,7 +79,8 @@
                   >check</v-icon
                 >
               </td>
-
+              <td class="text-xs-left">{{ props.item.tpz }}</td>
+              <td class="text-xs-left">{{ props.item.tj }}</td>
               <td class="justify-center px-0">
                 <v-layout>
                   <v-flex xs6>
@@ -153,6 +154,8 @@ export default {
         { text: 'GatPodstawowy', value: 'gatPodstawowy' },
         { text: 'NumerRysNorma', value: 'numerRysNorma' },
         { text: 'Przypisano komponent', value: 'hasComponent' },
+        { text: 'TPZ', value: 'tPZ' },
+        { text: 'TJ', value: 'tJ' },
 
         { text: 'Akcje', value: 'actions' }
       ],
