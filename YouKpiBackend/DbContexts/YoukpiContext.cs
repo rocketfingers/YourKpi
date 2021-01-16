@@ -66,6 +66,21 @@ namespace YouKpiBackend.DbContexts
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.Email)
+                    .HasColumnName("EMAIL")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.KodPocztowy)
+                    .HasColumnName("KOD_POCZTOWY")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Miasto)
+                    .HasColumnName("MIASTO")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(150)
@@ -77,6 +92,21 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(10)
                     .IsUnicode(false)
                     .IsFixedLength();
+
+                entity.Property(e => e.NrBudynku)
+                    .HasColumnName("NR_BUDYNKU")
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NrTelefonu)
+                    .HasColumnName("NR_TELEFONU")
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ulica)
+                    .HasColumnName("ULICA")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Czesci>(entity =>

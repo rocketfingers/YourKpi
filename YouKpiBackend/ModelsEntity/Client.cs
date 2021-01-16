@@ -14,6 +14,12 @@ namespace YouKpiBackend.ModelsEntity
         public int Id { get; set; }
         public string Nip { get; set; }
         public string Name { get; set; }
+        public string KodPocztowy { get; set; }
+        public string Miasto { get; set; }
+        public string Ulica { get; set; }
+        public string NrBudynku { get; set; }
+        public string NrTelefonu { get; set; }
+        public string Email { get; set; }
 
         public virtual ICollection<Offer> Offer { get; set; }
     }
