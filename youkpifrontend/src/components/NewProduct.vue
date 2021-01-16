@@ -36,33 +36,38 @@
               v-model="currentProduct.numerRysNorma"
             ></v-text-field>
           </v-flex>
-          <v-flex xs12>
-            <v-text-field
-              outlined
-              :rules="[requiredRule, numberRule]"
-              color
-              label="DN"
-              type="number"
-              min="0"
-              v-model.number="currentProduct.dn"
-            ></v-text-field>
+          <v-flex 12>
+            <v-layout row wrap>
+              <v-flex xs5>
+                <v-text-field
+                  outlined
+                  :rules="[requiredRule, numberRule]"
+                  color
+                  label="DN"
+                  type="number"
+                  min="0"
+                  v-model.number="currentProduct.dn"
+                ></v-text-field>
+              </v-flex>
+              <v-spacer></v-spacer>
+              <v-flex xs5>
+                <v-text-field
+                  outlined
+                  color
+                  :rules="[requiredRule, numberRule]"
+                  label="PN"
+                  type="number"
+                  min="0"
+                  v-model.number="currentProduct.pn"
+                ></v-text-field>
+              </v-flex>
+            </v-layout>
           </v-flex>
         </v-layout>
       </v-flex>
       <v-flex xs1> </v-flex>
       <v-flex xs5>
         <v-layout row wrap>
-          <v-flex xs12>
-            <v-text-field
-              outlined
-              color
-              :rules="[requiredRule, numberRule]"
-              label="PN"
-              type="number"
-              min="0"
-              v-model.number="currentProduct.pn"
-            ></v-text-field>
-          </v-flex>
           <v-flex xs12>
             <v-text-field
               outlined
@@ -89,6 +94,31 @@
               label="Uszczelnienie"
               v-model="currentProduct.uszczelnienie"
             ></v-text-field>
+          </v-flex>
+          <v-flex xs12>
+            <v-layout row wrap>
+              <v-flex xs9>
+                <v-text-field
+                  v-model="currentProduct.cena"
+                  outlined
+                  :disabled="readonly"
+                  :rules="[requiredRule, priceRule]"
+                  type="number"
+                  min="0"
+                  @change="currentProduct.waluta = 'PLN'"
+                  label="Cena"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs3>
+                <v-autocomplete
+                  label="Waluta"
+                  outlined
+                  :items="['PLN', 'EUR', 'USD', 'GBP']"
+                  v-model="currentProduct.waluta"
+                  autocomplete
+                ></v-autocomplete>
+              </v-flex>
+            </v-layout>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -123,6 +153,11 @@ export default {
       requiredRule: (v) => !!v || 'To pole jest wymagane',
       numberRule: val => {
         if (val < 0) return 'Wprowadź wartość dodatnią'
+        return true
+      },
+      priceRule: val => {
+        if (val < 0) return 'Wprowadz dodatnia wartosc'
+        if (val > 500000) return 'Maksymalna wartość: 500 000'
         return true
       }
 

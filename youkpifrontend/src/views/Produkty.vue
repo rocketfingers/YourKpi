@@ -195,6 +195,8 @@ export default {
         { text: 'ANSI', value: 'ansi' },
         { text: 'Wersja', value: 'wersja' },
         { text: 'Uszczelnienie', value: 'uszczelnienie' },
+        { text: 'Cena', value: 'cena' },
+        { text: 'Waluta', value: 'waluta' },
         { text: 'Akcje', value: 'actions' }
       ],
       products: [],

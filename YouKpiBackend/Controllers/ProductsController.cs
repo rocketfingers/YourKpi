@@ -27,8 +27,19 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Produkty.Include(p => p.ProduktCzesci).ToListAsync();
-                return Ok(res);
+                var res =  _ctx.Produkty
+                    .Include(p => p.ProduktCzesci)
+                    .ThenInclude(p => p.Czesci);
+
+                foreach(var item in res) //Zapetlona referencja... Naprawic to mozna dodajac warstwe viewmodeli
+                {
+                    foreach (var pc in item.ProduktCzesci)
+                    {
+                        pc.Czesci.ProduktCzesci = null;
+                    }
+                }
+
+                return Ok(await res.ToListAsync());
             }
             catch (Exception ex)
             {
@@ -89,6 +100,8 @@ namespace YouKpiBackend.Controllers
                 product.Ansi = entity.Ansi;
                 product.Wersja = entity.Wersja;
                 product.Uszczelnienie = entity.Uszczelnienie;
+                product.Cena = entity.Cena;
+                product.Waluta = entity.Waluta;
 
                 product.ProduktCzesci.ToList().ForEach(p =>
                 {

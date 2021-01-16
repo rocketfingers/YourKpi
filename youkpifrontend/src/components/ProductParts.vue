@@ -67,9 +67,10 @@
                       color
                       :items="parts"
                       item-text="id"
-                      item-value="id"
+                      return-object
                       :rules="[requiredRule]"
-                      v-model="props.item.czesciId"
+                      @change="setCzesci(props.item)"
+                      v-model="props.item.czesci"
                     ></v-autocomplete>
                     <v-text-field
                       v-else-if="header.value == 'iloscSztuk'"
@@ -79,7 +80,15 @@
                     ></v-text-field>
                   </template>
                   <template v-else>
-                    {{ props.item[header.value] }}
+                    <template v-if="header.value == 'czescitpz'">
+                      {{ props.item.czesci.tpz }}
+                    </template>
+                    <template v-else-if="header.value == 'czescitj'">
+                      {{ props.item.czesci.tj }}
+                    </template>
+                    <template v-else>
+                      {{ props.item[header.value] }}
+                    </template>
                   </template>
                 </td>
               </template>
@@ -106,6 +115,8 @@ export default {
       headers: [
         { text: 'Id części', value: 'czesciId', visible: true },
         { text: 'Ilość sztuk', value: 'iloscSztuk', visible: true },
+        { text: 'TPZ', value: 'czescitpz' },
+        { text: 'TJ', value: 'czescitj' },
         { text: 'Akcje', value: 'actions', visible: true }
       ],
       search: '',
@@ -126,11 +137,16 @@ export default {
 
   },
   methods: {
+    setCzesci (item) {
+      // eslint-disable-next-line no-debugger
+      debugger
+      item.czesciId = item.czesci.id
+    },
     addPartToProduct () {
       if (!this.currentProduct.produktCzesci) {
         this.$set(this.currentProduct, 'produktCzesci', [])
       }
-      this.currentProduct.produktCzesci.unshift({ czesciId: '', iloscSztuk: '', actions: '', isEdited: true })
+      this.currentProduct.produktCzesci.unshift({ czesci: [], czesciId: '', iloscSztuk: '', actions: '', isEdited: true })
     },
     async editPart (part) {
       if (part.isEdited) {
