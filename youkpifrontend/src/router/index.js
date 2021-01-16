@@ -12,6 +12,7 @@ import ReasonCodes from '../views/ReasonCodes.vue'
 import Komponenty from '../views/Komponenty.vue'
 import Procesy from '../views/Procesy.vue'
 import StepsView from '../views/StepsView.vue'
+import Customers from '../views/Customers.vue'
 
 Vue.use(VueRouter)
 
@@ -75,6 +76,11 @@ const routes = [
     path: '/stepsmachines',
     name: 'Steps machines',
     component: StepsView
+  },
+  {
+    path: '/customers',
+    name: 'Klienci',
+    component: Customers
   },
   {
     path: '/login',

@@ -33,6 +33,8 @@ var _Procesy = _interopRequireDefault(require("../views/Procesy.vue"));
 
 var _StepsView = _interopRequireDefault(require("../views/StepsView.vue"));
 
+var _Customers = _interopRequireDefault(require("../views/Customers.vue"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vueRouter["default"]);
@@ -85,6 +87,10 @@ var routes = [{
   path: '/stepsmachines',
   name: 'Steps machines',
   component: _StepsView["default"]
+}, {
+  path: '/customers',
+  name: 'Klienci',
+  component: _Customers["default"]
 }, {
   path: '/login',
   name: 'Login',

@@ -1,5 +1,51 @@
 <template>
   <div>
+    <v-dialog v-model="showNewCustomerDialog" max-width="1800" persistent>
+      <v-card>
+        <v-toolbar dark elevation-4 color="primary lighten-1">
+          <span class="headline">Dodaj klienta</span>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="showNewCustomerDialog = false" dark>
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-container grid-list-md>
+          <v-layout row wrap justify-space-around>
+            <v-flex xs11>
+              <v-form ref="newForm">
+                <NewCustomer
+                  :currentItem="currentCustomerItem"
+                  :editMode="editMode"
+                  @editedCustomer="editcurrentItemRes"
+                ></NewCustomer>
+              </v-form>
+            </v-flex>
+          </v-layout>
+        </v-container>
+        <v-card-actions class="blue lighten-5">
+          <v-btn
+            large
+            color="blue darken-1"
+            flat
+            @click.native="showNewCustomerDialog = false"
+          >
+            Anuluj
+            <v-icon dark>cancel</v-icon>
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn
+            flat
+            large
+            color="blue darken-1"
+            @click.native="addCustomerAction"
+          >
+            Zapisz
+            <v-icon dark>save</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <v-dialog v-model="showProcessSelectorDialog" max-width="1600" persistent>
       <v-card>
         <v-toolbar dark elevation-4 color="primary lighten-1">
@@ -114,7 +160,18 @@
               return-object
               required
               v-model="currentOffer.client"
-            ></v-autocomplete>
+            >
+              <template slot="prepend">
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-icon v-on="on" @click="addCustomer()" color="green"
+                      >fa-user-plus</v-icon
+                    >
+                  </template>
+                  <span>Dodaj nowego klienta</span>
+                </v-tooltip>
+              </template>
+            </v-autocomplete>
           </v-flex>
         </v-layout>
         <v-layout row wrap>
@@ -236,12 +293,14 @@
 <script>
 import OfferLines from '../components/OfferLines'
 import ProcessSelector from '../components/ProcessSelector'
+import NewCustomer from '../components/NewCustomer'
 
 export default {
   name: 'NewProduct',
   components: {
     OfferLines: OfferLines,
-    ProcessSelector: ProcessSelector
+    ProcessSelector: ProcessSelector,
+    NewCustomer: NewCustomer
   },
   props: {
     currentOffer: Object,
@@ -254,6 +313,9 @@ export default {
   },
   data () {
     return {
+      // api
+      addCustomerApi: 'api/Customer/Create',
+
       showProcessSelectorDialog: false,
       requiredRule: (v) => !!v || 'To pole jest wymagane',
       numberRule: val => {
@@ -271,7 +333,9 @@ export default {
         { text: 'Business area', value: 'businessArea', visible: true },
         { text: 'Nazwa procesu', value: 'nazwaProcesu', visible: true },
         { text: 'Typ zlecenia', value: 'typZlecenia', visible: true }
-      ]
+      ],
+      showNewCustomerDialog: false,
+      currentCustomerItem: {}
     }
   },
   computed: {
@@ -323,6 +387,24 @@ export default {
     }
   },
   methods: {
+    addCustomer () {
+      this.currentCustomerItem = { }
+      this.showNewCustomerDialog = true
+    },
+    addCustomerAction () {
+      this.$http
+        .post(this.addCustomerApi, this.currentCustomerItem)
+        .then((Result) => {
+          var customer = Result.data
+          customer.showName = customer.id + ', ' + customer.name + ', ' + customer.nip
+          this.customers.push(customer)
+          this.showNewCustomerDialog = false
+        })
+        .catch((e) => {
+          this.showNewCustomerDialog = false
+        })
+    },
+
     beforeSaveValidation () {
       // eslint-disable-next-line no-debugger
       // debuggers

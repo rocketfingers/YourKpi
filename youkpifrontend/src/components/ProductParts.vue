@@ -83,15 +83,59 @@
                     <template v-if="header.value == 'czescitpz'">
                       {{ props.item.czesci.tpz }}
                     </template>
+                    <template v-if="header.value == 'czesciNazwa'">
+                      {{ props.item.czesci.nazwa }}
+                    </template>
                     <template v-else-if="header.value == 'czescitj'">
                       {{ props.item.czesci.tj }}
                     </template>
+                    <template v-else-if="header.value == 'componentValue'">
+                      <v-layout row wrap>
+                        <b>
+                          {{
+                            (
+                              props.item.czesci.komponent.cenaJednostkowa *
+                              props.item.czesci.komponent.ilosc
+                            ).toFixed(2)
+                          }}</b
+                        >
+                        <v-spacer></v-spacer>
+                        <span>
+                          ({{ props.item.czesci.komponent.cenaJednostkowa }} *
+                          {{ props.item.czesci.komponent.ilosc }})
+                        </span>
+                        <v-spacer></v-spacer>
+                      </v-layout>
+                    </template>
+
                     <template v-else>
                       {{ props.item[header.value] }}
                     </template>
                   </template>
                 </td>
               </template>
+            </tr>
+          </template>
+          <template slot="body.append" slot-scope="props">
+            <tr class="green lighten-4">
+              <td>
+                <b>Suma:</b>
+              </td>
+              <td></td>
+
+              <td>
+                {{ calculateNoOfParts(props) }}
+              </td>
+              <td>
+                {{ calculateTpz(props) }}
+              </td>
+              <td>
+                {{ calculateTj(props) }}
+              </td>
+              <td>
+                {{ calculateComponentsValue(props) }}
+              </td>
+              <td></td>
             </tr>
           </template>
         </v-data-table>
@@ -114,9 +158,11 @@ export default {
     return {
       headers: [
         { text: 'Id części', value: 'czesciId', visible: true },
+        { text: 'Nazwa', value: 'czesciNazwa' },
         { text: 'Ilość sztuk', value: 'iloscSztuk', visible: true },
         { text: 'TPZ', value: 'czescitpz' },
         { text: 'TJ', value: 'czescitj' },
+        { text: 'Wart. komponentu (cena*zuzycie)', value: 'componentValue' },
         { text: 'Akcje', value: 'actions', visible: true }
       ],
       search: '',
@@ -128,7 +174,13 @@ export default {
       intRule: val => {
         if (val.includes(',') || val.includes('.')) return 'Wprowadź wartość całkowitą'
         return true
-      }
+      },
+      rows: [
+
+        50,
+        100,
+        { text: '$vuetify.dataIterator.rowsPerPageAll', value: 1000 }
+      ]
     }
   },
   computed: {
@@ -137,9 +189,55 @@ export default {
 
   },
   methods: {
+    calculateNoOfParts (props) {
+      var res = 0
+      props.items.forEach(element => {
+        res = res + this.parseFloatOrZero(element.iloscSztuk)
+      })
+
+      return 'Ilość sztuk: ' + res.toFixed(2)
+    },
+    calculateTpz (props) {
+      var res = 0
+      props.items.forEach(element => {
+        res = res + (this.parseFloatOrZero(element.czesci.tpz) * this.parseFloatOrZero(element.iloscSztuk))
+      })
+
+      // // eslint-disable-next-line no-debugger
+      // debugger
+      return 'TPZ: ' + res.toFixed(2)
+    },
+    calculateTj (props) {
+      var res = 0
+      props.items.forEach(element => {
+        res = res + (this.parseFloatOrZero(element.czesci.tj) * this.parseFloatOrZero(element.iloscSztuk))
+      })
+      if (res === '0') {
+        res = 0
+      }
+      return 'TJ: ' + res.toFixed(2)
+    },
+    calculateComponentsValue (props) {
+      var res = 0
+      props.items.forEach(element => {
+        if (element.czesci.komponent) {
+          res = res + (this.parseFloatOrZero(element.czesci.komponent.cenaJednostkowa) * this.parseFloatOrZero(element.iloscSztuk) * this.parseFloatOrZero(element.czesci.komponent.ilosc))
+        }
+      })
+      if (res === '0') {
+        res = 0
+      }
+      return 'Wartość komponentów: ' + res.toFixed(2)
+    },
+    parseFloatOrZero (val) {
+      var res = parseFloat(val)
+      if (res.toString() === 'NaN') {
+        return 0
+      }
+      return res
+    },
     setCzesci (item) {
-      // eslint-disable-next-line no-debugger
-      debugger
+      item.iloscSztuk = 1
       item.czesciId = item.czesci.id
     },
     addPartToProduct () {

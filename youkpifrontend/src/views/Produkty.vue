@@ -197,6 +197,9 @@ export default {
         { text: 'Uszczelnienie', value: 'uszczelnienie' },
         { text: 'Cena', value: 'cena' },
         { text: 'Waluta', value: 'waluta' },
+        { text: 'Suma TPZ', value: 'tpzSum' },
+        { text: 'Suma TJ', value: 'tjSum' },
+        { text: 'Wart. komponentów', value: 'componentsValueSum' },
         { text: 'Akcje', value: 'actions' }
       ],
       products: [],
@@ -227,6 +230,9 @@ export default {
       this.$http.get(this.getAllPartsApi)
         .then(Response => {
           this.parts = Response.data
+          this.parts.forEach(p => {
+            p.showName = p.id + ', ' + p.name
+          })
         })
     },
     getProducts () {
@@ -235,6 +241,23 @@ export default {
         .get(this.getAllProducts)
         .then((Response) => {
           $this.products = Response.data
+          $this.products.forEach(product => {
+            product.tpzSum = 0
+            product.tjSum = 0
+            product.componentsValueSum = 0
+            product.produktCzesci.forEach(procze => {
+              product.tpzSum = product.tpzSum + (procze.czesci.tpz * procze.iloscSztuk)
+            })
+            product.produktCzesci.forEach(procze => {
+              product.tjSum = product.tjSum + (procze.czesci.tj * procze.iloscSztuk)
+            })
+            product.produktCzesci.forEach(procze => {
+              product.componentsValueSum = product.componentsValueSum + (procze.czesci.komponent.cenaJednostkowa * procze.iloscSztuk * procze.czesci.komponent.ilosc)
+            })
+            product.tpzSum = product.tpzSum.toFixed(2)
+            product.tjSum = product.tjSum.toFixed(2)
+            product.componentsValueSum = product.componentsValueSum.toFixed(2)
+          })
           this.tableLoading = false
         })
         .catch((e) => {
