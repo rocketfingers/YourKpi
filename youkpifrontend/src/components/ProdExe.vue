@@ -24,6 +24,7 @@
           class="elevation-2"
           :expanded.sync="expanded"
           single-expand
+          no-data-text="Brak przypisanych procesów albo ofert do wykonania"
         >
           <template slot="item" slot-scope="props">
             <tr>
