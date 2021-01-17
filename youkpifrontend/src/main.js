@@ -8,7 +8,10 @@ import axios from 'axios'
 import dtMixin from './components/dtMixin.js'
 import VuetifyDialog from 'vuetify-dialog'
 import auth from './auth'
+import dateMixin from './dateMixin'
 Vue.mixin(dtMixin)
+Vue.mixin(dateMixin)
+
 const backendAdress = process.env.VUE_APP_BACKEND
 
 Vue.config.productionTip = false
