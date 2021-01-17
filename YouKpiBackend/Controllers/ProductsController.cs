@@ -105,7 +105,7 @@ namespace YouKpiBackend.Controllers
                 product.Uszczelnienie = entity.Uszczelnienie;
                 product.Cena = entity.Cena;
                 product.Waluta = entity.Waluta;
-
+                _ctx.Entry(product).State = EntityState.Modified;
                 product.ProduktCzesci.ToList().ForEach(p =>
                 {
                     _ctx.Entry(p).State = EntityState.Deleted;
@@ -115,7 +115,7 @@ namespace YouKpiBackend.Controllers
                     part.ProduktyId = product.Id;
                     product.ProduktCzesci.Add(part);
                 });
-                _ctx.SaveChanges();
+                await _ctx.SaveChangesAsync();
 
                 return NoContent();
             }
