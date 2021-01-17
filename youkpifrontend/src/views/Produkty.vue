@@ -231,7 +231,7 @@ export default {
         .then(Response => {
           this.parts = Response.data
           this.parts.forEach(p => {
-            p.showName = p.id + ', ' + p.name
+            p.showName = p.id + ', ' + p.nazwa
           })
         })
     },
