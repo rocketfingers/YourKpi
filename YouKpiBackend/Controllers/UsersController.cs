@@ -156,7 +156,7 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> AddUserProcess(PracownikProcessViewModel model)
+        public async Task<IActionResult> AddUserProcess([FromBody]PracownikProcessViewModel model)
         {
             if (!ModelState.IsValid)
             {
