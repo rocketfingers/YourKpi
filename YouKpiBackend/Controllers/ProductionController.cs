@@ -106,6 +106,8 @@ namespace YouKpiBackend.Controllers
             try
             {
                 var res = await _dbContext.ProdExe.ToListAsync();
+                var possibleProcesses = await _dbContext.PracownikProcess.Where(p => p.PracownikId == this.GetUserId()).Select(p => p.ProcessId).ToListAsync();
+                res = res.Where(p => possibleProcesses.Contains(p.ProcessId)).ToList();
                 //var res = await _ctx.Offer.Include(p => p.Clients).Include(p => p.OfferLines).ThenInclude(p => p.Product).ToListAsync();
                 return Ok(res.OrderByDescending(p => p.Id));
             }
