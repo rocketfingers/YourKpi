@@ -221,7 +221,7 @@
               dark
               class="mb-2"
               @click="checkStatus()"
-              v-if="!readonly"
+              v-if="!readonly && editMode"
               >{{ btnChangeStatusText }}</v-btn
             >
           </v-flex>
@@ -343,6 +343,7 @@ export default {
       if (this.currentOffer.status === 'zakończony') {
         return true
       }
+
       return false
     },
     btnChangeStatusText () {
@@ -410,28 +411,28 @@ export default {
       // debuggers
 
       if (!this.currentOffer.offerLines) {
-        this.$dialog.confirm({
+        this.$dialog.warning({
           text: 'Aby zapisać ofertę dodaj pozycje do Offer lines!',
           title: 'Uwaga'
         })
         return false
       }
       if (this.currentOffer.offerLines.length === 0) {
-        this.$dialog.confirm({
+        this.$dialog.warning({
           text: 'Aby zapisać ofertę dodaj pozycje do Offer lines!',
           title: 'Uwaga'
         })
         return false
       }
       if (!this.currentOffer.offerProcess) {
-        this.$dialog.confirm({
+        this.$dialog.warning({
           text: 'Aby zapisać ofertę dodaj procesy!',
           title: 'Uwaga'
         })
         return false
       }
       if (this.currentOffer.offerProcess.length <= 0) {
-        this.$dialog.confirm({
+        this.$dialog.warning({
           text: 'Aby zapisać ofertę dodaj procesy!',
           title: 'Uwaga'
         })
@@ -442,7 +443,7 @@ export default {
       )
 
       if (emptyOfferLines.length > 0) {
-        this.$dialog.confirm({
+        this.$dialog.warning({
           text: 'Aby zapisać ofertę dodaj procesy (w offer lines)!',
           title: 'Uwaga'
         })
@@ -466,7 +467,7 @@ export default {
           return
       }
       if (this.currentOffer.offerProcess.length <= 0) {
-        var res2 = this.$dialog.confirm({
+        var res2 = this.$dialog.warning({
           text: 'Aby otworzyć ofertę należy wybrać procesy dla ofery',
           title: 'Uwaga'
         })
