@@ -112,6 +112,7 @@ namespace YouKpiBackend.Controllers
                 });
                 entity.ProduktCzesci.ToList().ForEach(part =>
                 {
+                    part.Czesci = null;
                     part.ProduktyId = product.Id;
                     product.ProduktCzesci.Add(part);
                 });
