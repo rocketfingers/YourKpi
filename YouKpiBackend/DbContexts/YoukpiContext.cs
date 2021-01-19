@@ -743,7 +743,14 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnName("ProcessID")
                     .HasMaxLength(30);
 
+                entity.Property(e => e.ReasonCodeId).HasColumnName("ReasonCodeID");
+
                 entity.Property(e => e.StartedOn).HasColumnType("datetime");
+
+                entity.HasOne(d => d.ReasonCode)
+                    .WithMany(p => p.StepOfferWykonanie)
+                    .HasForeignKey(d => d.ReasonCodeId)
+                    .HasConstraintName("FK_StepOfferWykonanie_ReasonCodes");
             });
 
             modelBuilder.Entity<Steps>(entity =>

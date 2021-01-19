@@ -21,6 +21,19 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllSimple()
+        {
+            try
+            {
+                var res = await _ctx.ReasonCodes.Select(p => new {Id = p.Id, Name = p.Opis }).ToListAsync();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetAll()
         {
             try

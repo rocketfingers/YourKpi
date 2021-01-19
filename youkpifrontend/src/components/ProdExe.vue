@@ -234,6 +234,18 @@
                   min="0"
                   label="Liczba pomiarów Nok"
                 ></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-autocomplete
+                  v-model="reasonCodeId"
+                  outlined
+                  item-text="name"
+                  item-value="id"
+                  :items="reasons"
+                  :loading="reasonsLoading"
+                  label="Reason code"
+                  clearable
+                ></v-autocomplete>
               </v-flex> </v-layout
           ></v-card-text>
           <v-card-actions class="blue lighten-5">
@@ -301,8 +313,11 @@ export default {
         { text: 'Liczba pomiarów Nok', value: 'liczbaPomiarowNok' },
         { text: 'Step rozpoczęty', value: 'stepStarted' },
         { text: 'Używany przez innego pracowanika', value: 'stepUsedBySomeoneElse' },
+        { text: 'Mój czas', value: 'timeSpendMe' },
+        { text: 'Czas razem', value: 'timeSpendOther' },
         { text: 'Max rozpoczęcie', value: 'shouldStartBefore' },
         { text: 'Zakończone', value: 'zakonczone' },
+
         { text: 'Akcje', value: 'actions' }
       ],
       currentId: 0,
@@ -330,7 +345,10 @@ export default {
       currentStepItem: {},
       liczbaPomiarow: 0,
       liczbaPomiarowNok: 0,
-      dialogZamknijStep: false
+      reasonCodeId: null,
+      dialogZamknijStep: false,
+      reasons: [],
+      reasonsLoading: true
     }
   },
   computed: {
@@ -373,6 +391,7 @@ export default {
       if (this2.currentStepItem.stepStarted === false) {
         this2.currentStepItem.stepStarted = true
       }
+      this2.currentStepItem.timeSpendMe += res.data
       this2.currentItem.czasSpedzony = this2.currentItem.czasSpedzony + res.data
       item.stepStartedByMe = !item.stepStartedByMe
     },
@@ -383,7 +402,8 @@ export default {
         OfferLineId: this.currentItem.offerLineId,
         StepNum: this.currentStepItem.stepNum,
         LiczbaPomiarow: this.liczbaPomiarow,
-        LiczbaPomiarowNok: this.liczbaPomiarowNok
+        LiczbaPomiarowNok: this.liczbaPomiarowNok,
+        ReasonCodeId: this.reasonCodeId
       }
     },
     async saveStep () {
@@ -394,10 +414,18 @@ export default {
       await v.axiosInstance.post('api/Production/SaveStep', model)
       this.currentStepItem.liczbaPomiarow = this.liczbaPomiarow
       this.currentStepItem.liczbaPomiarowNok = this.liczbaPomiarowNok
+      this.currentStepItem.reasonCodeId = this.reasonCodeId
       this.dialogZamknijStep = false
     },
     async saveCloseZamknijStep () {
       var model = this.genModelSaveStep()
+      if (this.currentStepItem.reasonCodeId === null) {
+        this.$dialog.error({
+          text: 'Musisz wybrać reason code, aby zamknąć step?',
+          title: 'Problem'
+        })
+        return
+      }
       model.Zakonczenie = true
       var res = await this.$dialog.confirm({
         text: 'Czy na pewno chcesz zamknąć ten step?',
@@ -408,6 +436,7 @@ export default {
         this.currentStepItem.liczbaPomiarow = this.liczbaPomiarow
         this.currentStepItem.liczbaPomiarowNok = this.liczbaPomiarowNok
         this.currentStepItem.StepUsedBySomeoneElse = false
+        this.currentStepItem.reasonCodeId = this.reasonCodeId
         this.currentItem.wykonaneStepy++
         this.currentStepItem.zakonczone = true
         this.dialogZamknijStep = false
@@ -417,6 +446,7 @@ export default {
       this.currentStepItem = item
       this.liczbaPomiarow = item.liczbaPomiarow
       this.liczbaPomiarowNok = item.liczbaPomiarowNok
+      this.reasonCodeId = this.currentStepItem.reasonCodeId
       this.dialogZamknijStep = true
     },
     expandRow (item) {
@@ -434,6 +464,7 @@ export default {
   created () {
     v.axiosInstance.get(this.getAllApi)
       .then(Response => { this.data = Response.data; this.tableLoading = false })
+    v.axiosInstance.get('api/ReasonCode/GetAllSimple').then(res => { this.reasons = res.data; this.reasonsLoading = false })
   },
   destroyed () {
   }

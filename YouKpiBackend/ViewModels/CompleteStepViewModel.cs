@@ -13,5 +13,6 @@ namespace YouKpiBackend.ViewModels
         public int LiczbaPomiarow { get; set; }
         public int LiczbaPomiarowNok { get; set; }
         public bool Zakonczenie { get; set;}
+        public int? ReasonCodeId { get; set; }
     }
 }

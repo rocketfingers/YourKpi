@@ -20,6 +20,9 @@ namespace YouKpiBackend.ViewModels
         public DateTime? StartedDate { get; set; }
         public DateTime? ShouldStartBefore { get; set; }
         public TimeToEnd PlannedStartStatus { get; set; }
+        public int? ReasonCodeId { get; set; }
+        public int TimeSpendMe { get; set; }
+        public int TimeSpendOther { get; set; }
 
     }
     public enum TimeToEnd
