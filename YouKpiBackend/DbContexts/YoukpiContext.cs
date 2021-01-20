@@ -388,8 +388,6 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<Pracownik>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Email).HasMaxLength(50);
 
                 entity.Property(e => e.Login)
