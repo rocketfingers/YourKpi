@@ -23,7 +23,8 @@ namespace YouKpiBackend.ViewModels
         public int? ReasonCodeId { get; set; }
         public int TimeSpendMe { get; set; }
         public int TimeSpendOther { get; set; }
-
+        public DateTime? ClosedOn { get; set; }
+        public int? GScore { get; set; }
     }
     public enum TimeToEnd
     {

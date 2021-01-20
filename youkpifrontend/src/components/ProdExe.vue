@@ -107,6 +107,19 @@
                           </td>
                           <td
                             :key="header.value"
+                            v-else-if="header.value === 'gScore'"
+                          >
+                            <span
+                              :class="{
+                                'red--text': props.item.gScore > 0,
+                                'green--text': props.item.gScore === 0,
+                                'blue--text': props.item.gScore < 0,
+                              }"
+                              >{{ props.item.gScore }}</span
+                            >
+                          </td>
+                          <td
+                            :key="header.value"
                             class="justify-center px-0"
                             v-else-if="header.value === 'actions'"
                           >
@@ -316,6 +329,7 @@ export default {
         { text: 'Mój czas', value: 'timeSpendMe' },
         { text: 'Czas razem', value: 'timeSpendOther' },
         { text: 'Max rozpoczęcie', value: 'shouldStartBefore' },
+        { text: 'GScore', value: 'gScore' },
         { text: 'Zakończone', value: 'zakonczone' },
 
         { text: 'Akcje', value: 'actions' }

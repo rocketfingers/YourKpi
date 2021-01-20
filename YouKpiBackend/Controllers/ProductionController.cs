@@ -268,6 +268,7 @@ namespace YouKpiBackend.Controllers
                     var wykonanie = wykonanieList.FirstOrDefault(p => p.Step == res.StepNum);
                     if (wykonanie != null)
                     {
+                        res.ClosedOn = wykonanie.ClosedOn.HasValue ? wykonanie.ClosedOn.Value : wykonanie.ClosedOn;
                         res.ReasonCodeId = wykonanie.ReasonCodeId;
                         res.StepStarted = wykonanie.StartedOn.HasValue;
                         res.LiczbaPomiarow = wykonanie.LiczbaPomiarow;
@@ -285,6 +286,10 @@ namespace YouKpiBackend.Controllers
                     {
                         shouldStartBeBefore = shouldStartBeBefore.Value.AddDays(-curStep.Sekwencja);
                         curStep.ShouldStartBefore = shouldStartBeBefore;
+                        if (curStep.ShouldStartBefore.HasValue && curStep.ClosedOn.HasValue)
+                        {
+                            curStep.GScore = curStep.ClosedOn.Value.Subtract(curStep.ShouldStartBefore.Value).Days;
+                        }
                         if (curStep.ShouldStartBefore > DateTime.Now.AddDays(1))
                         {
                             curStep.PlannedStartStatus = TimeToEnd.OnTime;
