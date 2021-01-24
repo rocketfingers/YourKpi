@@ -27,7 +27,7 @@ namespace YouKpiBackend.BusinessLibrary.Offer
         private readonly double col3Pos = 220;
         private readonly double col4Pos = 250;
         private readonly double col5Pos = 300;
-        private readonly double col6Pos = 430;
+        private readonly double col6Pos = 400;
         private readonly double col7Pos = 480;
 
         public OfferPdfService(YoukpiContext ctx)
@@ -132,8 +132,9 @@ namespace YouKpiBackend.BusinessLibrary.Offer
             gfx.DrawString("Ilość", font, XBrushes.Black, new XRect(NewColumn(actualRow, col2Pos), new XSize(col3Pos - col2Pos, tableLineHeight)), XStringFormats.TopLeft);
             gfx.DrawString("W", font, XBrushes.Black, new XRect(NewColumn(actualRow, col3Pos), new XSize(col4Pos - col3Pos, tableLineHeight)), XStringFormats.TopLeft);
             gfx.DrawString("Medium", font, XBrushes.Black, new XRect(NewColumn(actualRow, col4Pos), new XSize(col5Pos - col4Pos, tableLineHeight)), XStringFormats.TopLeft);
-            gfx.DrawString("Dodatkowe wypsażenie", font, XBrushes.Black, new XRect(NewColumn(actualRow, col5Pos), new XSize(col6Pos - col5Pos, tableLineHeight)), XStringFormats.TopLeft);
-            gfx.DrawString("Sale", font, XBrushes.Black, new XRect(NewColumn(actualRow, col6Pos), new XSize(col7Pos - col6Pos, tableLineHeight)), XStringFormats.TopLeft);
+            gfx.DrawString("Wypsażenie", font, XBrushes.Black, new XRect(NewColumn(actualRow, col5Pos), new XSize(col6Pos - col5Pos, tableLineHeight)), XStringFormats.TopLeft);
+            //gfx.DrawString("Sale", font, XBrushes.Black, new XRect(NewColumn(actualRow, col6Pos), new XSize(col7Pos - col6Pos, tableLineHeight)), XStringFormats.TopLeft);
+            gfx.DrawString("Cena sprzedaży", font, XBrushes.Black, new XRect(NewColumn(actualRow, col6Pos), new XSize(col7Pos - col6Pos, tableLineHeight)), XStringFormats.TopLeft);
             gfx.DrawString("Liczba procesów", font, XBrushes.Black, new XRect(NewColumn(actualRow, col7Pos), new XSize(page.Width - col7Pos - marginRight, tableLineHeight)), XStringFormats.TopLeft);
         }
 
@@ -146,7 +147,13 @@ namespace YouKpiBackend.BusinessLibrary.Offer
             gfx.DrawString(ol.W, regularFont, XBrushes.Black, new XRect(NewColumn(actualRow, col3Pos), new XSize(col4Pos - col3Pos, tableLineHeight)), XStringFormats.TopLeft);
             gfx.DrawString(ol.Medium, regularFont, XBrushes.Black, new XRect(NewColumn(actualRow, col4Pos), new XSize(col5Pos - col4Pos, tableLineHeight)), XStringFormats.TopLeft);
             gfx.DrawString(ol.AdditionalEquipment, regularFont, XBrushes.Black, new XRect(NewColumn(actualRow, col5Pos), new XSize(col6Pos - col5Pos, tableLineHeight)), XStringFormats.TopLeft);
-            gfx.DrawString(ol.Sale, regularFont, XBrushes.Black, new XRect(NewColumn(actualRow, col6Pos), new XSize(col7Pos - col6Pos, tableLineHeight)), XStringFormats.TopLeft);
+
+            var salesPrice = "";
+            if (ol.SalesPrice != null)
+            {
+                salesPrice = ol.SalesPrice.ToString();
+            } 
+            gfx.DrawString(salesPrice, regularFont, XBrushes.Black, new XRect(NewColumn(actualRow, col6Pos), new XSize(col7Pos - col6Pos, tableLineHeight)), XStringFormats.TopLeft);
             gfx.DrawString(ol.OfferLineProcess.Count.ToString(), regularFont, XBrushes.Black, new XRect(NewColumn(actualRow, col7Pos), new XSize(page.Width - col7Pos - marginRight, tableLineHeight)), XStringFormats.TopLeft);
         }
 

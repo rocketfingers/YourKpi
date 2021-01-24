@@ -342,6 +342,8 @@ namespace YouKpiBackend.DbContexts
 
                 entity.Property(e => e.Medium).HasMaxLength(150);
 
+                entity.Property(e => e.PriceInOfferDay).HasColumnType("decimal(18, 2)");
+
                 entity.Property(e => e.ProductId)
                     .IsRequired()
                     .HasColumnName("ProductID")
@@ -349,6 +351,8 @@ namespace YouKpiBackend.DbContexts
                     .IsUnicode(false);
 
                 entity.Property(e => e.Sale).HasMaxLength(50);
+
+                entity.Property(e => e.SalesPrice).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.W).HasMaxLength(50);
 
