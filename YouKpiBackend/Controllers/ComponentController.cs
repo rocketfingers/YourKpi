@@ -89,6 +89,7 @@ namespace YouKpiBackend.Controllers
                 component.ProcessId= entity.ProcessId;
                 component.KomponentId = entity.KomponentId;
                 component.Wymiar = entity.Wymiar;
+                component.Ltid = entity.Ltid;
 
                 await _ctx.SaveChangesAsync();
 

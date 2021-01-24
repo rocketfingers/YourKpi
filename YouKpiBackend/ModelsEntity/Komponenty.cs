@@ -20,6 +20,7 @@ namespace YouKpiBackend.ModelsEntity
         public string Jednostka { get; set; }
         public decimal? CenaJednostkowa { get; set; }
         public string ProcessId { get; set; }
+        public int? Ltid { get; set; }
 
         public virtual ICollection<Czesci> Czesci { get; set; }
     }

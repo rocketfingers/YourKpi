@@ -6,8 +6,15 @@ namespace YouKpiBackend.ModelsEntity
 {
     public partial class ReasonCodes
     {
+        public ReasonCodes()
+        {
+            StepOfferWykonanie = new HashSet<StepOfferWykonanie>();
+        }
+
         public int Id { get; set; }
         public int? IdDifferenceReasonCode { get; set; }
         public string Opis { get; set; }
+
+        public virtual ICollection<StepOfferWykonanie> StepOfferWykonanie { get; set; }
     }
 }

@@ -42,6 +42,19 @@
                   v-model="currentItem.gatunekPodst"
                 ></v-text-field>
               </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  outlined
+                  :rules="[requiredRule, ltidRule]"
+                  color
+                  label="LTID"
+                  :min="1"
+                  type="number"
+                  hint="Wartości 1-999"
+                  :max="999"
+                  v-model="currentItem.ltid"
+                ></v-text-field>
+              </v-flex>
             </v-layout>
           </v-flex>
           <v-flex xs1> </v-flex>
@@ -121,8 +134,8 @@ export default {
   },
   data () {
     return {
-      requiredRule: (v) => (!!v || this.notValidate) || 'To pole jest wymagane'
-
+      requiredRule: (v) => (!!v || this.notValidate) || 'To pole jest wymagane',
+      ltidRule: (v) => ((v > 0 && v < 1000) || this.notValidate) || 'Wprowadź poprawną wartość!!'
     }
   },
   computed: {
