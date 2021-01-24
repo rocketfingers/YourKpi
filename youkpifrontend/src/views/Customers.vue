@@ -178,6 +178,8 @@ export default {
       if (!this.$refs.newForm.validate()) {
         return
       }
+      alert('ok')
+
       if (this.editedIndex > 0) {
         this.editAction(this.currentItem)
       } else {
@@ -212,7 +214,7 @@ export default {
       this.showNewDialog = true
       this.currentItem = item
     },
-    editCurrentProductRes (edited) {
+    editcurrentItemRes (edited) {
       this.currentItem = edited
     },
     editAction (item) {
