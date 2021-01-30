@@ -4,14 +4,8 @@ using System.Collections.Generic;
 
 namespace YouKpiBackend.ModelsEntity
 {
-    public partial class Komponenty
+    public partial class KomponentyTodelete
     {
-        public Komponenty()
-        {
-            Czesci = new HashSet<Czesci>();
-            MagazynKomponenty = new HashSet<MagazynKomponenty>();
-        }
-
         public int Id { get; set; }
         public string KomponentId { get; set; }
         public string Nazwa { get; set; }
@@ -21,9 +15,5 @@ namespace YouKpiBackend.ModelsEntity
         public string Jednostka { get; set; }
         public decimal? CenaJednostkowa { get; set; }
         public string ProcessId { get; set; }
-        public int? Ltid { get; set; }
-
-        public virtual ICollection<Czesci> Czesci { get; set; }
-        public virtual ICollection<MagazynKomponenty> MagazynKomponenty { get; set; }
     }
 }
