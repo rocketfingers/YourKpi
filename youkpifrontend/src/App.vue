@@ -107,6 +107,12 @@
             </v-list-item-icon>
             <v-list-item-title>Klienci</v-list-item-title>
           </v-list-item>
+          <v-list-item @click="$router.push({ name: 'Magazyn' })">
+            <v-list-item-icon>
+              <v-icon>fa-warehouse</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Magazyn</v-list-item-title>
+          </v-list-item>
           <v-divider></v-divider>
         </v-list-item-group>
       </v-list>

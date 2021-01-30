@@ -31,9 +31,11 @@ var _Komponenty = _interopRequireDefault(require("../views/Komponenty.vue"));
 
 var _Procesy = _interopRequireDefault(require("../views/Procesy.vue"));
 
-var _StepsView = _interopRequireDefault(require("../views/StepsView.vue"));
+var _StepsMachines = _interopRequireDefault(require("../views/StepsMachines.vue"));
 
 var _Customers = _interopRequireDefault(require("../views/Customers.vue"));
+
+var _Magazyn = _interopRequireDefault(require("../views/Magazyn.vue"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -86,11 +88,15 @@ var routes = [{
 }, {
   path: '/stepsmachines',
   name: 'Steps machines',
-  component: _StepsView["default"]
+  component: _StepsMachines["default"]
 }, {
   path: '/customers',
   name: 'Klienci',
   component: _Customers["default"]
+}, {
+  path: '/store',
+  name: 'Magazyn',
+  component: _Magazyn["default"]
 }, {
   path: '/login',
   name: 'Login',

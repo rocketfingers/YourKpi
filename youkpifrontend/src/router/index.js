@@ -13,6 +13,7 @@ import Komponenty from '../views/Komponenty.vue'
 import Procesy from '../views/Procesy.vue'
 import StepsView from '../views/StepsMachines.vue'
 import Customers from '../views/Customers.vue'
+import Store from '../views/Magazyn.vue'
 
 Vue.use(VueRouter)
 
@@ -81,6 +82,11 @@ const routes = [
     path: '/customers',
     name: 'Klienci',
     component: Customers
+  },
+  {
+    path: '/store',
+    name: 'Magazyn',
+    component: Store
   },
   {
     path: '/login',
