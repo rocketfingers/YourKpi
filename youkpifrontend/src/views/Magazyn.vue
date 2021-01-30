@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <v-dialog v-model="showNewDialog" max-width="1800" persistent>
+    <v-dialog v-model="showNewDialog" max-width="1800" persistent>
       <v-card>
         <v-toolbar dark elevation-4 color="primary lighten-1">
           <span class="headline">{{ formTitle }}</span>
@@ -13,11 +13,16 @@
           <v-layout row wrap justify-space-around>
             <v-flex xs11>
               <v-form ref="newForm">
-                <NewReasonCode
+                <NewStoreElement
                   :currentItem="currentItem"
+                  :stores="stores"
                   :editMode="editMode"
-                  @editedProduct="editcurrentItemRes"
-                ></NewReasonCode>
+                  @editedItem="editCurrentItemRes"
+                  :components="components"
+                  :products="products"
+                  :parts="parts"
+                  :contractors="contractors"
+                ></NewStoreElement>
               </v-form>
             </v-flex>
           </v-layout>
@@ -39,23 +44,45 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog> -->
+    </v-dialog>
 
     <v-layout row wrap elevation-3>
       <v-flex xs12>
-        <v-toolbar flat color="white">
-          <v-toolbar-title>Magazyn</v-toolbar-title>
-          <v-divider class="mx-2" inset vertical></v-divider>
-          <v-spacer></v-spacer>
-          <v-text-field
-            append-icon="search"
-            label="Wyszukaj"
-            single-line
-            hide-details
-            class="elevation-1"
-            v-model="search"
-          ></v-text-field>
-          <v-btn color="primary" dark class="mb-2" @click="add()">Nowy</v-btn>
+        <v-toolbar flat color="white" class="mt-5">
+          <v-layout row wrap ma-3>
+            <v-flex xs12 md4>
+              <v-layout row wrap ma-3>
+                <v-autocomplete
+                  label="Wybierz magazyn"
+                  :items="stores"
+                  :rules="[requiredRule]"
+                  hide-details
+                  item-text="name"
+                  return-object
+                  v-model="selectedStores"
+                  multiple
+                  autocomplete
+                ></v-autocomplete>
+              </v-layout>
+            </v-flex>
+            <v-spacer></v-spacer>
+            <v-flex xs12 md5>
+              <v-layout row wrap ma-3>
+                <v-text-field
+                  append-icon="search"
+                  label="Wyszukaj"
+                  single-line
+                  hide-details
+                  class="elevation-1"
+                  v-model="search"
+                >
+                </v-text-field>
+                <v-btn color="primary" dark class="mb-2" @click="add()"
+                  >Nowy</v-btn
+                >
+              </v-layout>
+            </v-flex>
+          </v-layout>
         </v-toolbar>
       </v-flex>
       <v-flex xs12>
@@ -114,28 +141,26 @@
 </template>
 
 <script>
-// import NewReasonCode from '../components/NewReasonCode'
+import NewStoreElement from '../components/NewStoreElement'
 
 export default {
   name: 'Produkty',
   components: {
-    // NewReasonCode: NewReasonCode
+    NewStoreElement: NewStoreElement
   },
   props: {},
   data () {
     return {
       // api
-      getAll: 'api/ReasonCode/GetAll',
-      addApi: 'api/ReasonCode/Create',
-      editApi: 'api/ReasonCode/Update',
-      deleteApi: 'api/ReasonCode/Delete',
+      getAll: 'api/Store/GetAll',
+      getAllComponentsSimple: 'api/Component/GetAllSimpleView',
+      getAllProductsSimple: 'api/Products/GetAllSimpleView',
+      getAllPartsSimple: 'api/Parts/GetAllSimpleView',
+      getAllContractorsSimple: 'api/Contractor/GetAllSimpleView',
 
-      // headers: [
-      //   // { text: 'Id', value: 'id' },
-      //   { text: 'Id difference', value: 'idDifferenceReasonCode' },
-      //   { text: 'Opis', value: 'opis' },
-      //   { text: 'Akcje', value: 'actions' }
-      // ],
+      addApi: 'api/Store/Create',
+      editApi: 'api/Store/Update',
+      deleteApi: 'api/Store/Delete',
       headers: [
         // { text: 'Id', value: 'id' },
         { text: 'Lp', value: 'lp' },
@@ -155,12 +180,22 @@ export default {
       showNewDialog: false,
       showProductPartsDialog: false,
       tableLoading: false,
-      formTitle: 'Dodaj produkt',
+      formTitle: 'Dodaj ',
       currentItem: { produktCzesci: [] },
       editedIndex: -1,
-      productTypes: [],
       editMode: false,
-      parts: []
+      parts: [],
+      products: [],
+      components: [],
+      stores: [
+        { id: 1, name: 'Części' },
+        { id: 2, name: 'Produkty' },
+        { id: 3, name: 'Komponenty' }
+      ],
+      selectedStores: [
+        { id: 1, name: 'Części' },
+        { id: 2, name: 'Produkty' },
+        { id: 3, name: 'Komponenty' }]
     }
   },
   computed: {},
@@ -168,7 +203,25 @@ export default {
   methods: {
     initialise () {
       this.tableLoading = true
+      this.getProducts()
+      this.getParts()
+      this.getComponents()
+      this.getContractors()
       this.getItems()
+    },
+
+    getContractors () {
+      var $this = this
+      this.$http
+        .get(this.getAllContractorsSimple)
+        .then((Response) => {
+          $this.contractors = Response.data
+          $this.contractors.forEach(p => {
+            p.showName = p.id + ', ' + p.name
+          })
+        })
+        .catch((e) => {
+        })
     },
     getItems () {
       var $this = this
@@ -182,11 +235,50 @@ export default {
           this.tableLoading = false
         })
     },
+    getProducts () {
+      var $this = this
+      this.$http
+        .get(this.getAllProductsSimple)
+        .then((Response) => {
+          $this.products = Response.data
+          $this.products.forEach(p => {
+            p.showName = p.id + ', ' + p.name
+          })
+        })
+        .catch((e) => {
+        })
+    },
+    getParts () {
+      var $this = this
+      this.$http
+        .get(this.getAllPartsSimple)
+        .then((Response) => {
+          $this.parts = Response.data
+          $this.parts.forEach(p => {
+            p.showName = p.id + ', ' + p.name
+          })
+        })
+        .catch((e) => {
+        })
+    },
+    getComponents () {
+      var $this = this
+      this.$http
+        .get(this.getAllComponentsSimple)
+        .then((Response) => {
+          $this.components = Response.data
+          $this.components.forEach(p => {
+            p.showName = p.id + ', ' + p.name
+          })
+        })
+        .catch((e) => {
+        })
+    },
 
     saveAction () {
-      if (!this.$refs.newForm.validate()) {
-        return
-      }
+      // if (!this.$refs.newForm.validate()) {
+      //   return
+      // }
       if (this.editedIndex > 0) {
         this.editAction(this.currentItem)
       } else {
@@ -221,8 +313,8 @@ export default {
       this.showNewDialog = true
       this.currentItem = item
     },
-    editCurrentProductRes (editedProduct) {
-      this.currentItem = editedProduct
+    editCurrentItemRes (editedItem) {
+      this.currentItem = editedItem
     },
     editAction (item) {
       this.$http
