@@ -8,6 +8,7 @@ namespace YouKpiBackend.ModelsEntity
     {
         public Czesci()
         {
+            MagazynCzesci = new HashSet<MagazynCzesci>();
             ProduktCzesci = new HashSet<ProduktCzesci>();
         }
 
@@ -21,6 +22,7 @@ namespace YouKpiBackend.ModelsEntity
         public decimal? Tj { get; set; }
 
         public virtual Komponenty Komponent { get; set; }
+        public virtual ICollection<MagazynCzesci> MagazynCzesci { get; set; }
         public virtual ICollection<ProduktCzesci> ProduktCzesci { get; set; }
     }
 }

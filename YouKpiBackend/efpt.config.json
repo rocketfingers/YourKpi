@@ -29,6 +29,26 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Kontrahent]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Lokacja]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MagazynCzesci]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MagazynKomponenty]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MagazynProdukty]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Maszyny]",
          "ObjectType": 0
       },

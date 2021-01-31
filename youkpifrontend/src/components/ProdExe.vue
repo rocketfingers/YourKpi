@@ -1,6 +1,21 @@
 <template>
   <div>
     <v-layout row wrap elevation-3>
+      <v-flex xs12 sm6 md4 xl3>
+        <v-select
+          :items="[
+            { id: 'O', name: 'Oferta' },
+            { id: 'P', name: 'Produkcja' },
+            { id: 'R', name: 'Rozwój' },
+          ]"
+          v-model="selectedTypes"
+          label="Typ"
+          multiple
+          chips
+          item-text="name"
+          item-value="id"
+        ></v-select>
+      </v-flex>
       <v-flex xs12>
         <v-toolbar flat color="white">
           <v-toolbar-title>{{ title }}</v-toolbar-title>
@@ -14,10 +29,13 @@
             class="elevation-1"
             v-model="searchTable"
           ></v-text-field>
+          <v-divider class="mx-2" inset vertical></v-divider>
+
+          <v-btn rounded color="primary"><v-icon>refresh</v-icon></v-btn>
         </v-toolbar>
         <v-data-table
           :headers="headers"
-          :items="data"
+          :items="filterData"
           :search="searchTable"
           :loading="tableLoading"
           :footer-props="footer"
@@ -33,7 +51,9 @@
                 <td :key="header.value" v-if="header.value === 'wykonaneStepy'">
                   <v-progress-circular
                     :rotate="-90"
-                    :value="props.item.wykonaneStepy * 10"
+                    :value="
+                      (props.item.wykonaneStepy / props.item.iloscStepow) * 100
+                    "
                     color="primary"
                   >
                     {{ props.item.wykonaneStepy }}
@@ -319,6 +339,7 @@ export default {
       // Settings
       showDialog: false,
       data: [],
+      selectedTypes: ['O', 'P', 'R'],
       stepsData: [],
       footerStepTable: { 'items-per-page-options': [-1] },
       stepsLoading: false,
@@ -370,6 +391,9 @@ export default {
     }
   },
   computed: {
+    filterData () {
+      return this.data.filter(p => this.selectedTypes.indexOf(p.typProcesu) >= 0)
+    },
     formTitle: function () {
       if (this.editedIndex >= 0) {
         return this.editTitle

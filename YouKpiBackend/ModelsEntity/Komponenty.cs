@@ -9,6 +9,7 @@ namespace YouKpiBackend.ModelsEntity
         public Komponenty()
         {
             Czesci = new HashSet<Czesci>();
+            MagazynKomponenty = new HashSet<MagazynKomponenty>();
         }
 
         public int Id { get; set; }
@@ -20,7 +21,9 @@ namespace YouKpiBackend.ModelsEntity
         public string Jednostka { get; set; }
         public decimal? CenaJednostkowa { get; set; }
         public string ProcessId { get; set; }
+        public int? Ltid { get; set; }
 
         public virtual ICollection<Czesci> Czesci { get; set; }
+        public virtual ICollection<MagazynKomponenty> MagazynKomponenty { get; set; }
     }
 }
