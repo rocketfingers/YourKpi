@@ -11,6 +11,9 @@
       ></v-img>
       <!-- <v-toolbar-title class="ml-1 white--text">YouKPI</v-toolbar-title> -->
       <v-spacer></v-spacer>
+      <span class="white--text mr-2">{{
+        formatDateTimeYYYYMMDD(new Date())
+      }}</span>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon @click="logout()">

@@ -66,7 +66,7 @@
                       v-if="header.value == 'czesciId'"
                       color
                       :items="parts"
-                      item-text="id"
+                      item-text="showName"
                       return-object
                       :rules="[requiredRule]"
                       @change="setCzesci(props.item)"
@@ -76,7 +76,7 @@
                       v-else-if="header.value == 'iloscSztuk'"
                       v-model="props.item.iloscSztuk"
                       type="number"
-                      :rules="[requiredRule, numberRule, intRule]"
+                      :rules="[numberRule, intRule]"
                     ></v-text-field>
                   </template>
                   <template v-else>

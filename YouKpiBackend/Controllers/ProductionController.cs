@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using YouKpiBackend.BusinessLibrary.Production;
 using YouKpiBackend.DbContexts;
@@ -59,14 +60,17 @@ namespace YouKpiBackend.Controllers
                     find.LiczbaPomiarowNok = model.LiczbaPomiarowNok;
                     find.LiczbaPomiarow = model.LiczbaPomiarow;
                     find.Zakonczonie = model.Zakonczenie;
-                    find.ClosedOn = DateTime.Now;
-                    find.ClosesBy = this.GetUserId();
+                    find.ReasonCodeId = model.ReasonCodeId;
+                    if (model.Zakonczenie)
+                    {
+                        find.ClosedOn = DateTime.Now;
+                        find.ClosesBy = this.GetUserId();
+                    }
                 }
                 else
                 {
-                    AddStepOfferWykonanie(model);
+                    AddStepOfferWykonanie(model, this.GetUserId());
                 }
-                await _dbContext.SaveChangesAsync();
                 var lstStepsStartedTimeRegisterToClose = await _dbContext.PracownikCzasStep.Where(p =>
                 p.ProcessId == model.ProcessId
                 && p.OfferLinesId == model.OfferLineId
@@ -76,6 +80,8 @@ namespace YouKpiBackend.Controllers
                 {
                     item.CzasStop = DateTime.Now;
                 }
+                await _dbContext.SaveChangesAsync();
+
                 //var res = await _ctx.Offer.Include(p => p.Clients).Include(p => p.OfferLines).ThenInclude(p => p.Product).ToListAsync();
                 return Ok();
             }
@@ -85,7 +91,7 @@ namespace YouKpiBackend.Controllers
             }
         }
 
-        private void AddStepOfferWykonanie(SaveCompleteStepViewModel model)
+        private void AddStepOfferWykonanie(SaveCompleteStepViewModel model, int userId)
         {
             var itemToAdd = new StepOfferWykonanie()
             {
@@ -95,8 +101,15 @@ namespace YouKpiBackend.Controllers
                 ProcessId = model.ProcessId,
                 OfferLineId = model.OfferLineId,
                 Step = model.StepNum,
-                StartedOn = DateTime.Now
-            };
+                StartedOn = DateTime.Now,
+                ReasonCodeId = model.ReasonCodeId
+           };
+            if (model.Zakonczenie)
+            {
+                itemToAdd.ClosedOn = DateTime.Now;
+                itemToAdd.ClosesBy = userId;
+                
+            }
             _dbContext.StepOfferWykonanie.Add(itemToAdd);
         }
 
@@ -106,6 +119,8 @@ namespace YouKpiBackend.Controllers
             try
             {
                 var res = await _dbContext.ProdExe.ToListAsync();
+                var possibleProcesses = await _dbContext.PracownikProcess.Where(p => p.PracownikId == this.GetUserId()).Select(p => p.ProcessId).ToListAsync();
+                res = res.Where(p => possibleProcesses.Contains(p.ProcessId)).ToList();
                 //var res = await _ctx.Offer.Include(p => p.Clients).Include(p => p.OfferLines).ThenInclude(p => p.Product).ToListAsync();
                 return Ok(res.OrderByDescending(p => p.Id));
             }
@@ -169,7 +184,7 @@ namespace YouKpiBackend.Controllers
                                 OfferLineId = model.OfferLineId,
                                 ProcessId = model.ProcessId,
                                 StepNum = model.StepNum                                
-                            });
+                            }, this.GetUserId());
                         }
                         else
                         {
@@ -230,7 +245,14 @@ namespace YouKpiBackend.Controllers
                     && x.OfferLinesId == offerLineId
                     && x.ProcessId == processId
                     && x.Step == p.StepNum
-                    && x.CzasStop == null)
+                    && x.CzasStop == null),
+                    TimeSpendMe = _dbContext.PracownikCzasStep.Where(x => 
+                    x.PracownikId == userId
+                    && x.OfferLinesId == offerLineId 
+                    && x.ProcessId == processId && x.Step == p.StepNum).Sum(x => x.LiczbaMinut),
+                    TimeSpendOther = _dbContext.PracownikCzasStep.Where(x =>
+                      x.OfferLinesId == offerLineId
+                     && x.ProcessId == processId && x.Step == p.StepNum).Sum(x => x.LiczbaMinut)
                 }).ToListAsync();
 
                 var wykonanieList = await _dbContext.StepOfferWykonanie.Where(p =>
@@ -246,6 +268,7 @@ namespace YouKpiBackend.Controllers
                     var wykonanie = wykonanieList.FirstOrDefault(p => p.Step == res.StepNum);
                     if (wykonanie != null)
                     {
+                        res.ReasonCodeId = wykonanie.ReasonCodeId;
                         res.StepStarted = wykonanie.StartedOn.HasValue;
                         res.LiczbaPomiarow = wykonanie.LiczbaPomiarow;
                         res.LiczbaPomiarowNok = wykonanie.LiczbaPomiarowNok;
