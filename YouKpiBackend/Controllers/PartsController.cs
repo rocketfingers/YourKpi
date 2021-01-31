@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.Extensions;
 using YouKpiBackend.ModelsEntity;
+using YouKpiBackend.ViewModels;
 
 namespace YouKpiBackend.Controllers
 {
@@ -36,16 +37,30 @@ namespace YouKpiBackend.Controllers
             }
         }
 
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllSimpleView()
+        {
+            try
+            {
+                var res = await _dbContext.Czesci.Select(x => new SimpleViewModel(x.Id, x.Nazwa)).ToListAsync();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             try
             {
                 var encodedId = id.Replace("%2F", "");
-                var res = await _dbContext.Czesci.Where(p => p.Id.Replace("/","") == encodedId.RmNlTrim()).FirstOrDefaultAsync();
+                var res = await _dbContext.Czesci.Where(p => p.Id.Replace("/", "") == encodedId.RmNlTrim()).FirstOrDefaultAsync();
                 return Ok(res);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
@@ -59,13 +74,13 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
-                if(part.KomponentId!=0)
+                if (part.KomponentId != 0)
                 {
                     await UpdateComponent(part.Komponent);
                 }
-                part.Komponent = null; 
+                part.Komponent = null;
                 var res = _dbContext.Czesci.Add(part);
-                
+
                 await _dbContext.SaveChangesAsync();
                 part.Id = res.Entity.Id;
 
@@ -81,7 +96,7 @@ namespace YouKpiBackend.Controllers
         {
             if (entity != null)
             {
-             
+
                 var component = _dbContext.Komponenty.FirstOrDefault(p => p.Id == entity.Id);
 
                 component.CenaJednostkowa = entity.CenaJednostkowa;

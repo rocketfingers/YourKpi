@@ -129,7 +129,9 @@
                 <td :key="index" v-else-if="header.value == 'czesc'">
                   {{ props.item.czesc }}
                 </td>
-
+                <td :key="index" v-else-if="header.value == 'ltid'">
+                  {{ props.item.ltid }}
+                </td>
                 <td :key="index" v-else-if="header.value == 'actions'">
                   <v-layout>
                     <v-flex xs4>
@@ -204,6 +206,7 @@ export default {
         { text: 'Cena jednostkowa', value: 'cenaJednostkowa' },
         { text: 'Proces id', value: 'processId' },
         { text: 'Część', value: 'czesc' },
+        { text: 'LTID', value: 'ltid' },
         { text: 'Akcje', value: 'actions' }
       ],
       items: [],

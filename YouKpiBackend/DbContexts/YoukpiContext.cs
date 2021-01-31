@@ -21,6 +21,12 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Czesci> Czesci { get; set; }
         public virtual DbSet<Komponenty> Komponenty { get; set; }
+        public virtual DbSet<KomponentyTodelete> KomponentyTodelete { get; set; }
+        public virtual DbSet<Kontrahent> Kontrahent { get; set; }
+        public virtual DbSet<Lokacja> Lokacja { get; set; }
+        public virtual DbSet<MagazynCzesci> MagazynCzesci { get; set; }
+        public virtual DbSet<MagazynKomponenty> MagazynKomponenty { get; set; }
+        public virtual DbSet<MagazynProdukty> MagazynProdukty { get; set; }
         public virtual DbSet<Maszyny> Maszyny { get; set; }
         public virtual DbSet<MozliweStatusyOferty> MozliweStatusyOferty { get; set; }
         public virtual DbSet<MozliwyDn> MozliwyDn { get; set; }
@@ -175,6 +181,8 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Ltid).HasColumnName("LTID");
+
                 entity.Property(e => e.Nazwa)
                     .HasColumnName("NAZWA")
                     .HasMaxLength(300)
@@ -188,6 +196,255 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnName("WYMIAR")
                     .HasMaxLength(300)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<KomponentyTodelete>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("Komponenty_todelete");
+
+                entity.Property(e => e.CenaJednostkowa)
+                    .HasColumnName("CENA_JEDNOSTKOWA")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.GatunekPodst)
+                    .HasColumnName("GATUNEK_PODST")
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Ilosc)
+                    .HasColumnName("ILOSC")
+                    .HasColumnType("decimal(11, 6)");
+
+                entity.Property(e => e.Jednostka)
+                    .HasColumnName("JEDNOSTKA")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.KomponentId)
+                    .HasColumnName("KOMPONENT_ID")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nazwa)
+                    .HasColumnName("NAZWA")
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProcessId)
+                    .HasColumnName("PROCESS_ID")
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.Wymiar)
+                    .HasColumnName("WYMIAR")
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Kontrahent>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Email)
+                    .HasColumnName("EMAIL")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.KodPocztowy)
+                    .HasColumnName("KOD_POCZTOWY")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Miasto)
+                    .HasColumnName("MIASTO")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nip)
+                    .IsRequired()
+                    .HasColumnName("NIP")
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.NrBudynku)
+                    .HasColumnName("NR_BUDYNKU")
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NrTelefonu)
+                    .HasColumnName("NR_TELEFONU")
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ulica)
+                    .HasColumnName("ULICA")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Lokacja>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Nazwa)
+                    .HasColumnName("NAZWA")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<MagazynCzesci>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CenaJdnNetto)
+                    .HasColumnName("CENA_JDN_NETTO")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.DataPrzyjecia)
+                    .HasColumnName("DATA_PRZYJECIA")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ElementId)
+                    .HasColumnName("ELEMENT_ID")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ilosc).HasColumnName("ILOSC");
+
+                entity.Property(e => e.Jednostka)
+                    .HasColumnName("JEDNOSTKA")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.KontrahentId).HasColumnName("KONTRAHENT_ID");
+
+                entity.Property(e => e.LokacjaId).HasColumnName("LOKACJA_ID");
+
+                entity.Property(e => e.NrFakturyId)
+                    .HasColumnName("NR_FAKTURY_ID")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Element)
+                    .WithMany(p => p.MagazynCzesci)
+                    .HasForeignKey(d => d.ElementId)
+                    .HasConstraintName("FK_Czesci");
+
+                entity.HasOne(d => d.Kontrahent)
+                    .WithMany(p => p.MagazynCzesci)
+                    .HasForeignKey(d => d.KontrahentId)
+                    .HasConstraintName("FK_Kontrahent");
+
+                entity.HasOne(d => d.Lokacja)
+                    .WithMany(p => p.MagazynCzesci)
+                    .HasForeignKey(d => d.LokacjaId)
+                    .HasConstraintName("FK_Lokacje");
+            });
+
+            modelBuilder.Entity<MagazynKomponenty>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CenaJdnNetto)
+                    .HasColumnName("CENA_JDN_NETTO")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.DataPrzyjecia)
+                    .HasColumnName("DATA_PRZYJECIA")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ElementId).HasColumnName("ELEMENT_ID");
+
+                entity.Property(e => e.Ilosc).HasColumnName("ILOSC");
+
+                entity.Property(e => e.Jednostka)
+                    .HasColumnName("JEDNOSTKA")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.KontrahentId).HasColumnName("KONTRAHENT_ID");
+
+                entity.Property(e => e.LokacjaId).HasColumnName("LOKACJA_ID");
+
+                entity.Property(e => e.NrFakturyId)
+                    .HasColumnName("NR_FAKTURY_ID")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Element)
+                    .WithMany(p => p.MagazynKomponenty)
+                    .HasForeignKey(d => d.ElementId)
+                    .HasConstraintName("FK_Komponenty");
+
+                entity.HasOne(d => d.Kontrahent)
+                    .WithMany(p => p.MagazynKomponenty)
+                    .HasForeignKey(d => d.KontrahentId)
+                    .HasConstraintName("FK_KontrahentKomponenty");
+
+                entity.HasOne(d => d.Lokacja)
+                    .WithMany(p => p.MagazynKomponenty)
+                    .HasForeignKey(d => d.LokacjaId)
+                    .HasConstraintName("FK_LokacjePKomponenty");
+            });
+
+            modelBuilder.Entity<MagazynProdukty>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CenaJdnNetto)
+                    .HasColumnName("CENA_JDN_NETTO")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.DataPrzyjecia)
+                    .HasColumnName("DATA_PRZYJECIA")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ElementId)
+                    .HasColumnName("ELEMENT_ID")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ilosc).HasColumnName("ILOSC");
+
+                entity.Property(e => e.Jednostka)
+                    .HasColumnName("JEDNOSTKA")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.KontrahentId).HasColumnName("KONTRAHENT_ID");
+
+                entity.Property(e => e.LokacjaId).HasColumnName("LOKACJA_ID");
+
+                entity.Property(e => e.NrFakturyId)
+                    .HasColumnName("NR_FAKTURY_ID")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Element)
+                    .WithMany(p => p.MagazynProdukty)
+                    .HasForeignKey(d => d.ElementId)
+                    .HasConstraintName("FK_Produkty");
+
+                entity.HasOne(d => d.Kontrahent)
+                    .WithMany(p => p.MagazynProdukty)
+                    .HasForeignKey(d => d.KontrahentId)
+                    .HasConstraintName("FK_KontrahentProdukty");
+
+                entity.HasOne(d => d.Lokacja)
+                    .WithMany(p => p.MagazynProdukty)
+                    .HasForeignKey(d => d.LokacjaId)
+                    .HasConstraintName("FK_LokacjeProdukty");
             });
 
             modelBuilder.Entity<Maszyny>(entity =>
@@ -340,6 +597,8 @@ namespace YouKpiBackend.DbContexts
 
                 entity.Property(e => e.Medium).HasMaxLength(150);
 
+                entity.Property(e => e.PriceInOfferDay).HasColumnType("decimal(18, 2)");
+
                 entity.Property(e => e.ProductId)
                     .IsRequired()
                     .HasColumnName("ProductID")
@@ -347,6 +606,8 @@ namespace YouKpiBackend.DbContexts
                     .IsUnicode(false);
 
                 entity.Property(e => e.Sale).HasMaxLength(50);
+
+                entity.Property(e => e.SalesPrice).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.W).HasMaxLength(50);
 
@@ -388,8 +649,6 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<Pracownik>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Email).HasMaxLength(50);
 
                 entity.Property(e => e.Login)

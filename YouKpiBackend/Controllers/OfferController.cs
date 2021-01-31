@@ -101,6 +101,7 @@ namespace YouKpiBackend.Controllers
                 foreach (var item in entity.OfferLines.ToList())
                 {
                     item.OfferId = offer.Id;
+                    item.Product = null;
                     offer.OfferLines.Add(item);
                 }
 

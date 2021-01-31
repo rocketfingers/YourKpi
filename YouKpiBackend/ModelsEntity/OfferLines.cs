@@ -20,6 +20,8 @@ namespace YouKpiBackend.ModelsEntity
         public string Medium { get; set; }
         public string AdditionalEquipment { get; set; }
         public string Sale { get; set; }
+        public decimal? PriceInOfferDay { get; set; }
+        public decimal? SalesPrice { get; set; }
 
         public virtual Offer Offer { get; set; }
         public virtual Produkty Product { get; set; }

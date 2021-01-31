@@ -167,9 +167,10 @@
                       color
                       :items="products"
                       item-text="id"
-                      item-value="id"
+                      return-object
                       :rules="[requiredRule]"
-                      v-model="props.item.productId"
+                      @change="changeProduct(props.item)"
+                      v-model="props.item.product"
                     ></v-autocomplete>
                     <v-text-field
                       v-else-if="header.value == 'quantity'"
@@ -192,9 +193,21 @@
                       v-model="props.item.additionalEquipment"
                       :rules="[requiredRule]"
                     ></v-text-field>
-                    <v-text-field
+                    <!-- <v-text-field
                       v-else-if="header.value == 'sale'"
                       v-model="props.item.sale"
+                      :rules="[requiredRule]"
+                    ></v-text-field> -->
+                    <v-text-field
+                      v-else-if="header.value == 'priceInOfferDay'"
+                      type="number"
+                      v-model="props.item.priceInOfferDay"
+                      :rules="[requiredRule]"
+                    ></v-text-field>
+                    <v-text-field
+                      v-else-if="header.value == 'salesPrice'"
+                      v-model="props.item.salesPrice"
+                      type="number"
                       :rules="[requiredRule]"
                     ></v-text-field>
                   </template>
@@ -228,6 +241,12 @@
                           </td>
                           <td class="text-xs-left">
                             {{ props.item.typZlecenia }}
+                          </td>
+                          <td class="text-xs-left">
+                            {{ props.item.priceInOfferDay }}
+                          </td>
+                          <td class="text-xs-left">
+                            {{ props.item.salesPrice }}
                           </td>
                         </tr>
                       </template>
@@ -267,7 +286,9 @@ export default {
         { text: 'W', value: 'w', visible: true },
         { text: 'Medium', value: 'medium', visible: true },
         { text: 'Dodatkowe wyposażenie', value: 'additionalEquipment', visible: true },
-        { text: 'Sale', value: 'sale', visible: true },
+        // { text: 'Sale', value: 'sale', visible: true },
+        { text: 'Cena w dniu oferty', value: 'priceInOfferDay', visible: true },
+        { text: 'Cena sprzedaży', value: 'salesPrice', visible: true },
         { text: 'Liczba procesów', value: 'processesNo', visible: true },
         { text: 'Akcje', value: 'actions', visible: true }
       ],
@@ -323,6 +344,13 @@ export default {
 
   },
   methods: {
+    changeProduct (item) {
+      if (item.product) {
+        item.productId = item.product.id
+        item.priceInOfferDay = item.product.cena
+        item.salesPrice = item.product.cena
+      }
+    },
     getSelectedOfferLineProcesses (item) {
       var selPro = []
       var $this = this
@@ -342,11 +370,27 @@ export default {
         this.$set(this.currentOffer, 'offerLines', [])
       }
 
-      this.currentOffer.offerLines.unshift({ id: 0, tempId: -1 - this.currentOffer.offerLines.length, productId: '', quantity: '', w: '', medium: '', additionalEquipment: '', sale: '', actions: '', isEdited: true, offerLineProcess: [] })
+      this.currentOffer.offerLines.unshift({
+        id: 0,
+        tempId: -1 - this.currentOffer.offerLines.length,
+        productId: '',
+        quantity: '',
+        w: '',
+        medium: '',
+        additionalEquipment: '',
+        priceInOfferDay: '',
+        salesPrice: '',
+        actions: '',
+        isEdited: true,
+        offerLineProcess: []
+      })
     },
     async editOffer (offer) {
+      if (offer.productId) {
+        offer.product = this.products.find(p => p.id === offer.productId)
+      }
       if (offer.isEdited) {
-        if (offer.productId.length === 0 || offer.quantity === 0 || offer.w.length === 0 || offer.medium.length === 0 || offer.additionalEquipment.length === 0 || offer.sale === 0) {
+        if (offer.productId.length === 0 || offer.quantity === 0 || offer.w.length === 0 || offer.medium.length === 0 || offer.additionalEquipment.length === 0 || offer.priceInOfferDay === 0 || offer.salesPrice === 0) {
           await this.$dialog.confirm({
             text: 'Uzupełnij dane!'
           })
