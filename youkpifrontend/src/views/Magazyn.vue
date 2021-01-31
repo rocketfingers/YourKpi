@@ -225,10 +225,6 @@ export default {
     initialise () {
       this.tableLoading = true
       this.getProducts()
-      this.getParts()
-      this.getComponents()
-      this.getContractors()
-      this.getItems()
     },
 
     getContractors () {
@@ -240,6 +236,7 @@ export default {
           $this.contractors.forEach(p => {
             p.showName = p.id + ', ' + p.name
           })
+          this.getItems()
         })
         .catch((e) => {
         })
@@ -255,6 +252,34 @@ export default {
             p.kontrahent = $this.contractors.find(c => c.id === p.kontrahentId.toString())
             if (p.kontrahent) {
               p.kontrahent = p.kontrahent.name
+            }
+            // eslint-disable-next-line no-debugger
+            debugger
+            switch (p.magazyn.id) {
+              case 1:
+                var item = $this.parts.find(part => part.id === p.elementId)
+                if (item) {
+                  p.nazwa = item.name
+                } else {
+                  p.nazwa = ''
+                }
+                break
+              case 2:
+                var item2 = $this.products.find(prod => prod.id === p.elementId)
+                if (item2) {
+                  p.nazwa = item2.id
+                } else {
+                  p.nazwa = ''
+                }
+                break
+              case 3:
+                var item3 = $this.components.find(comp => comp.id === p.elementId)
+                if (item3) {
+                  p.nazwa = item3.name
+                } else {
+                  p.nazwa = ''
+                }
+                break
             }
             p.dataPrzyjecia = $this.formatDateTimeYYYYMMDD(p.dataPrzyjecia)
           })
@@ -273,6 +298,7 @@ export default {
           $this.products.forEach(p => {
             p.showName = p.id + ', ' + p.name
           })
+          this.getParts()
         })
         .catch((e) => {
         })
@@ -286,6 +312,7 @@ export default {
           $this.parts.forEach(p => {
             p.showName = p.id + ', ' + p.name
           })
+          this.getComponents()
         })
         .catch((e) => {
         })
@@ -299,6 +326,7 @@ export default {
           $this.components.forEach(p => {
             p.showName = p.id + ', ' + p.name
           })
+          this.getContractors()
         })
         .catch((e) => {
         })
