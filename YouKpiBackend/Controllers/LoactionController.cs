@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
+using YouKpiBackend.ViewModels;
 
 namespace YouKpiBackend.Controllers
 {
@@ -25,6 +27,20 @@ namespace YouKpiBackend.Controllers
             try
             {
                 var res = await _ctx.Lokacja.ToListAsync();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllSimpleView()
+        {
+            try
+            {
+                var res = await _ctx.Lokacja.Select(x => new SimpleViewModel(x.Id.ToString(), x.Nazwa)).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)

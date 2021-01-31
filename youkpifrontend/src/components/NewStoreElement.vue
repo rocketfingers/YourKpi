@@ -4,32 +4,31 @@
       <v-flex xs12 md5>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-flex xs12>
-              <v-autocomplete
-                label="Magazyn"
-                outlined
-                :items="stores"
-                :rules="[requiredRule]"
-                return-object
-                item-text="name"
-                v-model="currentItem.magazyn"
-                @change="setElements(currentItem.magazyn)"
-                autocomplete
-              ></v-autocomplete>
-            </v-flex>
-            <v-flex xs12>
-              <v-autocomplete
-                label="Id"
-                outlined
-                :items="elements"
-                :rules="[requiredRule]"
-                item-value="id"
-                item-text="showName"
-                v-model="currentItem.elementId"
-                autocomplete
-              ></v-autocomplete>
-            </v-flex>
+            <v-autocomplete
+              label="Magazyn"
+              outlined
+              :items="stores"
+              :rules="[requiredRule]"
+              return-object
+              item-text="name"
+              v-model="currentItem.magazyn"
+              @change="setElements(currentItem.magazyn)"
+              autocomplete
+            ></v-autocomplete>
           </v-flex>
+          <v-flex xs12>
+            <v-autocomplete
+              label="Id"
+              outlined
+              :items="elements"
+              :rules="[requiredRule]"
+              item-value="id"
+              item-text="showName"
+              v-model="currentItem.elementId"
+              autocomplete
+            ></v-autocomplete>
+          </v-flex>
+
           <!-- <v-flex xs12>
             <v-text-field
               outlined
@@ -71,6 +70,7 @@
               color
               :rules="[requiredRule]"
               label="Cena jednostkowa netto"
+              type="number"
               v-model="currentItem.cenaJdnNetto"
             ></v-text-field>
           </v-flex>
@@ -101,7 +101,18 @@
               v-model="currentItem.dataPrzyjecia"
             ></v-text-field>
           </v-flex>
-
+          <v-flex xs12>
+            <v-autocomplete
+              label="Lokacja"
+              outlined
+              :items="locations"
+              :rules="[requiredRule]"
+              item-value="id"
+              item-text="showName"
+              v-model="currentItem.lokacjaId"
+              autocomplete
+            ></v-autocomplete>
+          </v-flex>
           <v-flex xs12>
             <v-text-field
               outlined
@@ -130,7 +141,8 @@ export default {
     components: Array,
     products: Array,
     parts: Array,
-    contractors: Array
+    contractors: Array,
+    locations: Array
   },
   data () {
     return {

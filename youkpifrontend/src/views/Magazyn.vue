@@ -22,6 +22,7 @@
                   :products="products"
                   :parts="parts"
                   :contractors="contractors"
+                  :locations="locations"
                 ></NewStoreElement>
               </v-form>
             </v-flex>
@@ -168,17 +169,16 @@ export default {
       getAllComponentsSimple: 'api/Component/GetAllSimpleView',
       getAllProductsSimple: 'api/Products/GetAllSimpleView',
       getAllPartsSimple: 'api/Parts/GetAllSimpleView',
+      getAllLocationsSimple: 'api/Loaction/GetAllSimpleView',
       getAllContractorsSimple: 'api/Contractor/GetAllSimpleView',
-
       addApi: 'api/Store/Create',
       editApi: 'api/Store/Update',
       deleteApi: 'api/Store/Delete',
       headers: [
-        // { text: 'Id', value: 'id' },
-        // { text: 'Lp', value: 'lp' },
         { text: 'Kontrahent', value: 'kontrahent' },
         { text: 'Data przyjęcia', value: 'dataPrzyjecia' },
         { text: 'Magazyn', value: 'magazynName' },
+        { text: 'Lokacja', value: 'lokacjaName' },
         { text: 'Numer faktury', value: 'nrFakturyId' },
         { text: 'Id', value: 'elementId' },
         { text: 'Nazwa', value: 'nazwa' },
@@ -199,6 +199,7 @@ export default {
       parts: [],
       products: [],
       components: [],
+      locations: [],
       stores: [
         { id: 1, name: 'Części' },
         { id: 2, name: 'Produkty' },
@@ -224,9 +225,22 @@ export default {
   methods: {
     initialise () {
       this.tableLoading = true
-      this.getProducts()
+      this.getLoactions()
     },
-
+    getLoactions () {
+      var $this = this
+      this.$http
+        .get(this.getAllLocationsSimple)
+        .then((Response) => {
+          $this.locations = Response.data
+          $this.locations.forEach(p => {
+            p.showName = p.id + ', ' + p.name
+          })
+          this.getProducts()
+        })
+        .catch((e) => {
+        })
+    },
     getContractors () {
       var $this = this
       this.$http
@@ -252,6 +266,12 @@ export default {
             p.kontrahent = $this.contractors.find(c => c.id === p.kontrahentId.toString())
             if (p.kontrahent) {
               p.kontrahent = p.kontrahent.name
+            }
+            p.lokacjaName = ''
+            var lokacjaObj = $this.locations.find(l => l.id === p.lokacjaId?.toString())
+
+            if (lokacjaObj) {
+              p.lokacjaName = lokacjaObj.name
             }
             switch (p.magazyn.id) {
               case 1:
