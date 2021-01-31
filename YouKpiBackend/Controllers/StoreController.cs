@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
@@ -108,23 +109,47 @@ namespace YouKpiBackend.Controllers
         //    }
         //}
 
-        //[HttpDelete("[action]")]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    try
-        //    {
-        //        var item = _ctx.ReasonCodes.FirstOrDefault(p => p.Id == id);
-        //        if (item != null)
-        //        {
-        //            _ctx.ReasonCodes.Remove(item);
-        //            await _ctx.SaveChangesAsync();
-        //        }
-        //        return Ok();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, ex.Message);
-        //    }
-        //}
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> Delete(int id, int magazynId)
+        {
+            try
+            {
+                switch (magazynId)
+                {
+                    case 1:
+                        var item = _ctx.MagazynCzesci.FirstOrDefault(p => p.Id == id);
+                        if (item != null)
+                        {
+                            _ctx.MagazynCzesci.Remove(item);
+                            await _ctx.SaveChangesAsync();
+                        }
+                        return Ok();
+
+                    case 2:
+                        var item2= _ctx.MagazynProdukty.FirstOrDefault(p => p.Id == id);
+                        if (item2 != null)
+                        {
+                            _ctx.MagazynProdukty.Remove(item2);
+                            await _ctx.SaveChangesAsync();
+                        }
+                        return Ok();
+
+                    case 3:
+                        var item3 = _ctx.MagazynKomponenty.FirstOrDefault(p => p.Id == id);
+                        if (item3 != null)
+                        {
+                            _ctx.MagazynKomponenty.Remove(item3);
+                            await _ctx.SaveChangesAsync();
+                        }
+                        return Ok();
+                    default:
+                        throw new Exception("Nieparwidlowy magazyn!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

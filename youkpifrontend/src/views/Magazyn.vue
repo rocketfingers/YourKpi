@@ -48,56 +48,54 @@
 
     <v-layout row wrap elevation-3>
       <v-flex xs12>
-        <v-toolbar flat color="white" class="mt-5">
-          <v-layout row wrap ma-3>
-            <v-flex xs12 md4>
-              <v-layout row wrap ma-3>
-                <v-autocomplete
-                  label="Wybierz magazyn"
-                  :items="stores"
-                  :rules="[requiredRule]"
-                  hide-details
-                  item-text="name"
-                  return-object
-                  v-model="selectedStores"
-                  multiple
-                  autocomplete
-                ></v-autocomplete>
-              </v-layout>
-            </v-flex>
-            <v-spacer></v-spacer>
-            <v-flex xs12 md2>
-              <v-layout row wrap justify-space-around>
-                <v-switch
-                  v-model="storeReport"
-                  label="Raport magazynu"
-                ></v-switch>
-              </v-layout>
-            </v-flex>
-            <v-spacer></v-spacer>
-            <v-flex xs12 md5>
-              <v-layout row wrap ma-3>
-                <v-text-field
-                  append-icon="search"
-                  label="Wyszukaj"
-                  single-line
-                  hide-details
-                  class="elevation-1"
-                  v-model="search"
-                >
-                </v-text-field>
-                <v-btn
-                  color="primary"
-                  dark
-                  class="mb-2"
-                  @click="add()"
-                  v-show="!storeReport"
-                  >Nowy</v-btn
-                >
-              </v-layout>
-            </v-flex>
-          </v-layout>
-        </v-toolbar>
+        <v-layout row wrap ma-3 elevation-3>
+          <v-flex xs12 md4>
+            <v-layout row wrap ma-3>
+              <v-autocomplete
+                label="Wybierz magazyn"
+                :items="stores"
+                :rules="[requiredRule]"
+                hide-details
+                item-text="name"
+                return-object
+                v-model="selectedStores"
+                multiple
+                autocomplete
+              ></v-autocomplete>
+            </v-layout>
+          </v-flex>
+          <v-spacer></v-spacer>
+          <v-flex xs12 md2>
+            <v-layout row wrap justify-space-around>
+              <v-switch
+                v-model="storeReport"
+                label="Raport magazynu"
+              ></v-switch>
+            </v-layout>
+          </v-flex>
+          <v-spacer></v-spacer>
+          <v-flex xs12 md5>
+            <v-layout row wrap ma-3>
+              <v-text-field
+                append-icon="search"
+                label="Wyszukaj"
+                single-line
+                hide-details
+                class="elevation-1"
+                v-model="search"
+              >
+              </v-text-field>
+              <v-btn
+                color="primary"
+                dark
+                class="mb-2"
+                @click="add()"
+                v-show="!storeReport"
+                >Nowy</v-btn
+              >
+            </v-layout>
+          </v-flex>
+        </v-layout>
       </v-flex>
       <v-flex xs12>
         <v-data-table
@@ -350,6 +348,7 @@ export default {
         .post(this.addApi, item)
         .then((Result) => {
           this.items.push(Result.data)
+          this.initialise()
         })
         .catch((e) => {
         })
@@ -380,7 +379,10 @@ export default {
       if (res) {
         var indexOfItem = this.items.indexOf(item)
         this.$http.delete(this.deleteApi, {
-          params: { id: item.id }
+          params: {
+            id: item.id,
+            magazynId: item.magazyn.id
+          }
         })
           .then(Result => {
             this.items.splice(indexOfItem, 1)
