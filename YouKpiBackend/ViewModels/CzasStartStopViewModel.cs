@@ -11,5 +11,11 @@ namespace YouKpiBackend.ViewModels
         public int OfferLineId { get; set; }
         public int StepNum { get; set; }
         public int PracownikId { get; set; }
+        public StartOrStop StartStop { get; set; }
+    }
+    public enum StartOrStop
+    {
+        Start = 0,
+        Stop = 1
     }
 }

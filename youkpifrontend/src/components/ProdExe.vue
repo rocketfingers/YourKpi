@@ -141,12 +141,13 @@
                                     <v-icon
                                       class="mr-2"
                                       color="primary"
-                                      @click="registerTime(props.item)"
+                                      @click="registerTime(props.item, 0)"
                                       v-bind="attrs"
                                       v-on="on"
                                       :disabled="
                                         props.item.zakonczone ||
-                                        props.item.stepStartedByMe
+                                        props.item.stepStartedByMe ||
+                                        props.item.blocked
                                       "
                                     >
                                       hourglass_top
@@ -161,12 +162,13 @@
                                     <v-icon
                                       class="mr-2"
                                       color="primary"
-                                      @click="registerTime(props.item)"
+                                      @click="registerTime(props.item, 1)"
                                       v-bind="attrs"
                                       v-on="on"
                                       :disabled="
                                         props.item.zakonczone ||
-                                        !props.item.stepStartedByMe
+                                        !props.item.stepStartedByMe ||
+                                        props.item.blocked
                                       "
                                     >
                                       hourglass_bottom
@@ -186,7 +188,8 @@
                                       v-on="on"
                                       :disabled="
                                         props.item.zakonczone ||
-                                        !props.item.stepStarted
+                                        !props.item.stepStarted ||
+                                        props.item.blocked
                                       "
                                     >
                                       arrow_forward_ios
@@ -297,6 +300,7 @@
 
 <script>
 import * as v from '../main.js'
+import Vue from 'vue'
 import ProdExeExpand from '../components/ProdExeExpand.vue'
 export default {
   name: 'ProdExe',
@@ -393,20 +397,28 @@ export default {
       }
       return 'yellow lighten-5'
     },
-    async registerTime (item) {
+    async registerTime (item, startstop) {
+      item.blocked = true
       this.currentStepItem = item
       const this2 = this
+
       const model = {
         ProcessId: this.currentItem.processId,
         OfferLineId: this.currentItem.offerLineId,
-        StepNum: this.currentStepItem.stepNum
+        StepNum: this.currentStepItem.stepNum,
+        StartStop: startstop
       }
-      var res = await v.axiosInstance.put('api/Production/TimeStartStop', model)
+      const link = startstop === 0 ? 'api/Production/TimeStart' : 'api/Production/TimeStop'
+      var res = await v.axiosInstance.put(link, model)
       if (this2.currentStepItem.stepStarted === false) {
         this2.currentStepItem.stepStarted = true
       }
-      this2.currentStepItem.timeSpendMe += res.data
-      this2.currentItem.czasSpedzony = this2.currentItem.czasSpedzony + res.data
+      if (startstop === 1) {
+        this2.currentStepItem.timeSpendMe += res.data
+        this2.currentStepItem.timeSpendOther += res.data
+        this2.currentItem.czasSpedzony += res.data
+      }
+      item.blocked = false
       item.stepStartedByMe = !item.stepStartedByMe
     },
 
@@ -469,7 +481,13 @@ export default {
         this.stepsLoading = true
         this.stepsData = []
         v.axiosInstance.get('api/Production/GetSteps?offerLineId=' + item.item.offerLineId + '&processId=' + item.item.processId)
-          .then(Response => { this.stepsData = Response.data; this.stepsLoading = false })
+          .then(Response => {
+            this.stepsData = Response.data
+            this.stepsData.forEach(element => {
+              Vue.set(element, 'blocked', false)
+            })
+            this.stepsLoading = false
+          })
       }
 
       item.expand(!item.isExpanded)

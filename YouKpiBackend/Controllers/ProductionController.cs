@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using YouKpiBackend.BusinessLibrary.Production;
 using YouKpiBackend.DbContexts;
@@ -103,12 +102,11 @@ namespace YouKpiBackend.Controllers
                 Step = model.StepNum,
                 StartedOn = DateTime.Now,
                 ReasonCodeId = model.ReasonCodeId
-           };
+            };
             if (model.Zakonczenie)
             {
                 itemToAdd.ClosedOn = DateTime.Now;
                 itemToAdd.ClosesBy = userId;
-                
             }
             _dbContext.StepOfferWykonanie.Add(itemToAdd);
         }
@@ -131,79 +129,62 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpPut("[action]")]
-        public async Task<IActionResult> TimeStartStop([FromBody] CzasStartStopViewModel model)
-        { 
+        public async Task<IActionResult> TimeStop([FromBody] CzasStartStopViewModel model)
+        {
             try
             {
-                int timeToAdd = 0;
                 var userId = this.GetUserId();
                 model.PracownikId = userId;
-                var isStepFinished = await _dbContext.StepOfferWykonanie.AnyAsync(p =>
-                p.ProcessId == model.ProcessId
-                && p.OfferLineId == model.OfferLineId
-                && p.Step == model.StepNum && p.Zakonczonie == true);
-
-                if (isStepFinished)
-                {
-                    throw new StepAlreadyClosedException("Step został już zakończony i pomiary czasu zostaly zastopowane");
-                }
-
-                PracownikCzasStep find = null;
-                find = await _dbContext.PracownikCzasStep.FirstOrDefaultAsync(x =>
-                 x.PracownikId == model.PracownikId
-                 && x.OfferLinesId == model.OfferLineId
-                 && x.ProcessId == model.ProcessId
-                 && x.Step == model.StepNum
-                 && x.CzasStop == null);
-                if (find != null)
-                {
-                    timeToAdd = DateTime.Now.Subtract(find.CzasStart.Value).Minutes;
-                    find.LiczbaMinut = timeToAdd;
-                    find.CzasStop = DateTime.Now;
-                }
-                else
-                {
-                    bool wasStepEarlierStarted;
-                    int wasStepEarlierStartedCountItems = await _dbContext.PracownikCzasStep.CountAsync(x =>
-                   x.PracownikId == model.PracownikId
-                   && x.OfferLinesId == model.OfferLineId
-                   && x.ProcessId == model.ProcessId
-                   && x.Step == model.StepNum
-                   && x.CzasStop != null);
-
-                    wasStepEarlierStarted = wasStepEarlierStartedCountItems > 0;
-
-                    if (!wasStepEarlierStarted)
-                    {
-                        var itemToUpdateStartedTime = await _dbContext.StepOfferWykonanie.FirstOrDefaultAsync(x =>
-                         x.OfferLineId == model.OfferLineId
-                         && x.ProcessId == model.ProcessId
-                         && x.Step == model.StepNum); if (itemToUpdateStartedTime == null)
-                        {
-                            AddStepOfferWykonanie(new SaveCompleteStepViewModel() {
-                                OfferLineId = model.OfferLineId,
-                                ProcessId = model.ProcessId,
-                                StepNum = model.StepNum                                
-                            }, this.GetUserId());
-                        }
-                        else
-                        {
-                            itemToUpdateStartedTime.StartedOn = DateTime.Now;
-                        }
-                    }
-
-                    _dbContext.PracownikCzasStep.Add(new PracownikCzasStep()
-                    {
-                        Id = 0,
-                        CzasStart = DateTime.Now,
-                        OfferLinesId = model.OfferLineId,
-                        PracownikId = userId,
-                        ProcessId = model.ProcessId,
-                        Step = model.StepNum
-                    });
-                }
+                await CheckIsStepClosed(model);
+                var timeToAdd = await StopTime(model);
                 await _dbContext.SaveChangesAsync();
-                return Ok(timeToAdd);
+                return Ok(timeToAdd); 
+            }
+            catch (StepAlreadyClosedException ex)
+            {
+                return StatusCode(StatusCodes.Status422UnprocessableEntity, "Step został już zakończony.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPut("[action]")]
+        public async Task<IActionResult> TimeStart([FromBody] CzasStartStopViewModel model)
+        {
+            try
+            {
+                var userId = this.GetUserId();
+                model.PracownikId = userId;
+
+                var OtherStepStarted = await _dbContext.PracownikCzasStep.FirstOrDefaultAsync(p =>
+                    p.PracownikId == model.PracownikId
+                    && p.CzasStart != null
+                    && p.CzasStop == null);
+                // nie trzeba stprawdzac czy ten step jest otwarty, bo to sprawdza ogolnie wszystkie stepy
+                if (OtherStepStarted != null)
+                {
+                    throw new AnotherStepOpenedException($"{OtherStepStarted.ProcessId}-{OtherStepStarted.OfferLinesId}");
+                }
+
+                await createParentTableIfDoestExist(model);
+
+                _dbContext.PracownikCzasStep.Add(new PracownikCzasStep()
+                {
+                    Id = 0,
+                    CzasStart = DateTime.Now,
+                    OfferLinesId = model.OfferLineId,
+                    PracownikId = userId,
+                    ProcessId = model.ProcessId,
+                    Step = model.StepNum
+                });
+                await _dbContext.SaveChangesAsync();
+                return Ok();
+            }
+            catch (AnotherStepOpenedException ex)
+            {
+                return BadRequest("Jest już otwarty inny step w linii - " + ex.StepOpenedId);
             }
             catch (StepAlreadyClosedException ex)
             {
@@ -213,6 +194,74 @@ namespace YouKpiBackend.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
+        }
+
+        private async Task createParentTableIfDoestExist(CzasStartStopViewModel model)
+        {
+            bool wasStepEarlierStarted;
+
+            int wasStepEarlierStartedCountItems = await _dbContext.PracownikCzasStep.CountAsync(x =>
+               x.PracownikId == model.PracownikId
+               && x.OfferLinesId == model.OfferLineId
+               && x.ProcessId == model.ProcessId
+               && x.Step == model.StepNum
+               && x.CzasStop != null);
+
+            wasStepEarlierStarted = wasStepEarlierStartedCountItems > 0;
+
+            if (!wasStepEarlierStarted)
+            {
+                var itemToUpdateStartedTime = await _dbContext.StepOfferWykonanie.FirstOrDefaultAsync(x =>
+                 x.OfferLineId == model.OfferLineId
+                 && x.ProcessId == model.ProcessId
+                 && x.Step == model.StepNum);
+                if (itemToUpdateStartedTime == null)
+                {
+                    AddStepOfferWykonanie(new SaveCompleteStepViewModel()
+                    {
+                        OfferLineId = model.OfferLineId,
+                        ProcessId = model.ProcessId,
+                        StepNum = model.StepNum
+                    }, this.GetUserId());
+                }
+                else
+                {
+                    itemToUpdateStartedTime.StartedOn = DateTime.Now;
+                }
+            }
+        }
+
+        private async Task CheckIsStepClosed(CzasStartStopViewModel model)
+        {
+            var isStepFinished = await _dbContext.StepOfferWykonanie.AnyAsync(p =>
+                p.ProcessId == model.ProcessId
+                && p.OfferLineId == model.OfferLineId
+                && p.Step == model.StepNum && p.Zakonczonie == true);
+
+            if (isStepFinished)
+            {
+                throw new StepAlreadyClosedException("Step został już zakończony i pomiary czasu zostaly zastopowane");
+            }
+        }
+
+        private async Task<int> StopTime(CzasStartStopViewModel model)
+        {
+            int timeToAdd = 0;
+            PracownikCzasStep find = null;
+            find = await _dbContext.PracownikCzasStep.FirstOrDefaultAsync(x =>
+                x.PracownikId == model.PracownikId
+                && x.OfferLinesId == model.OfferLineId
+                && x.ProcessId == model.ProcessId
+                && x.Step == model.StepNum
+                && x.CzasStop == null);
+
+            if (find != null)
+            {
+                timeToAdd = (int)DateTime.Now.Subtract(find.CzasStart.Value).TotalMinutes;
+                find.LiczbaMinut = timeToAdd;
+                find.CzasStop = DateTime.Now;
+            }
+            return timeToAdd;
         }
 
         [HttpGet("[action]")]
@@ -246,9 +295,9 @@ namespace YouKpiBackend.Controllers
                     && x.ProcessId == processId
                     && x.Step == p.StepNum
                     && x.CzasStop == null),
-                    TimeSpendMe = _dbContext.PracownikCzasStep.Where(x => 
+                    TimeSpendMe = _dbContext.PracownikCzasStep.Where(x =>
                     x.PracownikId == userId
-                    && x.OfferLinesId == offerLineId 
+                    && x.OfferLinesId == offerLineId
                     && x.ProcessId == processId && x.Step == p.StepNum).Sum(x => x.LiczbaMinut),
                     TimeSpendOther = _dbContext.PracownikCzasStep.Where(x =>
                       x.OfferLinesId == offerLineId
@@ -256,7 +305,7 @@ namespace YouKpiBackend.Controllers
                 }).ToListAsync();
 
                 var wykonanieList = await _dbContext.StepOfferWykonanie.Where(p =>
-                p.OfferLineId == offerLineId 
+                p.OfferLineId == offerLineId
                 && p.ProcessId == processId)
                     .ToListAsync();
 
@@ -293,7 +342,6 @@ namespace YouKpiBackend.Controllers
                         if (curStep.ShouldStartBefore > DateTime.Now.AddDays(1))
                         {
                             curStep.PlannedStartStatus = TimeToEnd.OnTime;
-
                         }
                         else if (curStep.ShouldStartBefore >= DateTime.Now && curStep.ShouldStartBefore < DateTime.Now.AddDays(1))
                         {
@@ -322,7 +370,6 @@ namespace YouKpiBackend.Controllers
                     {
                         curStep.PlannedStartStatus = TimeToEnd.Unknown;
                     }
-                    
                 }
                 return Ok(steps);
             }
