@@ -409,7 +409,7 @@ export default {
 
     beforeSaveValidation () {
       // eslint-disable-next-line no-debugger
-      // debuggers
+      // debugger
 
       if (!this.currentOffer.offerLines) {
         this.$dialog.warning({

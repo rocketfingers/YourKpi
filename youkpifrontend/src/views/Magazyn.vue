@@ -253,8 +253,6 @@ export default {
             if (p.kontrahent) {
               p.kontrahent = p.kontrahent.name
             }
-            // eslint-disable-next-line no-debugger
-            debugger
             switch (p.magazyn.id) {
               case 1:
                 var item = $this.parts.find(part => part.id === p.elementId)
@@ -383,7 +381,7 @@ export default {
     },
 
     edit (item, index) {
-      this.formTitle = 'Edytuj ' + item.idDifferenceReasonCode
+      this.formTitle = 'Edytuj ' + item.nazwa
       this.editMode = true
       this.editedIndex = index
       this.showNewDialog = true

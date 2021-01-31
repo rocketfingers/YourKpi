@@ -147,6 +147,8 @@ export default {
   },
   watch: {
     currentItem (val) {
+      this.setElements(this.currentItem.magazyn)
+
       this.$emit('editedItem', this.currentItem)
     }
   },
@@ -172,6 +174,9 @@ export default {
   created () {
   },
   destroyed () {
+  },
+  mounted () {
+    this.setElements(this.currentItem.magazyn)
   }
 }
 </script>
