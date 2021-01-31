@@ -265,6 +265,7 @@ export default {
             p.magazynName = p.magazyn.name
             p.kontrahent = $this.contractors.find(c => c.id === p.kontrahentId.toString())
             if (p.kontrahent) {
+              p.kontrahentId = p.kontrahent
               p.kontrahent = p.kontrahent.name
             }
             p.lokacjaName = ''
@@ -272,6 +273,7 @@ export default {
 
             if (lokacjaObj) {
               p.lokacjaName = lokacjaObj.name
+              p.lokacjaId = lokacjaObj
             }
             switch (p.magazyn.id) {
               case 1:
