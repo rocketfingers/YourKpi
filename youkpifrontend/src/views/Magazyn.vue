@@ -252,7 +252,7 @@ export default {
           $this.items = Response.data
           $this.items.forEach(p => {
             p.magazynName = p.magazyn.name
-            p.kontrahent = $this.contractors.find(c => c.id === p.kontrahentId)
+            p.kontrahent = $this.contractors.find(c => c.id === p.kontrahentId.toString())
             if (p.kontrahent) {
               p.kontrahent = p.kontrahent.name
             }
@@ -368,6 +368,7 @@ export default {
       this.$http
         .put(this.editApi, item)
         .then((Result) => {
+          this.initialise()
         })
         .catch((e) => {})
     },

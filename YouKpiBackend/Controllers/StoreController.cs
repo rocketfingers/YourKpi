@@ -87,27 +87,88 @@ namespace YouKpiBackend.Controllers
             }
         }
 
-        //[HttpPut("[action]")]
-        //public async Task<IActionResult> Update([FromBody] ReasonCodes entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        return BadRequest("Bad model");
-        //    }
-        //    try
-        //    {
-        //        var reasonCode = _ctx.ReasonCodes.FirstOrDefault(p => p.Id == entity.Id);
-        //        reasonCode.Opis = entity.Opis;
-        //        reasonCode.IdDifferenceReasonCode = entity.IdDifferenceReasonCode;
-        //        await _ctx.SaveChangesAsync();
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Update([FromBody] StoreElementViewModel entity)
+        {
+            if (entity == null)
+            {
+                return BadRequest("Bad model");
+            }
+            try
+            {
+                switch (entity.Magazyn.Id)
+                {
+                    case 1:
+                        var item = _ctx.MagazynCzesci.FirstOrDefault(p => p.Id == entity.Id);
+                        if (item != null)
+                        {
+                            item.CenaJdnNetto = entity.CenaJdnNetto;
+                            item.DataPrzyjecia = entity.DataPrzyjecia;
+                            item.Element = null;
+                            item.ElementId = entity.ElementId;
+                            item.Ilosc = entity.Ilosc;
+                            item.Jednostka = entity.Jednostka;
+                            item.Kontrahent = null;
+                            item.KontrahentId = entity.KontrahentId;
+                            item.Lokacja = null;
+                            item.LokacjaId = entity.LokacjaId;
+                            item.NrFakturyId = entity.NrFakturyId;
 
-        //        return NoContent();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        //    }
-        //}
+                            await _ctx.SaveChangesAsync();
+                        }
+                        return NoContent();
+                    case 2:
+                        var item2 = _ctx.MagazynProdukty.FirstOrDefault(p => p.Id == entity.Id);
+                        if (item2 != null)
+                        {
+                            item2.CenaJdnNetto = entity.CenaJdnNetto;
+                            item2.DataPrzyjecia = entity.DataPrzyjecia;
+                            item2.Element = null;
+                            item2.ElementId = entity.ElementId;
+                            item2.Ilosc = entity.Ilosc;
+                            item2.Jednostka = entity.Jednostka;
+                            item2.Kontrahent = null;
+                            item2.KontrahentId = entity.KontrahentId;
+                            item2.Lokacja = null;
+                            item2.LokacjaId = entity.LokacjaId;
+                            item2.NrFakturyId = entity.NrFakturyId;
+
+                            await _ctx.SaveChangesAsync();
+                        }
+                        return NoContent();
+                    case 3:
+                        var item3 = _ctx.MagazynKomponenty.FirstOrDefault(p => p.Id == entity.Id);
+                        if (item3 != null)
+                        {
+                            item3.CenaJdnNetto = entity.CenaJdnNetto;
+                            item3.DataPrzyjecia = entity.DataPrzyjecia;
+                            item3.Element = null;
+                            int? elId = null;
+                            if (int.TryParse(entity.ElementId, out int res))
+                            {
+                                elId = res;
+                            }
+                            item3.ElementId = elId;
+                            item3.Ilosc = entity.Ilosc;
+                            item3.Jednostka = entity.Jednostka;
+                            item3.Kontrahent = null;
+                            item3.KontrahentId = entity.KontrahentId;
+                            item3.Lokacja = null;
+                            item3.LokacjaId = entity.LokacjaId;
+                            item3.NrFakturyId = entity.NrFakturyId;
+
+                            await _ctx.SaveChangesAsync();
+                        }
+                        return NoContent();
+                    default:
+                        throw new Exception("Nieparwidlowy magazyn!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
 
         [HttpDelete("[action]")]
         public async Task<IActionResult> Delete(int id, int magazynId)
@@ -126,7 +187,7 @@ namespace YouKpiBackend.Controllers
                         return Ok();
 
                     case 2:
-                        var item2= _ctx.MagazynProdukty.FirstOrDefault(p => p.Id == id);
+                        var item2 = _ctx.MagazynProdukty.FirstOrDefault(p => p.Id == id);
                         if (item2 != null)
                         {
                             _ctx.MagazynProdukty.Remove(item2);
