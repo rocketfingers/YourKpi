@@ -2,7 +2,7 @@
 
 namespace YouKpiBackend.ViewModels
 {
-    public class StoreElementViewModel 
+    public class StoreElementViewModel
     {
         public int Id { get; set; }
         public string ElementId { get; set; }
@@ -18,6 +18,15 @@ namespace YouKpiBackend.ViewModels
 
     public class StoreViewModel
     {
+        public StoreViewModel()
+        {
+
+        }
+        public StoreViewModel(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
         public int Id { get; set; }
         public string Name { get; set; }
     }

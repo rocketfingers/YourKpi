@@ -25,7 +25,7 @@
                 :rules="[requiredRule]"
                 item-value="id"
                 item-text="showName"
-                v-model="currentItem.idElement"
+                v-model="currentItem.elementId"
                 autocomplete
               ></v-autocomplete>
             </v-flex>
@@ -85,8 +85,9 @@
               outlined
               :items="contractors"
               item-text="showName"
+              item-value="id"
               :rules="[requiredRule]"
-              v-model="currentItem.kontrahent"
+              v-model="currentItem.kontrahentId"
               autocomplete
             ></v-autocomplete>
           </v-flex>
@@ -107,7 +108,7 @@
               color
               label="Numer faktury"
               :rules="[requiredRule]"
-              v-model="currentItem.numerFaktury"
+              v-model="currentItem.nrFakturyId"
             ></v-text-field>
           </v-flex>
         </v-layout>

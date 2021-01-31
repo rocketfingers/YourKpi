@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
+using YouKpiBackend.ModelsEntity;
 using YouKpiBackend.ViewModels;
 
 namespace YouKpiBackend.Controllers
@@ -31,9 +32,9 @@ namespace YouKpiBackend.Controllers
             {
                 var lst = new List<StoreElementViewModel>();
                 lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynCzesci.ToListAsync()));
+                lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynProdukty.ToListAsync()));
                 lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynKomponenty.ToListAsync()));
-                lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynKomponenty.ToListAsync()));
-                
+
                 return Ok(lst);
             }
             catch (Exception ex)
@@ -42,25 +43,48 @@ namespace YouKpiBackend.Controllers
             }
         }
 
-        //[HttpPost("[action]")]
-        //public async Task<IActionResult> Create([FromBody] ReasonCodes entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        return BadRequest("Bad model");
-        //    }
-        //    try
-        //    {
-        //        var res = _ctx.ReasonCodes.Add(entity);
-        //        _ctx.SaveChanges();
-        //        entity.Id = res.Entity.Id;
-        //        return Created("", entity);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        //    }
-        //}
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Create([FromBody] StoreElementViewModel entity)
+        {
+            if (entity == null)
+            {
+                return BadRequest("Bad model");
+            }
+            try
+            {
+                if (entity.Magazyn.Id > 0)
+                {
+                    switch (entity.Magazyn.Id)
+                    {
+                        case 1:
+                            var res1 = _ctx.MagazynCzesci.Add(_mapper.Map<MagazynCzesci>(entity));
+                            _ctx.SaveChanges();
+                            entity.Id = res1.Entity.Id;
+                            return Created("", entity);
+                        case 2:
+                            var res2 = _ctx.MagazynProdukty.Add(_mapper.Map<MagazynProdukty>(entity));
+                            _ctx.SaveChanges();
+                            entity.Id = res2.Entity.Id;
+                            return Created("", entity);
+                        case 3:
+                            var res3 = _ctx.MagazynKomponenty.Add(_mapper.Map<MagazynKomponenty>(entity));
+                            entity.Id = res3.Entity.Id;
+                            _ctx.SaveChanges();
+                            return Created("", entity);
+                        default:
+                            throw new Exception("Nieparwidlowy magazyn!");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Nie wybrano magazynu!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
 
         //[HttpPut("[action]")]
         //public async Task<IActionResult> Update([FromBody] ReasonCodes entity)

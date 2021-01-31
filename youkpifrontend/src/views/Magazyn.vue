@@ -66,6 +66,15 @@
               </v-layout>
             </v-flex>
             <v-spacer></v-spacer>
+            <v-flex xs12 md2>
+              <v-layout row wrap justify-space-around>
+                <v-switch
+                  v-model="storeReport"
+                  label="Raport magazynu"
+                ></v-switch>
+              </v-layout>
+            </v-flex>
+            <v-spacer></v-spacer>
             <v-flex xs12 md5>
               <v-layout row wrap ma-3>
                 <v-text-field
@@ -77,7 +86,12 @@
                   v-model="search"
                 >
                 </v-text-field>
-                <v-btn color="primary" dark class="mb-2" @click="add()"
+                <v-btn
+                  color="primary"
+                  dark
+                  class="mb-2"
+                  @click="add()"
+                  v-show="!storeReport"
                   >Nowy</v-btn
                 >
               </v-layout>
@@ -88,7 +102,7 @@
       <v-flex xs12>
         <v-data-table
           :headers="headers"
-          :items="items"
+          :items="filteredItems"
           class="elevation-1"
           item-key="id"
           :loading="tableLoading"
@@ -98,7 +112,7 @@
             <tr>
               <template v-for="(header, index) in headers">
                 <td :key="index" v-if="header.value == 'actions'">
-                  <v-layout>
+                  <v-layout v-show="!storeReport">
                     <v-flex xs4>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
@@ -163,16 +177,16 @@ export default {
       deleteApi: 'api/Store/Delete',
       headers: [
         // { text: 'Id', value: 'id' },
-        { text: 'Lp', value: 'lp' },
+        // { text: 'Lp', value: 'lp' },
         { text: 'Kontrahent', value: 'kontrahent' },
         { text: 'Data przyjęcia', value: 'dataPrzyjecia' },
-        { text: 'Magazyn', value: 'magazyn' },
-        { text: 'Numer faktury', value: 'numerFaktury' },
-        { text: 'Id', value: 'itemId' },
+        { text: 'Magazyn', value: 'magazynName' },
+        { text: 'Numer faktury', value: 'nrFakturyId' },
+        { text: 'Id', value: 'elementId' },
         { text: 'Nazwa', value: 'nazwa' },
         { text: 'Ilość', value: 'ilosc' },
         { text: 'Jednostka', value: 'jednostka' },
-        { text: 'Cena jednostkowa netto', value: 'cenaJednostkowaNetto' },
+        { text: 'Cena jednostkowa netto', value: 'cenaJdnNetto' },
         { text: 'Akcje', value: 'actions' }
       ],
       items: [],
@@ -195,10 +209,19 @@ export default {
       selectedStores: [
         { id: 1, name: 'Części' },
         { id: 2, name: 'Produkty' },
-        { id: 3, name: 'Komponenty' }]
+        { id: 3, name: 'Komponenty' }],
+      storeReport: false
     }
   },
-  computed: {},
+  computed: {
+    filteredItems () {
+      var res = this.items.filter(p => {
+        return (this.selectedStores.some(s => s.id === p.magazyn.id))
+      })
+
+      return res
+    }
+  },
   watch: {},
   methods: {
     initialise () {
@@ -229,6 +252,14 @@ export default {
         .get(this.getAll)
         .then((Response) => {
           $this.items = Response.data
+          $this.items.forEach(p => {
+            p.magazynName = p.magazyn.name
+            p.kontrahent = $this.contractors.find(c => c.id === p.kontrahentId)
+            if (p.kontrahent) {
+              p.kontrahent = p.kontrahent.name
+            }
+            p.dataPrzyjecia = $this.formatDateTimeYYYYMMDD(p.dataPrzyjecia)
+          })
           this.tableLoading = false
         })
         .catch((e) => {
@@ -274,11 +305,29 @@ export default {
         .catch((e) => {
         })
     },
+    formatDateTimeYYYYMMDD (date) {
+      if (date) {
+        if (date instanceof Date) {
+          return (
+            date.getFullYear() +
+            '-' +
+            (date.getMonth() + 1) +
+            '-' +
+            date.getDate()
+          )
+        }
+        if (date.toString().includes('T')) {
+          return date.toString().split('T')[0]
+        }
+
+        return date
+      }
+    },
 
     saveAction () {
-      // if (!this.$refs.newForm.validate()) {
-      //   return
-      // }
+      if (!this.$refs.newForm.validate()) {
+        return
+      }
       if (this.editedIndex > 0) {
         this.editAction(this.currentItem)
       } else {
