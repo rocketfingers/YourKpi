@@ -31,7 +31,9 @@
           ></v-text-field>
           <v-divider class="mx-2" inset vertical></v-divider>
 
-          <v-btn rounded color="primary"><v-icon>refresh</v-icon></v-btn>
+          <v-btn @click="getData()" rounded color="primary"
+            ><v-icon>refresh</v-icon></v-btn
+          >
         </v-toolbar>
         <v-data-table
           :headers="headers"
@@ -519,11 +521,16 @@ export default {
       }
 
       item.expand(!item.isExpanded)
+    },
+
+    getData () {
+      this.tableLoading = true
+      v.axiosInstance.get(this.getAllApi)
+        .then(Response => { this.data = Response.data; this.tableLoading = false })
     }
   },
   created () {
-    v.axiosInstance.get(this.getAllApi)
-      .then(Response => { this.data = Response.data; this.tableLoading = false })
+    this.getData()
     v.axiosInstance.get('api/ReasonCode/GetAllSimple').then(res => { this.reasons = res.data; this.reasonsLoading = false })
   },
   destroyed () {
