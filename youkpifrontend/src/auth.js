@@ -43,7 +43,7 @@ export default {
   },
   parseJwt (token) {
     var base64Url = token.split('.')[1]
-    var base64 = base64Url.replace('-', '+').replace('_', '/')
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
     var parsed = JSON.parse(this.b64DecodeUnicode(base64))
     return parsed
   },

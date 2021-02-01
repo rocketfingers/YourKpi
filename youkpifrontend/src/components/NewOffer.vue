@@ -294,7 +294,7 @@
 <script>
 import OfferLines from '../components/OfferLines'
 import ProcessSelector from '../components/ProcessSelector'
-import NewCustomer from '../components/NewCustomer'
+import NewCustomer from '../components/NewCustomer.vue'
 
 export default {
   name: 'NewProduct',

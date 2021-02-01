@@ -7,6 +7,7 @@ namespace YouKpiBackend.ModelsEntity
     public partial class ProdExe
     {
         public string Id { get; set; }
+        public string TypProcesu { get; set; }
         public int? OfferLineId { get; set; }
         public int OfferId { get; set; }
         public string IdentyfikatorZamowienia { get; set; }
@@ -25,5 +26,6 @@ namespace YouKpiBackend.ModelsEntity
         public string Wersja { get; set; }
         public int CzasSpedzony { get; set; }
         public int? WykonaneStepy { get; set; }
+        public int? IloscStepow { get; set; }
     }
 }

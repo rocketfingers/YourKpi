@@ -13,186 +13,147 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[BusiessArea]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Client]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Czesci]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Komponenty]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[Komponenty_todelete]",
-         "ObjectType": 0
-      },
-      {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Kontrahent]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Lokacja]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[MagazynCzesci]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[MagazynKomponenty]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[MagazynProdukty]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Maszyny]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[MozliweStatusyOferty]",
-         "ObjectType": 0
-      },
-      {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[MozliwyDN]",
-         "ObjectType": 0
-      },
-      {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[MozliwyOrderType]",
-         "ObjectType": 0
-      },
-      {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[MożliwaGrupaProcesu]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
+         "Name": "[dbo].[MozliweStatusyOferty]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MozliwyDN]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MozliwyOrderType]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Offer]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[OfferLineProcess]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[OfferLines]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[OfferProcess]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Pracownik]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[PracownikCzasStep]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[PracownikProcess]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Process]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[ProcessStepsToDelete]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
-         "Name": "[dbo].[ProdExe]",
-         "ObjectType": 0
-      },
-      {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[ProduktCzesci]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Produkty]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Produkty_old]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Projects]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[ReasonCodes]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[StepOfferWykonanie]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[Steps]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[StepsMachines]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[StepsToDelete]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[TypWyrobu]",
          "ObjectType": 0
       },
       {
-         "HasPrimaryKey": true,
          "Name": "[dbo].[TypWyrobuIdDn]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProdExe]",
+         "ObjectType": 3
       }
    ],
+   "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
    "UseDbContextSplitting": false,
    "UseFluentApiOnly": true,

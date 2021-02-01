@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import NewCustomer from '../components/NewCustomer'
+import NewCustomer from '../components/NewCustomer.vue'
 
 export default {
   name: 'Customers',

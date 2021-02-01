@@ -1,6 +1,21 @@
 <template>
   <div>
     <v-layout row wrap elevation-3>
+      <v-flex xs12 sm6 md4 xl3>
+        <v-select
+          :items="[
+            { id: 'O', name: 'Oferta' },
+            { id: 'P', name: 'Produkcja' },
+            { id: 'R', name: 'Rozwój' },
+          ]"
+          v-model="selectedTypes"
+          label="Typ"
+          multiple
+          chips
+          item-text="name"
+          item-value="id"
+        ></v-select>
+      </v-flex>
       <v-flex xs12>
         <v-toolbar flat color="white">
           <v-toolbar-title>{{ title }}</v-toolbar-title>
@@ -14,10 +29,13 @@
             class="elevation-1"
             v-model="searchTable"
           ></v-text-field>
+          <v-divider class="mx-2" inset vertical></v-divider>
+
+          <v-btn rounded color="primary"><v-icon>refresh</v-icon></v-btn>
         </v-toolbar>
         <v-data-table
           :headers="headers"
-          :items="data"
+          :items="filterData"
           :search="searchTable"
           :loading="tableLoading"
           :footer-props="footer"
@@ -33,7 +51,9 @@
                 <td :key="header.value" v-if="header.value === 'wykonaneStepy'">
                   <v-progress-circular
                     :rotate="-90"
-                    :value="props.item.wykonaneStepy * 10"
+                    :value="
+                      (props.item.wykonaneStepy / props.item.iloscStepow) * 100
+                    "
                     color="primary"
                   >
                     {{ props.item.wykonaneStepy }}
@@ -107,6 +127,19 @@
                           </td>
                           <td
                             :key="header.value"
+                            v-else-if="header.value === 'gScore'"
+                          >
+                            <span
+                              :class="{
+                                'red--text': props.item.gScore > 0,
+                                'green--text': props.item.gScore === 0,
+                                'blue--text': props.item.gScore < 0,
+                              }"
+                              >{{ props.item.gScore }}</span
+                            >
+                          </td>
+                          <td
+                            :key="header.value"
                             class="justify-center px-0"
                             v-else-if="header.value === 'actions'"
                           >
@@ -128,12 +161,13 @@
                                     <v-icon
                                       class="mr-2"
                                       color="primary"
-                                      @click="registerTime(props.item)"
+                                      @click="registerTime(props.item, 0)"
                                       v-bind="attrs"
                                       v-on="on"
                                       :disabled="
                                         props.item.zakonczone ||
-                                        props.item.stepStartedByMe
+                                        props.item.stepStartedByMe ||
+                                        props.item.blocked
                                       "
                                     >
                                       hourglass_top
@@ -148,12 +182,13 @@
                                     <v-icon
                                       class="mr-2"
                                       color="primary"
-                                      @click="registerTime(props.item)"
+                                      @click="registerTime(props.item, 1)"
                                       v-bind="attrs"
                                       v-on="on"
                                       :disabled="
                                         props.item.zakonczone ||
-                                        !props.item.stepStartedByMe
+                                        !props.item.stepStartedByMe ||
+                                        props.item.blocked
                                       "
                                     >
                                       hourglass_bottom
@@ -173,7 +208,8 @@
                                       v-on="on"
                                       :disabled="
                                         props.item.zakonczone ||
-                                        !props.item.stepStarted
+                                        !props.item.stepStarted ||
+                                        props.item.blocked
                                       "
                                     >
                                       arrow_forward_ios
@@ -284,6 +320,7 @@
 
 <script>
 import * as v from '../main.js'
+import Vue from 'vue'
 import ProdExeExpand from '../components/ProdExeExpand.vue'
 export default {
   name: 'ProdExe',
@@ -302,6 +339,7 @@ export default {
       // Settings
       showDialog: false,
       data: [],
+      selectedTypes: ['O', 'P', 'R'],
       stepsData: [],
       footerStepTable: { 'items-per-page-options': [-1] },
       stepsLoading: false,
@@ -316,6 +354,7 @@ export default {
         { text: 'Mój czas', value: 'timeSpendMe' },
         { text: 'Czas razem', value: 'timeSpendOther' },
         { text: 'Max rozpoczęcie', value: 'shouldStartBefore' },
+        { text: 'GScore', value: 'gScore' },
         { text: 'Zakończone', value: 'zakonczone' },
 
         { text: 'Akcje', value: 'actions' }
@@ -352,6 +391,9 @@ export default {
     }
   },
   computed: {
+    filterData () {
+      return this.data.filter(p => this.selectedTypes.indexOf(p.typProcesu) >= 0)
+    },
     formTitle: function () {
       if (this.editedIndex >= 0) {
         return this.editTitle
@@ -379,20 +421,28 @@ export default {
       }
       return 'yellow lighten-5'
     },
-    async registerTime (item) {
+    async registerTime (item, startstop) {
+      item.blocked = true
       this.currentStepItem = item
       const this2 = this
+
       const model = {
         ProcessId: this.currentItem.processId,
         OfferLineId: this.currentItem.offerLineId,
-        StepNum: this.currentStepItem.stepNum
+        StepNum: this.currentStepItem.stepNum,
+        StartStop: startstop
       }
-      var res = await v.axiosInstance.put('api/Production/TimeStartStop', model)
+      const link = startstop === 0 ? 'api/Production/TimeStart' : 'api/Production/TimeStop'
+      var res = await v.axiosInstance.put(link, model)
       if (this2.currentStepItem.stepStarted === false) {
         this2.currentStepItem.stepStarted = true
       }
-      this2.currentStepItem.timeSpendMe += res.data
-      this2.currentItem.czasSpedzony = this2.currentItem.czasSpedzony + res.data
+      if (startstop === 1) {
+        this2.currentStepItem.timeSpendMe += res.data
+        this2.currentStepItem.timeSpendOther += res.data
+        this2.currentItem.czasSpedzony += res.data
+      }
+      item.blocked = false
       item.stepStartedByMe = !item.stepStartedByMe
     },
 
@@ -455,7 +505,13 @@ export default {
         this.stepsLoading = true
         this.stepsData = []
         v.axiosInstance.get('api/Production/GetSteps?offerLineId=' + item.item.offerLineId + '&processId=' + item.item.processId)
-          .then(Response => { this.stepsData = Response.data; this.stepsLoading = false })
+          .then(Response => {
+            this.stepsData = Response.data
+            this.stepsData.forEach(element => {
+              Vue.set(element, 'blocked', false)
+            })
+            this.stepsLoading = false
+          })
       }
 
       item.expand(!item.isExpanded)
