@@ -433,17 +433,21 @@ export default {
         StartStop: startstop
       }
       const link = startstop === 0 ? 'api/Production/TimeStart' : 'api/Production/TimeStop'
-      var res = await v.axiosInstance.put(link, model)
-      if (this2.currentStepItem.stepStarted === false) {
-        this2.currentStepItem.stepStarted = true
+      try {
+        var res = await v.axiosInstance.put(link, model)
+        if (this2.currentStepItem.stepStarted === false) {
+          this2.currentStepItem.stepStarted = true
+        }
+        if (startstop === 1) {
+          this2.currentStepItem.timeSpendMe += res.data
+          this2.currentStepItem.timeSpendOther += res.data
+          this2.currentItem.czasSpedzony += res.data
+        }
+        item.blocked = false
+        item.stepStartedByMe = !item.stepStartedByMe
+      } catch (error) {
+        item.blocked = false
       }
-      if (startstop === 1) {
-        this2.currentStepItem.timeSpendMe += res.data
-        this2.currentStepItem.timeSpendOther += res.data
-        this2.currentItem.czasSpedzony += res.data
-      }
-      item.blocked = false
-      item.stepStartedByMe = !item.stepStartedByMe
     },
 
     genModelSaveStep () {
@@ -458,8 +462,7 @@ export default {
     },
     async saveStep () {
       var model = this.genModelSaveStep()
-      // eslint-disable-next-line no-debugger
-      debugger
+
       model.Zakonczenie = false
       await v.axiosInstance.post('api/Production/SaveStep', model)
       this.currentStepItem.liczbaPomiarow = this.liczbaPomiarow
@@ -469,7 +472,8 @@ export default {
     },
     async saveCloseZamknijStep () {
       var model = this.genModelSaveStep()
-      if (this.currentStepItem.reasonCodeId === null) {
+
+      if (this.reasonCodeId === null) {
         this.$dialog.error({
           text: 'Musisz wybrać reason code, aby zamknąć step?',
           title: 'Problem'
