@@ -102,7 +102,7 @@
                 </td>
                 <td :key="index" v-else-if="header.value === 'actions'">
                   <v-layout justify-space-between>
-                    <v-flex xs4>
+                    <v-flex xs3>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
                           <v-icon
@@ -116,8 +116,8 @@
                         <span>Edycja</span>
                       </v-tooltip>
                     </v-flex>
-
-                    <v-flex xs4>
+                    <v-spacer></v-spacer>
+                    <v-flex xs3>
                       <v-layout row wrap class="justify-center layout">
                         <v-tooltip bottom>
                           <template v-slot:activator="{ on }">
@@ -132,7 +132,8 @@
                         </v-tooltip>
                       </v-layout>
                     </v-flex>
-                    <v-flex xs4>
+
+                    <v-flex xs3>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
                           <v-icon
@@ -193,7 +194,7 @@ export default {
       getAllofferTypesApi: 'api/offerTypes/GetAll',
       getAllProjectsApi: 'api/Project/GetAll',
       getAllCustomersApi: 'api/Customer/GetAll',
-      getAllProductsApi: 'api/Products/GetAllSimple',
+      getAllProductsApi: 'api/Products/GetAll',
       getAllProcesses: 'api/Process/GetAll',
       getOfferFile: 'api/Offer/GetPdf/',
       expanded: [],
@@ -209,7 +210,9 @@ export default {
         { text: 'Klient', value: 'clientsId' },
         { text: 'Data zamówienia', value: 'orderDate' },
         { text: 'Planowane zakończenie', value: 'plannedEnd' },
-        { text: 'Suma', value: 'sum' },
+        { text: 'Suma w dniu oferty', value: 'sumInOfferDay' },
+        { text: 'Suma sprzedaży', value: 'sumSale' },
+
         { text: 'Liczba procesów', value: 'processesNo', visible: true },
         { text: 'Akcje', value: 'actions' }
       ],
@@ -324,6 +327,17 @@ export default {
         .then((Response) => {
           $this.items = Response.data
           $this.items.forEach(i => {
+            i.sumInOfferDay = 0
+            i.sumSale = 0
+
+            i.offerLines.forEach(p => {
+              i.sumInOfferDay = i.sumInOfferDay + (p.priceInOfferDay * p.quantity)
+              i.sumSale = i.sumSale + (p.salesPrice * p.quantity)
+            })
+
+            i.sumInOfferDay = i.sumInOfferDay.toFixed(2)
+            i.sumSale = i.sumSale.toFixed(2)
+
             i.offerDate = this.formatDateTime(i.offerDate)
             i.orderDate = this.formatDateTime(i.orderDate)
             i.plannedEnd = this.formatDateTime(i.plannedEnd)
@@ -473,6 +487,7 @@ export default {
       this.$http
         .put(this.editOfferApi, offer)
         .then((Result) => {
+          this.initialise()
         })
         .catch((e) => {})
     },

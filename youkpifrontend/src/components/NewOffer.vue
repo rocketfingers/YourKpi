@@ -183,7 +183,8 @@
               type="date"
               label="Data zamówienia"
               v-model="currentOffer.orderDate"
-            ></v-text-field>
+            >
+            </v-text-field>
           </v-flex>
           <v-spacer></v-spacer>
           <v-flex xs5>

@@ -19,7 +19,6 @@
                 <v-text-field
                   outlined
                   color
-                  :rules="[requiredRule, postalCodeRule]"
                   label="Kod pocztowy"
                   v-model="currentItem.kodPocztowy"
                 ></v-text-field>
@@ -29,7 +28,6 @@
                 <v-text-field
                   outlined
                   color
-                  :rules="[requiredRule]"
                   label="Miasto"
                   v-model="currentItem.miasto"
                 ></v-text-field>
@@ -43,7 +41,6 @@
                 <v-text-field
                   outlined
                   color
-                  :rules="[requiredRule]"
                   label="Ulica"
                   v-model="currentItem.ulica"
                 ></v-text-field>
@@ -53,7 +50,6 @@
                 <v-text-field
                   outlined
                   color
-                  :rules="[requiredRule]"
                   label="Numer budynku"
                   v-model="currentItem.nrBudynku"
                 ></v-text-field>
@@ -78,7 +74,6 @@
             <v-text-field
               outlined
               color
-              :rules="[requiredRule]"
               label="Numer telefonu"
               v-model="currentItem.nrTelefonu"
             ></v-text-field>
@@ -87,7 +82,6 @@
             <v-text-field
               outlined
               color
-              :rules="[requiredRule, emailRule]"
               label="Email"
               v-model="currentItem.email"
             ></v-text-field>
@@ -133,7 +127,7 @@ export default {
   },
   watch: {
     currentItem (val) {
-      this.$emit('editedProduct', this.currentItem)
+      this.$emit('editedCustomer', this.currentItem)
     }
   },
   methods: {

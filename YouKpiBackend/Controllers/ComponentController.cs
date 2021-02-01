@@ -37,6 +37,20 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllSimpleView()
+        {
+            try
+            {
+                var res = await _ctx.Komponenty.Select(x => new SimpleViewModel(x.Id.ToString(),  x.Nazwa)).ToListAsync();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetAllUnassign()
         {
             try
@@ -89,6 +103,7 @@ namespace YouKpiBackend.Controllers
                 component.ProcessId= entity.ProcessId;
                 component.KomponentId = entity.KomponentId;
                 component.Wymiar = entity.Wymiar;
+                component.Ltid = entity.Ltid;
 
                 await _ctx.SaveChangesAsync();
 
