@@ -151,6 +151,10 @@
       {
          "Name": "[dbo].[ProdExe]",
          "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vOtifReport]",
+         "ObjectType": 3
       }
    ],
    "UseBoolPropertiesWithoutDefaultSql": false,

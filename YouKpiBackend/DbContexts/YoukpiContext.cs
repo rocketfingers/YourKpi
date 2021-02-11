@@ -52,6 +52,7 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<StepsToDelete> StepsToDelete { get; set; }
         public virtual DbSet<TypWyrobu> TypWyrobu { get; set; }
         public virtual DbSet<TypWyrobuIdDn> TypWyrobuIdDn { get; set; }
+        public virtual DbSet<VOtifReport> VOtifReport { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1080,6 +1081,34 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(50);
 
                 entity.Property(e => e.WymiaryDlmm).HasColumnName("WymiaryDLmm");
+            });
+
+            modelBuilder.Entity<VOtifReport>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vOtifReport");
+
+                entity.Property(e => e.ClosedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.NazwaGrupyProcesu)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.NazwaProcesu)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.PlannedEndOffer)
+                    .HasColumnName("plannedEndOffer")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ProcessId)
+                    .IsRequired()
+                    .HasColumnName("PROCESS_ID")
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.StepShouldEndBeforeDays).HasColumnName("stepShouldEndBeforeDays");
             });
 
             OnModelCreatingPartial(modelBuilder);
