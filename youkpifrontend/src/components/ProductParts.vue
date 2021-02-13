@@ -200,7 +200,8 @@ export default {
     calculateTpz (props) {
       var res = 0
       props.items.forEach(element => {
-        res = res + (this.parseFloatOrZero(element.czesci.tpz) * this.parseFloatOrZero(element.iloscSztuk))
+        // res = res + (this.parseFloatOrZero(element.czesci.tpz) * this.parseFloatOrZero(element.iloscSztuk))
+        res = res + (this.parseFloatOrZero(element.czesci.tpz))
       })
 
       // // eslint-disable-next-line no-debugger

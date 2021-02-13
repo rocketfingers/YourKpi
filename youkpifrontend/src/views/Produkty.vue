@@ -256,8 +256,12 @@ export default {
             product.tpzSum = 0
             product.tjSum = 0
             product.componentsValueSum = 0
+            // eslint-disable-next-line no-debugger
+            debugger
+
             product.produktCzesci.forEach(procze => {
-              product.tpzSum = product.tpzSum + (procze.czesci.tpz * procze.iloscSztuk)
+              // product.tpzSum = product.tpzSum + (procze.czesci.tpz * procze.iloscSztuk)
+              product.tpzSum = product.tpzSum + procze.czesci.tpz
             })
             product.produktCzesci.forEach(procze => {
               product.tjSum = product.tjSum + (procze.czesci.tj * procze.iloscSztuk)
