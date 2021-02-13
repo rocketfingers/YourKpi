@@ -406,6 +406,14 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
+                entity.Property(e => e.DataUruchomienia)
+                    .HasColumnName("DATA_URUCHOMIENIA")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Krytycznosc)
+                    .HasColumnName("KRYTYCZNOSC")
+                    .HasMaxLength(1);
+
                 entity.Property(e => e.MiejscePracy)
                     .HasColumnName("MIEJSCE_PRACY")
                     .HasMaxLength(200)
@@ -437,6 +445,10 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnName("RODZAJ")
                     .HasMaxLength(200)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("STATUS")
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.TrybPracy)
                     .HasColumnName("TRYB_PRACY")
