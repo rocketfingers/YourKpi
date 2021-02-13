@@ -198,12 +198,15 @@
                       v-model="props.item.sale"
                       :rules="[requiredRule]"
                     ></v-text-field> -->
-                    <v-text-field
+                    <template v-else-if="header.value == 'priceInOfferDay'">
+                      {{ props.item.priceInOfferDay }}
+                    </template>
+                    <!-- <v-text-field
                       v-else-if="header.value == 'priceInOfferDay'"
                       type="number"
                       v-model="props.item.priceInOfferDay"
                       :rules="[requiredRule]"
-                    ></v-text-field>
+                    ></v-text-field> -->
                     <v-text-field
                       v-else-if="header.value == 'salesPrice'"
                       v-model="props.item.salesPrice"
