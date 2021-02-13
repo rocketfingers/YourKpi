@@ -94,15 +94,15 @@ namespace YouKpiBackend.Controllers
                     p.Czesci = null;
                 });
 
-                var iterator = 0;
-                var tempId = entity.Id;
-                while (_ctx.Produkty.Any(p => p.Id == tempId))
-                {
-                    iterator++;
-                    tempId = entity.Id + "_" + iterator;
-                };
+                //var iterator = 0;
+                //var tempId = entity.Id;
+                //while (_ctx.Produkty.Any(p => p.Id == tempId))
+                //{
+                //    iterator++;
+                //    tempId = entity.Id + "_" + iterator;
+                //};
    
-                entity.Id = tempId;
+                //entity.Id = tempId;
                 var res = _ctx.Produkty.Add(entity);
                 await _ctx.SaveChangesAsync();
 

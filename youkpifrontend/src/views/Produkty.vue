@@ -256,9 +256,6 @@ export default {
             product.tpzSum = 0
             product.tjSum = 0
             product.componentsValueSum = 0
-            // eslint-disable-next-line no-debugger
-            debugger
-
             product.produktCzesci.forEach(procze => {
               // product.tpzSum = product.tpzSum + (procze.czesci.tpz * procze.iloscSztuk)
               product.tpzSum = product.tpzSum + procze.czesci.tpz
@@ -290,7 +287,7 @@ export default {
     },
     saveProductAction () {
       if (!this.$refs.newProductForm.validate()) {
-        return
+        return false
       }
       if (this.editedIndex > 0) {
         this.editProductAction(this.currentProduct)
@@ -298,9 +295,14 @@ export default {
         this.addProductAction(this.currentProduct)
       }
       this.showNewProductDialog = false
+      return true
     },
-    addProduct () {
-      this.currentProduct = { produktCzesci: [] }
+    addProduct (productTemplate) {
+      if (productTemplate) {
+        this.currentProduct = productTemplate
+      } else {
+        this.currentProduct = { produktCzesci: [] }
+      }
 
       this.editMode = false
       this.productTitle = 'Dodaj produkt'
@@ -337,13 +339,16 @@ export default {
       this.currentProduct = editedProduct
     },
     duplicateProduct (product) {
-      this.showMsgText = 'Utworzono duplikat produktu: ' + product.id
-
-      var duplicatedProduct = product
-      duplicatedProduct.produktCzesci.forEach(p => {
-        p.id = 0
-      })
-      this.addProductAction(duplicatedProduct, true)
+      if (this.saveProductAction()) {
+        this.showMsgText = 'Utworzono duplikat produktu: ' + product.id
+        var duplicatedProduct = JSON.parse(JSON.stringify(product))
+        duplicatedProduct.id = ''
+        duplicatedProduct.produktCzesci.forEach(p => {
+          p.id = 0
+        })
+        this.addProduct(duplicatedProduct)
+      }
+      // this.addProductAction(duplicatedProduct, true)
     },
     editProductAction (product) {
       this.$http

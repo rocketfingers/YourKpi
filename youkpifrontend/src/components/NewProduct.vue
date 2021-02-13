@@ -190,12 +190,10 @@ export default {
   methods: {
     async duplicateProduct (product) {
       var res = await this.$dialog.confirm({
-        text: 'Czy na pewno chcesz utworzyć duplikat dla:  ' + product.id + '?',
+        text: 'Czy na pewno chcesz utworzyć duplikat dla:  ' + product.id + '? (aktualny produkt zostanie zapisany, zostaniesz przeniesiony do duplikatu)',
         title: 'Uwaga'
       })
       if (res) {
-      // eslint-disable-next-line no-debugger
-        // debugger
         this.$emit('duplicateProduct', product)
       }
     }
