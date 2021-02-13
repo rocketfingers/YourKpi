@@ -68,7 +68,7 @@
       <v-flex xs12 md2 xl align-self-center>
         <v-layout row wrap justify-space-around>
           <v-btn
-            v-show="currentProduct.id"
+            v-show="currentProduct.id && editMode"
             color="primary"
             dark
             class="mb-2"

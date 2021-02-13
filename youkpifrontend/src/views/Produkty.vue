@@ -60,7 +60,7 @@
         <v-container grid-list-md>
           <ProductParts
             :currentProduct="currentProduct"
-            :readonly="true"
+            readonly="true"
           ></ProductParts>
         </v-container>
         <v-card-actions class="blue lighten-5">
@@ -224,7 +224,8 @@ export default {
       parts: [],
       emptyProduct: { produktCzesci: [] },
       showMsg: false,
-      showMsgText: ''
+      showMsgText: '',
+      parentProduct: {}
 
     }
   },
@@ -238,11 +239,21 @@ export default {
       this.getProductTypes()
     },
     getParts () {
+      var $this = this
       this.$http.get(this.getAllPartsApi)
         .then(Response => {
-          this.parts = Response.data
-          this.parts.forEach(p => {
+          $this.parts = Response.data
+          // eslint-disable-next-line no-debugger
+          debugger
+          $this.parts.forEach(p => {
             p.showName = p.id + ', ' + p.nazwa
+            if (!p.komponent) {
+              p.komponent = { cenaJednostkowa: 0, ilosc: 0 }
+            } else
+            if (!p.komponent.cenaJednostkowa) {
+              p.komponent.cenaJednostkowa = 0
+              p.komponent.ilosc = 0
+            }
           })
         })
     },
@@ -253,6 +264,17 @@ export default {
         .then((Response) => {
           $this.products = Response.data
           $this.products.forEach(product => {
+            product.produktCzesci.forEach(pc => {
+              if (!pc.czesci) {
+                pc.czesci = { komponent: { cenaJednostkowa: 0 } }
+              }
+              if (!pc.czesci.komponent) {
+                pc.czesci = { komponent: { cenaJednostkowa: 0 } }
+              }
+              if (!pc.czesci.komponent.cenaJednostkowa) {
+                pc.czesci.komponent.cenaJednostkowa = 0
+              }
+            })
             product.tpzSum = 0
             product.tjSum = 0
             product.componentsValueSum = 0
@@ -266,6 +288,7 @@ export default {
             product.produktCzesci.forEach(procze => {
               product.componentsValueSum = product.componentsValueSum + (procze.czesci.komponent.cenaJednostkowa * procze.iloscSztuk * procze.czesci.komponent.ilosc)
             })
+
             product.tpzSum = product.tpzSum.toFixed(2)
             product.tjSum = product.tjSum.toFixed(2)
             product.componentsValueSum = product.componentsValueSum.toFixed(2)
@@ -291,10 +314,10 @@ export default {
       }
       if (this.editedIndex > 0) {
         this.editProductAction(this.currentProduct)
+        this.showNewProductDialog = false
       } else {
         this.addProductAction(this.currentProduct)
       }
-      this.showNewProductDialog = false
       return true
     },
     addProduct (productTemplate) {
@@ -309,19 +332,43 @@ export default {
       this.editedIndex = -1
       this.showNewProductDialog = true
     },
+    validatePartsTheSame (product, parentProduct) {
+      var toCompareProd = { produktCzesci: [] }
+      if (parentProduct) {
+        toCompareProd = JSON.parse(JSON.stringify(parentProduct))
+        toCompareProd.id = 0
+        toCompareProd.produktCzesci.forEach(pc => {
+          pc.id = 0
+          pc.isEdited = false
+        })
+        product.produktCzesci.forEach(pc => {
+          pc.isEdited = false
+        })
+      }
+      if (JSON.stringify(toCompareProd.produktCzesci) === JSON.stringify(product.produktCzesci)) {
+        this.showMsgText = 'Duplikowany produkt składa się dokładnie z tych samych części!'
+        this.showMsg = true
+        return false
+      }
+      return true
+    },
     addProductAction (product, isDuplicate) {
-      this.$http
-        .post(this.addProductApi, product)
-        .then((Result) => {
-          this.products.unshift(product)
-          this.initialise()
+      if (this.validatePartsTheSame(product, this.parentProduct)) {
+        this.$http
+          .post(this.addProductApi, product)
+          .then((Result) => {
+            this.products.unshift(product)
+            this.initialise()
 
-          if (isDuplicate) {
-            this.showMsg = true
-          }
-        })
-        .catch((e) => {
-        })
+            if (this.parentProduct) {
+              this.showMsgText = 'Utworzono duplikat produktu'
+              this.showMsg = true
+            }
+          })
+          .catch((e) => {
+          })
+        this.showNewProductDialog = false
+      }
     },
     showProductParts (product, index) {
       this.currentProduct = product
@@ -346,6 +393,8 @@ export default {
         duplicatedProduct.produktCzesci.forEach(p => {
           p.id = 0
         })
+        this.parentProduct = product
+
         this.addProduct(duplicatedProduct)
       }
       // this.addProductAction(duplicatedProduct, true)
@@ -354,6 +403,7 @@ export default {
       this.$http
         .put(this.editProductApi, product)
         .then((Result) => {
+          this.initialise()
         })
         .catch((e) => {})
     },
