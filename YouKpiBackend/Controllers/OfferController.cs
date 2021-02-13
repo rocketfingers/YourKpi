@@ -33,7 +33,24 @@ namespace YouKpiBackend.Controllers
                     .Include(p => p.OfferProcess)
                     .Include(p => p.OfferLines)
                     .ThenInclude(p => p.OfferLineProcess)
+                    .Include(p => p.OfferLines)
+                    .ThenInclude(p => p.Product)
                     .ToListAsync();
+
+                //Ustawienie ceny w dniu oferty, jesli nie ustawila sie przy dodawaniu 
+                res.ForEach(p =>
+                {
+                    p.OfferLines.ToList().ForEach(ol =>
+                    {
+                        ol.PriceInOfferDay = ol.Product.Cena;
+                        if (!(ol.SalesPrice > 0) || ol.SalesPrice == null)
+                        {
+                            ol.SalesPrice = ol.Product.Cena;
+                        }
+                        ol.Product = null;
+                    });
+                });
+
                 //var res = await _ctx.Offer.Include(p => p.Clients).Include(p => p.OfferLines).ThenInclude(p => p.Product).ToListAsync();
                 return Ok(res.OrderByDescending(p => p.Id));
             }

@@ -169,7 +169,7 @@
                       item-text="id"
                       return-object
                       :rules="[requiredRule]"
-                      @change="changeProduct(props.item)"
+                      @input="changeProduct(props.item)"
                       v-model="props.item.product"
                     ></v-autocomplete>
                     <v-text-field
@@ -345,6 +345,9 @@ export default {
   },
   methods: {
     changeProduct (item) {
+      // eslint-disable-next-line no-debugger
+      debugger
+
       if (item.product) {
         item.productId = item.product.id
         item.priceInOfferDay = item.product.cena

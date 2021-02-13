@@ -25,7 +25,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.ReasonCodes.Select(p => new {Id = p.Id, Name = p.Opis }).ToListAsync();
+                var res = await _ctx.ReasonCodes.Select(p => new { Id = p.Id, Name = p.Opis }).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
@@ -57,7 +57,7 @@ namespace YouKpiBackend.Controllers
             try
             {
                 var res = _ctx.ReasonCodes.Add(entity);
-                _ctx.SaveChanges();
+                await _ctx.SaveChangesAsync();
                 entity.Id = res.Entity.Id;
                 return Created("", entity);
             }

@@ -12,7 +12,7 @@ namespace YouKpiBackend.BusinessLibrary.Offer
     public class OfferPdfService
     {
         private readonly YoukpiContext _ctx;
-        private readonly int x = 15;
+       // private readonly int x = 15;
         private readonly int interline = 15;
         private readonly int lineHeight = 20;
         private readonly int tableLineHeight = 10;

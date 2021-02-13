@@ -59,18 +59,18 @@ namespace YouKpiBackend.Controllers
                     {
                         case 1:
                             var res1 = _ctx.MagazynCzesci.Add(_mapper.Map<MagazynCzesci>(entity));
-                            _ctx.SaveChanges();
+                            await _ctx.SaveChangesAsync();
                             entity.Id = res1.Entity.Id;
                             return Created("", entity);
                         case 2:
                             var res2 = _ctx.MagazynProdukty.Add(_mapper.Map<MagazynProdukty>(entity));
-                            _ctx.SaveChanges();
+                            await _ctx.SaveChangesAsync();
                             entity.Id = res2.Entity.Id;
                             return Created("", entity);
                         case 3:
                             var res3 = _ctx.MagazynKomponenty.Add(_mapper.Map<MagazynKomponenty>(entity));
                             entity.Id = res3.Entity.Id;
-                            _ctx.SaveChanges();
+                            await _ctx.SaveChangesAsync();
                             return Created("", entity);
                         default:
                             throw new Exception("Nieparwidlowy magazyn!");

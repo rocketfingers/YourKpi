@@ -138,11 +138,11 @@ namespace YouKpiBackend.Controllers
                 await CheckIsStepClosed(model);
                 var timeToAdd = await StopTime(model);
                 await _dbContext.SaveChangesAsync();
-                return Ok(timeToAdd); 
+                return Ok(timeToAdd);
             }
             catch (StepAlreadyClosedException ex)
             {
-                return StatusCode(StatusCodes.Status422UnprocessableEntity, "Step został już zakończony.");
+                return StatusCode(StatusCodes.Status422UnprocessableEntity, "Step został już zakończony." + ex);
             }
             catch (Exception ex)
             {

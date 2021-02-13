@@ -104,7 +104,7 @@ namespace YouKpiBackend.Controllers
    
                 entity.Id = tempId;
                 var res = _ctx.Produkty.Add(entity);
-                _ctx.SaveChanges();
+                await _ctx.SaveChangesAsync();
 
                 return Created("", entity);
             }
