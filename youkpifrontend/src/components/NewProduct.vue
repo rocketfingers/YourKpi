@@ -65,7 +65,23 @@
           </v-flex>
         </v-layout>
       </v-flex>
-      <v-flex xs1> </v-flex>
+      <v-flex xs12 md2 xl align-self-center>
+        <v-layout row wrap justify-space-around>
+          <v-btn
+            v-show="currentProduct.id"
+            color="primary"
+            dark
+            class="mb-2"
+            @click="duplicateProduct(currentProduct)"
+            v-if="!readonly"
+          >
+            <v-flex xs12> Duplikuj </v-flex>
+            <v-flex xs12>
+              <v-icon>fa-copy </v-icon>
+            </v-flex>
+          </v-btn>
+        </v-layout>
+      </v-flex>
       <v-flex xs5>
         <v-layout row wrap>
           <v-flex xs12>
@@ -155,6 +171,7 @@ export default {
         if (val < 0) return 'Wprowadź wartość dodatnią'
         return true
       },
+
       priceRule: val => {
         if (val < 0) return 'Wprowadz dodatnia wartosc'
         if (val > 500000) return 'Maksymalna wartość: 500 000'
@@ -171,6 +188,17 @@ export default {
     }
   },
   methods: {
+    async duplicateProduct (product) {
+      var res = await this.$dialog.confirm({
+        text: 'Czy na pewno chcesz utworzyć duplikat dla:  ' + product.id + '?',
+        title: 'Uwaga'
+      })
+      if (res) {
+      // eslint-disable-next-line no-debugger
+        // debugger
+        this.$emit('duplicateProduct', product)
+      }
+    }
   },
   created () {
   },

@@ -17,6 +17,7 @@
                   :currentProduct="currentProduct"
                   :editMode="editMode"
                   @editedProduct="editCurrentProductRes"
+                  @duplicateProduct="duplicateProduct"
                   :productTypes="productTypes"
                   :parts="parts"
                 ></NewProduct>
@@ -161,6 +162,14 @@
         </v-data-table>
       </v-flex>
     </v-layout>
+    <v-snackbar v-model="showMsg">
+      {{ showMsgText }}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="pink" text v-bind="attrs" @click="showMsg = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -213,7 +222,9 @@ export default {
       productTypes: [],
       editMode: false,
       parts: [],
-      emptyProduct: { produktCzesci: [] }
+      emptyProduct: { produktCzesci: [] },
+      showMsg: false,
+      showMsgText: ''
 
     }
   },
@@ -292,11 +303,16 @@ export default {
       this.editedIndex = -1
       this.showNewProductDialog = true
     },
-    addProductAction (product) {
+    addProductAction (product, isDuplicate) {
       this.$http
         .post(this.addProductApi, product)
         .then((Result) => {
-          this.products.push(product)
+          this.products.unshift(product)
+          this.initialise()
+
+          if (isDuplicate) {
+            this.showMsg = true
+          }
         })
         .catch((e) => {
         })
@@ -315,6 +331,15 @@ export default {
     },
     editCurrentProductRes (editedProduct) {
       this.currentProduct = editedProduct
+    },
+    duplicateProduct (product) {
+      this.showMsgText = 'Utworzono duplikat produktu: ' + product.id
+
+      var duplicatedProduct = product
+      duplicatedProduct.produktCzesci.forEach(p => {
+        p.id = 0
+      })
+      this.addProductAction(duplicatedProduct, true)
     },
     editProductAction (product) {
       this.$http

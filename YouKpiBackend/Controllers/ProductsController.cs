@@ -27,12 +27,12 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res =  _ctx.Produkty
+                var res = _ctx.Produkty
                     .Include(p => p.ProduktCzesci)
                     .ThenInclude(p => p.Czesci)
                     .ThenInclude(p => p.Komponent);
 
-                foreach(var item in res) /// TODO: Zapetlona referencja... Naprawic to mozna dodajac warstwe viewmodeli
+                foreach (var item in res) /// TODO: Zapetlona referencja... Naprawic to mozna dodajac warstwe viewmodeli
                 {
                     foreach (var pc in item.ProduktCzesci)
                     {
@@ -54,7 +54,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Produkty.Select(x => new SimpleViewModel(x.Id,"")).ToListAsync();
+                var res = await _ctx.Produkty.Select(x => new SimpleViewModel(x.Id, "")).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
@@ -89,6 +89,20 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
+                entity.ProduktCzesci.ToList().ForEach(p =>
+                {
+                    p.Czesci = null;
+                });
+
+                var iterator = 0;
+                var tempId = entity.Id;
+                while (_ctx.Produkty.Any(p => p.Id == tempId))
+                {
+                    iterator++;
+                    tempId = entity.Id + "_" + iterator;
+                };
+   
+                entity.Id = tempId;
                 var res = _ctx.Produkty.Add(entity);
                 _ctx.SaveChanges();
 
