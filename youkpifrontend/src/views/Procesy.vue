@@ -15,6 +15,7 @@
               <NewProcess
                 :editedProcess="editedProcess"
                 :editMode="editMode"
+                :processes="items"
                 @editedProcess="editedProcessRes"
               ></NewProcess>
             </v-form>
