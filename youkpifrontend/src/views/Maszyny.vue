@@ -101,6 +101,7 @@
                     </v-flex>
                   </v-layout>
                 </td>
+
                 <td :key="index" v-else>
                   {{ props.item[header.value] }}
                 </td>
@@ -168,6 +169,9 @@ export default {
         .get(this.getAll)
         .then((Response) => {
           $this.items = Response.data
+          $this.items.forEach(p => {
+            p.dataUruchomienia = this.formatDateTimeYYYYMMDD(p.dataUruchomienia)
+          })
           this.tableLoading = false
         })
         .catch((e) => {
