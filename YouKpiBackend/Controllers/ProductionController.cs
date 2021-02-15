@@ -67,7 +67,7 @@ namespace YouKpiBackend.Controllers
                     PartName = p.PartName,
                     WyrobId = p.WyrobId,
                     CountPart = p.IloscCzesci,
-                    TimeSpend = p.CzasStop.Value.Subtract(p.CzasStart.Value).TotalMinutes
+                    TimeSpend = (int)p.CzasStop.Value.Subtract(p.CzasStart.Value).TotalMinutes
                 }).ToListAsync();
 
                 return Ok(res);

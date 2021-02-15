@@ -275,6 +275,17 @@
               </v-flex>
               <v-flex xs12>
                 <v-autocomplete
+                  label="Część"
+                  :items="parts"
+                  outlined
+                  :loading="partsLoading"
+                  item-text="showName"
+                  item-value="id"
+                ></v-autocomplete>
+              </v-flex>
+
+              <v-flex xs12>
+                <v-autocomplete
                   v-model="reasonCodeId"
                   outlined
                   item-text="name"
@@ -338,9 +349,13 @@ export default {
       // Settings
       title: 'Akcje do wykonania',
       getAllApi: 'api/Production/GetMainPage',
+      getAllPartsApi: 'api/Parts/GetAll',
+
       // Settings
       showDialog: false,
       data: [],
+      parts: [],
+      partsLoading: true,
       selectedTypes: ['O', 'P', 'R'],
       stepsData: [],
       footerStepTable: { 'items-per-page-options': [-1] },
@@ -527,11 +542,25 @@ export default {
       this.tableLoading = true
       v.axiosInstance.get(this.getAllApi)
         .then(Response => { this.data = Response.data; this.tableLoading = false })
+    },
+    getParts () {
+      this.$http.get(this.getAllPartsApi)
+        .then(Response => {
+          this.parts = Response.data
+          this.parts.forEach(p => {
+            p.showName = p.id + ', ' + p.nazwa
+          })
+          this.partsLoading = false
+        })
+    },
+    getReasonCodes () {
+      v.axiosInstance.get('api/ReasonCode/GetAllSimple').then(res => { this.reasons = res.data; this.reasonsLoading = false })
     }
   },
   created () {
     this.getData()
-    v.axiosInstance.get('api/ReasonCode/GetAllSimple').then(res => { this.reasons = res.data; this.reasonsLoading = false })
+    this.getParts()
+    this.getReasonCodes()
   },
   destroyed () {
   }
