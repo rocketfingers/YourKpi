@@ -101,6 +101,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[ProcessesProcess]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[ProcessStepsToDelete]",
          "ObjectType": 0
       },
@@ -150,6 +154,10 @@
       },
       {
          "Name": "[dbo].[ProdExe]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vActivityHistory]",
          "ObjectType": 3
       },
       {

@@ -14,7 +14,7 @@ import Procesy from '../views/Procesy.vue'
 import StepsView from '../views/StepsMachines.vue'
 import Customers from '../views/Customers.vue'
 import Store from '../views/Magazyn.vue'
-
+import ActivityHistory from '../views/ActivityHistory.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,6 +22,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/activityhistory',
+    name: 'ActivityHistory',
+    component: ActivityHistory
   },
   {
     path: '/produkty',

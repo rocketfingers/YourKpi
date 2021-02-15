@@ -73,7 +73,12 @@
             </v-list-item-icon>
             <v-list-item-title>Oferty</v-list-item-title>
           </v-list-item>
-
+          <v-list-item @click="$router.push({ name: 'ActivityHistory' })">
+            <v-list-item-icon>
+              <v-icon>fa-history</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Historia aktywności</v-list-item-title>
+          </v-list-item>
           <v-list-item @click="$router.push({ name: 'Maszyny' })">
             <v-list-item-icon>
               <v-icon>fa-cogs</v-icon>

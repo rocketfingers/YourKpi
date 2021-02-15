@@ -14,7 +14,12 @@ namespace YouKpiBackend.ModelsEntity
         public DateTime? CzasStart { get; set; }
         public DateTime? CzasStop { get; set; }
         public int Step { get; set; }
+        public string CzescId { get; set; }
+        public int? CześćIlosc { get; set; }
+        public string MaszynyId { get; set; }
 
+        public virtual Czesci Czesc { get; set; }
+        public virtual Maszyny Maszyny { get; set; }
         public virtual OfferLines OfferLines { get; set; }
         public virtual Pracownik Pracownik { get; set; }
         public virtual Process Process { get; set; }

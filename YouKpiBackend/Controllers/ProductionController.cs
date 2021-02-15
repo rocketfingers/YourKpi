@@ -40,6 +40,44 @@ namespace YouKpiBackend.Controllers
             }
         }
 
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetActivityHistory()
+        {
+            try
+            {
+                bool isAdmin = this.isAdmin();
+                int userId = this.GetUserId();
+                var initialData = _dbContext.VActivityHistory.AsQueryable();
+                if (!isAdmin)
+                {
+                    initialData = initialData.Where(p => p.PracownikId == userId);
+                }
+
+                var res = await initialData.Select(p => new ActivitiesHistoryModel
+                {
+                    Client = p.Client,
+                    ClientId = p.ClientsId,
+                    Day = p.CzasStart.Value,
+                    PracownikName = p.PracownikName,
+                    ProcessId = p.ProcessId,
+                    ProcessName = p.ProcessName,
+                    IloscPomiarow = p.IloscPomiarow,
+                    IloscPomiarowNok = p.IloscPomiarowNok,
+                    PartId = p.PartId,
+                    PartName = p.PartName,
+                    WyrobId = p.WyrobId,
+                    CountPart = p.IloscCzesci,
+                    TimeSpend = p.CzasStop.Value.Subtract(p.CzasStart.Value).TotalMinutes
+                }).ToListAsync();
+
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpPost("[action]")]
         public async Task<IActionResult> SaveStep([FromBody] SaveCompleteStepViewModel model)
         {
@@ -138,7 +176,7 @@ namespace YouKpiBackend.Controllers
                 await CheckIsStepClosed(model);
                 var timeToAdd = await StopTime(model);
                 await _dbContext.SaveChangesAsync();
-                return Ok(timeToAdd); 
+                return Ok(timeToAdd);
             }
             catch (StepAlreadyClosedException ex)
             {
