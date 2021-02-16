@@ -40,6 +40,7 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<PracownikProcess> PracownikProcess { get; set; }
         public virtual DbSet<Process> Process { get; set; }
         public virtual DbSet<ProcessStepsToDelete> ProcessStepsToDelete { get; set; }
+        public virtual DbSet<ProcessesProcess> ProcessesProcess { get; set; }
         public virtual DbSet<ProdExe> ProdExe { get; set; }
         public virtual DbSet<ProduktCzesci> ProduktCzesci { get; set; }
         public virtual DbSet<Produkty> Produkty { get; set; }
@@ -727,6 +728,29 @@ namespace YouKpiBackend.DbContexts
                     .WithMany(p => p.ProcessStepsToDelete)
                     .HasForeignKey(d => d.ProcessId)
                     .HasConstraintName("FK_PROCESS_ID");
+            });
+
+            modelBuilder.Entity<ProcessesProcess>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ProcessId)
+                    .HasColumnName("PROCESS_ID")
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.RelatedProcessId)
+                    .HasColumnName("RELATED_PROCESS_ID")
+                    .HasMaxLength(30);
+
+                entity.HasOne(d => d.Process)
+                    .WithMany(p => p.ProcessesProcessProcess)
+                    .HasForeignKey(d => d.ProcessId)
+                    .HasConstraintName("FK_ProcessesProcess");
+
+                entity.HasOne(d => d.RelatedProcess)
+                    .WithMany(p => p.ProcessesProcessRelatedProcess)
+                    .HasForeignKey(d => d.RelatedProcessId)
+                    .HasConstraintName("FK_ProcessesRelatedProcess");
             });
 
             modelBuilder.Entity<ProdExe>(entity =>

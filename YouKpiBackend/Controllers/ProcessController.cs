@@ -27,7 +27,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Process.Include(p=> p.Steps).ToListAsync();
+                var res = await _ctx.Process.Include(p => p.Steps).Include(p => p.ProcessesProcessProcess).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
@@ -67,19 +67,28 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
-                var processEntity = _ctx.Process.Include(p => p.Steps).FirstOrDefault(c => c.Id == entity.Id);
+                var processEntity = _ctx.Process.Include(p => p.Steps).Include(p => p.ProcessesProcessProcess).FirstOrDefault(c => c.Id == entity.Id);
                 processEntity.Steps.ToList().ForEach(p =>
                 {
                     _ctx.Entry(p).State = EntityState.Deleted;
                 });
 
                 processEntity.TypZlecenia = entity.TypZlecenia;
-                processEntity.BusinessArea= entity.BusinessArea;
+                processEntity.BusinessArea = entity.BusinessArea;
                 processEntity.NazwaGrupyProcesu = entity.NazwaGrupyProcesu;
                 processEntity.NazwaProcesu = entity.NazwaProcesu;
                 processEntity.Steps = entity.Steps;
+                processEntity.ProcessesProcessProcess.ToList().ForEach(p =>
+                {
+                    _ctx.Entry(p).State = EntityState.Deleted;
+                });
 
-                await  _ctx.SaveChangesAsync();
+                entity.ProcessesProcessProcess.ToList().ForEach(p =>
+                {
+                    _ctx.ProcessesProcess.Add(p);
+                });
+
+                await _ctx.SaveChangesAsync();
 
                 return NoContent();
             }
@@ -94,8 +103,8 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                
-                var processEntity = _ctx.Process.Include(p => p.Steps).FirstOrDefault (c => c.Id == id);
+
+                var processEntity = _ctx.Process.Include(p => p.Steps).FirstOrDefault(c => c.Id == id);
                 processEntity.Steps.ToList().ForEach(p =>
                 {
                     _ctx.Entry(p).State = EntityState.Deleted;

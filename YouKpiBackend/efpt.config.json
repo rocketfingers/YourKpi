@@ -124,6 +124,11 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "[dbo].[ProcessesProcess]",
+         "ObjectType": 0
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "[dbo].[ProcessStepsToDelete]",
          "ObjectType": 0
       },
