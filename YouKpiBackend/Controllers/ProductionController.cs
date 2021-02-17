@@ -61,8 +61,6 @@ namespace YouKpiBackend.Controllers
                     PracownikName = p.PracownikName,
                     ProcessId = p.ProcessId,
                     ProcessName = p.ProcessName,
-                    IloscPomiarow = p.IloscPomiarow,
-                    IloscPomiarowNok = p.IloscPomiarowNok,
                     PartId = p.PartId,
                     PartName = p.PartName,
                     WyrobId = p.WyrobId,
