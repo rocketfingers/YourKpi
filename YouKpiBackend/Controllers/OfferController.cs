@@ -69,6 +69,24 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
+                entity.OfferLines.ToList().ForEach(p =>
+                {
+                    p.Product = null;
+                    p.Offer = null;
+                    p.OfferLineProcess.ToList().ForEach(ol =>
+                    {
+                        ol.OfferLine = null;
+                        ol.Process = null;
+                    });
+
+                
+                });
+
+                entity.OfferProcess.ToList().ForEach(p =>
+                {
+                    p.Process = null;
+                    p.Offer = null;
+                });
                 var res = _ctx.Add(entity);
                 entity.Id = res.Entity.Id;
                 await _ctx.SaveChangesAsync();
