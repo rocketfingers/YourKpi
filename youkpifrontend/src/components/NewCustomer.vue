@@ -68,6 +68,7 @@
               :rules="[requiredRule]"
               label="NIP"
               v-model="currentItem.nip"
+              maxlength="15"
             ></v-text-field>
           </v-flex>
           <v-flex xs12>

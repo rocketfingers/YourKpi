@@ -178,8 +178,6 @@ export default {
       if (!this.$refs.newForm.validate()) {
         return
       }
-      alert('ok')
-
       if (this.editedIndex > 0) {
         this.editAction(this.currentItem)
       } else {
