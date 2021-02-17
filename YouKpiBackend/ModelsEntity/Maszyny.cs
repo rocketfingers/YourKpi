@@ -8,6 +8,7 @@ namespace YouKpiBackend.ModelsEntity
     {
         public Maszyny()
         {
+            PracownikCzasStep = new HashSet<PracownikCzasStep>();
             StepsMachines = new HashSet<StepsMachines>();
         }
 
@@ -24,6 +25,7 @@ namespace YouKpiBackend.ModelsEntity
         public string Status { get; set; }
         public DateTime? DataUruchomienia { get; set; }
 
+        public virtual ICollection<PracownikCzasStep> PracownikCzasStep { get; set; }
         public virtual ICollection<StepsMachines> StepsMachines { get; set; }
     }
 }

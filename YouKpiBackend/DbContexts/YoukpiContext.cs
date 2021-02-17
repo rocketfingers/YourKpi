@@ -53,6 +53,7 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<StepsToDelete> StepsToDelete { get; set; }
         public virtual DbSet<TypWyrobu> TypWyrobu { get; set; }
         public virtual DbSet<TypWyrobuIdDn> TypWyrobuIdDn { get; set; }
+        public virtual DbSet<VActivityHistory> VActivityHistory { get; set; }
         public virtual DbSet<VOtifReport> VOtifReport { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -642,11 +643,29 @@ namespace YouKpiBackend.DbContexts
 
                 entity.Property(e => e.CzasStop).HasColumnType("datetime");
 
+                entity.Property(e => e.CzescId)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MaszynyId)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.OfferLinesId).HasColumnName("OfferLinesID");
 
                 entity.Property(e => e.ProcessId)
                     .IsRequired()
                     .HasMaxLength(30);
+
+                entity.HasOne(d => d.Czesc)
+                    .WithMany(p => p.PracownikCzasStep)
+                    .HasForeignKey(d => d.CzescId)
+                    .HasConstraintName("FK_PracownikCzasStep_PracownikCzasStep2");
+
+                entity.HasOne(d => d.Maszyny)
+                    .WithMany(p => p.PracownikCzasStep)
+                    .HasForeignKey(d => d.MaszynyId)
+                    .HasConstraintName("FK_PracownikCzasStep_Maszyny");
 
                 entity.HasOne(d => d.OfferLines)
                     .WithMany(p => p.PracownikCzasStep)
@@ -1117,6 +1136,48 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(50);
 
                 entity.Property(e => e.WymiaryDlmm).HasColumnName("WymiaryDLmm");
+            });
+
+            modelBuilder.Entity<VActivityHistory>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vActivityHistory");
+
+                entity.Property(e => e.Client)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CzasStart).HasColumnType("datetime");
+
+                entity.Property(e => e.CzasStop).HasColumnType("datetime");
+
+                entity.Property(e => e.PartId)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PartName)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PracownikName)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProcessId)
+                    .IsRequired()
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.ProcessName)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.WyrobId)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<VOtifReport>(entity =>

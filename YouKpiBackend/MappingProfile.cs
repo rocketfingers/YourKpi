@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using YouKpiBackend.BusinessLibrary.Production;
 using YouKpiBackend.ModelsEntity;
 using YouKpiBackend.ViewModels;
 
@@ -23,6 +24,7 @@ namespace YouKpiBackend
             CreateMap<MagazynKomponenty, StoreElementViewModel>()
                  .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(3, "Komponenty")))
                  .ReverseMap();
+            CreateMap<ActivitiesHistoryModel, ActivityHistoryViewModel>();
         }
     }
 }
