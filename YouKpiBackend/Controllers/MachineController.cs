@@ -46,7 +46,7 @@ namespace YouKpiBackend.Controllers
             try
             {
                 var res = _ctx.Maszyny.Add(entity);
-                _ctx.SaveChanges();
+                await _ctx.SaveChangesAsync();
 
                 return Created("", entity);
             }
@@ -73,6 +73,9 @@ namespace YouKpiBackend.Controllers
                 machine.OsY = entity.OsY;
                 machine.OsZ = entity.OsZ;
                 machine.Rodzaj = entity.Rodzaj;
+                machine.DataUruchomienia = entity.DataUruchomienia;
+                machine.Status = entity.Status;
+                machine.Krytycznosc = entity.Krytycznosc;
                 machine.TrybPracy = entity.TrybPracy;
                 await _ctx.SaveChangesAsync();
 

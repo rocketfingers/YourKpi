@@ -101,6 +101,7 @@
                     </v-flex>
                   </v-layout>
                 </td>
+
                 <td :key="index" v-else>
                   {{ props.item[header.value] }}
                 </td>
@@ -134,12 +135,15 @@ export default {
         { text: 'Id', value: 'id' },
         { text: 'Nazwa', value: 'nazwa' },
         { text: 'Rodzaj', value: 'rodzaj' },
+        { text: 'Krytyczność', value: 'krytycznosc' },
         { text: 'Opis', value: 'opis' },
+        { text: 'Status', value: 'status' },
         { text: 'Tryb pracy', value: 'trybPracy' },
         { text: 'OS_X', value: 'osX' },
         { text: 'OS_Y', value: 'osY' },
         { text: 'OS_Z', value: 'osZ' },
         { text: 'Miejsce pracy', value: 'miejscePracy' },
+        { text: 'Data uruchomienia', value: 'dataUruchomienia' },
         { text: 'Akcje', value: 'actions' }
       ],
       items: [],
@@ -165,6 +169,9 @@ export default {
         .get(this.getAll)
         .then((Response) => {
           $this.items = Response.data
+          $this.items.forEach(p => {
+            p.dataUruchomienia = this.formatDateTimeYYYYMMDD(p.dataUruchomienia)
+          })
           this.tableLoading = false
         })
         .catch((e) => {

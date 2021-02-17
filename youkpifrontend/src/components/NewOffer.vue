@@ -406,11 +406,10 @@ export default {
           this.showNewCustomerDialog = false
         })
     },
+    editcurrentItemRes () {
 
+    },
     beforeSaveValidation () {
-      // eslint-disable-next-line no-debugger
-      // debugger
-
       if (!this.currentOffer.offerLines) {
         this.$dialog.warning({
           text: 'Aby zapisać ofertę dodaj pozycje do Offer lines!',

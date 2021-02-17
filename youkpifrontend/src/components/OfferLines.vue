@@ -169,7 +169,7 @@
                       item-text="id"
                       return-object
                       :rules="[requiredRule]"
-                      @change="changeProduct(props.item)"
+                      @input="changeProduct(props.item)"
                       v-model="props.item.product"
                     ></v-autocomplete>
                     <v-text-field
@@ -198,12 +198,15 @@
                       v-model="props.item.sale"
                       :rules="[requiredRule]"
                     ></v-text-field> -->
-                    <v-text-field
+                    <template v-else-if="header.value == 'priceInOfferDay'">
+                      {{ props.item.priceInOfferDay }}
+                    </template>
+                    <!-- <v-text-field
                       v-else-if="header.value == 'priceInOfferDay'"
                       type="number"
                       v-model="props.item.priceInOfferDay"
                       :rules="[requiredRule]"
-                    ></v-text-field>
+                    ></v-text-field> -->
                     <v-text-field
                       v-else-if="header.value == 'salesPrice'"
                       v-model="props.item.salesPrice"
@@ -345,6 +348,9 @@ export default {
   },
   methods: {
     changeProduct (item) {
+      // eslint-disable-next-line no-debugger
+      debugger
+
       if (item.product) {
         item.productId = item.product.id
         item.priceInOfferDay = item.product.cena

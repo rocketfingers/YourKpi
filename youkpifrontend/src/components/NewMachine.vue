@@ -33,6 +33,17 @@
             ></v-text-field>
           </v-flex>
           <v-flex xs12>
+            <v-autocomplete
+              outlined
+              color
+              :rules="[requiredRule]"
+              label="Status"
+              :items="['sprawna', 'awaria', 'obsługa', 'przezbrojenie']"
+              required
+              v-model="currentItem.status"
+            ></v-autocomplete>
+          </v-flex>
+          <v-flex xs12>
             <v-text-field
               outlined
               :rules="[requiredRule]"
@@ -85,7 +96,6 @@
               v-model.number="currentItem.osZ"
             ></v-text-field>
           </v-flex>
-
           <v-flex xs12>
             <v-text-field
               outlined
@@ -94,6 +104,27 @@
               label="Miejsce pracy"
               v-model="currentItem.miejscePracy"
             ></v-text-field>
+          </v-flex>
+          <v-flex xs12>
+            <v-text-field
+              outlined
+              color
+              :rules="[requiredRule]"
+              label="Data uruchomienia"
+              type="date"
+              v-model="currentItem.dataUruchomienia"
+            ></v-text-field>
+          </v-flex>
+          <v-flex xs12>
+            <v-autocomplete
+              outlined
+              color
+              :rules="[requiredRule]"
+              label="Krytyczność"
+              :items="['A', 'B', 'C']"
+              required
+              v-model="currentItem.krytycznosc"
+            ></v-autocomplete>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -114,7 +145,6 @@ export default {
   data () {
     return {
       requiredRule: (v) => !!v || 'To pole jest wymagane'
-
     }
   },
   computed: {

@@ -180,7 +180,7 @@ namespace YouKpiBackend.Controllers
             }
             catch (StepAlreadyClosedException ex)
             {
-                return StatusCode(StatusCodes.Status422UnprocessableEntity, "Step został już zakończony.");
+                return StatusCode(StatusCodes.Status422UnprocessableEntity, "Step został już zakończony." + ex);
             }
             catch (Exception ex)
             {

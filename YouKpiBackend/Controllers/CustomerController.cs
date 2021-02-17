@@ -65,7 +65,7 @@ namespace YouKpiBackend.Controllers
             try
             {
                 var res = _ctx.Client.Add(entity);
-                _ctx.SaveChanges();
+                await _ctx.SaveChangesAsync();
                 entity.Id = res.Entity.Id;
                 return Created("", entity);
             }

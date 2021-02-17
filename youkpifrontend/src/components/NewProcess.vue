@@ -61,6 +61,23 @@
               v-model="editedProcess.typZlecenia"
             ></v-autocomplete>
           </v-flex>
+
+          <v-flex xs12>
+            <v-autocomplete
+              outlined
+              color
+              :rules="[requiredRule]"
+              label="Procesy powiązane (SLA)"
+              :items="processes"
+              return-object
+              item-text="showName"
+              multiple
+              item-value="id"
+              required
+              chips
+              v-model="editedProcess.procesyPowiazane"
+            ></v-autocomplete>
+          </v-flex>
         </v-layout>
       </v-flex>
     </v-layout>
@@ -82,8 +99,8 @@ export default {
   },
   props: {
     editedProcess: Object,
-    editMode: Boolean
-
+    editMode: Boolean,
+    processes: Array
   },
   data () {
     return {

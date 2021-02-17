@@ -17,6 +17,7 @@
                   :currentProduct="currentProduct"
                   :editMode="editMode"
                   @editedProduct="editCurrentProductRes"
+                  @duplicateProduct="duplicateProduct"
                   :productTypes="productTypes"
                   :parts="parts"
                 ></NewProduct>
@@ -59,7 +60,7 @@
         <v-container grid-list-md>
           <ProductParts
             :currentProduct="currentProduct"
-            :readonly="true"
+            readonly="true"
           ></ProductParts>
         </v-container>
         <v-card-actions class="blue lighten-5">
@@ -161,6 +162,14 @@
         </v-data-table>
       </v-flex>
     </v-layout>
+    <v-snackbar v-model="showMsg">
+      {{ showMsgText }}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="pink" text v-bind="attrs" @click="showMsg = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -213,7 +222,10 @@ export default {
       productTypes: [],
       editMode: false,
       parts: [],
-      emptyProduct: { produktCzesci: [] }
+      emptyProduct: { produktCzesci: [] },
+      showMsg: false,
+      showMsgText: '',
+      parentProduct: {}
 
     }
   },
@@ -227,11 +239,21 @@ export default {
       this.getProductTypes()
     },
     getParts () {
+      var $this = this
       this.$http.get(this.getAllPartsApi)
         .then(Response => {
-          this.parts = Response.data
-          this.parts.forEach(p => {
+          $this.parts = Response.data
+          // eslint-disable-next-line no-debugger
+          debugger
+          $this.parts.forEach(p => {
             p.showName = p.id + ', ' + p.nazwa
+            if (!p.komponent) {
+              p.komponent = { cenaJednostkowa: 0, ilosc: 0 }
+            } else
+            if (!p.komponent.cenaJednostkowa) {
+              p.komponent.cenaJednostkowa = 0
+              p.komponent.ilosc = 0
+            }
           })
         })
     },
@@ -242,11 +264,23 @@ export default {
         .then((Response) => {
           $this.products = Response.data
           $this.products.forEach(product => {
+            product.produktCzesci.forEach(pc => {
+              if (!pc.czesci) {
+                pc.czesci = { komponent: { cenaJednostkowa: 0 } }
+              }
+              if (!pc.czesci.komponent) {
+                pc.czesci = { komponent: { cenaJednostkowa: 0 } }
+              }
+              if (!pc.czesci.komponent.cenaJednostkowa) {
+                pc.czesci.komponent.cenaJednostkowa = 0
+              }
+            })
             product.tpzSum = 0
             product.tjSum = 0
             product.componentsValueSum = 0
             product.produktCzesci.forEach(procze => {
-              product.tpzSum = product.tpzSum + (procze.czesci.tpz * procze.iloscSztuk)
+              // product.tpzSum = product.tpzSum + (procze.czesci.tpz * procze.iloscSztuk)
+              product.tpzSum = product.tpzSum + procze.czesci.tpz
             })
             product.produktCzesci.forEach(procze => {
               product.tjSum = product.tjSum + (procze.czesci.tj * procze.iloscSztuk)
@@ -254,6 +288,7 @@ export default {
             product.produktCzesci.forEach(procze => {
               product.componentsValueSum = product.componentsValueSum + (procze.czesci.komponent.cenaJednostkowa * procze.iloscSztuk * procze.czesci.komponent.ilosc)
             })
+
             product.tpzSum = product.tpzSum.toFixed(2)
             product.tjSum = product.tjSum.toFixed(2)
             product.componentsValueSum = product.componentsValueSum.toFixed(2)
@@ -275,31 +310,65 @@ export default {
     },
     saveProductAction () {
       if (!this.$refs.newProductForm.validate()) {
-        return
+        return false
       }
       if (this.editedIndex > 0) {
         this.editProductAction(this.currentProduct)
+        this.showNewProductDialog = false
       } else {
         this.addProductAction(this.currentProduct)
       }
-      this.showNewProductDialog = false
+      return true
     },
-    addProduct () {
-      this.currentProduct = { produktCzesci: [] }
+    addProduct (productTemplate) {
+      if (productTemplate) {
+        this.currentProduct = productTemplate
+      } else {
+        this.currentProduct = { produktCzesci: [] }
+      }
 
       this.editMode = false
       this.productTitle = 'Dodaj produkt'
       this.editedIndex = -1
       this.showNewProductDialog = true
     },
-    addProductAction (product) {
-      this.$http
-        .post(this.addProductApi, product)
-        .then((Result) => {
-          this.products.push(product)
+    validatePartsTheSame (product, parentProduct) {
+      var toCompareProd = { produktCzesci: [] }
+      if (parentProduct) {
+        toCompareProd = JSON.parse(JSON.stringify(parentProduct))
+        toCompareProd.id = 0
+        toCompareProd.produktCzesci.forEach(pc => {
+          pc.id = 0
+          pc.isEdited = false
         })
-        .catch((e) => {
+        product.produktCzesci.forEach(pc => {
+          pc.isEdited = false
         })
+      }
+      if (JSON.stringify(toCompareProd.produktCzesci) === JSON.stringify(product.produktCzesci)) {
+        this.showMsgText = 'Duplikowany produkt składa się dokładnie z tych samych części!'
+        this.showMsg = true
+        return false
+      }
+      return true
+    },
+    addProductAction (product, isDuplicate) {
+      if (this.validatePartsTheSame(product, this.parentProduct)) {
+        this.$http
+          .post(this.addProductApi, product)
+          .then((Result) => {
+            this.products.unshift(product)
+            this.initialise()
+
+            if (this.parentProduct) {
+              this.showMsgText = 'Utworzono duplikat produktu'
+              this.showMsg = true
+            }
+          })
+          .catch((e) => {
+          })
+        this.showNewProductDialog = false
+      }
     },
     showProductParts (product, index) {
       this.currentProduct = product
@@ -316,10 +385,25 @@ export default {
     editCurrentProductRes (editedProduct) {
       this.currentProduct = editedProduct
     },
+    duplicateProduct (product) {
+      if (this.saveProductAction()) {
+        this.showMsgText = 'Utworzono duplikat produktu: ' + product.id
+        var duplicatedProduct = JSON.parse(JSON.stringify(product))
+        duplicatedProduct.id = ''
+        duplicatedProduct.produktCzesci.forEach(p => {
+          p.id = 0
+        })
+        this.parentProduct = product
+
+        this.addProduct(duplicatedProduct)
+      }
+      // this.addProductAction(duplicatedProduct, true)
+    },
     editProductAction (product) {
       this.$http
         .put(this.editProductApi, product)
         .then((Result) => {
+          this.initialise()
         })
         .catch((e) => {})
     },
