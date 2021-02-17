@@ -335,20 +335,23 @@ export default {
     validatePartsTheSame (product, parentProduct) {
       var toCompareProd = { produktCzesci: [] }
       if (parentProduct) {
-        toCompareProd = JSON.parse(JSON.stringify(parentProduct))
-        toCompareProd.id = 0
-        toCompareProd.produktCzesci.forEach(pc => {
-          pc.id = 0
-          pc.isEdited = false
-        })
-        product.produktCzesci.forEach(pc => {
-          pc.isEdited = false
-        })
-      }
-      if (JSON.stringify(toCompareProd.produktCzesci) === JSON.stringify(product.produktCzesci)) {
-        this.showMsgText = 'Duplikowany produkt składa się dokładnie z tych samych części!'
-        this.showMsg = true
-        return false
+        if (Object.keys(parentProduct).length > 0) {
+          toCompareProd = JSON.parse(JSON.stringify(parentProduct))
+          toCompareProd.id = 0
+          toCompareProd.produktCzesci.forEach(pc => {
+            pc.id = 0
+            pc.isEdited = false
+          })
+          product.produktCzesci.forEach(pc => {
+            pc.isEdited = false
+          })
+
+          if (JSON.stringify(toCompareProd.produktCzesci) === JSON.stringify(product.produktCzesci)) {
+            this.showMsgText = 'Duplikowany produkt składa się dokładnie z tych samych części!'
+            this.showMsg = true
+            return false
+          }
+        }
       }
       return true
     },
