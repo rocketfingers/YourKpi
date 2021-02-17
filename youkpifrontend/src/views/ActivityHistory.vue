@@ -63,8 +63,6 @@ export default {
         { text: 'Dzień', value: 'day', visible: true },
         { text: 'Nazwa procesu', value: 'processName', visible: true },
         { text: 'Spędzony czas', value: 'timeSpend', visible: true },
-        { text: 'Ilość pomiarów', value: 'iloscPomiarow' },
-        { text: 'Ilość pomiarów NOK', value: 'iloscPomiarowNok' },
         { text: 'Id klienta', value: 'clientId' },
         { text: 'Klient', value: 'client' },
         { text: 'Id produktu', value: 'wyrobId' },
