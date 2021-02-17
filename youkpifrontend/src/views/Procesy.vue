@@ -187,8 +187,16 @@ export default {
         .get(this.getAllProcesses)
         .then((Response) => {
           $this.items = Response.data
+          // eslint-disable-next-line no-debugger
+          debugger
           $this.items.forEach(p => {
             p.showName = p.id + ', ' + p.nazwaProcesu
+            p.procesyPowiazane = []
+            // alert(p.processesProcessProcess.length)
+
+            p.processesProcessProcess.forEach(pprp => {
+              p.procesyPowiazane.push(pprp.relatedProcessId)
+            })
           })
           this.tableLoading = false
         })
@@ -209,6 +217,30 @@ export default {
           title: 'Uwaga'
         })
       } else {
+        var relatedProcesses = []
+        // eslint-disable-next-line no-debugger
+        debugger
+        var $this = this
+        this.editedProcess.procesyPowiazane.forEach(p => {
+          var processInRelated = $this.editedProcess.processesProcessProcess.find(ppp => ppp.relatedProcessId === p)
+          if (!processInRelated) {
+            relatedProcesses.push(
+              {
+                id: 0,
+                processId: $this.editedProcess.id,
+                RelatedProcessId: p
+              }
+            )
+          } else {
+            relatedProcesses.push(
+              {
+                id: processInRelated.id,
+                processId: $this.editedProcess.id,
+                RelatedProcessId: processInRelated.relatedProcessId
+              })
+          }
+        })
+        this.editedProcess.processesProcessProcess = relatedProcesses
         if (this.editedIndex > 0) {
           this.editoProcessAction(this.editedProcess)
         } else {

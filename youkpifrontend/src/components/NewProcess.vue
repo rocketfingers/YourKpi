@@ -69,12 +69,11 @@
               :rules="[requiredRule]"
               label="Procesy powiązane (SLA)"
               :items="processes"
-              return-object
               item-text="showName"
               multiple
               item-value="id"
               required
-              chips
+              clearable
               v-model="editedProcess.procesyPowiazane"
             ></v-autocomplete>
           </v-flex>
