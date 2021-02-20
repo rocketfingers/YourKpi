@@ -77,8 +77,10 @@ namespace YouKpiBackend.Controllers
                 if (part.KomponentId != 0)
                 {
                     await UpdateComponent(part.Komponent);
+                    part.Komponent = null;
                 }
-                part.Komponent = null;
+                part.Komponent.MagazynKomponenty = null;
+                part.Komponent.Czesci = null;
                 var res = _dbContext.Czesci.Add(part);
 
                 await _dbContext.SaveChangesAsync();
@@ -132,7 +134,9 @@ namespace YouKpiBackend.Controllers
                 part.KomponentId = entity.KomponentId;
                 part.Tpz = entity.Tpz;
                 part.Tj = entity.Tj;
-
+                part.Komponent = entity.Komponent;
+                part.Komponent.MagazynKomponenty = null;
+                part.Komponent.Czesci = null;
                 await _dbContext.SaveChangesAsync();
 
                 return NoContent();

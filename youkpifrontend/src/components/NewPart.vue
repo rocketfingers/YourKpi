@@ -122,10 +122,12 @@
     <NewComponent
       v-show="!readonly"
       :currentItem="editedItem.komponent"
-      :editMode="editMode"
+      :editMode="editedItem.komponent.isNewFlag !== true"
       :processes="processes"
       @editedProduct="editCurrentProductRes"
       :notValidate="notValidateComponent"
+      :components="components"
+      :validateId="editedItem.komponent.isNewFlag === true"
     ></NewComponent>
   </div>
 </template>
@@ -159,17 +161,17 @@ export default {
         if (val > 200) return 'Maksymalna wartość: 200'
         return true
       },
-      isItemAlreadyExists: (v) => (!(this.parts.some(p => p.id.toUpperCase().trim() === v.toUpperCase().trim())) || this.notValidate) || 'Część o tym id już istnieje!!',
+      isItemAlreadyExists: (v) => (!(this.parts.some(p => p.id.toUpperCase().trim() === v.toUpperCase().trim())) || this.notValidate || this.editMode) || 'Część o tym id już istnieje!!',
       showComponent: true,
       notValidateComponent: false
     }
   },
   computed: {
     componentsToAutocomplete (val) {
-      // // eslint-disable-next-line no-debugger
-      // debugger
       var $this = this
       var cmps = this.components.filter(c => {
+      //   // eslint-disable-next-line no-debugger
+      //   debugger
         if (c.czesci) {
           if (c.czesci.length > 0 && $this.editedItem.komponentId !== c.id) {
             return false

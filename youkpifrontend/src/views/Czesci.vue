@@ -2,7 +2,7 @@
   <div>
     <v-layout row wrap elevation-3>
       <v-flex xs12>
-        <v-toolbar flat color="white">
+        <v-toolbar text color="white">
           <v-toolbar-title>{{ title }}</v-toolbar-title>
           <v-divider class="mx-2" inset vertical></v-divider>
           <v-spacer></v-spacer>
@@ -38,21 +38,21 @@
               </v-form>
               <v-card-actions class="blue lighten-5">
                 <v-btn
-                  outline
-                  round
+                  outlined
+                  rounded
                   large
                   color="blue darken-1"
-                  flat
+                  text
                   @click="showDialog = false"
                   >Anuluj<v-icon dark>cancel</v-icon></v-btn
                 >
                 <v-spacer></v-spacer>
                 <v-btn
-                  outline
-                  round
+                  outlined
+                  rounded
                   large
                   color="blue darken-1"
-                  flat
+                  text
                   @click.native="save"
                   >Zapisz<v-icon dark>save</v-icon></v-btn
                 >
@@ -184,6 +184,7 @@ export default {
 
       this.editedIndex = this.data.indexOf(item)
       this.editedItem = Object.assign({}, item)
+
       this.showDialog = true
     },
     editCurrentProductRes (edited) {
@@ -209,7 +210,7 @@ export default {
       //   this.$refs.newPartForm.reset()
       // }
       this.editMode = false
-      this.editedItem = Object.assign({}, this.defaultItem)
+      this.editedItem = Object.assign({ komponent: { } }, this.defaultItem)
       this.editedIndex = -1
       this.showDialog = false
       // Deletion of form errors
@@ -247,6 +248,8 @@ export default {
           })
           $this.components.unshift({
             showName: 'zdefiniuj nowy komponent',
+            komponentId: '',
+            isNewFlag: true,
             id: 0
           })
           $this.getProcesses()
@@ -268,8 +271,8 @@ export default {
           this.close()
         })
       } else {
-        // eslint-disable-next-line no-debugger
-        debugger
+        // // eslint-disable-next-line no-debugger
+        // debugger
         this.$http.post(this.postNewApi,
           this.editedItem)
           .then(Result => {
@@ -281,7 +284,7 @@ export default {
     }
   },
   created () {
-    this.editedItem = Object.assign({}, this.defaultItem)
+    this.editedItem = Object.assign({ komponent: { } }, this.defaultItem)
 
     v.axiosInstance.get(this.getAllApi)
       .then(Response => {

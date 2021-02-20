@@ -18,11 +18,11 @@
           <v-spacer></v-spacer>
 
           <v-btn
-            outline
-            round
+            outlined
+            rounded
             large
             color="blue darken-1"
-            flat
+            text
             @click="showPartDialog = false"
             >Ok<v-icon dark>check</v-icon></v-btn
           >
@@ -48,6 +48,7 @@
                   :processes="processes"
                   :components="items"
                   @editedProduct="editCurrentProductRes"
+                  :validateId="validateComponentId"
                 ></NewComponent>
               </v-form>
             </v-flex>
@@ -55,21 +56,21 @@
         </v-container>
         <v-card-actions class="blue lighten-5">
           <v-btn
-            outline
-            round
+            outlined
+            roundd
             large
             color="blue darken-1"
-            flat
+            text
             @click="showNewDialog = false"
             >Anuluj<v-icon dark>cancel</v-icon></v-btn
           >
           <v-spacer></v-spacer>
           <v-btn
-            outline
-            round
+            outlined
+            rounded
             large
             color="blue darken-1"
-            flat
+            text
             @click.native="saveAction"
             >Zapisz<v-icon dark>save</v-icon></v-btn
           >
@@ -79,7 +80,7 @@
 
     <v-layout row wrap elevation-3>
       <v-flex xs12>
-        <v-toolbar flat color="white">
+        <v-toolbar text color="white">
           <v-toolbar-title>Komponenty</v-toolbar-title>
           <v-divider class="mx-2" inset vertical></v-divider>
           <v-spacer></v-spacer>
@@ -215,13 +216,14 @@ export default {
       showNewDialog: false,
       tableLoading: false,
       title: 'Dodaj',
-      currentItem: { },
+      currentItem: { komponent: { } },
       editedIndex: -1,
       editMode: false,
       processes: [],
       showPartDialog: false,
       partEditMode: true,
-      editedPart: {},
+      editedPart: { komponent: {} },
+      validateComponentId: false,
       formTitle: ''
     }
   },
@@ -252,8 +254,8 @@ export default {
         })
     },
     showPart (parts) {
-      // eslint-disable-next-line no-debugger
-      debugger
+      // // eslint-disable-next-line no-debugger
+      // debugger
 
       if (parts.length > 0) {
         this.showPartDialog = true
@@ -268,6 +270,9 @@ export default {
         .get(this.getPart + partId)
         .then((Response) => {
           $this.editedPart = Response.data
+          if (!$this.editedPart.komponent) {
+            $this.editedPart.komponent = {}
+          }
           this.tableLoading = false
         })
         .catch((e) => {
@@ -305,8 +310,9 @@ export default {
       //   this.$refs.newForm.reset()
       // }
       this.editMode = false
+      this.validateComponentId = true
       this.formTitle = 'Dodaj'
-      this.currentItem = { }
+      this.currentItem = { komponent: { } }
       this.editedIndex = -1
       this.showNewDialog = true
     },
@@ -324,6 +330,7 @@ export default {
       this.formTitle = 'Edytuj ' + item.komponentId
       this.editMode = true
       this.editedIndex = index
+      this.validateComponentId = false
       this.showNewDialog = true
       this.currentItem = item
     },
