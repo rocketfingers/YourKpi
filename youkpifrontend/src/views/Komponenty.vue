@@ -46,6 +46,7 @@
                   :currentItem="currentItem"
                   :editMode="editMode"
                   :processes="processes"
+                  :components="items"
                   @editedProduct="editCurrentProductRes"
                 ></NewComponent>
               </v-form>

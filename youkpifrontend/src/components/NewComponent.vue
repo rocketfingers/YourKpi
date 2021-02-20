@@ -11,7 +11,7 @@
                   color
                   label="Id"
                   required
-                  :rules="[requiredRule]"
+                  :rules="[requiredRule, isItemAlreadyExists]"
                   v-model="currentItem.komponentId"
                 ></v-text-field>
               </v-flex>
@@ -129,13 +129,14 @@ export default {
     currentItem: Object,
     editMode: Boolean,
     processes: Array,
-    notValidate: Boolean
-
+    notValidate: Boolean,
+    components: Array
   },
   data () {
     return {
       requiredRule: (v) => (!!v || this.notValidate) || 'To pole jest wymagane',
-      ltidRule: (v) => ((v > 0 && v < 1000) || this.notValidate) || 'Wprowadź poprawną wartość!!'
+      ltidRule: (v) => ((v > 0 && v < 1000) || this.notValidate) || 'Wprowadź poprawną wartość!!',
+      isItemAlreadyExists: (v) => (!(this.components.some(p => p.komponentId.toUpperCase() === v.toUpperCase())) || this.notValidate) || 'Komponent o tym id już istnieje!!'
     }
   },
   computed: {
