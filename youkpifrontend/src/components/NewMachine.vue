@@ -61,6 +61,19 @@
               v-model="currentItem.rodzaj"
             ></v-text-field>
           </v-flex>
+          <v-flex xs12>
+            <v-text-field
+              outlined
+              color
+              :rules="[requiredRule]"
+              label="Wartość maszyny"
+              type="number"
+              :min="0"
+              v-model="currentItem.wartoscMaszyny"
+            >
+              <template slot="append"> <strong>PLN</strong> </template>
+            </v-text-field>
+          </v-flex>
         </v-layout>
       </v-flex>
       <v-flex xs1> </v-flex>
@@ -125,6 +138,19 @@
               required
               v-model="currentItem.krytycznosc"
             ></v-autocomplete>
+          </v-flex>
+          <v-flex xs12>
+            <v-text-field
+              outlined
+              color
+              :rules="[requiredRule]"
+              label="Stawka miesięczna"
+              type="number"
+              :min="0"
+              v-model="currentItem.stawkaMiesieczna"
+            >
+              <template slot="append"> <strong>PLN</strong> </template>
+            </v-text-field>
           </v-flex>
         </v-layout>
       </v-flex>

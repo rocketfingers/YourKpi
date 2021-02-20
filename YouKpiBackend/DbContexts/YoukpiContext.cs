@@ -95,9 +95,8 @@ namespace YouKpiBackend.DbContexts
                     .IsUnicode(false);
 
                 entity.Property(e => e.Nip)
-                    .IsRequired()
                     .HasColumnName("NIP")
-                    .HasMaxLength(10)
+                    .HasMaxLength(20)
                     .IsUnicode(false)
                     .IsFixedLength();
 
@@ -452,10 +451,18 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnName("STATUS")
                     .HasMaxLength(50);
 
+                entity.Property(e => e.StawkaMiesieczna)
+                    .HasColumnName("STAWKA_MIESIECZNA")
+                    .HasColumnType("decimal(18, 2)");
+
                 entity.Property(e => e.TrybPracy)
                     .HasColumnName("TRYB_PRACY")
                     .HasMaxLength(200)
                     .IsUnicode(false);
+
+                entity.Property(e => e.WartoscMaszyny)
+                    .HasColumnName("WARTOSC_MASZYNY")
+                    .HasColumnType("decimal(18, 2)");
             });
 
             modelBuilder.Entity<MozliweStatusyOferty>(entity =>

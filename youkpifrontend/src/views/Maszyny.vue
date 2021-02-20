@@ -144,6 +144,8 @@ export default {
         { text: 'OS_Z', value: 'osZ' },
         { text: 'Miejsce pracy', value: 'miejscePracy' },
         { text: 'Data uruchomienia', value: 'dataUruchomienia' },
+        { text: 'Wartość maszyny [PLN]', value: 'wartoscMaszyny' },
+        { text: 'Stawka miesięczna [PLN]', value: 'stawkaMiesieczna' },
         { text: 'Akcje', value: 'actions' }
       ],
       items: [],

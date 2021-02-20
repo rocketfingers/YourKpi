@@ -77,6 +77,8 @@ namespace YouKpiBackend.Controllers
                 machine.Status = entity.Status;
                 machine.Krytycznosc = entity.Krytycznosc;
                 machine.TrybPracy = entity.TrybPracy;
+                machine.WartoscMaszyny = entity.WartoscMaszyny;
+                machine.StawkaMiesieczna = entity.StawkaMiesieczna;
                 await _ctx.SaveChangesAsync();
 
                 return NoContent();
