@@ -10,7 +10,7 @@
                   v-model="editedItem.id"
                   outlined
                   :disabled="editMode || readonly"
-                  :rules="[requiredRule]"
+                  :rules="[requiredRule, isItemAlreadyExists]"
                   label="Id"
                 ></v-text-field>
               </v-flex>
@@ -144,7 +144,8 @@ export default {
     components: Array,
     hideComponent: Boolean,
     readonly: Boolean,
-    processes: Array
+    processes: Array,
+    parts: Array
   },
   data () {
     return {
@@ -158,6 +159,7 @@ export default {
         if (val > 200) return 'Maksymalna wartość: 200'
         return true
       },
+      isItemAlreadyExists: (v) => (!(this.parts.some(p => p.id.toUpperCase().trim() === v.toUpperCase().trim())) || this.notValidate) || 'Część o tym id już istnieje!!',
       showComponent: true,
       notValidateComponent: false
     }

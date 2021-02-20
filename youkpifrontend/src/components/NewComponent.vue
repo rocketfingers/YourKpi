@@ -136,7 +136,7 @@ export default {
     return {
       requiredRule: (v) => (!!v || this.notValidate) || 'To pole jest wymagane',
       ltidRule: (v) => ((v > 0 && v < 1000) || this.notValidate) || 'Wprowadź poprawną wartość!!',
-      isItemAlreadyExists: (v) => (!(this.components.some(p => p.komponentId.toUpperCase() === v.toUpperCase())) || this.notValidate) || 'Komponent o tym id już istnieje!!'
+      isItemAlreadyExists: (v) => (!(this.components.some(p => p.komponentId.toUpperCase().trim() === v.toUpperCase().trim())) || this.notValidate) || 'Komponent o tym id już istnieje!!'
     }
   },
   computed: {

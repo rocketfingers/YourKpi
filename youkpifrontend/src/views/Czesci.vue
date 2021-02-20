@@ -33,6 +33,7 @@
                   :components="components"
                   :readonly="false"
                   :processes="processes"
+                  :parts="data"
                 ></NewPart>
               </v-form>
               <v-card-actions class="blue lighten-5">
@@ -156,7 +157,6 @@ export default {
         { text: 'Przypisano komponent', value: 'hasComponent' },
         { text: 'TPZ', value: 'tPZ' },
         { text: 'TJ', value: 'tJ' },
-
         { text: 'Akcje', value: 'actions' }
       ],
       editMode: false,
