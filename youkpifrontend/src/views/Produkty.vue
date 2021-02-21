@@ -29,7 +29,7 @@
           <v-btn
             large
             color="blue darken-1"
-            flat
+            text
             @click.native="showNewProductDialog = false"
           >
             Anuluj
@@ -37,7 +37,7 @@
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             large
             color="blue darken-1"
             @click.native="saveProductAction"
@@ -60,7 +60,7 @@
         <v-container grid-list-md>
           <ProductParts
             :currentProduct="currentProduct"
-            readonly="true"
+            :readonly="true"
           ></ProductParts>
         </v-container>
         <v-card-actions class="blue lighten-5">
@@ -78,7 +78,7 @@
     </v-dialog>
     <v-layout row wrap elevation-3>
       <v-flex xs12>
-        <v-toolbar flat color="white">
+        <v-toolbar text color="white">
           <v-toolbar-title>Produkty</v-toolbar-title>
           <v-divider class="mx-2" inset vertical></v-divider>
           <v-spacer></v-spacer>
@@ -243,8 +243,8 @@ export default {
       this.$http.get(this.getAllPartsApi)
         .then(Response => {
           $this.parts = Response.data
-          // eslint-disable-next-line no-debugger
-          debugger
+          // // eslint-disable-next-line no-debugger
+          // debugger
           $this.parts.forEach(p => {
             p.showName = p.id + ', ' + p.nazwa
             if (!p.komponent) {

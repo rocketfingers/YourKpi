@@ -162,7 +162,8 @@ export default {
     currentProduct: Object,
     productTypes: Array,
     editMode: Boolean,
-    parts: Array
+    parts: Array,
+    readonly: Boolean
   },
   data () {
     return {

@@ -79,8 +79,11 @@ namespace YouKpiBackend.Controllers
                     await UpdateComponent(part.Komponent);
                     part.Komponent = null;
                 }
-                part.Komponent.MagazynKomponenty = null;
-                part.Komponent.Czesci = null;
+                else
+                {
+                    part.Komponent.MagazynKomponenty = null;
+                    part.Komponent.Czesci = null;
+                }
                 var res = _dbContext.Czesci.Add(part);
 
                 await _dbContext.SaveChangesAsync();

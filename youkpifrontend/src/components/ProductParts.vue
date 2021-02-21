@@ -3,6 +3,45 @@
   <div>
     <v-layout row wrap justify-space-around elevation-3 width="100%">
       <v-flex xs12>
+        <v-dialog v-model="showNewPartDialog" width="auto" max-width="none">
+          <v-toolbar dark elevation-4 color="primary lighten-1">
+            <span class="headline">Dodaj część</span>
+          </v-toolbar>
+          <v-card>
+            <v-form ref="newPartForm">
+              <NewPart
+                :editedItem="newPartItem"
+                :editMode="false"
+                @editedProduct="editCurrentProductRes"
+                :components="components"
+                :readonly="false"
+                :processes="processes"
+                :parts="parts"
+              ></NewPart>
+            </v-form>
+            <v-card-actions class="blue lighten-5">
+              <v-btn
+                outlined
+                rounded
+                large
+                color="blue darken-1"
+                text
+                @click="showNewPartDialog = false"
+                >Anuluj<v-icon dark>cancel</v-icon></v-btn
+              >
+              <v-spacer></v-spacer>
+              <v-btn
+                outlined
+                rounded
+                large
+                color="blue darken-1"
+                text
+                @click.native="saveNewPart"
+                >Zapisz<v-icon dark>save</v-icon></v-btn
+              >
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
         <v-toolbar flat color="white">
           <v-toolbar-title>Czesci</v-toolbar-title>
           <v-divider class="mx-2" inset vertical></v-divider>
@@ -71,7 +110,28 @@
                       :rules="[requiredRule]"
                       @change="setCzesci(props.item)"
                       v-model="props.item.czesci"
-                    ></v-autocomplete>
+                    >
+                      <template slot="prepend">
+                        <v-tooltip bottom>
+                          <template v-slot:activator="{ on }">
+                            <v-btn
+                              @click="addPart(props.item)"
+                              outlined
+                              rounded
+                              v-on="on"
+                            >
+                              <v-flex xs6>
+                                <v-icon color="green">fa-tools</v-icon>
+                              </v-flex>
+                              <v-flex xs6>
+                                <v-icon color="green">fa-plus</v-icon>
+                              </v-flex>
+                            </v-btn>
+                          </template>
+                          <span>Dodaj nową część</span>
+                        </v-tooltip>
+                      </template></v-autocomplete
+                    >
                     <v-text-field
                       v-else-if="header.value == 'iloscSztuk'"
                       v-model="props.item.iloscSztuk"
@@ -145,17 +205,26 @@
 </template>
 
 <script>
+import NewPart from '../components/NewPart'
+
 export default {
   name: 'ProductParts',
   components: {
+    NewPart: NewPart
   },
   props: {
     currentProduct: Object,
     readonly: Boolean,
     parts: Array
+
   },
   data () {
     return {
+      // api
+      getAllProcesses: 'api/Process/GetAll',
+      getAllFreeComponents: 'api/Component/GetAllUnassign',
+      postNewPartApi: 'api/Parts/Create',
+
       headers: [
         { text: 'Id części', value: 'czesciId', visible: true },
         { text: 'Nazwa', value: 'czesciNazwa' },
@@ -180,7 +249,12 @@ export default {
         50,
         100,
         { text: '$vuetify.dataIterator.rowsPerPageAll', value: 1000 }
-      ]
+      ],
+      showNewPartDialog: false,
+      components: [],
+      processes: [],
+      newPartItem: { komponent: {} }
+
     }
   },
   computed: {
@@ -241,7 +315,12 @@ export default {
       item.iloscSztuk = 1
       item.czesciId = item.czesci.id
     },
+    addPart (item) {
+      this.currentPart = item
+      this.showNewPartDialog = true
+    },
     addPartToProduct () {
+      this.getComponents()
       if (!this.currentProduct.produktCzesci) {
         this.$set(this.currentProduct, 'produktCzesci', [])
       }
@@ -269,7 +348,78 @@ export default {
       var indexOfPart = this.currentProduct.produktCzesci.indexOf(part)
       this.currentProduct.produktCzesci.splice(indexOfPart, 1)
     //   }
+    },
+    editCurrentProductRes (item) {
+      // // eslint-disable-next-line no-debugger
+      // debugger
+      this.newPartItem = item
+    },
+    saveNewPart () {
+      if (!this.$refs.newPartForm.validate()) {
+        return
+      }
+      // Native form submission is not yet supported
+      // // eslint-disable-next-line no-debugger
+      // debugger
+      this.$http.post(this.postNewPartApi,
+        this.newPartItem)
+        .then(Result => {
+          this.newPartItem.id = Result.data.id
+          this.parts.push(Result.data)
+          this.currentPart.czesci = Result.data
+          this.currentPart.czesci.showName = this.currentPart.czesci.id + ', ' + this.currentPart.czesci.nazwa
+          this.setCzesci(this.currentPart)
+          this.closeNewPart()
+        })
+    },
+    closeNewPart () {
+      // if (this.$refs.newPartForm) {
+      //   this.$refs.newPartForm.reset()
+      // }
+      this.newPartItem = Object.assign({ komponent: { } }, this.defaultItem)
+      this.showNewPartDialog = false
+      // Deletion of form errors
+    },
+    getComponents () {
+      var $this = this
+      this.$http
+        .get(this.getAllFreeComponents)
+        .then((Response) => {
+          $this.components = Response.data
+
+          $this.components.forEach(p => {
+            p.showName = p.komponentId + ', ' + p.nazwa + ', ' + p.gatunekPodst
+            if (p.czesci.length > 0) {
+              p.czesc = p.czesci[0].id
+            } else {
+              p.czesc = 'nie przypisano'
+            }
+          })
+          $this.components.unshift({
+            showName: 'zdefiniuj nowy komponent',
+            komponentId: '',
+            isNewFlag: true,
+            id: 0
+          })
+          $this.getProcesses()
+        })
+        .catch((e) => {
+        })
+    },
+    getProcesses () {
+      var $this = this
+      this.$http
+        .get(this.getAllProcesses)
+        .then((Response) => {
+          $this.processes = Response.data
+          $this.processes.forEach(p => {
+            p.showName = p.id + ', ' + p.nazwaProcesu
+          })
+        })
+        .catch((e) => {
+        })
     }
+
   },
   created () {
   },
