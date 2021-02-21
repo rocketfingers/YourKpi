@@ -28,7 +28,7 @@
           <v-btn
             large
             color="blue darken-1"
-            flat
+            text
             @click.native="showNewOfferDialog = false"
           >
             Anuluj
@@ -36,7 +36,7 @@
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             large
             color="blue darken-1"
             @click.native="saveOfferAction"
@@ -49,7 +49,7 @@
     </v-dialog>
     <v-layout row wrap elevation-3>
       <v-flex xs12>
-        <v-toolbar flat color="white">
+        <v-toolbar text color="white">
           <v-toolbar-title>Oferta</v-toolbar-title>
           <v-divider class="mx-2" inset vertical></v-divider>
           <v-spacer></v-spacer>

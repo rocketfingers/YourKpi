@@ -34,7 +34,7 @@
         <v-card-actions class="blue lighten-5">
           <v-spacer></v-spacer>
           <v-btn
-            flat
+            text
             large
             color="blue darken-1"
             @click.native="saveOfferProcesses"
@@ -54,7 +54,7 @@
       class="mb-5"
     >
       <v-flex xs12>
-        <v-toolbar flat color="white" v-if="!readonly">
+        <v-toolbar text color="white" v-if="!readonly">
           <v-toolbar-title>Offer Lines</v-toolbar-title>
           <v-divider class="mx-2" inset vertical></v-divider>
           <v-spacer></v-spacer>
@@ -348,8 +348,8 @@ export default {
   },
   methods: {
     changeProduct (item) {
-      // eslint-disable-next-line no-debugger
-      debugger
+      // // eslint-disable-next-line no-debugger
+      // debugger
 
       if (item.product) {
         item.productId = item.product.id
@@ -424,8 +424,10 @@ export default {
     },
     editOfferLineProcesses (offerLine, selectedProcesses) {
       if (this.currentOffer.offerLines) {
+        // eslint-disable-next-line no-debugger
+        debugger
         this.currentOffer.offerLines.forEach(ol => {
-          if (ol.id === offerLine.id) {
+          if (ol.id === offerLine.id && ol.productId === offerLine.productId) {
             ol.offerLineProcess = []
             selectedProcesses.forEach(sp => {
               var item = {
