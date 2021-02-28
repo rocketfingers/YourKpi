@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Hangfire;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -84,8 +87,26 @@ namespace YouKpiBackend
             );
 
             AddServices(services);
-
-            services.AddControllers();
+                services.AddControllers();
+                services.AddHangfireServer();
+                // Add Hangfire services.
+                string hangfireConStr = Configuration.GetConnectionString("HangfireConnection");
+                services.AddHangfire(configuration => configuration
+                    // .UseNLogLogProvider()
+                    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                    .UseSimpleAssemblyNameTypeSerializer()
+                    .UseRecommendedSerializerSettings()
+                    .UseSqlServerStorage(hangfireConStr, new SqlServerStorageOptions
+                    {
+                        SchemaName = "hangfire",
+                        CommandBatchMaxTimeout = TimeSpan.FromMinutes(30),
+                        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                        QueuePollInterval = TimeSpan.Zero,
+                        UseRecommendedIsolationLevel = true,
+                        DisableGlobalLocks = true
+                    }));
+            
+            
         }
         private static void AddServices(IServiceCollection services)
         {
@@ -109,7 +130,22 @@ namespace YouKpiBackend
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            //this call placement is important
+            bool isDashboardReadOnly = Configuration.GetSection("Hangfiredashboard").GetValue<bool>("IsReadOnly");
 
+            if (Debugger.IsAttached)
+            {
+                isDashboardReadOnly = false;
+            }
+            var options = new DashboardOptions
+            {
+                
+                IsReadOnlyFunc = (x) => isDashboardReadOnly,
+                Authorization = new[] { new CustomAuthorizationFilter() }
+            };
+            app.UseHangfireDashboard("/hangfiredashboard", options);
+            var hangfire = new HangFireJobs();
+            BackgroundJob.Enqueue(() => Console.WriteLine("Starting Hangfire!"));
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
