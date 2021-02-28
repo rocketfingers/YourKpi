@@ -1,187 +1,226 @@
 <template>
   <div>
-    <v-container>
-      <v-layout row wrap elevation-3>
-        <v-flex xs12>
-          <v-toolbar flat color="white">
-            <v-toolbar-title>{{ title }}</v-toolbar-title>
-            <v-divider class="mx-2" inset vertical></v-divider>
-            <v-spacer></v-spacer>
-            <v-text-field
-              append-icon="search"
-              label="Search"
-              single-line
-              hide-details
-              class="elevation-1"
-              v-model="searchTable"
-            ></v-text-field>
-            <v-dialog v-model="showDialog" width="auto" max-width="none">
-              <template v-slot:activator="{ on, attrs }">
+    <v-layout row wrap elevation-3>
+      <v-flex xs12>
+        <v-toolbar flat color="white">
+          <v-toolbar-title>{{ title }}</v-toolbar-title>
+          <v-divider class="mx-2" inset vertical></v-divider>
+          <v-spacer></v-spacer>
+          <v-text-field
+            append-icon="search"
+            label="Search"
+            single-line
+            hide-details
+            class="elevation-1"
+            v-model="searchTable"
+          ></v-text-field>
+          <v-dialog v-model="showDialog" width="auto" max-width="none">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn v-on="on" v-bind="attrs" color="primary" dark class="mb-2">
+                Nowy
+              </v-btn>
+            </template>
+
+            <v-toolbar dark elevation-4 color="primary lighten-1">
+              <span class="headline">{{ formTitle }}</span>
+            </v-toolbar>
+            <v-card>
+              <v-form ref="newForm">
+                <v-card-text>
+                  <v-container>
+                    <v-layout row wrap v-if="showDialog">
+                      <v-flex xs12 md5>
+                        <v-layout wrap>
+                          <v-flex xs12>
+                            <v-text-field
+                              outlined
+                              color
+                              label="Imię i nazwisko"
+                              required
+                              v-model="editedItem.name"
+                            ></v-text-field>
+                          </v-flex>
+                          <v-flex xs12>
+                            <v-text-field
+                              :disabled="editMode"
+                              outlined
+                              color
+                              label="Login"
+                              required
+                              v-model="editedItem.login"
+                            ></v-text-field>
+                          </v-flex>
+                          <v-flex xs12>
+                            <v-text-field
+                              type="number"
+                              min="1"
+                              outlined
+                              color
+                              label="Tryb pracy"
+                              required
+                              v-model="editedItem.trybPracy"
+                            ></v-text-field>
+                          </v-flex>
+                          <v-flex xs12>
+                            <v-text-field
+                              type="number"
+                              min="1"
+                              outlined
+                              color
+                              label="Czas dostępu"
+                              required
+                              v-model="editedItem.czasDostepuMin"
+                            ></v-text-field>
+                          </v-flex>
+                          <v-flex xs12>
+                            <v-text-field
+                              outlined
+                              color
+                              label="Mail"
+                              :disabled="editMode"
+                              required
+                              v-model="editedItem.email"
+                            ></v-text-field>
+                          </v-flex>
+                          <v-flex xs12>
+                            <v-checkbox
+                              label="Administrator"
+                              v-model="editedItem.isAdministrator"
+                            ></v-checkbox>
+                          </v-flex>
+                        </v-layout>
+                      </v-flex>
+                      <v-spacer></v-spacer>
+                      <v-flex xs12 md5>
+                        <v-layout row wrap>
+                          <v-flex xs12>
+                            <v-text-field
+                              outlined
+                              color
+                              label="Stawka miesięczna"
+                              type="number"
+                              :min="0"
+                              v-model="editedItem.stawkaMiesieczna"
+                            >
+                              <template slot="append">
+                                <strong>PLN</strong>
+                              </template>
+                            </v-text-field>
+                          </v-flex>
+                          <v-flex xs12>
+                            <v-text-field
+                              outlined
+                              color
+                              label="Stawka godzinowa"
+                              type="number"
+                              :min="0"
+                              v-model="editedItem.stawkaGodzinowa"
+                            >
+                              <template slot="append">
+                                <strong>PLN</strong>
+                              </template>
+                            </v-text-field>
+                          </v-flex>
+                        </v-layout>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-card-text>
+              </v-form>
+              <v-card-actions class="blue lighten-5">
                 <v-btn
-                  v-on="on"
-                  v-bind="attrs"
-                  color="primary"
-                  dark
-                  class="mb-2"
+                  outlined
+                  rounded
+                  large
+                  color="blue darken-1"
+                  text
+                  @click="showDialog = false"
+                  >Anuluj<v-icon dark>cancel</v-icon></v-btn
                 >
-                  Nowy
-                </v-btn>
-              </template>
+                <v-spacer></v-spacer>
+                <v-btn
+                  outlineed
+                  rounded
+                  large
+                  color="blue darken-1"
+                  text
+                  @click.native="save"
+                  >Zapisz<v-icon dark>save</v-icon></v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-toolbar>
+        <v-data-table
+          :headers="headers"
+          :items="data"
+          :search="searchTable"
+          :loading="tableLoading"
+          :footer-props="footer"
+          class="elevation-2"
+        >
+          <template slot="item" slot-scope="props">
+            <tr>
+              <!-- Columns settings  -->
+              <td class="text-xs-left">{{ props.item.id }}</td>
+              <td class="text-xs-left">{{ props.item.name }}</td>
+              <td class="text-xs-left">{{ props.item.login }}</td>
+              <td class="text-xs-left">{{ props.item.trybPracy }}</td>
+              <td class="text-xs-left">{{ props.item.czasDostepuMin }}</td>
+              <td class="text-xs-left">{{ props.item.email }}</td>
+              <td class="text-xs-left">
+                <b>
+                  {{ props.item.stawkaMiesieczna }}
+                </b>
+                PLN
+              </td>
+              <td class="text-xs-left">
+                <b>{{ props.item.stawkaGodzinowa }} </b> PLN
+              </td>
 
-              <v-toolbar dark elevation-4 color="primary lighten-1">
-                <span class="headline">{{ formTitle }}</span>
-              </v-toolbar>
-              <v-card>
-                <v-form ref="newForm">
-                  <v-card-text>
-                    <v-container v-if="showDialog" grid-list-md>
-                      <v-layout wrap>
-                        <v-flex xs12 sm8 offset-sm2>
-                          <v-text-field
-                            outlined
-                            color
-                            label="Imię i nazwisko"
-                            required
-                            v-model="editedItem.name"
-                          ></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm8 offset-sm2>
-                          <v-text-field
-                            :disabled="editMode"
-                            outlined
-                            color
-                            label="Login"
-                            required
-                            v-model="editedItem.login"
-                          ></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm8 offset-sm2>
-                          <v-text-field
-                            type="number"
-                            min="1"
-                            outlined
-                            color
-                            label="Tryb pracy"
-                            required
-                            v-model="editedItem.trybPracy"
-                          ></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm8 offset-sm2>
-                          <v-text-field
-                            type="number"
-                            min="1"
-                            outlined
-                            color
-                            label="Czas dostępu"
-                            required
-                            v-model="editedItem.czasDostepuMin"
-                          ></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm8 offset-sm2>
-                          <v-text-field
-                            outlined
-                            color
-                            label="Mail"
-                            :disabled="editMode"
-                            required
-                            v-model="editedItem.email"
-                          ></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm8 offset-sm2>
-                          <v-checkbox
-                            label="Administrator"
-                            v-model="editedItem.isAdministrator"
-                          ></v-checkbox>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
-                  </v-card-text>
-                </v-form>
-                <v-card-actions class="blue lighten-5">
-                  <v-btn
-                    outlined
-                    rounded
-                    large
-                    color="blue darken-1"
-                    text
-                    @click="showDialog = false"
-                    >Anuluj<v-icon dark>cancel</v-icon></v-btn
-                  >
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    outlineed
-                    rounded
-                    large
-                    color="blue darken-1"
-                    text
-                    @click.native="save"
-                    >Zapisz<v-icon dark>save</v-icon></v-btn
-                  >
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-toolbar>
-          <v-data-table
-            :headers="headers"
-            :items="data"
-            :search="searchTable"
-            :loading="tableLoading"
-            :footer-props="footer"
-            class="elevation-2"
-          >
-            <template slot="item" slot-scope="props">
-              <tr>
-                <!-- Columns settings  -->
-                <td class="text-xs-left">{{ props.item.id }}</td>
-                <td class="text-xs-left">{{ props.item.name }}</td>
-                <td class="text-xs-left">{{ props.item.login }}</td>
-                <td class="text-xs-left">{{ props.item.trybPracy }}</td>
-                <td class="text-xs-left">{{ props.item.czasDostepuMin }}</td>
-                <td class="text-xs-left">{{ props.item.email }}</td>
-                <td>
-                  <v-checkbox
-                    label=""
-                    v-model="props.item.isAdministrator"
-                    disabled
-                  ></v-checkbox>
-                </td>
+              <td>
+                <v-checkbox
+                  label=""
+                  v-model="props.item.isAdministrator"
+                  disabled
+                ></v-checkbox>
+              </td>
 
-                <td class="justify-center px-0">
-                  <v-layout>
-                    <v-flex xs4>
-                      <v-icon
-                        class="mr-2"
-                        @click="openUserProcessDialog(props.item)"
-                        color="primary lighten-1"
-                        >fa-universal-access</v-icon
-                      >
-                    </v-flex>
-                    <v-flex xs4>
-                      <v-icon
-                        class="mr-2"
-                        color="green"
-                        @click="editItem(props.item)"
-                      >
-                        edit
-                      </v-icon>
-                    </v-flex>
-                    <v-flex xs4>
-                      <v-icon
-                        @click="deleteProduct(props.item)"
-                        color="red lighten-1"
-                        >delete</v-icon
-                      >
-                    </v-flex>
-                  </v-layout>
-                </td>
-              </tr>
+              <td class="justify-center px-0">
+                <v-layout>
+                  <v-flex xs4>
+                    <v-icon
+                      class="mr-2"
+                      @click="openUserProcessDialog(props.item)"
+                      color="primary lighten-1"
+                      >fa-universal-access</v-icon
+                    >
+                  </v-flex>
+                  <v-flex xs4>
+                    <v-icon
+                      class="mr-2"
+                      color="green"
+                      @click="editItem(props.item)"
+                    >
+                      edit
+                    </v-icon>
+                  </v-flex>
+                  <v-flex xs4>
+                    <v-icon
+                      @click="deleteProduct(props.item)"
+                      color="red lighten-1"
+                      >delete</v-icon
+                    >
+                  </v-flex>
+                </v-layout>
+              </td>
+            </tr>
 
-              <tr></tr
-            ></template>
-          </v-data-table>
-        </v-flex>
-      </v-layout>
-    </v-container>
+            <tr></tr
+          ></template>
+        </v-data-table>
+      </v-flex>
+    </v-layout>
     <v-dialog
       v-model="showDialogUserProcess"
       v-if="showDialogUserProcess"
@@ -253,8 +292,9 @@ export default {
         { text: 'Tryb pracy', value: 'trybPracy' },
         { text: 'Czas dostepu(min)', value: 'czasDostepuMin' },
         { text: 'Mail', value: 'email' },
+        { text: 'Stawka miesięczna', value: 'stawkaMiesieczna' },
+        { text: 'Stawka godzinowa', value: 'stawkaGodzinowa' },
         { text: 'Administrator', value: 'isAdministrator' },
-
         { text: 'Akcje', value: 'actions' }
       ],
       editMode: false
