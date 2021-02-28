@@ -600,6 +600,8 @@ namespace YouKpiBackend.DbContexts
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.CzasWymagany).HasColumnName("CZAS_WYMAGANY");
+
                 entity.Property(e => e.OfferId).HasColumnName("OFFER_ID");
 
                 entity.Property(e => e.ProcessId)

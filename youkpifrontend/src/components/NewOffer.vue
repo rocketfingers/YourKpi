@@ -62,6 +62,7 @@
                 :filteredProcesses="filteredProcesses"
                 :parentItem="currentOffer"
                 @editedOfferLine="editOfferProcesses"
+                :showRequiredTime="true"
               >
               </ProcessSelector>
               <!-- <NewOffer
@@ -271,6 +272,10 @@
                   {{ props.item.nazwaProcesu }}
                 </td>
                 <td class="text-xs-left">
+                  {{ props.item.czasWymagany }}
+                </td>
+
+                <td class="text-xs-left">
                   {{ props.item.typZlecenia }}
                 </td>
               </tr>
@@ -333,6 +338,7 @@ export default {
         { text: 'Nazwa grupy procesu', value: 'nazwGrupyProcesu', visible: true },
         { text: 'Business area', value: 'businessArea', visible: true },
         { text: 'Nazwa procesu', value: 'nazwaProcesu', visible: true },
+        { text: 'Czas wymagany', value: 'czasWymagany', visible: true },
         { text: 'Typ zlecenia', value: 'typZlecenia', visible: true }
       ],
       showNewCustomerDialog: false,
@@ -376,6 +382,7 @@ export default {
       if (this.currentOffer.offerProcess) {
         this.currentOffer.offerProcess.forEach(p => {
           var item = $this.processes.find(pr => pr.id === p.processId)
+          item.czasWymagany = p.czasWymagany
           selPro.push(item)
         })
       }
@@ -491,7 +498,8 @@ export default {
           selectedProcesses.forEach(sp => {
             var item = {
               offerId: this.currentOffer.id,
-              processId: sp.id
+              processId: sp.id,
+              czasWymagany: sp.czasWymagany
             }
             this.currentOffer.offerProcess.push(item)
           })

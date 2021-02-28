@@ -9,6 +9,7 @@ namespace YouKpiBackend.ModelsEntity
         public int Id { get; set; }
         public int OfferId { get; set; }
         public string ProcessId { get; set; }
+        public double? CzasWymagany { get; set; }
 
         public virtual Offer Offer { get; set; }
         public virtual Process Process { get; set; }

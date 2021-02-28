@@ -4,7 +4,7 @@
       <v-container grid-list-md>
         <v-layout row wrap justify-space-around class="elevation-3">
           <v-flex 12>
-            <v-toolbar flat color="white">
+            <v-toolbar text color="white">
               <v-toolbar-title>Procesy</v-toolbar-title>
               <v-divider class="mx-2" inset vertical></v-divider>
               <v-spacer></v-spacer>
@@ -44,6 +44,21 @@
                   </td>
                   <td class="text-xs-left">{{ props.item.businessArea }}</td>
                   <td class="text-xs-left">{{ props.item.nazwaProcesu }}</td>
+                  <td class="text-xs-left">
+                    <v-text-field
+                      v-if="showRequiredTime"
+                      v-model="props.item.czasWymagany"
+                      label="Czas wymagany"
+                      prepend-icon="mdi-clock-time-four-outline"
+                      type="number"
+                      :rules="[czasWymaganyRule]"
+                      hint="1-10000"
+                      mask="time"
+                      return-masked-value
+                    ></v-text-field>
+                    <span v-else>Nie dotyczy</span>
+                  </td>
+
                   <td class="text-xs-left">{{ props.item.typZlecenia }}</td>
                 </tr>
                 <tr></tr
@@ -64,7 +79,8 @@ export default {
   },
   props: {
     parentItem: Object,
-    filteredProcesses: Array
+    filteredProcesses: Array,
+    showRequiredTime: Boolean
   },
   data () {
     return {
@@ -73,11 +89,16 @@ export default {
         if (val < 0) return 'Wprowadz dodatnia wartosc'
         return true
       },
+      czasWymaganyRule: val => {
+        if (val > 10000 || val < 1) return 'Wprowadź wartość z dopuszczalnego zakresu'
+        return true
+      },
       headers: [
         { text: 'Id', value: 'id', visible: true },
         { text: 'Nazwa grupy procesu', value: 'nazwaGrupyProcesu', visible: true },
         { text: 'Business area', value: 'businessArea', visible: true },
         { text: 'Nazwa procesu', value: 'nazwaProcesu', visible: true },
+        { text: 'Czas wymagany', value: 'czasWymagany', visible: this.showRequiredTime },
         { text: 'Typ zlecenia', value: 'typZlecenia', visible: true }
       ],
       search: '',

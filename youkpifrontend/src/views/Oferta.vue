@@ -47,7 +47,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-layout row wrap elevation-3>
+    <v-layout row wrap elevation-2>
       <v-flex xs12>
         <v-toolbar text color="white">
           <v-toolbar-title>Oferta</v-toolbar-title>
@@ -68,9 +68,10 @@
       </v-flex>
       <v-flex xs12>
         <v-data-table
+          mt-2
           :headers="headers"
           :items="items"
-          class="elevation-1"
+          class="elevation-2"
           :expanded.sync="expanded"
           item-key="id"
           :loading="tableLoading"
