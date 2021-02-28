@@ -422,6 +422,13 @@ export default {
         })
         return false
       }
+      if (this.currentOffer.offerProcess.filter(op => !op.czasWymagany || op.czasWymagany === 0 || op.czasWymagany < 1 || op.czasWymagany > 10000).length > 0) {
+        this.$dialog.warning({
+          text: 'Upewnij się, że czasy procesów oferty mieszczą się w wymaganych zakresach!',
+          title: 'Uwaga'
+        })
+        return false
+      }
       var emptyOfferLines = this.currentOffer.offerLines.filter(p =>
         p.offerLineProcess.length === 0
       )

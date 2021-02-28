@@ -417,6 +417,8 @@ export default {
 
     },
     beforeSaveValidation () {
+      // eslint-disable-next-line no-debugger
+      debugger
       if (!this.currentOffer.offerLines) {
         this.$dialog.warning({
           text: 'Aby zapisać ofertę dodaj pozycje do Offer lines!',
@@ -441,6 +443,15 @@ export default {
       if (this.currentOffer.offerProcess.length <= 0) {
         this.$dialog.warning({
           text: 'Aby zapisać ofertę dodaj procesy!',
+          title: 'Uwaga'
+        })
+        return false
+      }
+
+      alert((this.currentOffer.offerProcess.filter(op => op.czasWymagany < 1 || op.czasWymagany > 10000).length))
+      if (this.currentOffer.offerProcess.filter(op => op.czasWymagany < 1 || op.czasWymagany > 10000).length > 0) {
+        this.$dialog.warning({
+          text: 'Upewnij się, że czasy procesów oferty mieszczą się w wymaganych zakresach!',
           title: 'Uwaga'
         })
         return false

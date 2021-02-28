@@ -54,6 +54,7 @@
                       :rules="[czasWymaganyRule]"
                       hint="1-10000"
                       mask="time"
+                      @change="selectItem(props, true)"
                       return-masked-value
                     ></v-text-field>
                     <span v-else>Nie dotyczy</span>
@@ -119,8 +120,13 @@ export default {
 
   },
   methods: {
-    selectItem (props) {
-      props.select(props.isSelected)
+    selectItem (props, val) {
+      if (val === true) {
+        props.select(false)
+        props.select(true)
+      } else {
+        props.select(props.isSelected)
+      }
     }
   },
   created () {
