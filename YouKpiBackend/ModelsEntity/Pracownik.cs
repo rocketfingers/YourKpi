@@ -22,6 +22,8 @@ namespace YouKpiBackend.ModelsEntity
         public string Password { get; set; }
         public string Email { get; set; }
         public string Salt { get; set; }
+        public decimal? StawkaMiesieczna { get; set; }
+        public decimal? StawkaGodzinowa { get; set; }
 
         public virtual ICollection<Offer> Offer { get; set; }
         public virtual ICollection<PracownikCzasStep> PracownikCzasStep { get; set; }

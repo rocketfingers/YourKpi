@@ -79,6 +79,9 @@ namespace YouKpiBackend.Controllers
                 pracToChange.TrybPracy = entity.TrybPracy;
                 pracToChange.CzasDostepuMin = entity.CzasDostepuMin;
                 pracToChange.Email = entity.Email;
+                pracToChange.StawkaGodzinowa = entity.StawkaGodzinowa;
+                pracToChange.StawkaMiesieczna = entity.StawkaMiesieczna;
+
                 await _dbContext.SaveChangesAsync();
 
                 return NoContent();

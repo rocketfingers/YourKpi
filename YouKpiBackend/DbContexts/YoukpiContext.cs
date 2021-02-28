@@ -640,6 +640,14 @@ namespace YouKpiBackend.DbContexts
                     .IsUnicode(false);
 
                 entity.Property(e => e.Salt).HasMaxLength(20);
+
+                entity.Property(e => e.StawkaGodzinowa)
+                    .HasColumnName("STAWKA_GODZINOWA")
+                    .HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.StawkaMiesieczna)
+                    .HasColumnName("STAWKA_MIESIECZNA")
+                    .HasColumnType("decimal(18, 2)");
             });
 
             modelBuilder.Entity<PracownikCzasStep>(entity =>

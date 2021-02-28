@@ -14,5 +14,8 @@ namespace YouKpiBackend.ViewModels
         public bool IsAdministrator { get; set; }
         public string Login { get; set; }
         public string Email { get; set; }
+        public decimal? StawkaGodzinowa { get; set; }
+        public decimal? StawkaMiesieczna { get; set; }
+
     }
 }
