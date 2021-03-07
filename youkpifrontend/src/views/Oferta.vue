@@ -591,6 +591,13 @@ export default {
               } else if (part.availableParts > 0) {
                 part.available = true
               }
+              if (part.komponent) {
+                if (!part.komponent.availableComponents) {
+                  part.komponent.availableComponents = 'brak pozycji w magazynie'
+                } else if (part.availableComponents > 0) {
+                  part.komponent.available = true
+                }
+              }
             })
           })
         })

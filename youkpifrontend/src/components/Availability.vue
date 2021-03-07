@@ -36,10 +36,14 @@
             <tr :class="props.isExpanded ? 'primary lighten-5' : 'white'">
               <template v-for="(header, index) in headers">
                 <td :key="index" v-if="header.value === 'expand'">
-                  <v-icon @click="expandRow(props)" v-show="!props.isExpanded"
+                  <v-icon
+                    @click="expandProductRow(props)"
+                    v-show="!props.isExpanded"
                     >fa-arrow-down</v-icon
                   >
-                  <v-icon @click="expandRow(props)" v-show="props.isExpanded"
+                  <v-icon
+                    @click="expandProductRow(props)"
+                    v-show="props.isExpanded"
                     >fa-arrow-up</v-icon
                   >
                 </td>
@@ -73,19 +77,37 @@
                 <v-flex xs11>
                   <v-card elevation-3>
                     <v-data-table
-                      :headers="expandedHeaders"
+                      :headers="expandedPartsHeaders"
                       :items="item.parts"
+                      :expanded.sync="expandedParts"
+                      item-key="id"
                     >
                       <template slot="item" slot-scope="props">
                         <tr>
+                          <td>
+                            <v-icon
+                              @click="expandPartRow(props)"
+                              v-show="!props.isExpanded"
+                              >fa-arrow-down</v-icon
+                            >
+                            <v-icon
+                              @click="expandPartRow(props)"
+                              v-show="props.isExpanded"
+                              >fa-arrow-up</v-icon
+                            >
+                          </td>
                           <td>{{ props.item.id }}</td>
                           <td class="text-xs-left">
                             {{ props.item.nazwa }}
                           </td>
                           <td class="text-xs-left">
+                            <v-icon v-show="props.item.komponentId"
+                              >fa-check-square</v-icon
+                            >
+                          </td>
+                          <td class="text-xs-left">
                             {{ props.item.ilosc }}
                           </td>
-
                           <td class="text-xs-left">
                             <v-layout row wrap justify-space-around>
                               <v-icon
@@ -102,6 +124,57 @@
                             </v-layout>
                           </td>
                         </tr>
+                      </template>
+                      <template v-slot:expanded-item="{ headers, item }">
+                        <td :colspan="headers.length">
+                          <v-layout
+                            justify-space-around
+                            mb-3
+                            v-if="item.komponent"
+                          >
+                            <v-flex xs11>
+                              <v-card elevation-3>
+                                <v-data-table
+                                  :headers="expandedComponentsHeaders"
+                                  :items="[item.komponent]"
+                                >
+                                  <template slot="item" slot-scope="props">
+                                    <tr>
+                                      <td>{{ props.item.komponentId }}</td>
+                                      <td>{{ props.item.nazwa }}</td>
+                                      <td>{{ props.item.ilosc }}</td>
+                                      <td class="text-xs-left">
+                                        <v-layout row wrap justify-space-around>
+                                          <v-icon
+                                            v-show="props.item.status > 0"
+                                            color="green"
+                                            >check</v-icon
+                                          >
+                                          <v-icon
+                                            v-show="props.item.status < 2"
+                                            color="red"
+                                            >fa-exclamation-triangle</v-icon
+                                          >
+                                          <v-spacer></v-spacer>
+                                          {{ props.item.availableComponents }}
+                                          <v-spacer></v-spacer>
+                                        </v-layout>
+                                      </td>
+                                    </tr>
+                                  </template>
+                                </v-data-table>
+                              </v-card>
+                            </v-flex>
+                          </v-layout>
+                          <v-layout
+                            v-else
+                            justify-space-around
+                            mb-3
+                            color="red"
+                          >
+                            Wybrana część nie posiada zdefiniowanego komponentu!
+                          </v-layout>
+                        </td>
                       </template>
                     </v-data-table>
                   </v-card>
@@ -137,15 +210,21 @@ export default {
         { text: 'W', value: 'w', visible: true },
         { text: 'Medium', value: 'medium', visible: true },
         { text: 'Dodatkowe wyposażenie', value: 'additionalEquipment', visible: true },
-        // { text: 'Sale', value: 'sale', visible: true },
         { text: 'Cena w dniu oferty', value: 'priceInOfferDay', visible: true },
         { text: 'Cena sprzedaży', value: 'salesPrice', visible: true },
         { text: 'Ilość', value: 'quantity', visible: true },
-
         { text: 'Dostępność', value: 'availableProducts', visible: true }
       ],
-      expandedHeaders: [
+      expandedPartsHeaders: [
+        { text: 'Rozwiń', value: 'expand', visible: true },
         { text: 'Id części', value: 'id', visible: true },
+        { text: 'Nazwa', value: 'nazwa', visible: true },
+        { text: 'Komponent', value: 'komponentId', visible: true },
+        { text: 'Ilość sztuk', value: 'ilosc', visible: true },
+        { text: 'Dostępność', value: 'availableParts', visible: true }
+      ],
+      expandedComponentsHeaders: [
+        { text: 'Id komponentu', value: 'komponentId', visible: true },
         { text: 'Nazwa', value: 'nazwa', visible: true },
         { text: 'Ilość sztuk', value: 'ilosc', visible: true },
         { text: 'Dostępność', value: 'availableParts', visible: true }
@@ -163,7 +242,8 @@ export default {
       showProcessSelectorDialog: false,
       processesSelectorTitle: 'Wybierz procesy',
       currentOfferLine: {},
-      expanded: []
+      expanded: [],
+      expandedParts: []
 
     }
   },
@@ -187,8 +267,11 @@ export default {
       })
       return selPro
     },
-    expandRow (item) {
+    expandProductRow (item) {
       this.currentOfferLine = item.item
+      item.expand(!item.isExpanded)
+    },
+    expandPartRow (item) {
       item.expand(!item.isExpanded)
     }
 

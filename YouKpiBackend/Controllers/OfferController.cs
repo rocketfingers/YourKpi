@@ -84,13 +84,45 @@ namespace YouKpiBackend.Controllers
                 foreach (var offerLine in offer.OfferLines)
                 {
                     var availabilityParts = new List<AvailabilityPartsViewModel>();
-                    var productParts = await _ctx.ProduktCzesci.Where(p => p.ProduktyId == offerLine.ProductId).Include(p => p.Czesci).ToListAsync();
+                    var productParts = await _ctx.ProduktCzesci.Where(p => p.ProduktyId == offerLine.ProductId).Include(p => p.Czesci).ThenInclude(p => p.Komponent).ToListAsync();
                     foreach (var part in productParts)
                     {
+                        AvailabilityComponentViewModel availabilityComponent = null; 
+                        if (part.Czesci.Komponent != null)
+                        {
+                            var noOfAvailableComponents = _ctx.MagazynKomponenty.Where(p => p.ElementId == part.Czesci.KomponentId).FirstOrDefault()?.Ilosc;
+                            var componentStatus = AvailabilityStatus.Lack;
+                            if (noOfAvailableComponents == null)
+                            { }
+                            else if (noOfAvailableComponents >= part.Czesci.Komponent.Ilosc)
+                            {
+                                componentStatus = AvailabilityStatus.Enough;
+                            }
+                            else if (noOfAvailableComponents > 0)
+                            {
+                                componentStatus = AvailabilityStatus.NotEnouth;
+                            }
+                             availabilityComponent = new AvailabilityComponentViewModel()
+                            {
+                                Status = componentStatus,
+                                AvailableComponents = noOfAvailableComponents,
+                                Ilosc = part.Czesci.Komponent.Ilosc,
+                                CenaJednostkowa = part.Czesci.Komponent.CenaJednostkowa,
+                                GatunekPodst = part.Czesci.Komponent.GatunekPodst,
+                                Id = part.Czesci.Komponent.Id,
+                                Jednostka = part.Czesci.Komponent.Jednostka,
+                                KomponentId = part.Czesci.Komponent.KomponentId,
+                                Ltid = part.Czesci.Komponent.Ltid,
+                                Nazwa = part.Czesci.Komponent.Nazwa,
+                                Wymiar = part.Czesci.Komponent.Wymiar,
+                                ProcessId = part.Czesci.Komponent.ProcessId
+                            };
+                        }
                         var noOfAvailableParts = _ctx.MagazynCzesci.Where(p => p.ElementId == part.CzesciId).FirstOrDefault()?.Ilosc;
-
                         var prartStatus = AvailabilityStatus.Lack;
-                        if (noOfAvailableParts >= part.IloscSztuk)
+                        if (noOfAvailableParts == null)
+                        { }
+                        else if (noOfAvailableParts >= part.IloscSztuk)
                         {
                             prartStatus = AvailabilityStatus.Enough;
                         }
@@ -98,7 +130,6 @@ namespace YouKpiBackend.Controllers
                         {
                             prartStatus = AvailabilityStatus.NotEnouth;
                         }
-
                         availabilityParts.Add(new AvailabilityPartsViewModel()
                         {
                             Ilosc = part.IloscSztuk,
@@ -111,13 +142,16 @@ namespace YouKpiBackend.Controllers
                             Tj = part.Czesci.Tj,
                             Tpz = part.Czesci.Tpz,
                             Wymiary = part.Czesci.Wymiary,
-                            Status = prartStatus
+                            Status = prartStatus,
+                            Komponent = availabilityComponent
                         });
                     }
 
                     var noOfAvailableProducts = _ctx.MagazynProdukty.Where(p => p.ElementId == offerLine.ProductId).FirstOrDefault()?.Ilosc;
                     var productStatus = AvailabilityStatus.Lack;
-                    if(noOfAvailableProducts >= offerLine.Quantity)
+                    if (noOfAvailableProducts == null)
+                    { }
+                    else if (noOfAvailableProducts >= offerLine.Quantity)
                     {
                         productStatus = AvailabilityStatus.Enough;
                     }else if(noOfAvailableProducts >0)
