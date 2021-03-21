@@ -18,11 +18,11 @@ namespace YouKpiBackend.BusinessLibrary
             {
                 //wywala joby ktore sie nieodpalily w prze3szlosci a sa w bazie
 
-                RecurringJob.AddOrUpdate<ProductionLibrary>("DebugStopStepLongerThan480", x => x.StopStepLongerThan480(), "0 * * * *");
+                RecurringJob.AddOrUpdate<ProductionLibrary>("DebugStopStepLongerThanMaxWorkTime", x => x.StopStepLongerThan4MaxWorkTime(), "0 * * * *");
             }
             else
             {
-                RecurringJob.AddOrUpdate<ProductionLibrary>("StopStepLongerThan480",  x =>  x.StopStepLongerThan480(), "0 * * * *");
+                RecurringJob.AddOrUpdate<ProductionLibrary>("StopStepLongerThanMaxWorkTime",  x =>  x.StopStepLongerThan4MaxWorkTime(), "0 * * * *");
             }
         }
     }
