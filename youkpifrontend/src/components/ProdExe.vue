@@ -58,8 +58,8 @@
                     "
                     color="primary"
                   >
-                    {{ props.item.wykonaneStepy }}
-                  </v-progress-circular>
+                    {{ props.item.wykonaneStepy }} </v-progress-circular
+                  >/{{ props.item.iloscStepow }}
                 </td>
                 <td :key="header.value" v-else-if="header.value === 'expand'">
                   <v-icon @click="expandRow(props)" v-show="!props.isExpanded"
