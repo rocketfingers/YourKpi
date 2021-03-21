@@ -357,7 +357,7 @@ export default {
       // Settings
       title: 'Akcje do wykonania',
       getAllApi: 'api/Production/GetMainPage',
-      getAllPartsApi: 'api/Parts/GetAll',
+      getAllPartsApi: 'api/Parts/GetAllForOfferLineIdSimpleView',
 
       // Settings
       showDialog: false,
@@ -428,6 +428,16 @@ export default {
     }
   },
   watch: {
+    currentItem: {
+      handler: function (newVal, oldval) {
+        // eslint-disable-next-line no-debugger
+        debugger
+        if (newVal !== oldval) {
+          this.getParts()
+        }
+      },
+      deep: true
+    },
     showDialog (val) {
       val || this.close()
     }
@@ -552,7 +562,7 @@ export default {
         .then(Response => { this.data = Response.data; this.tableLoading = false })
     },
     getParts () {
-      this.$http.get(this.getAllPartsApi)
+      this.$http.get(this.getAllPartsApi + '?offerLineId=' + this.currentItem.offerLineId)
         .then(Response => {
           this.parts = Response.data
           this.parts.forEach(p => {
@@ -567,7 +577,6 @@ export default {
   },
   created () {
     this.getData()
-    this.getParts()
     this.getReasonCodes()
   },
   destroyed () {

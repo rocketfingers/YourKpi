@@ -50,7 +50,26 @@ namespace YouKpiBackend.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllForOfferLineIdSimpleView(int offerLineId)
+        {
+            try
+            {
 
+                var res = await _dbContext.OfferLines
+                    .Include(p => p.Product)
+                    .ThenInclude(p => p.ProduktCzesci)
+                    .ThenInclude(p => p.Czesci)
+                    .Where(p => p.Id == (offerLineId))
+                    .SelectMany(p => p.Product.ProduktCzesci.Select(x => x.Czesci)).ToListAsync();
+
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetById(string id)
         {
