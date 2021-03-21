@@ -1,5 +1,58 @@
 <template>
   <div>
+    <v-dialog v-model="showAvailabilityDialog" max-width="1800" persistent>
+      <v-card>
+        <v-toolbar dark elevation-4 color="primary lighten-1">
+          <span class="headline">{{ offerAvailabilityTitle }}</span>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="showAvailabilityDialog = false" dark>
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-layout row wrap justify-space-around class="ma-4">
+          <v-flex xs11>
+            <v-form ref="newOfferForm">
+              <Availability
+                :offerAvailability="offerAvailability"
+              ></Availability>
+
+              <!-- <NewOffer
+                :currentOffer="currentOffer"
+                :projects="projects"
+                :editMode="editMode"
+                @editedOffer="editcurrentOfferRes"
+                :customers="customers"
+                :products="products"
+                :processes="processes"
+              ></NewOffer> -->
+            </v-form>
+          </v-flex>
+        </v-layout>
+        <v-card-actions class="blue lighten-5">
+          <v-spacer></v-spacer>
+          <v-btn
+            large
+            color="blue darken-1"
+            text
+            @click.native="showAvailabilityDialog = false"
+          >
+            Zamknij
+            <v-icon dark>cancel</v-icon>
+          </v-btn>
+          <!-- <v-spacer></v-spacer>
+          <v-btn
+            text
+            large
+            color="blue darken-1"
+            @click.native="saveOfferAction"
+          >
+            Zapisz
+            <v-icon dark>save</v-icon>
+          </v-btn> -->
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <v-dialog v-model="showNewOfferDialog" max-width="1800" persistent>
       <v-card>
         <v-toolbar dark elevation-4 color="primary lighten-1">
@@ -108,6 +161,21 @@
                         <template v-slot:activator="{ on }">
                           <v-icon
                             v-on="on"
+                            @click="showAvailability(props.item, index)"
+                            color="green"
+                            class="mr-2"
+                            >fa-tasks</v-icon
+                          >
+                        </template>
+                        <span>Dostępność</span>
+                      </v-tooltip>
+                    </v-flex>
+                    <v-spacer></v-spacer>
+                    <v-flex xs3>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <v-icon
+                            v-on="on"
                             @click="editOffer(props.item, index)"
                             color="green"
                             class="mr-2"
@@ -133,7 +201,7 @@
                         </v-tooltip>
                       </v-layout>
                     </v-flex>
-
+                    <v-spacer></v-spacer>
                     <v-flex xs3>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
@@ -177,12 +245,14 @@
 <script>
 import NewOffer from '../components/NewOffer'
 import OfferLines from '../components/OfferLines'
+import Availability from '../components/Availability'
 
 export default {
   name: 'Produkty',
   components: {
     NewOffer: NewOffer,
-    OfferLines: OfferLines
+    OfferLines: OfferLines,
+    Availability: Availability
   },
   props: {},
   data () {
@@ -198,6 +268,8 @@ export default {
       getAllProductsApi: 'api/Products/GetAll',
       getAllProcesses: 'api/Process/GetAll',
       getOfferFile: 'api/Offer/GetPdf/',
+      getOfferAvailability: 'api/Offer/GetOfferAvailability/',
+
       expanded: [],
 
       headers: [
@@ -230,7 +302,10 @@ export default {
       projects: [],
       customers: [],
       products: [],
-      processes: []
+      processes: [],
+      offerAvailabilityTitle: 'Dostępność',
+      showAvailabilityDialog: false,
+      offerAvailability: {}
     }
   },
   computed: {},
@@ -487,6 +562,47 @@ export default {
       this.editedIndex = index
       this.showNewOfferDialog = true
       this.currentOffer = offer
+    },
+    showAvailability (offer, index) {
+      this.offerAvailabilityTitle = 'Dostępność dla oferty: ' + offer.name
+      this.currentOffer = offer
+      this.getAvailability(offer.id)
+      this.showAvailabilityDialog = true
+
+      this.editedIndex = index
+    },
+    getAvailability (offerId) {
+      var $this = this
+      this.$http
+        .get(this.getOfferAvailability + offerId)
+        .then((Response) => {
+          $this.offerAvailability = Response.data
+          $this.offerAvailability.availabilityProducts.forEach(p => {
+            p.available = false
+            if (!p.availableProducts) {
+              p.availableProducts = 'brak pozycji w magazynie'
+            } else if (p.availableProducts > 0) {
+              p.available = true
+            }
+            p.parts.forEach(part => {
+              part.available = false
+              if (!part.availableParts) {
+                part.availableParts = 'brak pozycji w magazynie'
+              } else if (part.availableParts > 0) {
+                part.available = true
+              }
+              if (part.komponent) {
+                if (!part.komponent.availableComponents) {
+                  part.komponent.availableComponents = 'brak pozycji w magazynie'
+                } else if (part.availableComponents > 0) {
+                  part.komponent.available = true
+                }
+              }
+            })
+          })
+        })
+        .catch((e) => {
+        })
     },
     editcurrentOfferRes (editedOffer) {
       this.currentOffer = editedOffer
