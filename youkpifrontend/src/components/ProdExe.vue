@@ -61,6 +61,14 @@
                     {{ props.item.wykonaneStepy }} </v-progress-circular
                   >/{{ props.item.iloscStepow }}
                 </td>
+                <td
+                  :key="header.value"
+                  v-else-if="header.value === 'plannedEnd'"
+                >
+                  <span class="text-no-wrap">{{
+                    formatDateTimeYYYYMMDD(props.item.plannedEnd)
+                  }}</span>
+                </td>
                 <td :key="header.value" v-else-if="header.value === 'expand'">
                   <v-icon @click="expandRow(props)" v-show="!props.isExpanded"
                     >fa-arrow-down</v-icon
