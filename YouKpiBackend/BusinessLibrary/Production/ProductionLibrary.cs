@@ -17,20 +17,22 @@ namespace YouKpiBackend.BusinessLibrary.Production
         {
             _dbContext = dbContext;
         }
-        public async Task StopStepLongerThan480()
+        [Hangfire.AutomaticRetry(Attempts =1)]
+        public async Task StopStepLongerThan4MaxWorkTime()
         {
-            List<PracownikCzasStep> stepsToStop = await NewMethod();
+            List<PracownikCzasStep> stepsToStop = await FindStepsLongerThanMaxWorkTime();
 
             stepsToStop.ForEach(p => p.CzasStop = DateTime.Now);
             await _dbContext.SaveChangesAsync();
         }
 
-        private async Task<List<PracownikCzasStep>> NewMethod()
+        private async Task<List<PracownikCzasStep>> FindStepsLongerThanMaxWorkTime()
         {
+            
             return await _dbContext.PracownikCzasStep.Where(
                 p => p.CzasStart != null
                 && p.CzasStop == null
-                && (int)DateTime.Now.Subtract(p.CzasStart.Value).TotalMinutes > MaxWorkTime).ToListAsync();
+                && EF.Functions.DateDiffMinute(p.CzasStart.Value, DateTime.Now) > MaxWorkTime).ToListAsync();
         }
         //public Task GetActivitiesHistory(bool isAdministrator, int? userId = null)
         //{
