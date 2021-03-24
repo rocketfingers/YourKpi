@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.BusinessLibrary.Offer;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
+using YouKpiBackend.ViewModels;
+using YouKpiBackend.ViewModels.Offer;
 
 namespace YouKpiBackend.Controllers
 {
@@ -60,6 +63,146 @@ namespace YouKpiBackend.Controllers
             }
         }
 
+
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> GetOfferAvailability(int id)
+        {
+            try
+            {
+                var offer = await _ctx.Offer.Where(o => o.Id == id).Include(p => p.Clients)
+                    .Include(p => p.OfferLines)
+                    .Include(p => p.OfferLines)
+                    .ThenInclude(p => p.Product)
+                    .ThenInclude(p => p.ProduktCzesci)
+                    .FirstOrDefaultAsync();
+
+                var availability = new AvailabilityOfferViewModel()
+                {
+                    AvailabilityProducts = new List<AvailabilityOfferLinesViewModel>()
+                };
+
+                foreach (var offerLine in offer.OfferLines)
+                {
+                    var availabilityParts = new List<AvailabilityPartsViewModel>();
+                    var productParts = await _ctx.ProduktCzesci.Where(p => p.ProduktyId == offerLine.ProductId).Include(p => p.Czesci).ThenInclude(p => p.Komponent).ToListAsync();
+                    foreach (var part in productParts)
+                    {
+                        var requiredPartsNo = part.IloscSztuk;
+                        if (requiredPartsNo > 0)
+                        {
+                            requiredPartsNo = requiredPartsNo * offerLine.Quantity;
+                        }
+                        AvailabilityComponentViewModel availabilityComponent = null;
+                        if (part.Czesci.Komponent != null)
+                        {
+                            var requiredComponentsNo = part.Czesci.Komponent.Ilosc;
+                            if (requiredComponentsNo > 0)
+                            {
+                                requiredComponentsNo = requiredComponentsNo * requiredPartsNo * offerLine.Quantity;
+                            }
+
+                            var noOfAvailableComponents = _ctx.MagazynKomponenty.Where(p => p.ElementId == part.Czesci.KomponentId).FirstOrDefault()?.Ilosc;
+                            var componentStatus = AvailabilityStatus.Lack;
+                            if (noOfAvailableComponents == null)
+                            { }
+                            else if (noOfAvailableComponents >= part.Czesci.Komponent.Ilosc)
+                            {
+                                componentStatus = AvailabilityStatus.Enough;
+                            }
+                            else if (noOfAvailableComponents > 0)
+                            {
+                                componentStatus = AvailabilityStatus.NotEnouth;
+                            }
+
+                            availabilityComponent = new AvailabilityComponentViewModel()
+                            {
+                                Status = componentStatus,
+                                AvailableComponents = noOfAvailableComponents,
+                                Ilosc = requiredComponentsNo,
+                                CenaJednostkowa = part.Czesci.Komponent.CenaJednostkowa,
+                                GatunekPodst = part.Czesci.Komponent.GatunekPodst,
+                                Id = part.Czesci.Komponent.Id,
+                                Jednostka = part.Czesci.Komponent.Jednostka,
+                                KomponentId = part.Czesci.Komponent.KomponentId,
+                                Ltid = part.Czesci.Komponent.Ltid,
+                                Nazwa = part.Czesci.Komponent.Nazwa,
+                                Wymiar = part.Czesci.Komponent.Wymiar,
+                                ProcessId = part.Czesci.Komponent.ProcessId
+                            };
+                        }
+
+                        var noOfAvailableParts = _ctx.MagazynCzesci.Where(p => p.ElementId == part.CzesciId).FirstOrDefault()?.Ilosc;
+                        var prartStatus = AvailabilityStatus.Lack;
+                        if (noOfAvailableParts == null)
+                        { }
+                        else if (noOfAvailableParts >= requiredPartsNo)
+                        {
+                            prartStatus = AvailabilityStatus.Enough;
+                        }
+                        else if (noOfAvailableParts > 0)
+                        {
+                            prartStatus = AvailabilityStatus.NotEnouth;
+                        }
+
+                        availabilityParts.Add(new AvailabilityPartsViewModel()
+                        {
+                            Ilosc = requiredPartsNo,
+                            AvailableParts = noOfAvailableParts,
+                            GatPodstawowy = part.Czesci.GatPodstawowy,
+                            Id = part.Czesci.Id,
+                            KomponentId = part.Czesci.KomponentId,
+                            Nazwa = part.Czesci.Nazwa,
+                            NumerRysNorma = part.Czesci.NumerRysNorma,
+                            Tj = part.Czesci.Tj,
+                            Tpz = part.Czesci.Tpz,
+                            Wymiary = part.Czesci.Wymiary,
+                            Status = prartStatus,
+                            Komponent = availabilityComponent
+                        });
+                    }
+
+                    var noOfAvailableProducts = _ctx.MagazynProdukty.Where(p => p.ElementId == offerLine.ProductId).FirstOrDefault()?.Ilosc;
+                    var productStatus = AvailabilityStatus.Lack;
+                    if (noOfAvailableProducts == null)
+                    { }
+                    else if (noOfAvailableProducts >= offerLine.Quantity)
+                    {
+                        productStatus = AvailabilityStatus.Enough;
+                    }
+                    else if (noOfAvailableProducts > 0)
+                    {
+                        productStatus = AvailabilityStatus.NotEnouth;
+                    }
+
+                    availability.AvailabilityProducts.Add(
+                        new AvailabilityOfferLinesViewModel()
+                        {
+                            Sale = offerLine.Sale,
+                            SalesPrice = offerLine.SalesPrice,
+                            AdditionalEquipment = offerLine.AdditionalEquipment,
+                            AvailableProducts = noOfAvailableProducts,
+                            Id = offerLine.Id,
+                            Medium = offerLine.Medium,
+                            OfferId = offerLine.OfferId,
+                            Parts = availabilityParts,
+                            PriceInOfferDay = offerLine.PriceInOfferDay,
+                            ProductId = offerLine.ProductId,
+                            Quantity = offerLine.Quantity,
+                            W = offerLine.W,
+                            Status = productStatus
+                        }
+                        );
+                }
+
+                return Ok(availability);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+
         [HttpPost("[action]")]
         public async Task<IActionResult> Create([FromBody] Offer entity)
         {
@@ -79,7 +222,7 @@ namespace YouKpiBackend.Controllers
                         ol.Process = null;
                     });
 
-                
+
                 });
 
                 entity.OfferProcess.ToList().ForEach(p =>
