@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.Extensions;
 using YouKpiBackend.ModelsEntity;
-using YouKpiBackend.ViewModels;
 using YouKpiBackend.ViewModels.Store;
 
 namespace YouKpiBackend.Controllers
