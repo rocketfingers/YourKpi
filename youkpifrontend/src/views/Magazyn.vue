@@ -351,25 +351,6 @@ export default {
         .catch((e) => {
         })
     },
-    formatDateTimeYYYYMMDD (date) {
-      if (date) {
-        if (date instanceof Date) {
-          return (
-            date.getFullYear() +
-            '-' +
-            (date.getMonth() + 1) +
-            '-' +
-            date.getDate()
-          )
-        }
-        if (date.toString().includes('T')) {
-          return date.toString().split('T')[0]
-        }
-
-        return date
-      }
-    },
-
     saveAction () {
       if (!this.$refs.newForm.validate()) {
         return
