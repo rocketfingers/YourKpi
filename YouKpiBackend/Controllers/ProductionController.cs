@@ -98,6 +98,26 @@ namespace YouKpiBackend.Controllers
                     find.ReasonCodeId = model.ReasonCodeId;
                     if (model.Zakonczenie)
                     {
+                        if (CheckIsThisLastStep(model))
+                        {
+                            int countAllSteps = await _dbContext.Steps
+                                                  .Where(p =>
+                                                  p.ProcessesId == model.ProcessId)
+                                                  .CountAsync();
+
+                            int countFinishedSteps = await _dbContext.StepOfferWykonanie
+                                                    .Where(p =>
+                                                    p.ProcessId == model.ProcessId &&
+                                                    p.OfferLineId == model.OfferLineId &&
+                                                    p.Zakonczonie)
+                                                    .CountAsync();
+                            int countOfStepsNeededClosesBefore10 = countAllSteps - 1;
+
+                            if (countFinishedSteps != countOfStepsNeededClosesBefore10)
+                            {
+                                throw new Exception("Trzeba zamknąć wszystkie inne kroki przez zamknięciem 10.");
+                            }
+                        }
                         find.ClosedOn = DateTime.Now;
                         find.ClosesBy = this.GetUserId();
                     }
@@ -124,6 +144,11 @@ namespace YouKpiBackend.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
+        }
+
+        private static bool CheckIsThisLastStep(SaveCompleteStepViewModel model)
+        {
+            return model.StepNum == 10;
         }
 
         private void AddStepOfferWykonanie(SaveCompleteStepViewModel model, int userId)
