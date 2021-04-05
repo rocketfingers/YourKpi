@@ -26,6 +26,7 @@
               :search="search"
               show-select
               :footer-props="footer"
+              :expanded.sync="expanded"
               footer-props.items-per-page-options="rows"
               class="elevation-2"
             >
@@ -37,6 +38,14 @@
                       @click="selectItem(props)"
                     >
                     </v-checkbox>
+                  </td>
+                  <td :key="index">
+                    <v-icon @click="expandRow(props)" v-show="!props.isExpanded"
+                      >fa-arrow-down</v-icon
+                    >
+                    <v-icon @click="expandRow(props)" v-show="props.isExpanded"
+                      >fa-arrow-up</v-icon
+                    >
                   </td>
                   <td class="text-xs-left">{{ props.item.id }}</td>
                   <td class="text-xs-left">
@@ -64,6 +73,15 @@
                 </tr>
                 <tr></tr
               ></template>
+              <template v-slot:expanded-item="{ headers, item }">
+                <td :colspan="headers.length">
+                  <v-layout justify-space-around>
+                    <v-flex xs11>
+                      <Steps :currentProcess="item" :readonly="true"> </Steps>
+                    </v-flex>
+                  </v-layout>
+                </td>
+              </template>
             </v-data-table>
           </v-flex>
         </v-layout>
@@ -73,15 +91,20 @@
 </template>
 
 <script>
+import Steps from '../components/Steps'
 
 export default {
   name: 'ProcessSelector',
   components: {
+    Steps: Steps
+
   },
   props: {
     parentItem: Object,
     filteredProcesses: Array,
-    showRequiredTime: Boolean
+    showRequiredTime: Boolean,
+    expanded: []
+
   },
   data () {
     return {
@@ -95,6 +118,7 @@ export default {
         return true
       },
       headers: [
+        { text: 'Rozwiń', value: 'expand' },
         { text: 'Id', value: 'id', visible: true },
         { text: 'Nazwa grupy procesu', value: 'nazwaGrupyProcesu', visible: true },
         { text: 'Business area', value: 'businessArea', visible: true },
@@ -120,6 +144,9 @@ export default {
 
   },
   methods: {
+    expandRow (item) {
+      item.expand(!item.isExpanded)
+    },
     selectItem (props, val) {
       if (val === true) {
         props.select(false)

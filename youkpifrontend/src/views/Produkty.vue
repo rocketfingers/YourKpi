@@ -105,7 +105,7 @@
           :search="search"
         >
           <template slot="item" slot-scope="props">
-            <tr>
+            <tr :class="props.item.rowColor">
               <template v-for="(header, index) in headers">
                 <td :key="index" v-if="header.value == 'actions'">
                   <v-layout>
@@ -208,7 +208,8 @@ export default {
         { text: 'Waluta', value: 'waluta' },
         { text: 'Suma TPZ', value: 'tpzSum' },
         { text: 'Suma TJ', value: 'tjSum' },
-        { text: 'Wart. komponentów', value: 'componentsValueSum' },
+        { text: 'Wart.BoM', value: 'componentsValueSum' },
+        { text: 'BoM%', value: 'componentsValueSumPercent' },
         { text: 'Akcje', value: 'actions' }
       ],
       products: [],
@@ -292,12 +293,28 @@ export default {
             product.tpzSum = product.tpzSum.toFixed(2)
             product.tjSum = product.tjSum.toFixed(2)
             product.componentsValueSum = product.componentsValueSum.toFixed(2)
+            if (product.componentsValueSum > 0 && product.cena > 0) {
+              product.componentsValueSumPercent = ((product.componentsValueSum * 100) / product.cena).toFixed(2)
+            }
+            product.rowColor = $this.prepareRowColor(product)
           })
           this.tableLoading = false
         })
         .catch((e) => {
           this.tableLoading = false
         })
+    },
+
+    prepareRowColor (product) {
+      var rowColor = 'red lighten-4'
+      if (!product.dn || !product.componentsValueSumPercent) {
+        return 'white'
+      }
+      if ((product.dn <= 50 && product.componentsValueSumPercent <= 25) ||
+      ((product.dn >= 65 && product.dn <= 100) && product.componentsValueSumPercent <= 35) ||
+      ((product.dn >= 125) && product.componentsValueSumPercent <= 40)
+      ) { rowColor = 'green lighten-5' }
+      return rowColor
     },
     getProductTypes () {
       var $this = this

@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
 using YouKpiBackend.ViewModels;
+using YouKpiBackend.ViewModels.Store;
 
 namespace YouKpiBackend.Controllers
 {
@@ -54,7 +54,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Produkty.Select(x => new SimpleViewModel(x.Id, "")).ToListAsync();
+                var res = await _ctx.Produkty.Select(x => new StoreElementSimpleViewModel(x.Id, "", x.Cena)).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
@@ -101,7 +101,7 @@ namespace YouKpiBackend.Controllers
                 //    iterator++;
                 //    tempId = entity.Id + "_" + iterator;
                 //};
-   
+
                 //entity.Id = tempId;
                 var res = _ctx.Produkty.Add(entity);
                 await _ctx.SaveChangesAsync();

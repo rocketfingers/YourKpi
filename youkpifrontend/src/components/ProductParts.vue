@@ -231,7 +231,7 @@ export default {
         { text: 'Ilość sztuk', value: 'iloscSztuk', visible: true },
         { text: 'TPZ', value: 'czescitpz' },
         { text: 'TJ', value: 'czescitj' },
-        { text: 'Wart. komponentu (cena*zuzycie)', value: 'componentValue' },
+        { text: 'Wart.BoM (cena*zuzycie)', value: 'componentValue' },
         { text: 'Akcje', value: 'actions', visible: true }
       ],
       search: '',

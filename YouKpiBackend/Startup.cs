@@ -20,6 +20,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using YouKpiBackend.BusinessLibrary;
+using YouKpiBackend.BusinessLibrary.Company;
 using YouKpiBackend.BusinessLibrary.Offer;
 using YouKpiBackend.DbContexts;
 
@@ -81,6 +82,7 @@ namespace YouKpiBackend
 
             services.AddScoped<YoukpiContext, YoukpiContext>();
             services.AddScoped<UserLibrary, UserLibrary>();
+            services.AddScoped<CompanyLibrary, CompanyLibrary>();
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
