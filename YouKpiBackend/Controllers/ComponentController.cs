@@ -3,12 +3,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
-using YouKpiBackend.ViewModels;
+using YouKpiBackend.ViewModels.Store;
 
 namespace YouKpiBackend.Controllers
 {
@@ -41,7 +40,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Komponenty.Select(x => new SimpleViewModel(x.Id.ToString(),  x.Nazwa)).ToListAsync();
+                var res = await _ctx.Komponenty.Select(x => new StoreElementSimpleViewModel(x.Id.ToString(), x.Nazwa, x.CenaJednostkowa)).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
@@ -63,7 +62,7 @@ namespace YouKpiBackend.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-        
+
         [HttpPost("[action]")]
         public async Task<IActionResult> Create([FromBody] Komponenty entity)
         {
@@ -97,10 +96,10 @@ namespace YouKpiBackend.Controllers
 
                 component.CenaJednostkowa = entity.CenaJednostkowa;
                 component.GatunekPodst = entity.GatunekPodst;
-                component.Ilosc= entity.Ilosc;
-                component.Jednostka= entity.Jednostka;
-                component.Nazwa= entity.Nazwa;
-                component.ProcessId= entity.ProcessId;
+                component.Ilosc = entity.Ilosc;
+                component.Jednostka = entity.Jednostka;
+                component.Nazwa = entity.Nazwa;
+                component.ProcessId = entity.ProcessId;
                 component.KomponentId = entity.KomponentId;
                 component.Wymiar = entity.Wymiar;
                 component.Ltid = entity.Ltid;

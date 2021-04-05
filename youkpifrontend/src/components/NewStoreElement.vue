@@ -25,6 +25,7 @@
               item-value="id"
               item-text="showName"
               v-model="currentItem.elementId"
+              @change="selectStoreItem(currentItem)"
               autocomplete
             ></v-autocomplete>
           </v-flex>
@@ -72,6 +73,7 @@
               label="Cena jednostkowa netto"
               type="number"
               v-model="currentItem.cenaJdnNetto"
+              suffix="PLN"
             ></v-text-field>
           </v-flex>
         </v-layout>
@@ -151,7 +153,8 @@ export default {
         if (val < 0) return 'Wprowadź wartość dodatnią'
         return true
       },
-      elements: []
+      elements: [],
+      currentStore: ''
 
     }
   },
@@ -166,6 +169,7 @@ export default {
   },
   methods: {
     setElements (magazyn) {
+      this.currentStore = magazyn
       if (magazyn === null) {
         this.elements = []
         return
@@ -181,6 +185,10 @@ export default {
           this.elements = this.components
           break
       }
+    },
+    selectStoreItem (item) {
+      var selectedElem = this.elements.find(e => e.id === item.elementId)
+      item.cenaJdnNetto = selectedElem.price
     }
   },
   created () {

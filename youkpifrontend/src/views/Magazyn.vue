@@ -32,14 +32,21 @@
           <v-btn
             large
             color="blue darken-1"
-            flat
+            text
+            outlined
             @click.native="showNewDialog = false"
           >
             Anuluj
             <v-icon dark>cancel</v-icon>
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn flat large color="blue darken-1" @click.native="saveAction">
+          <v-btn
+            text
+            outlined
+            large
+            color="blue darken-1"
+            @click.native="saveAction"
+          >
             Zapisz
             <v-icon dark>save</v-icon>
           </v-btn>
@@ -351,25 +358,6 @@ export default {
         .catch((e) => {
         })
     },
-    formatDateTimeYYYYMMDD (date) {
-      if (date) {
-        if (date instanceof Date) {
-          return (
-            date.getFullYear() +
-            '-' +
-            (date.getMonth() + 1) +
-            '-' +
-            date.getDate()
-          )
-        }
-        if (date.toString().includes('T')) {
-          return date.toString().split('T')[0]
-        }
-
-        return date
-      }
-    },
-
     saveAction () {
       if (!this.$refs.newForm.validate()) {
         return

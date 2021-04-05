@@ -414,9 +414,9 @@ export default {
             i.sumInOfferDay = i.sumInOfferDay.toFixed(2)
             i.sumSale = i.sumSale.toFixed(2)
 
-            i.offerDate = this.formatDateTime(i.offerDate)
-            i.orderDate = this.formatDateTime(i.orderDate)
-            i.plannedEnd = this.formatDateTime(i.plannedEnd)
+            i.offerDate = this.formatDateTimeYYYYMMDD(i.offerDate)
+            i.orderDate = this.formatDateTimeYYYYMMDD(i.orderDate)
+            i.plannedEnd = this.formatDateTimeYYYYMMDD(i.plannedEnd)
             if (i.projectsId) {
               i.project = this.projects.find(p => p.id === i.projectsId)
             }
@@ -615,24 +615,7 @@ export default {
         })
         .catch((e) => {})
     },
-    formatDateTime (date) {
-      if (date) {
-        if (date instanceof Date) {
-          return (
-            date.getFullYear() +
-            '-' +
-            (date.getMonth() + 1) +
-            '-' +
-            date.getDate()
-          )
-        }
-        if (date.toString().includes('T')) {
-          return date.toString().split('T')[0]
-        }
 
-        return date
-      }
-    },
     async deleteOffer (offer, index) {
       var res = await this.$dialog.confirm({
         text: 'Czy na pewno chcesz usunąć?',

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace YouKpiBackend.ModelsEntity
 {
     public partial class MozliweStatusyOferty

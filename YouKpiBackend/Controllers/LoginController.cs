@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YouKpiBackend.BusinessLibrary;
+using YouKpiBackend.BusinessLibrary.Company;
 using YouKpiBackend.BusinessLibrary.User;
 using YouKpiBackend.ViewModels;
 
@@ -13,13 +15,30 @@ namespace YouKpiBackend.Controllers
 
     public class LoginController : ControllerBase
     {
-
         UserLibrary _userLibrary;
+        CompanyLibrary _companyLibrary;
 
-        public LoginController(UserLibrary userLibrary)
+        public LoginController(UserLibrary userLibrary, CompanyLibrary companyLibrary)
         {
             _userLibrary = userLibrary;
+            _companyLibrary = companyLibrary;
         }
+
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetBasicInfo()
+        {
+            try
+            {
+                var res = await _companyLibrary.GetUserCompanyInfo();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
 
         [HttpPost("[action]")]
         public async Task<IActionResult> Authenticate([FromBody] LoginRequestViewModel model)
