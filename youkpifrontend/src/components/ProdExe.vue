@@ -326,6 +326,7 @@
               >Zapisz<v-icon dark>save</v-icon></v-btn
             >
             <v-btn
+              :disabled="!canStepBeClosed"
               rounded
               large
               color="blue darken-1"
@@ -416,6 +417,17 @@ export default {
     }
   },
   computed: {
+    canStepBeClosed () {
+      if (this.currentStepItem.stepNum !== 10) {
+        return true
+      }
+      var countOfClosed = this.stepsData.filter(p => p.zakonczone).length
+      var countOfAll = this.stepsData.length
+      if (countOfClosed + 1 === countOfAll) {
+        return true
+      }
+      return false
+    },
     filterData () {
       return this.data.filter(p => this.selectedTypes.indexOf(p.typProcesu) >= 0)
     },
