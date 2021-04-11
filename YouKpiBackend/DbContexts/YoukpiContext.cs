@@ -1141,48 +1141,15 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<Towary>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.CenaJendNet)
-                    .HasColumnName("CENA_JEND_NET")
-                    .HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.DataPrzyjecia)
-                    .HasColumnName("DATA_PRZYJECIA")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.Ilosc).HasColumnName("ILOSC");
-
-                entity.Property(e => e.KontrahentId).HasColumnName("KONTRAHENT_ID");
-
-                entity.Property(e => e.LokacjaId).HasColumnName("LOKACJA_ID");
-
-                entity.Property(e => e.Magazyn)
-                    .HasColumnName("MAGAZYN")
-                    .HasMaxLength(100)
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .HasMaxLength(30)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Nazwa)
                     .HasColumnName("NAZWA")
                     .HasMaxLength(500)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Nr).HasColumnName("NR");
-
-                entity.Property(e => e.TowarId)
-                    .HasColumnName("TOWAR_ID")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.Kontrahent)
-                    .WithMany(p => p.Towary)
-                    .HasForeignKey(d => d.KontrahentId)
-                    .HasConstraintName("FK__Towary__KONTRAHE__37FA4C37");
-
-                entity.HasOne(d => d.Lokacja)
-                    .WithMany(p => p.Towary)
-                    .HasForeignKey(d => d.LokacjaId)
-                    .HasConstraintName("FK__Towary__LOKACJA___38EE7070");
             });
 
             modelBuilder.Entity<TypWyrobu>(entity =>

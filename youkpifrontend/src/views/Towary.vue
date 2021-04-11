@@ -17,8 +17,6 @@
                   :currentItem="currentItem"
                   :editMode="editMode"
                   @editedProduct="editcurrentItemRes"
-                  :contractors="contractors"
-                  :locations="locations"
                 ></NewCommodity>
               </v-form>
             </v-flex>
@@ -135,15 +133,8 @@ export default {
       getAllLocationsSimple: 'api/Loaction/GetAllSimpleView',
 
       headers: [
-        { text: 'Nr', value: 'nr' },
-        { text: 'Id', value: 'towarId' },
+        { text: 'Id', value: 'id' },
         { text: 'Nazwa', value: 'nazwa' },
-        { text: 'Ilość', value: 'ilosc' },
-        { text: 'Cena jednostkowa netto', value: 'cenaJendNet' },
-        { text: 'Magazyn', value: 'magazyn' },
-        { text: 'Data przyjęcia', value: 'dataPrzyjeciaShow' },
-        { text: 'Kontrahent', value: 'kontrahentName' },
-        { text: 'Lokacja', value: 'lokacjaName' },
         { text: 'Akcje', value: 'actions' }
       ],
       items: [],
@@ -156,9 +147,7 @@ export default {
       editedIndex: -1,
       productTypes: [],
       editMode: false,
-      parts: [],
-      contractors: [],
-      locations: []
+      parts: []
     }
   },
   computed: {},
@@ -166,7 +155,7 @@ export default {
   methods: {
     initialise () {
       this.tableLoading = true
-      this.getLoactions()
+      this.getItems()
     },
     getItems () {
       var $this = this
@@ -198,45 +187,10 @@ export default {
         })
     },
 
-    getLoactions () {
-      var $this = this
-      this.$http
-        .get(this.getAllLocationsSimple)
-        .then((Response) => {
-          $this.locations = Response.data
-          $this.locations.forEach(p => {
-            p.showName = p.id + ', ' + p.name
-          })
-          this.getContractors()
-        })
-        .catch((e) => {
-        })
-    },
-    getContractors () {
-      var $this = this
-      this.$http
-        .get(this.getAllContractorsSimple)
-        .then((Response) => {
-          $this.contractors = Response.data
-          $this.contractors.forEach(p => {
-            p.showName = p.id + ', ' + p.name
-          })
-          this.getItems()
-        })
-        .catch((e) => {
-        })
-    },
     saveAction () {
       if (!this.$refs.newForm.validate()) {
         return
       }
-      if (this.currentItem.kontrahent) {
-        this.currentItem.kontrahentId = this.currentItem.kontrahent.id
-      }
-      if (this.currentItem.lokacja) {
-        this.currentItem.lokacjaId = this.currentItem.lokacja.id
-      }
-
       if (this.editedIndex > 0) {
         this.editAction(this.currentItem)
       } else {

@@ -9,7 +9,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
-using YouKpiBackend.ViewModels.Commodity;
 
 namespace YouKpiBackend.Controllers
 {
@@ -44,10 +43,9 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Towary.Include(t => t.Kontrahent).Include(t => t.Lokacja).ToListAsync();
+                var res = await _ctx.Towary.ToListAsync();
 
-                var resVm = _mapper.Map<List<CommodityViewModel>>(res);
-                return Ok(resVm);
+                return Ok(res);
             }
             catch (Exception ex)
             {
@@ -56,17 +54,14 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Create([FromBody] CommodityViewModel commodityViewModel)
+        public async Task<IActionResult> Create([FromBody] Towary entity)
         {
-            if (commodityViewModel == null)
+            if (entity == null)
             {
                 return BadRequest("Bad model");
             }
             try
             {
-                var entity = _mapper.Map<Towary>(commodityViewModel);
-                entity.Kontrahent = null;
-                entity.Nazwa = null;
                 var res = _ctx.Towary.Add(entity);
                 await _ctx.SaveChangesAsync();
                 entity.Id = res.Entity.Id;
@@ -79,23 +74,17 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpPut("[action]")]
-        public async Task<IActionResult> Update([FromBody] CommodityViewModel commodityViewModel)
+        public async Task<IActionResult> Update([FromBody] Towary entity)
         {
-            if (commodityViewModel == null)
+            if (entity == null)
             {
                 return BadRequest("Bad model");
             }
             try
             {
-                var item = _ctx.Towary.FirstOrDefault(p => p.Id == commodityViewModel.Id);
+                var item = _ctx.Towary.FirstOrDefault(p => p.Id == entity.Id);
 
-                item.Nazwa = commodityViewModel.Nazwa;
-                item.Ilosc = commodityViewModel.Ilosc;
-                item.CenaJendNet = commodityViewModel.CenaJendNet;
-                item.Magazyn = commodityViewModel.Magazyn;
-                item.DataPrzyjecia = commodityViewModel.DataPrzyjecia;
-                item.KontrahentId = commodityViewModel.KontrahentId;
-                item.LokacjaId = commodityViewModel.LokacjaId;
+                item.Nazwa = entity.Nazwa;
 
                 await _ctx.SaveChangesAsync();
 
@@ -108,7 +97,7 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpDelete("[action]")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             try
             {

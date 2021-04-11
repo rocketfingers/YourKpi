@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using YouKpiBackend.BusinessLibrary.Production;
 using YouKpiBackend.ModelsEntity;
 using YouKpiBackend.ViewModels;
-using YouKpiBackend.ViewModels.Commodity;
 
 namespace YouKpiBackend
 {
@@ -26,14 +21,7 @@ namespace YouKpiBackend
                  .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(3, "Komponenty")))
                  .ReverseMap();
             CreateMap<ActivitiesHistoryModel, ActivityHistoryViewModel>();
-
             CreateMap<CompanyBasicInfo, CompanyBasicInfoViewModel>();
-                
-                
-            CreateMap<Towary, CommodityViewModel>()
-                 .ForMember(dest => dest.KontrahentName, opt => opt.MapFrom(from => from.Kontrahent.Name))
-                 .ForMember(dest => dest.LokacjaName, opt => opt.MapFrom(from => from.Lokacja.Nazwa))
-                 .ReverseMap();
         }
     }
 }

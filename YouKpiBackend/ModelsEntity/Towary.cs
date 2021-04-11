@@ -6,18 +6,7 @@ namespace YouKpiBackend.ModelsEntity
 {
     public partial class Towary
     {
-        public int Id { get; set; }
-        public string TowarId { get; set; }
-        public int Nr { get; set; }
+        public string Id { get; set; }
         public string Nazwa { get; set; }
-        public int? Ilosc { get; set; }
-        public decimal? CenaJendNet { get; set; }
-        public string Magazyn { get; set; }
-        public DateTime? DataPrzyjecia { get; set; }
-        public int? KontrahentId { get; set; }
-        public int? LokacjaId { get; set; }
-
-        public virtual Kontrahent Kontrahent { get; set; }
-        public virtual Lokacja Lokacja { get; set; }
     }
 }
