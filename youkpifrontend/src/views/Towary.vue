@@ -13,11 +13,13 @@
           <v-layout row wrap justify-space-around>
             <v-flex xs11>
               <v-form ref="newForm">
-                <NewReasonCode
+                <NewCommodity
                   :currentItem="currentItem"
                   :editMode="editMode"
                   @editedProduct="editcurrentItemRes"
-                ></NewReasonCode>
+                  :contractors="contractors"
+                  :locations="locations"
+                ></NewCommodity>
               </v-form>
             </v-flex>
           </v-layout>
@@ -114,12 +116,12 @@
 </template>
 
 <script>
-import NewReasonCode from '../components/NewReasonCode'
+import NewCommodity from '../components/NewCommodity'
 
 export default {
   name: 'Towary',
   components: {
-    NewReasonCode: NewReasonCode
+    NewCommodity: NewCommodity
   },
   props: {},
   data () {
@@ -129,19 +131,19 @@ export default {
       addApi: 'api/Commodity/Create',
       editApi: 'api/Commodity/Update',
       deleteApi: 'api/Commodity/Delete',
+      getAllContractorsSimple: 'api/Contractor/GetAllSimpleView',
+      getAllLocationsSimple: 'api/Loaction/GetAllSimpleView',
 
       headers: [
-        // { text: 'Id', value: 'id' },
         { text: 'Nr', value: 'nr' },
         { text: 'Id', value: 'towarId' },
         { text: 'Nazwa', value: 'nazwa' },
         { text: 'Ilość', value: 'ilosc' },
         { text: 'Cena jednostkowa netto', value: 'cenaJendNet' },
         { text: 'Magazyn', value: 'magazyn' },
-        { text: 'Data przyjęcia', value: 'dataPrzyjecia' },
-        { text: 'Kontrahent', value: 'kontrahent' },
-        { text: 'Lokacja', value: 'lokacja' },
-
+        { text: 'Data przyjęcia', value: 'dataPrzyjeciaShow' },
+        { text: 'Kontrahent', value: 'kontrahentName' },
+        { text: 'Lokacja', value: 'lokacjaName' },
         { text: 'Akcje', value: 'actions' }
       ],
       items: [],
@@ -154,7 +156,9 @@ export default {
       editedIndex: -1,
       productTypes: [],
       editMode: false,
-      parts: []
+      parts: [],
+      contractors: [],
+      locations: []
     }
   },
   computed: {},
@@ -162,7 +166,7 @@ export default {
   methods: {
     initialise () {
       this.tableLoading = true
-      this.getItems()
+      this.getLoactions()
     },
     getItems () {
       var $this = this
@@ -170,11 +174,23 @@ export default {
         .get(this.getAll)
         .then((Response) => {
           $this.items = Response.data
-          // $this.items.forEach(p => {
-          //   if (p.kontrahent) {
-          //     p.kontrahentName = p.kontrahent.name
-          //   }
-          // })
+          $this.items.forEach(p => {
+            p.dataPrzyjeciaShow = this.formatDateTimeYYYYMMDD(p.dataPrzyjecia)
+
+            p.kontrahent = $this.contractors.find(c => c.id === p.kontrahentId.toString())
+            if (p.kontrahent) {
+              p.kontrahentId = p.kontrahent.id
+              p.kontrahentName = p.kontrahent.name
+            }
+            p.lokacjaName = ''
+            var lokacja = $this.locations.find(l => l.id === p.lokacjaId?.toString())
+
+            if (lokacja) {
+              p.lokacjaName = lokacja.name
+              p.lokacjaId = lokacja.id
+            }
+          })
+
           this.tableLoading = false
         })
         .catch((e) => {
@@ -182,10 +198,45 @@ export default {
         })
     },
 
+    getLoactions () {
+      var $this = this
+      this.$http
+        .get(this.getAllLocationsSimple)
+        .then((Response) => {
+          $this.locations = Response.data
+          $this.locations.forEach(p => {
+            p.showName = p.id + ', ' + p.name
+          })
+          this.getContractors()
+        })
+        .catch((e) => {
+        })
+    },
+    getContractors () {
+      var $this = this
+      this.$http
+        .get(this.getAllContractorsSimple)
+        .then((Response) => {
+          $this.contractors = Response.data
+          $this.contractors.forEach(p => {
+            p.showName = p.id + ', ' + p.name
+          })
+          this.getItems()
+        })
+        .catch((e) => {
+        })
+    },
     saveAction () {
       if (!this.$refs.newForm.validate()) {
         return
       }
+      if (this.currentItem.kontrahent) {
+        this.currentItem.kontrahentId = this.currentItem.kontrahent.id
+      }
+      if (this.currentItem.lokacja) {
+        this.currentItem.lokacjaId = this.currentItem.lokacja.id
+      }
+
       if (this.editedIndex > 0) {
         this.editAction(this.currentItem)
       } else {
@@ -208,6 +259,7 @@ export default {
         .post(this.addApi, item)
         .then((Result) => {
           this.items.push(Result.data)
+          this.initialise()
         })
         .catch((e) => {
         })
@@ -227,6 +279,7 @@ export default {
       this.$http
         .put(this.editApi, item)
         .then((Result) => {
+          this.initialise()
         })
         .catch((e) => {})
     },

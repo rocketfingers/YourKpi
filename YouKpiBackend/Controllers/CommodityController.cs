@@ -65,6 +65,8 @@ namespace YouKpiBackend.Controllers
             try
             {
                 var entity = _mapper.Map<Towary>(commodityViewModel);
+                entity.Kontrahent = null;
+                entity.Nazwa = null;
                 var res = _ctx.Towary.Add(entity);
                 await _ctx.SaveChangesAsync();
                 entity.Id = res.Entity.Id;
@@ -76,26 +78,34 @@ namespace YouKpiBackend.Controllers
             }
         }
 
-        //[HttpPut("[action]")]
-        //public async Task<IActionResult> Update([FromBody] Towary entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        return BadRequest("Bad model");
-        //    }
-        //    try
-        //    {
-        //        var item = _ctx.Towary.FirstOrDefault(p => p.Id == entity.Id);
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Update([FromBody] CommodityViewModel commodityViewModel)
+        {
+            if (commodityViewModel == null)
+            {
+                return BadRequest("Bad model");
+            }
+            try
+            {
+                var item = _ctx.Towary.FirstOrDefault(p => p.Id == commodityViewModel.Id);
 
-        //        await _ctx.SaveChangesAsync();
+                item.Nazwa = commodityViewModel.Nazwa;
+                item.Ilosc = commodityViewModel.Ilosc;
+                item.CenaJendNet = commodityViewModel.CenaJendNet;
+                item.Magazyn = commodityViewModel.Magazyn;
+                item.DataPrzyjecia = commodityViewModel.DataPrzyjecia;
+                item.KontrahentId = commodityViewModel.KontrahentId;
+                item.LokacjaId = commodityViewModel.LokacjaId;
 
-        //        return NoContent();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        //    }
-        //}
+                await _ctx.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
 
         [HttpDelete("[action]")]
         public async Task<IActionResult> Delete(int id)

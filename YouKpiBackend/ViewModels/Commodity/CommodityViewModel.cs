@@ -14,7 +14,7 @@ namespace YouKpiBackend.ViewModels.Commodity
         public DateTime? DataPrzyjecia { get; set; }
         public int KontrahentId { get; set; }
         public int? LokacjaId { get; set; }
-        public string Kontrahent { get; set; }
-        public string Lokacja { get; set; }
+        public string KontrahentName { get; set; }
+        public string LokacjaName { get; set; }
     }
 }
