@@ -21,6 +21,7 @@
                   :components="components"
                   :products="products"
                   :parts="parts"
+                  :commodities="commodities"
                   :contractors="contractors"
                   :locations="locations"
                 ></NewStoreElement>
@@ -175,6 +176,7 @@ export default {
       getAll: 'api/Store/GetAll',
       getAllComponentsSimple: 'api/Component/GetAllSimpleView',
       getAllProductsSimple: 'api/Products/GetAllSimpleView',
+      getAllCommoditiesSimple: 'api/Commodity/GetAllSimpleView',
       getAllPartsSimple: 'api/Parts/GetAllSimpleView',
       getAllLocationsSimple: 'api/Loaction/GetAllSimpleView',
       getAllContractorsSimple: 'api/Contractor/GetAllSimpleView',
@@ -207,15 +209,19 @@ export default {
       products: [],
       components: [],
       locations: [],
+      commodities: [],
       stores: [
         { id: 1, name: 'Części' },
         { id: 2, name: 'Produkty' },
-        { id: 3, name: 'Komponenty' }
+        { id: 3, name: 'Komponenty' },
+        { id: 4, name: 'Towary' }
       ],
       selectedStores: [
         { id: 1, name: 'Części' },
         { id: 2, name: 'Produkty' },
-        { id: 3, name: 'Komponenty' }],
+        { id: 3, name: 'Komponenty' },
+        { id: 4, name: 'Towary' }
+      ],
       storeReport: false
     }
   },
@@ -307,6 +313,15 @@ export default {
                   p.nazwa = ''
                 }
                 break
+              case 4:
+                var item4 = $this.commodities.find(com => com.id === p.elementId)
+
+                if (item4) {
+                  p.nazwa = item4.name
+                } else {
+                  p.nazwa = ''
+                }
+                break
             }
             p.dataPrzyjecia = $this.formatDateTimeYYYYMMDD(p.dataPrzyjecia)
           })
@@ -314,6 +329,20 @@ export default {
         })
         .catch((e) => {
           this.tableLoading = false
+        })
+    },
+    getCommodities () {
+      var $this = this
+      this.$http
+        .get(this.getAllCommoditiesSimple)
+        .then((Response) => {
+          $this.commodities = Response.data
+          $this.commodities.forEach(p => {
+            p.showName = p.id + ', ' + p.name
+          })
+          this.getParts()
+        })
+        .catch((e) => {
         })
     },
     getProducts () {
@@ -325,7 +354,7 @@ export default {
           $this.products.forEach(p => {
             p.showName = p.id + ', ' + p.name
           })
-          this.getParts()
+          this.getCommodities()
         })
         .catch((e) => {
         })
@@ -370,9 +399,9 @@ export default {
       this.showNewDialog = false
     },
     add () {
-      if (this.$refs.newForm) {
-        this.$refs.newForm.reset()
-      }
+      // if (this.$refs.newForm) {
+      //   this.$refs.newForm.reset()
+      // }
       this.editMode = false
       this.formTitle = 'Dodaj'
       this.currentItem = { }

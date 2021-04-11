@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
+using YouKpiBackend.ViewModels.Store;
 
 namespace YouKpiBackend.Controllers
 {
@@ -38,6 +39,20 @@ namespace YouKpiBackend.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllSimpleView()
+        {
+            try
+            {
+                var res = await _ctx.Towary.Select(x => new StoreElementSimpleViewModel(x.Id, x.Nazwa, x.Cena)).ToListAsync();
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAll()
         {

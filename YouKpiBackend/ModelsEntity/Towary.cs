@@ -6,7 +6,16 @@ namespace YouKpiBackend.ModelsEntity
 {
     public partial class Towary
     {
+        public Towary()
+        {
+            MagazynTowary = new HashSet<MagazynTowary>();
+        }
+
         public string Id { get; set; }
         public string Nazwa { get; set; }
+        public decimal? Cena { get; set; }
+        public string Waluta { get; set; }
+
+        public virtual ICollection<MagazynTowary> MagazynTowary { get; set; }
     }
 }

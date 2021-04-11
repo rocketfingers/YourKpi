@@ -144,7 +144,8 @@ export default {
     products: Array,
     parts: Array,
     contractors: Array,
-    locations: Array
+    locations: Array,
+    commodities: Array
   },
   data () {
     return {
@@ -183,6 +184,9 @@ export default {
           break
         case 3:
           this.elements = this.components
+          break
+        case 4:
+          this.elements = this.commodities
           break
       }
     },

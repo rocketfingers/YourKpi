@@ -20,6 +20,10 @@ namespace YouKpiBackend
             CreateMap<MagazynKomponenty, StoreElementViewModel>()
                  .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(3, "Komponenty")))
                  .ReverseMap();
+            CreateMap<MagazynTowary, StoreElementViewModel>()
+            .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(4, "Towary")))
+            .ReverseMap();
+
             CreateMap<ActivitiesHistoryModel, ActivityHistoryViewModel>();
             CreateMap<CompanyBasicInfo, CompanyBasicInfoViewModel>();
         }
