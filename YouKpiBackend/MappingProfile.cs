@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using YouKpiBackend.BusinessLibrary.Production;
 using YouKpiBackend.ModelsEntity;
 using YouKpiBackend.ViewModels;
+using YouKpiBackend.ViewModels.Commodity;
 
 namespace YouKpiBackend
 {
@@ -27,6 +28,12 @@ namespace YouKpiBackend
             CreateMap<ActivitiesHistoryModel, ActivityHistoryViewModel>();
 
             CreateMap<CompanyBasicInfo, CompanyBasicInfoViewModel>();
+                
+                
+            CreateMap<Towary, CommodityViewModel>()
+                 .ForMember(dest => dest.Kontrahent, opt => opt.MapFrom(from => from.Kontrahent.Name))
+                 .ForMember(dest => dest.Lokacja, opt => opt.MapFrom(from => from.Lokacja.Nazwa))
+                 .ReverseMap();
         }
     }
 }

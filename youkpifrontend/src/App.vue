@@ -191,6 +191,14 @@
                     <v-list-item-title>Magazyn</v-list-item-title>
                   </v-list-item>
                   <v-divider> </v-divider>
+
+                  <v-list-item @click="$router.push({ name: 'Towary' })">
+                    <v-list-item-icon>
+                      <v-icon>fa-th-large</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Towary</v-list-item-title>
+                  </v-list-item>
+                  <v-divider> </v-divider>
                 </v-list-item-group>
               </v-list>
             </v-flex>
