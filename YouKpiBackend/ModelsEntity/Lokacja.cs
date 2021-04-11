@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace YouKpiBackend.ModelsEntity
 {
     public partial class Lokacja
@@ -13,6 +11,7 @@ namespace YouKpiBackend.ModelsEntity
             MagazynCzesci = new HashSet<MagazynCzesci>();
             MagazynKomponenty = new HashSet<MagazynKomponenty>();
             MagazynProdukty = new HashSet<MagazynProdukty>();
+            Towary = new HashSet<Towary>();
         }
 
         public int Id { get; set; }
@@ -21,5 +20,6 @@ namespace YouKpiBackend.ModelsEntity
         public virtual ICollection<MagazynCzesci> MagazynCzesci { get; set; }
         public virtual ICollection<MagazynKomponenty> MagazynKomponenty { get; set; }
         public virtual ICollection<MagazynProdukty> MagazynProdukty { get; set; }
+        public virtual ICollection<Towary> Towary { get; set; }
     }
 }
