@@ -37,6 +37,10 @@ var _Customers = _interopRequireDefault(require("../views/Customers.vue"));
 
 var _Magazyn = _interopRequireDefault(require("../views/Magazyn.vue"));
 
+var _ActivityHistory = _interopRequireDefault(require("../views/ActivityHistory.vue"));
+
+var _Towary = _interopRequireDefault(require("../views/Towary.vue"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vueRouter["default"]);
@@ -45,6 +49,10 @@ var routes = [{
   path: '/',
   name: 'Home',
   component: _Home["default"]
+}, {
+  path: '/activityhistory',
+  name: 'ActivityHistory',
+  component: _ActivityHistory["default"]
 }, {
   path: '/produkty',
   name: 'Produkty',
@@ -101,6 +109,10 @@ var routes = [{
   path: '/login',
   name: 'Login',
   component: _Login["default"]
+}, {
+  path: '/commodity',
+  name: 'Towary',
+  component: _Towary["default"]
 } // {
 // path: '/about',
 // name: 'About',

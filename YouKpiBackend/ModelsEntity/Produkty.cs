@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace YouKpiBackend.ModelsEntity
 {
     public partial class Produkty
@@ -11,6 +9,7 @@ namespace YouKpiBackend.ModelsEntity
         public Produkty()
         {
             MagazynProdukty = new HashSet<MagazynProdukty>();
+            MagazynProduktyNiezgodne = new HashSet<MagazynProduktyNiezgodne>();
             OfferLines = new HashSet<OfferLines>();
             ProduktCzesci = new HashSet<ProduktCzesci>();
         }
@@ -27,6 +26,7 @@ namespace YouKpiBackend.ModelsEntity
         public string Waluta { get; set; }
 
         public virtual ICollection<MagazynProdukty> MagazynProdukty { get; set; }
+        public virtual ICollection<MagazynProduktyNiezgodne> MagazynProduktyNiezgodne { get; set; }
         public virtual ICollection<OfferLines> OfferLines { get; set; }
         public virtual ICollection<ProduktCzesci> ProduktCzesci { get; set; }
     }

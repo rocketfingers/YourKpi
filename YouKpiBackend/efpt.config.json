@@ -1,5 +1,5 @@
 ﻿{
-   "CodeGenerationMode": 0,
+   "CodeGenerationMode": 1,
    "ContextClassName": "YoukpiContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
@@ -8,6 +8,7 @@
    "ModelNamespace": null,
    "OutputContextPath": "DbContexts",
    "OutputPath": "ModelsEntity",
+   "ProceduresReturnList": false,
    "ProjectRootNamespace": "YouKpiBackend",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
@@ -51,6 +52,14 @@
       },
       {
          "Name": "[dbo].[MagazynProdukty]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MagazynProduktyNiezgodne]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MagazynTowary]",
          "ObjectType": 0
       },
       {
@@ -147,6 +156,10 @@
       },
       {
          "Name": "[dbo].[StepsToDelete]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Towary]",
          "ObjectType": 0
       },
       {
