@@ -159,6 +159,8 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
+                entity.Property(e => e.CzasProgramisty).HasColumnName("CZAS_PROGRAMISTY");
+
                 entity.Property(e => e.GatPodstawowy)
                     .IsRequired()
                     .HasMaxLength(30)
@@ -169,6 +171,11 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Nazwa)
                     .IsRequired()
                     .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumerProgramu)
+                    .HasColumnName("NUMER_PROGRAMU")
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.NumerRysNorma)

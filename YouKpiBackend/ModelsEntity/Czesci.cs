@@ -21,6 +21,8 @@ namespace YouKpiBackend.ModelsEntity
         public int? KomponentId { get; set; }
         public decimal? Tpz { get; set; }
         public decimal? Tj { get; set; }
+        public string NumerProgramu { get; set; }
+        public int? CzasProgramisty { get; set; }
 
         public virtual Komponenty Komponent { get; set; }
         public virtual ICollection<MagazynCzesci> MagazynCzesci { get; set; }
