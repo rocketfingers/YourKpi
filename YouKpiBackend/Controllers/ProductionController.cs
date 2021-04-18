@@ -117,9 +117,20 @@ namespace YouKpiBackend.Controllers
                             {
                                 throw new Exception("Trzeba zamknąć wszystkie inne kroki przez zamknięciem 10.");
                             }
+                            //dodawanie na magazyb
+                            var offerLine = await _dbContext.OfferLines.SingleAsync(p => p.Id == model.OfferLineId);
+                            _dbContext.MagazynProdukty.Add(new MagazynProdukty()
+                            {
+                                DataPrzyjecia = DateTime.Now,
+                                ElementId = offerLine.ProductId,
+                                Ilosc = offerLine.Quantity,
+                                KontrahentId = 32, // 4yc
+                            });
+
                         }
                         find.ClosedOn = DateTime.Now;
                         find.ClosesBy = this.GetUserId();
+
                     }
                 }
                 else
