@@ -18,11 +18,14 @@ namespace YouKpiBackend
                 .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(2, "Produkty")))
                 .ReverseMap();
             CreateMap<MagazynKomponenty, StoreElementViewModel>()
-                 .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(3, "Komponenty")))
-                 .ReverseMap();
+                .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(3, "Komponenty")))
+                .ReverseMap();
             CreateMap<MagazynTowary, StoreElementViewModel>()
-            .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(4, "Towary")))
-            .ReverseMap();
+                .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(4, "Towary")))
+                .ReverseMap();
+            CreateMap<MagazynProduktyNiezgodne, StoreElementViewModel>()
+                .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(5, "Produkty niezgodne")))
+                .ReverseMap();
 
             CreateMap<ActivitiesHistoryModel, ActivityHistoryViewModel>();
             CreateMap<CompanyBasicInfo, CompanyBasicInfoViewModel>();

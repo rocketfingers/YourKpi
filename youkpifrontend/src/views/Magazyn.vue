@@ -69,6 +69,7 @@
                 return-object
                 v-model="selectedStores"
                 multiple
+                chips
                 autocomplete
               ></v-autocomplete>
             </v-layout>
@@ -184,7 +185,7 @@ export default {
       editApi: 'api/Store/Update',
       deleteApi: 'api/Store/Delete',
       headers: [
-        { text: 'Kontrahent', value: 'kontrahent' },
+        { text: 'Kontrahent', value: 'kontrahentName' },
         { text: 'Data przyjęcia', value: 'dataPrzyjecia' },
         { text: 'Magazyn', value: 'magazynName' },
         { text: 'Lokacja', value: 'lokacjaName' },
@@ -214,13 +215,15 @@ export default {
         { id: 1, name: 'Części' },
         { id: 2, name: 'Produkty' },
         { id: 3, name: 'Komponenty' },
-        { id: 4, name: 'Towary' }
+        { id: 4, name: 'Towary' },
+        { id: 5, name: 'Produkty niezgodne' }
       ],
       selectedStores: [
         { id: 1, name: 'Części' },
         { id: 2, name: 'Produkty' },
         { id: 3, name: 'Komponenty' },
-        { id: 4, name: 'Towary' }
+        { id: 4, name: 'Towary' },
+        { id: 5, name: 'Produkty niezgodne' }
       ],
       storeReport: false
     }
@@ -278,15 +281,15 @@ export default {
             p.magazynName = p.magazyn.name
             p.kontrahent = $this.contractors.find(c => c.id === p.kontrahentId.toString())
             if (p.kontrahent) {
-              p.kontrahentId = p.kontrahent
-              p.kontrahent = p.kontrahent.name
+              p.kontrahentName = p.kontrahent.name
+              p.kontrahentId = p.kontrahent.id
             }
             p.lokacjaName = ''
             var lokacjaObj = $this.locations.find(l => l.id === p.lokacjaId?.toString())
 
             if (lokacjaObj) {
               p.lokacjaName = lokacjaObj.name
-              p.lokacjaId = lokacjaObj
+              p.lokacjaId = lokacjaObj.id
             }
             switch (p.magazyn.id) {
               case 1:
@@ -318,6 +321,15 @@ export default {
 
                 if (item4) {
                   p.nazwa = item4.name
+                } else {
+                  p.nazwa = ''
+                }
+                break
+              case 5:
+                var item5 = $this.products.find(com => com.id === p.elementId)
+
+                if (item5) {
+                  p.nazwa = item5.name
                 } else {
                   p.nazwa = ''
                 }
@@ -391,6 +403,8 @@ export default {
       if (!this.$refs.newForm.validate()) {
         return
       }
+      // eslint-disable-next-line no-debugger
+      debugger
       if (this.editedIndex > 0) {
         this.editAction(this.currentItem)
       } else {

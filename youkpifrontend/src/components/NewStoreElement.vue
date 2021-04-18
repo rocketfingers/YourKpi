@@ -188,6 +188,9 @@ export default {
         case 4:
           this.elements = this.commodities
           break
+        case 5:
+          this.elements = this.products
+          break
       }
     },
     selectStoreItem (item) {

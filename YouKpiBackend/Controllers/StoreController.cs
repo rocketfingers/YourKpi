@@ -36,6 +36,7 @@ namespace YouKpiBackend.Controllers
                 lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynProdukty.ToListAsync()));
                 lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynKomponenty.ToListAsync()));
                 lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynTowary.ToListAsync()));
+                lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynProduktyNiezgodne.ToListAsync()));
 
                 return Ok(lst);
             }
@@ -76,6 +77,11 @@ namespace YouKpiBackend.Controllers
                         case 4:
                             var res4 = _ctx.MagazynTowary.Add(_mapper.Map<MagazynTowary>(entity));
                             entity.Id = res4.Entity.Id;
+                            await _ctx.SaveChangesAsync();
+                            return Created("", entity);
+                        case 5:
+                            var res5 = _ctx.MagazynProduktyNiezgodne.Add(_mapper.Map<MagazynProduktyNiezgodne>(entity));
+                            entity.Id = res5.Entity.Id;
                             await _ctx.SaveChangesAsync();
                             return Created("", entity);
                         default:
@@ -185,6 +191,25 @@ namespace YouKpiBackend.Controllers
                             await _ctx.SaveChangesAsync();
                         }
                         return NoContent();
+                    case 5:
+                        var item5= _ctx.MagazynProduktyNiezgodne.FirstOrDefault(p => p.Id == entity.Id);
+                        if (item5 != null)
+                        {
+                            item5.CenaJdnNetto = entity.CenaJdnNetto;
+                            item5.DataPrzyjecia = entity.DataPrzyjecia;
+                            item5.Element = null;
+                            item5.ElementId = entity.ElementId;
+                            item5.Ilosc = entity.Ilosc;
+                            item5.Jednostka = entity.Jednostka;
+                            item5.Kontrahent = null;
+                            item5.KontrahentId = entity.KontrahentId;
+                            item5.Lokacja = null;
+                            item5.LokacjaId = entity.LokacjaId;
+                            item5.NrFakturyId = entity.NrFakturyId;
+
+                            await _ctx.SaveChangesAsync();
+                        }
+                        return NoContent();
                     default:
                         throw new Exception("Nieparwidlowy magazyn!");
                 }
@@ -237,6 +262,16 @@ namespace YouKpiBackend.Controllers
                             await _ctx.SaveChangesAsync();
                         }
                         return Ok();
+
+                    case 5:
+                        var item5 = _ctx.MagazynProduktyNiezgodne.FirstOrDefault(p => p.Id == id);
+                        if (item5 != null)
+                        {
+                            _ctx.MagazynProduktyNiezgodne.Remove(item5);
+                            await _ctx.SaveChangesAsync();
+                        }
+                        return Ok();
+
                     default:
                         throw new Exception("Nieparwidlowy magazyn!");
                 }
