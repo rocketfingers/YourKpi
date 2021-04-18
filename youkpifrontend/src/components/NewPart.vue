@@ -17,11 +17,40 @@
               <v-flex xs12>
                 <v-text-field
                   v-model="editedItem.nazwa"
+                  ref="nazwaInput"
                   outlined
+                  v-show="!showNazwaAutocomplete"
                   :disabled="readonly"
                   :rules="[requiredRule]"
                   label="Nazwa"
-                ></v-text-field>
+                  autocomplete
+                >
+                  <template slot="append">
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on }">
+                        <v-icon v-on="on" @click="foncusOnNazwaAutocomplete"
+                          >fa-question</v-icon
+                        >
+                      </template>
+                      <span>Sugestia</span>
+                    </v-tooltip>
+                  </template>
+                </v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-autocomplete
+                  label="Nazwa"
+                  ref="nazwaAutocomplete"
+                  outlined
+                  :items="parts"
+                  :rules="[requiredRule]"
+                  item-value="nazwa"
+                  autocomplete
+                  v-show="showNazwaAutocomplete"
+                  @input="foncusOnNazwaInput"
+                  item-text="nazwa"
+                  v-model="editedItem.nazwa"
+                ></v-autocomplete>
               </v-flex>
               <v-flex xs12>
                 <v-text-field
@@ -163,15 +192,14 @@ export default {
       },
       isItemAlreadyExists: (v) => (!(this.parts.some(p => p.id.toUpperCase().trim() === v.toUpperCase().trim())) || this.notValidate || this.editMode) || 'Część o tym id już istnieje!!',
       showComponent: true,
-      notValidateComponent: false
+      notValidateComponent: false,
+      showNazwaAutocomplete: true
     }
   },
   computed: {
     componentsToAutocomplete (val) {
       var $this = this
       var cmps = this.components.filter(c => {
-      //   // eslint-disable-next-line no-debugger
-      //   debugger
         if (c.czesci) {
           if (c.czesci.length > 0 && $this.editedItem.komponentId !== c.id) {
             return false
@@ -201,6 +229,13 @@ export default {
       if (this.editedItem.komponent) {
         this.editedItem.komponentId = this.editedItem.komponent.id
       }
+    },
+    foncusOnNazwaInput () {
+      this.showNazwaAutocomplete = false
+      this.$refs.nazwaInput.focus()
+    },
+    foncusOnNazwaAutocomplete () {
+      this.showNazwaAutocomplete = true
     }
   },
   created () {

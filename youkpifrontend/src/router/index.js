@@ -15,6 +15,8 @@ import StepsView from '../views/StepsMachines.vue'
 import Customers from '../views/Customers.vue'
 import Store from '../views/Magazyn.vue'
 import ActivityHistory from '../views/ActivityHistory.vue'
+import Towary from '../views/Towary.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -97,8 +99,12 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/commodity',
+    name: 'Towary',
+    component: Towary
   }
-
   // {
   // path: '/about',
   // name: 'About',

@@ -21,6 +21,7 @@
                   :components="components"
                   :products="products"
                   :parts="parts"
+                  :commodities="commodities"
                   :contractors="contractors"
                   :locations="locations"
                 ></NewStoreElement>
@@ -68,6 +69,7 @@
                 return-object
                 v-model="selectedStores"
                 multiple
+                chips
                 autocomplete
               ></v-autocomplete>
             </v-layout>
@@ -175,6 +177,7 @@ export default {
       getAll: 'api/Store/GetAll',
       getAllComponentsSimple: 'api/Component/GetAllSimpleView',
       getAllProductsSimple: 'api/Products/GetAllSimpleView',
+      getAllCommoditiesSimple: 'api/Commodity/GetAllSimpleView',
       getAllPartsSimple: 'api/Parts/GetAllSimpleView',
       getAllLocationsSimple: 'api/Loaction/GetAllSimpleView',
       getAllContractorsSimple: 'api/Contractor/GetAllSimpleView',
@@ -182,7 +185,7 @@ export default {
       editApi: 'api/Store/Update',
       deleteApi: 'api/Store/Delete',
       headers: [
-        { text: 'Kontrahent', value: 'kontrahent' },
+        { text: 'Kontrahent', value: 'kontrahentName' },
         { text: 'Data przyjęcia', value: 'dataPrzyjecia' },
         { text: 'Magazyn', value: 'magazynName' },
         { text: 'Lokacja', value: 'lokacjaName' },
@@ -207,15 +210,21 @@ export default {
       products: [],
       components: [],
       locations: [],
+      commodities: [],
       stores: [
         { id: 1, name: 'Części' },
         { id: 2, name: 'Produkty' },
-        { id: 3, name: 'Komponenty' }
+        { id: 3, name: 'Komponenty' },
+        { id: 4, name: 'Towary' },
+        { id: 5, name: 'Produkty niezgodne' }
       ],
       selectedStores: [
         { id: 1, name: 'Części' },
         { id: 2, name: 'Produkty' },
-        { id: 3, name: 'Komponenty' }],
+        { id: 3, name: 'Komponenty' },
+        { id: 4, name: 'Towary' },
+        { id: 5, name: 'Produkty niezgodne' }
+      ],
       storeReport: false
     }
   },
@@ -272,15 +281,15 @@ export default {
             p.magazynName = p.magazyn.name
             p.kontrahent = $this.contractors.find(c => c.id === p.kontrahentId.toString())
             if (p.kontrahent) {
-              p.kontrahentId = p.kontrahent
-              p.kontrahent = p.kontrahent.name
+              p.kontrahentName = p.kontrahent.name
+              p.kontrahentId = p.kontrahent.id
             }
             p.lokacjaName = ''
             var lokacjaObj = $this.locations.find(l => l.id === p.lokacjaId?.toString())
 
             if (lokacjaObj) {
               p.lokacjaName = lokacjaObj.name
-              p.lokacjaId = lokacjaObj
+              p.lokacjaId = lokacjaObj.id
             }
             switch (p.magazyn.id) {
               case 1:
@@ -307,6 +316,24 @@ export default {
                   p.nazwa = ''
                 }
                 break
+              case 4:
+                var item4 = $this.commodities.find(com => com.id === p.elementId)
+
+                if (item4) {
+                  p.nazwa = item4.name
+                } else {
+                  p.nazwa = ''
+                }
+                break
+              case 5:
+                var item5 = $this.products.find(com => com.id === p.elementId)
+
+                if (item5) {
+                  p.nazwa = item5.name
+                } else {
+                  p.nazwa = ''
+                }
+                break
             }
             p.dataPrzyjecia = $this.formatDateTimeYYYYMMDD(p.dataPrzyjecia)
           })
@@ -314,6 +341,20 @@ export default {
         })
         .catch((e) => {
           this.tableLoading = false
+        })
+    },
+    getCommodities () {
+      var $this = this
+      this.$http
+        .get(this.getAllCommoditiesSimple)
+        .then((Response) => {
+          $this.commodities = Response.data
+          $this.commodities.forEach(p => {
+            p.showName = p.id + ', ' + p.name
+          })
+          this.getParts()
+        })
+        .catch((e) => {
         })
     },
     getProducts () {
@@ -325,7 +366,7 @@ export default {
           $this.products.forEach(p => {
             p.showName = p.id + ', ' + p.name
           })
-          this.getParts()
+          this.getCommodities()
         })
         .catch((e) => {
         })
@@ -362,6 +403,8 @@ export default {
       if (!this.$refs.newForm.validate()) {
         return
       }
+      // eslint-disable-next-line no-debugger
+      debugger
       if (this.editedIndex > 0) {
         this.editAction(this.currentItem)
       } else {
@@ -370,9 +413,9 @@ export default {
       this.showNewDialog = false
     },
     add () {
-      if (this.$refs.newForm) {
-        this.$refs.newForm.reset()
-      }
+      // if (this.$refs.newForm) {
+      //   this.$refs.newForm.reset()
+      // }
       this.editMode = false
       this.formTitle = 'Dodaj'
       this.currentItem = { }
