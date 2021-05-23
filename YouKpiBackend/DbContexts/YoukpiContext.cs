@@ -196,6 +196,11 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnName("TPZ")
                     .HasColumnType("decimal(6, 2)");
 
+                entity.Property(e => e.Wykonanie)
+                    .HasColumnName("WYKONANIE")
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Wymiary).HasMaxLength(50);
 
                 entity.HasOne(d => d.Komponent)

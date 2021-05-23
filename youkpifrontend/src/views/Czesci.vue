@@ -140,10 +140,11 @@ export default {
         id: '',
         nazwa: '',
         gatPodstawowy: '',
-        numerRysNorma: ''
+        numerRysNorma: '',
+        wykonanie: 'Własne'
       },
       // Settings
-      editedItem: {},
+      editedItem: { wykonanie: 'Własne' },
       editedIndex: -1,
       showDialog: false,
       data: [],
@@ -179,6 +180,7 @@ export default {
     }
   },
   methods: {
+
     editItem (item) {
       this.editMode = true
 

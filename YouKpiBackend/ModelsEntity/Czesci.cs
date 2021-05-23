@@ -23,6 +23,7 @@ namespace YouKpiBackend.ModelsEntity
         public decimal? Tj { get; set; }
         public string NumerProgramu { get; set; }
         public int? CzasProgramisty { get; set; }
+        public string Wykonanie { get; set; }
 
         public virtual Komponenty Komponent { get; set; }
         public virtual ICollection<MagazynCzesci> MagazynCzesci { get; set; }

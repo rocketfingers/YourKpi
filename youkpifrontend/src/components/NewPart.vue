@@ -73,6 +73,15 @@
                   label="Numer programu"
                 ></v-text-field>
               </v-flex>
+              <v-flex xs12>
+                <v-autocomplete
+                  label="Wykonanie"
+                  outlined
+                  :items="['Własne', 'Outsourcing', 'Zakup']"
+                  autocomplete
+                  v-model="editedItem.wykonanie"
+                ></v-autocomplete>
+              </v-flex>
             </v-layout>
           </v-flex>
           <v-flex xs1> </v-flex>

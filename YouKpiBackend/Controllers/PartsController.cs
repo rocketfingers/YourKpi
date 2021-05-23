@@ -159,6 +159,7 @@ namespace YouKpiBackend.Controllers
                 part.Tj = entity.Tj;
                 part.NumerProgramu = entity.NumerProgramu;
                 part.CzasProgramisty = entity.CzasProgramisty;
+                part.Wykonanie = entity.Wykonanie;
 
                 //part.Komponent = entity.Komponent;
                 //part.Komponent.MagazynKomponenty = null;
