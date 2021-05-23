@@ -947,10 +947,6 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnName("id")
                     .HasMaxLength(81);
 
-                entity.Property(e => e.IdentyfikatorWyrobu)
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.IdentyfikatorZamowienia)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -964,7 +960,7 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(200);
 
                 entity.Property(e => e.NumerKlienta)
-                    .HasMaxLength(10)
+                    .HasMaxLength(20)
                     .IsUnicode(false)
                     .IsFixedLength();
 
@@ -1354,8 +1350,7 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(200);
 
                 entity.Property(e => e.WyrobId)
-                    .IsRequired()
-                    .HasMaxLength(30)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
             });
 

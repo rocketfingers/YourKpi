@@ -28,12 +28,12 @@ namespace YouKpiBackend
                 .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(5, "Produkty niezgodne")))
                 .ForMember(dest => dest.ElementId, opt => opt.MapFrom(from => from.Element.Id))
                 .ReverseMap();
-            CreateMap<StoreElementViewModel, MagazynProduktyNiezgodne>()
-                .ForMember(dest => dest.ElementId, opt => opt.MapFrom(from => int.Parse(from.ElementId.ToString())))
-                .ReverseMap();
-            CreateMap<StoreElementViewModel, MagazynProdukty>()
-                 .ForMember(dest => dest.ElementId, opt => opt.MapFrom(from => int.Parse(from.ElementId.ToString())))
-                 .ReverseMap();
+            //CreateMap<StoreElementViewModel, MagazynProduktyNiezgodne>()
+            //    .ForMember(dest => dest.ElementId, opt => opt.MapFrom(from => int.Parse(from.ElementId.ToString())))
+            //    .ReverseMap();
+            //CreateMap<StoreElementViewModel, MagazynProdukty>()
+            //     .ForMember(dest => dest.ElementId, opt => opt.MapFrom(from => int.Parse(from.ElementId.ToString())))
+            //     .ReverseMap();
 
 
             CreateMap<ActivitiesHistoryModel, ActivityHistoryViewModel>();
