@@ -11,7 +11,7 @@
               :disabled="editMode"
               required
               :rules="[requiredRule]"
-              v-model="currentProduct.id"
+              v-model="currentProduct.productId"
             ></v-text-field>
           </v-flex>
           <v-flex xs12>
@@ -191,7 +191,7 @@ export default {
   methods: {
     async duplicateProduct (product) {
       var res = await this.$dialog.confirm({
-        text: 'Czy na pewno chcesz utworzyć duplikat dla:  ' + product.id + '? (aktualny produkt zostanie zapisany, zostaniesz przeniesiony do duplikatu)',
+        text: 'Czy na pewno chcesz utworzyć duplikat dla:  ' + product.productId + '? (aktualny produkt zostanie zapisany, zostaniesz przeniesiony do duplikatu)',
         title: 'Uwaga'
       })
       if (res) {

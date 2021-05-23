@@ -152,6 +152,15 @@
                 <td :key="index" v-else-if="header.value === 'processesNo'">
                   {{ props.item.offerLineProcess.length }}
                 </td>
+                <td
+                  :key="index"
+                  v-else-if="
+                    header.value === 'productId' && !props.item.isEdited
+                  "
+                >
+                  {{ props.item.showName }}
+                </td>
+
                 <td :key="index" v-else-if="header.value === 'expand'">
                   <v-icon @click="expandRow(props)" v-show="!props.isExpanded"
                     >fa-arrow-down</v-icon
@@ -166,7 +175,7 @@
                       v-if="header.value == 'productId'"
                       color
                       :items="products"
-                      item-text="id"
+                      item-text="showName"
                       return-object
                       :rules="[requiredRule]"
                       @input="changeProduct(props.item)"
@@ -355,6 +364,7 @@ export default {
         item.productId = item.product.id
         item.priceInOfferDay = item.product.cena
         item.salesPrice = item.product.cena
+        item.showName = item.product.showName
       }
     },
     getSelectedOfferLineProcesses (item) {

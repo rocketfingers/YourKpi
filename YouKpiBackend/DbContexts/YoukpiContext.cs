@@ -417,10 +417,7 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnName("DATA_PRZYJECIA")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.ElementId)
-                    .HasColumnName("ELEMENT_ID")
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
+                entity.Property(e => e.ElementId).HasColumnName("ELEMENT_ID");
 
                 entity.Property(e => e.Ilosc).HasColumnName("ILOSC");
 
@@ -466,10 +463,7 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnName("DATA_PRZYJECIA")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.ElementId)
-                    .HasColumnName("ELEMENT_ID")
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
+                entity.Property(e => e.ElementId).HasColumnName("ELEMENT_ID");
 
                 entity.Property(e => e.Ilosc).HasColumnName("ILOSC");
 
@@ -729,11 +723,7 @@ namespace YouKpiBackend.DbContexts
 
                 entity.Property(e => e.PriceInOfferDay).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.ProductId)
-                    .IsRequired()
-                    .HasColumnName("ProductID")
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
+                entity.Property(e => e.ProductId).HasColumnName("PRODUCT_ID");
 
                 entity.Property(e => e.Sale).HasMaxLength(50);
 
@@ -749,8 +739,7 @@ namespace YouKpiBackend.DbContexts
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OfferLines)
                     .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OfferLine__Produ__0B5CAFEA");
+                    .HasConstraintName("FK__OfferLine__PRODU__64CCF2AE");
             });
 
             modelBuilder.Entity<OfferProcess>(entity =>
@@ -1012,10 +1001,7 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ProduktyId)
-                    .IsRequired()
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
+                entity.Property(e => e.ProduktId).HasColumnName("PRODUKT_ID");
 
                 entity.HasOne(d => d.Czesci)
                     .WithMany(p => p.ProduktCzesci)
@@ -1023,18 +1009,15 @@ namespace YouKpiBackend.DbContexts
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("ProduktCzesci_Czesci_FK");
 
-                entity.HasOne(d => d.Produkty)
+                entity.HasOne(d => d.Produkt)
                     .WithMany(p => p.ProduktCzesci)
-                    .HasForeignKey(d => d.ProduktyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasForeignKey(d => d.ProduktId)
                     .HasConstraintName("ProduktCzesci_Produkty_FK");
             });
 
             modelBuilder.Entity<Produkty>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Ansi)
                     .IsRequired()
@@ -1050,6 +1033,11 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(30);
 
                 entity.Property(e => e.Pn).HasColumnName("PN");
+
+                entity.Property(e => e.ProductId)
+                    .HasColumnName("PRODUCT_ID")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.TypWyrobuId)
                     .IsRequired()

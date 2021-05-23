@@ -7,11 +7,11 @@ namespace YouKpiBackend.ModelsEntity
     public partial class ProduktCzesci
     {
         public int Id { get; set; }
-        public string ProduktyId { get; set; }
         public string CzesciId { get; set; }
         public int? IloscSztuk { get; set; }
+        public int? ProduktId { get; set; }
 
         public virtual Czesci Czesci { get; set; }
-        public virtual Produkty Produkty { get; set; }
+        public virtual Produkty Produkt { get; set; }
     }
 }

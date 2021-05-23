@@ -16,6 +16,7 @@ namespace YouKpiBackend
                 .ReverseMap();
             CreateMap<MagazynProdukty, StoreElementViewModel>()
                 .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(2, "Produkty")))
+                .ForMember(dest => dest.ElementId, opt => opt.MapFrom(from => from.Element.Id))
                 .ReverseMap();
             CreateMap<MagazynKomponenty, StoreElementViewModel>()
                 .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(3, "Komponenty")))
@@ -25,7 +26,15 @@ namespace YouKpiBackend
                 .ReverseMap();
             CreateMap<MagazynProduktyNiezgodne, StoreElementViewModel>()
                 .ForMember(dest => dest.Magazyn, opt => opt.MapFrom(from => new StoreViewModel(5, "Produkty niezgodne")))
+                .ForMember(dest => dest.ElementId, opt => opt.MapFrom(from => from.Element.Id))
                 .ReverseMap();
+            CreateMap<StoreElementViewModel, MagazynProduktyNiezgodne>()
+                .ForMember(dest => dest.ElementId, opt => opt.MapFrom(from => int.Parse(from.ElementId.ToString())))
+                .ReverseMap();
+            CreateMap<StoreElementViewModel, MagazynProdukty>()
+                 .ForMember(dest => dest.ElementId, opt => opt.MapFrom(from => int.Parse(from.ElementId.ToString())))
+                 .ReverseMap();
+
 
             CreateMap<ActivitiesHistoryModel, ActivityHistoryViewModel>();
             CreateMap<CompanyBasicInfo, CompanyBasicInfoViewModel>();

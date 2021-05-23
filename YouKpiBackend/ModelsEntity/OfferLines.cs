@@ -14,7 +14,6 @@ namespace YouKpiBackend.ModelsEntity
 
         public int Id { get; set; }
         public int? OfferId { get; set; }
-        public string ProductId { get; set; }
         public int Quantity { get; set; }
         public string W { get; set; }
         public string Medium { get; set; }
@@ -22,6 +21,7 @@ namespace YouKpiBackend.ModelsEntity
         public string Sale { get; set; }
         public decimal? PriceInOfferDay { get; set; }
         public decimal? SalesPrice { get; set; }
+        public int? ProductId { get; set; }
 
         public virtual Offer Offer { get; set; }
         public virtual Produkty Product { get; set; }
