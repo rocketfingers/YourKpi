@@ -4,15 +4,41 @@
       <v-flex xs5>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-text-field
-              outlined
-              color
-              label="Id"
-              :disabled="editMode"
-              required
-              :rules="[requiredRule]"
-              v-model="currentProduct.productId"
-            ></v-text-field>
+            <v-layout row wrap>
+              <v-text-field
+                outlined
+                color
+                label="Id"
+                :disabled="editMode"
+                required
+                :rules="[requiredRule]"
+                @input="selectedSuffix = null"
+                v-model="currentProduct.productId"
+              ></v-text-field>
+              <v-flex xs1> </v-flex>
+              <v-autocomplete
+                outlined
+                color
+                label="Suffix"
+                :items="[
+                  'ANSI600',
+                  'CL150',
+                  'METAL',
+                  'L200',
+                  'L100',
+                  'H300',
+                  'WR',
+                  'BR',
+                  'PEEK',
+                ]"
+                required
+                @change="
+                  currentProduct.productId =
+                    currentProduct.productId + '.' + selectedSuffix
+                "
+                v-model="selectedSuffix"
+              ></v-autocomplete>
+            </v-layout>
           </v-flex>
           <v-flex xs12>
             <v-autocomplete
@@ -167,6 +193,7 @@ export default {
   },
   data () {
     return {
+      selectedSuffix: '',
       requiredRule: (v) => !!v || 'To pole jest wymagane',
       numberRule: val => {
         if (val < 0) return 'Wprowadź wartość dodatnią'
