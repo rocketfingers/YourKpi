@@ -20,6 +20,7 @@ namespace YouKpiBackend.ModelsEntity
         public string NrBudynku { get; set; }
         public string NrTelefonu { get; set; }
         public string Email { get; set; }
+        public string OsobaKontaktowa { get; set; }
 
         public virtual ICollection<Offer> Offer { get; set; }
     }

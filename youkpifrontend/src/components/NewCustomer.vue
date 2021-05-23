@@ -56,6 +56,14 @@
               </v-flex>
             </v-layout>
           </v-flex>
+          <v-flex xs12>
+            <v-text-field
+              outlined
+              color
+              label="Osoba kontaktowa"
+              v-model="currentItem.osobaKontaktowa"
+            ></v-text-field>
+          </v-flex>
         </v-layout>
       </v-flex>
       <v-spacer></v-spacer>

@@ -114,6 +114,11 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
+                entity.Property(e => e.OsobaKontaktowa)
+                    .HasColumnName("OSOBA_KONTAKTOWA")
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Ulica)
                     .HasColumnName("ULICA")
                     .HasMaxLength(100)
