@@ -105,7 +105,6 @@ namespace YouKpiBackend
                 // Add Hangfire services.
                 string hangfireConStr = Configuration.GetConnectionString("HangfireConnection");
                 services.AddHangfire(configuration => configuration
-                    .UseNLogLogProvider()
                     .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                     .UseSimpleAssemblyNameTypeSerializer()
                     .UseRecommendedSerializerSettings()
