@@ -10,6 +10,7 @@ using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -19,6 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using NLog;
 using YouKpiBackend.BusinessLibrary;
 using YouKpiBackend.BusinessLibrary.Company;
 using YouKpiBackend.BusinessLibrary.Offer;
@@ -39,6 +41,7 @@ namespace YouKpiBackend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -53,6 +56,14 @@ namespace YouKpiBackend
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
               .AddJwtBearer(options =>
               {
+                  options.Events = new JwtBearerEvents()
+                  {
+                      OnAuthenticationFailed = async c =>
+                      {
+                          await Task.Run(() => logger.Debug(c.Exception.Message));
+                      }
+                  };
+
                   options.TokenValidationParameters = new TokenValidationParameters
                   {
                       RoleClaimType = "role",
@@ -94,7 +105,6 @@ namespace YouKpiBackend
                 // Add Hangfire services.
                 string hangfireConStr = Configuration.GetConnectionString("HangfireConnection");
                 services.AddHangfire(configuration => configuration
-                    // .UseNLogLogProvider()
                     .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                     .UseSimpleAssemblyNameTypeSerializer()
                     .UseRecommendedSerializerSettings()
@@ -112,6 +122,9 @@ namespace YouKpiBackend
         }
         private static void AddServices(IServiceCollection services)
         {
+            // dodaje usera do request i pozwala nlogowi go pobrac
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddScoped<OfferPdfService, OfferPdfService>();
         }
 
@@ -122,6 +135,9 @@ namespace YouKpiBackend
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            LogManager.Configuration.Variables["conString"] = Configuration.GetConnectionString("DefaultConnection");
+
             app.UseCors(MyAllowSpecificOrigins);
 
             // app.UseHttpsRedirection();

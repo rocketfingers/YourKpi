@@ -368,7 +368,7 @@ export default {
         .then(Response => {
           this.products = Response.data
           this.products.forEach(p => {
-            p.showName = p.id + ', ' + p.name
+            p.showName = p.id + ', ' + p.productId
           })
           this.getOffer()
         })
@@ -407,6 +407,7 @@ export default {
             i.sumSale = 0
 
             i.offerLines.forEach(p => {
+              p.showName = this.products.find(pp => pp.id === p.productId).showName
               i.sumInOfferDay = i.sumInOfferDay + (p.priceInOfferDay * p.quantity)
               i.sumSale = i.sumSale + (p.salesPrice * p.quantity)
             })

@@ -19,7 +19,7 @@ namespace YouKpiBackend.ModelsEntity
         public string NazwaProcesu { get; set; }
         public DateTime ZakonczenieData { get; set; }
         public int? Wynik { get; set; }
-        public string IdentyfikatorWyrobu { get; set; }
+        public int? IdentyfikatorWyrobu { get; set; }
         public string TypWyrobu { get; set; }
         public int? Dn { get; set; }
         public int? IloscWyrobow { get; set; }

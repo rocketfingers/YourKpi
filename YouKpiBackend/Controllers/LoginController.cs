@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using YouKpiBackend.BusinessLibrary;
 using YouKpiBackend.BusinessLibrary.Company;
 using YouKpiBackend.BusinessLibrary.User;
@@ -17,11 +18,13 @@ namespace YouKpiBackend.Controllers
     {
         UserLibrary _userLibrary;
         CompanyLibrary _companyLibrary;
+        private readonly ILogger<LoginController> _logger;
 
-        public LoginController(UserLibrary userLibrary, CompanyLibrary companyLibrary)
+        public LoginController(UserLibrary userLibrary, CompanyLibrary companyLibrary, ILogger<LoginController> logger)
         {
             _userLibrary = userLibrary;
             _companyLibrary = companyLibrary;
+            _logger = logger;
         }
 
 
@@ -49,8 +52,10 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
-               var user =  await _userLibrary.Authenticate(model);
-               var token = _userLibrary.BuildToken(user);             
+
+                var user =  await _userLibrary.Authenticate(model);
+                _logger.LogInformation($"Logged user id: {user.Id}, name: {user.Name}");
+                var token = _userLibrary.BuildToken(user);             
 
                 return Created("", token);
             }

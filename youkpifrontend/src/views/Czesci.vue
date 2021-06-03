@@ -140,10 +140,11 @@ export default {
         id: '',
         nazwa: '',
         gatPodstawowy: '',
-        numerRysNorma: ''
+        numerRysNorma: '',
+        wykonanie: 'Własne'
       },
       // Settings
-      editedItem: {},
+      editedItem: { wykonanie: 'Własne' },
       editedIndex: -1,
       showDialog: false,
       data: [],
@@ -179,6 +180,7 @@ export default {
     }
   },
   methods: {
+
     editItem (item) {
       this.editMode = true
 
@@ -269,6 +271,7 @@ export default {
         ).then(Result => {
           Object.assign(this.data[this.editedIndex], this.editedItem)
           this.close()
+          this.initialise()
         })
       } else {
         // // eslint-disable-next-line no-debugger
@@ -279,25 +282,28 @@ export default {
             this.editedItem.id = Result.data.id
             this.data.push(this.editedItem)
             this.close()
+            this.initialise()
           })
       }
+    },
+    initialise () {
+      this.editedItem = Object.assign({ komponent: { } }, this.defaultItem)
+      v.axiosInstance.get(this.getAllApi)
+        .then(Response => {
+          this.data = Response.data
+          this.data.forEach(p => {
+            if (p.komponent != null) {
+              p.hasComponent = true
+            } else {
+              p.komponent = {}
+            }
+          })
+          this.getComponents()
+        })
     }
   },
   created () {
-    this.editedItem = Object.assign({ komponent: { } }, this.defaultItem)
-
-    v.axiosInstance.get(this.getAllApi)
-      .then(Response => {
-        this.data = Response.data
-        this.data.forEach(p => {
-          if (p.komponent != null) {
-            p.hasComponent = true
-          } else {
-            p.komponent = {}
-          }
-        })
-        this.getComponents()
-      })
+    this.initialise()
   },
   destroyed () {
   }

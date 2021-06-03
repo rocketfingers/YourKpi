@@ -63,6 +63,25 @@
                   label="TPZ"
                 ></v-text-field>
               </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="editedItem.numerProgramu"
+                  outlined
+                  :disabled="readonly"
+                  counter="10"
+                  maxlength="10"
+                  label="Numer programu"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-autocomplete
+                  label="Wykonanie"
+                  outlined
+                  :items="['Własne', 'Outsourcing', 'Zakup']"
+                  autocomplete
+                  v-model="editedItem.wykonanie"
+                ></v-autocomplete>
+              </v-flex>
             </v-layout>
           </v-flex>
           <v-flex xs1> </v-flex>
@@ -95,6 +114,18 @@
                   type="number"
                   min="0"
                   label="TJ"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="editedItem.czasProgramisty"
+                  outlined
+                  :disabled="readonly"
+                  :rules="[czasProgramistyRule]"
+                  type="number"
+                  min="1"
+                  max="100"
+                  label="Czas programisty"
                 ></v-text-field>
               </v-flex>
             </v-layout>
@@ -188,6 +219,11 @@ export default {
       tpztjRule: val => {
         if (val < 0) return 'Wprowadz dodatnia wartosc'
         if (val > 200) return 'Maksymalna wartość: 200'
+        return true
+      },
+      czasProgramistyRule: val => {
+        if (val < 1) return 'Wprowadz wartość większą od 1'
+        if (val > 100) return 'Maksymalna wartość: 100'
         return true
       },
       isItemAlreadyExists: (v) => (!(this.parts.some(p => p.id.toUpperCase().trim() === v.toUpperCase().trim())) || this.notValidate || this.editMode) || 'Część o tym id już istnieje!!',
