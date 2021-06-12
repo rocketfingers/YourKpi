@@ -259,10 +259,7 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<Lokacja>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
                 entity.Property(e => e.Nazwa)
-                    .HasColumnName("NAZWA")
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
@@ -505,7 +502,7 @@ namespace YouKpiBackend.DbContexts
                 entity.HasOne(d => d.Lokacja)
                     .WithMany(p => p.MagazynTowary)
                     .HasForeignKey(d => d.LokacjaId)
-                    .HasConstraintName("FK__Towary__LOKACJA___38EE7070");
+                    .HasConstraintName("FK__MagazynTo__LOKAC__090A5324");
             });
 
             modelBuilder.Entity<Maszyny>(entity =>
