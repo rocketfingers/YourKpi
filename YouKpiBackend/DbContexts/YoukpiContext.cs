@@ -42,12 +42,10 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<PracownikCzasStep> PracownikCzasStep { get; set; }
         public virtual DbSet<PracownikProcess> PracownikProcess { get; set; }
         public virtual DbSet<Process> Process { get; set; }
-        public virtual DbSet<ProcessStepsToDelete> ProcessStepsToDelete { get; set; }
         public virtual DbSet<ProcessesProcess> ProcessesProcess { get; set; }
         public virtual DbSet<ProdExe> ProdExe { get; set; }
         public virtual DbSet<ProduktCzesci> ProduktCzesci { get; set; }
         public virtual DbSet<Produkty> Produkty { get; set; }
-        public virtual DbSet<ProduktyOld> ProduktyOld { get; set; }
         public virtual DbSet<Projects> Projects { get; set; }
         public virtual DbSet<ReasonCodes> ReasonCodes { get; set; }
         public virtual DbSet<StepOfferWykonanie> StepOfferWykonanie { get; set; }
@@ -745,30 +743,6 @@ namespace YouKpiBackend.DbContexts
                     .HasDefaultValueSql("('R')");
             });
 
-            modelBuilder.Entity<ProcessStepsToDelete>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Nazwa)
-                    .HasColumnName("NAZWA")
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.NumerKroku).HasColumnName("NUMER_KROKU");
-
-                entity.Property(e => e.ProcessId)
-                    .HasColumnName("PROCESS_ID")
-                    .HasMaxLength(30);
-
-                entity.HasOne(d => d.Process)
-                    .WithMany(p => p.ProcessStepsToDelete)
-                    .HasForeignKey(d => d.ProcessId)
-                    .HasConstraintName("FK_PROCESS_ID");
-            });
-
             modelBuilder.Entity<ProcessesProcess>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -905,53 +879,6 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Wersja)
                     .IsRequired()
                     .HasMaxLength(5);
-            });
-
-            modelBuilder.Entity<ProduktyOld>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("Produkty_old");
-
-                entity.Property(e => e.Ansi)
-                    .IsRequired()
-                    .HasColumnName("ANSI")
-                    .HasMaxLength(5);
-
-                entity.Property(e => e.Dn).HasColumnName("DN");
-
-                entity.Property(e => e.Id)
-                    .IsRequired()
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.NumerRysNorma)
-                    .IsRequired()
-                    .HasMaxLength(30);
-
-                entity.Property(e => e.Pn).HasColumnName("PN");
-
-                entity.Property(e => e.TypWyrobuId)
-                    .IsRequired()
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Uszczelnienie)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.Waga).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.WagaJednostka)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasDefaultValueSql("(N'kg')");
-
-                entity.Property(e => e.Wersja)
-                    .IsRequired()
-                    .HasMaxLength(5);
-
-                entity.Property(e => e.WymiaryDlmm).HasColumnName("WymiaryDLmm");
             });
 
             modelBuilder.Entity<Projects>(entity =>

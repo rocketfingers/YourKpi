@@ -118,19 +118,11 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[ProcessStepsToDelete]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[ProduktCzesci]",
          "ObjectType": 0
       },
       {
          "Name": "[dbo].[Produkty]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[Produkty_old]",
          "ObjectType": 0
       },
       {
