@@ -144,14 +144,10 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.CzasProgramisty).HasColumnName("CZAS_PROGRAMISTY");
-
                 entity.Property(e => e.GatPodstawowy)
                     .IsRequired()
                     .HasMaxLength(30)
                     .IsUnicode(false);
-
-                entity.Property(e => e.KomponentId).HasColumnName("KOMPONENT_ID");
 
                 entity.Property(e => e.Nazwa)
                     .IsRequired()
@@ -159,7 +155,6 @@ namespace YouKpiBackend.DbContexts
                     .IsUnicode(false);
 
                 entity.Property(e => e.NumerProgramu)
-                    .HasColumnName("NUMER_PROGRAMU")
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
@@ -177,7 +172,6 @@ namespace YouKpiBackend.DbContexts
                     .HasColumnType("decimal(6, 2)");
 
                 entity.Property(e => e.Wykonanie)
-                    .HasColumnName("WYKONANIE")
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
@@ -186,7 +180,7 @@ namespace YouKpiBackend.DbContexts
                 entity.HasOne(d => d.Komponent)
                     .WithMany(p => p.Czesci)
                     .HasForeignKey(d => d.KomponentId)
-                    .HasConstraintName("FK__Czesci__KOMPONEN__0697FACD");
+                    .HasConstraintName("FK__Czesci__Komponen__76EBA2E9");
             });
 
             modelBuilder.Entity<Komponenty>(entity =>
