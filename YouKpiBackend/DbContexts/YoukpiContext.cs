@@ -729,15 +729,9 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<ProcessesProcess>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.ProcessId).HasMaxLength(30);
 
-                entity.Property(e => e.ProcessId)
-                    .HasColumnName("PROCESS_ID")
-                    .HasMaxLength(30);
-
-                entity.Property(e => e.RelatedProcessId)
-                    .HasColumnName("RELATED_PROCESS_ID")
-                    .HasMaxLength(30);
+                entity.Property(e => e.RelatedProcessId).HasMaxLength(30);
 
                 entity.HasOne(d => d.Process)
                     .WithMany(p => p.ProcessesProcessProcess)
@@ -811,8 +805,6 @@ namespace YouKpiBackend.DbContexts
                     .IsRequired()
                     .HasMaxLength(20)
                     .IsUnicode(false);
-
-                entity.Property(e => e.ProduktId).HasColumnName("PRODUKT_ID");
 
                 entity.HasOne(d => d.Czesci)
                     .WithMany(p => p.ProduktCzesci)
