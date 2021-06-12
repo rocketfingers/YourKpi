@@ -78,17 +78,14 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Email)
-                    .HasColumnName("EMAIL")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.KodPocztowy)
-                    .HasColumnName("KOD_POCZTOWY")
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Miasto)
-                    .HasColumnName("MIASTO")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -104,22 +101,18 @@ namespace YouKpiBackend.DbContexts
                     .IsFixedLength();
 
                 entity.Property(e => e.NrBudynku)
-                    .HasColumnName("NR_BUDYNKU")
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
                 entity.Property(e => e.NrTelefonu)
-                    .HasColumnName("NR_TELEFONU")
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
                 entity.Property(e => e.OsobaKontaktowa)
-                    .HasColumnName("OSOBA_KONTAKTOWA")
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Ulica)
-                    .HasColumnName("ULICA")
                     .HasMaxLength(100)
                     .IsUnicode(false);
             });
@@ -682,7 +675,7 @@ namespace YouKpiBackend.DbContexts
                     .WithMany(p => p.Offer)
                     .HasForeignKey(d => d.ClientsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Offer__ClientsId__078C1F06");
+                    .HasConstraintName("FK__Offer__ClientsId__740F363E");
 
                 entity.HasOne(d => d.OfferrerNavigation)
                     .WithMany(p => p.Offer)
