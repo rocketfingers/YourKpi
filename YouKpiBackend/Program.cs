@@ -42,7 +42,7 @@ namespace YouKpiBackend
               {
                   logging.ClearProviders();
                   logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-                  logging.AddConsole();
+                  //logging.AddConsole();
               })
               .UseNLog();  // NLog: Setup NLog for Dependency injection
     }
