@@ -180,49 +180,38 @@ namespace YouKpiBackend.DbContexts
                 entity.HasOne(d => d.Komponent)
                     .WithMany(p => p.Czesci)
                     .HasForeignKey(d => d.KomponentId)
-                    .HasConstraintName("FK__Czesci__Komponen__76EBA2E9");
+                    .HasConstraintName("FK__Czesci__Komponen__79C80F94");
             });
 
             modelBuilder.Entity<Komponenty>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.CenaJednostkowa)
-                    .HasColumnName("CENA_JEDNOSTKOWA")
-                    .HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.CenaJednostkowa).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.GatunekPodst)
-                    .HasColumnName("GATUNEK_PODST")
                     .HasMaxLength(300)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Ilosc)
-                    .HasColumnName("ILOSC")
-                    .HasColumnType("decimal(11, 6)");
+                entity.Property(e => e.Ilosc).HasColumnType("decimal(11, 6)");
 
                 entity.Property(e => e.Jednostka)
-                    .HasColumnName("JEDNOSTKA")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.KomponentId)
-                    .HasColumnName("KOMPONENT_ID")
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Ltid).HasColumnName("LTID");
 
                 entity.Property(e => e.Nazwa)
-                    .HasColumnName("NAZWA")
                     .HasMaxLength(300)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ProcessId)
-                    .HasColumnName("PROCESS_ID")
-                    .HasMaxLength(30);
+                entity.Property(e => e.ProcessId).HasMaxLength(30);
 
                 entity.Property(e => e.Wymiar)
-                    .HasColumnName("WYMIAR")
                     .HasMaxLength(300)
                     .IsUnicode(false);
             });
