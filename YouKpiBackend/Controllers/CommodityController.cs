@@ -44,7 +44,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Towary.Select(x => new StoreElementSimpleViewModel(x.Id, x.Nazwa, x.Cena)).ToListAsync();
+                var res = await _ctx.Towary.Select(x => new StoreElementSimpleViewModel(x.Id, x.Nazwa, x.CenaSprzedazy)).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
@@ -100,6 +100,10 @@ namespace YouKpiBackend.Controllers
                 var item = _ctx.Towary.FirstOrDefault(p => p.Id == entity.Id);
 
                 item.Nazwa = entity.Nazwa;
+                item.CenaSprzedazy = entity.CenaSprzedazy;
+                item.CenaZakupu = entity.CenaZakupu;
+                item.WalutaSprzedazy = entity.WalutaSprzedazy;
+                item.WalutaZakupu = entity.WalutaZakupu;
 
                 await _ctx.SaveChangesAsync();
 

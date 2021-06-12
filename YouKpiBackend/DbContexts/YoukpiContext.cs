@@ -1223,14 +1223,21 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Cena).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.CenaSprzedazy).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.CenaZakupu).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.Nazwa)
-                    .HasColumnName("NAZWA")
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Waluta).HasMaxLength(5);
+                entity.Property(e => e.WalutaSprzedazy)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.WalutaZakupu)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<TypWyrobu>(entity =>
