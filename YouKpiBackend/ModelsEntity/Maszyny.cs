@@ -17,15 +17,15 @@ namespace YouKpiBackend.ModelsEntity
         public string Rodzaj { get; set; }
         public string Opis { get; set; }
         public string TrybPracy { get; set; }
-        public decimal? OsX { get; set; }
-        public decimal? OsY { get; set; }
-        public decimal? OsZ { get; set; }
         public string MiejscePracy { get; set; }
         public string Krytycznosc { get; set; }
         public string Status { get; set; }
         public DateTime? DataUruchomienia { get; set; }
         public decimal? WartoscMaszyny { get; set; }
         public decimal? StawkaMiesieczna { get; set; }
+        public decimal? OsX { get; set; }
+        public decimal? OsY { get; set; }
+        public decimal? OsZ { get; set; }
 
         public virtual ICollection<PracownikCzasStep> PracownikCzasStep { get; set; }
         public virtual ICollection<StepsMachines> StepsMachines { get; set; }

@@ -446,17 +446,11 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.OsX)
-                    .HasColumnName("Os_X")
-                    .HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.OsX).HasColumnType("decimal(18, 0)");
 
-                entity.Property(e => e.OsY)
-                    .HasColumnName("Os_Y")
-                    .HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.OsY).HasColumnType("decimal(18, 0)");
 
-                entity.Property(e => e.OsZ)
-                    .HasColumnName("Os_Z")
-                    .HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.OsZ).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.Rodzaj)
                     .HasMaxLength(200)
@@ -909,12 +903,7 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<ReasonCodes>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.IdDifferenceReasonCode).HasColumnName("ID_DIFFERENCE_REASON_CODE");
-
                 entity.Property(e => e.Opis)
-                    .HasColumnName("OPIS")
                     .HasMaxLength(1000)
                     .IsUnicode(false);
             });
@@ -944,15 +933,9 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<Steps>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.ProcessesId).HasMaxLength(30);
 
-                entity.Property(e => e.ProcessesId)
-                    .HasColumnName("ProcessesID")
-                    .HasMaxLength(30);
-
-                entity.Property(e => e.StepId)
-                    .HasColumnName("STEP_ID")
-                    .HasMaxLength(61);
+                entity.Property(e => e.StepId).HasMaxLength(61);
 
                 entity.Property(e => e.StepName)
                     .IsRequired()
@@ -978,7 +961,7 @@ namespace YouKpiBackend.DbContexts
                 entity.HasOne(d => d.Step)
                     .WithMany(p => p.StepsMachines)
                     .HasForeignKey(d => d.StepId)
-                    .HasConstraintName("FK__StepsMach__StepI__2B5F6B28");
+                    .HasConstraintName("FK__StepsMach__StepI__451F3D2B");
             });
 
             modelBuilder.Entity<Towary>(entity =>
