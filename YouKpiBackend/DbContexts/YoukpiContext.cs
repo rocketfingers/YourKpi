@@ -53,7 +53,6 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<StepOfferWykonanie> StepOfferWykonanie { get; set; }
         public virtual DbSet<Steps> Steps { get; set; }
         public virtual DbSet<StepsMachines> StepsMachines { get; set; }
-        public virtual DbSet<StepsToDelete> StepsToDelete { get; set; }
         public virtual DbSet<Towary> Towary { get; set; }
         public virtual DbSet<TypWyrobu> TypWyrobu { get; set; }
         public virtual DbSet<TypWyrobuIdDn> TypWyrobuIdDn { get; set; }
@@ -787,15 +786,13 @@ namespace YouKpiBackend.DbContexts
                     .HasMaxLength(70)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Rola).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.Salt).HasMaxLength(20);
 
-                entity.Property(e => e.StawkaGodzinowa)
-                    .HasColumnName("STAWKA_GODZINOWA")
-                    .HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.StawkaGodzinowa).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.StawkaMiesieczna)
-                    .HasColumnName("STAWKA_MIESIECZNA")
-                    .HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.StawkaMiesieczna).HasColumnType("decimal(18, 2)");
             });
 
             modelBuilder.Entity<PracownikCzasStep>(entity =>
@@ -1225,24 +1222,6 @@ namespace YouKpiBackend.DbContexts
                     .WithMany(p => p.StepsMachines)
                     .HasForeignKey(d => d.StepId)
                     .HasConstraintName("FK__StepsMach__STEP___0F2D40CE");
-            });
-
-            modelBuilder.Entity<StepsToDelete>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .HasColumnName("ID")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.ProcessesId)
-                    .IsRequired()
-                    .HasColumnName("ProcessesID")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Sekwencja).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.StepName)
-                    .IsRequired()
-                    .HasMaxLength(200);
             });
 
             modelBuilder.Entity<Towary>(entity =>

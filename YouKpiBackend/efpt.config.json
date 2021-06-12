@@ -8,7 +8,6 @@
    "ModelNamespace": null,
    "OutputContextPath": "DbContexts",
    "OutputPath": "ModelsEntity",
-   "ProceduresReturnList": false,
    "ProjectRootNamespace": "YouKpiBackend",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
@@ -155,10 +154,6 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[StepsToDelete]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[Towary]",
          "ObjectType": 0
       },
@@ -196,5 +191,6 @@
    "UseNoObjectFilter": false,
    "UseNodaTime": false,
    "UseNullableReferences": false,
+   "UseSchemaFolders": false,
    "UseSpatial": false
 }
