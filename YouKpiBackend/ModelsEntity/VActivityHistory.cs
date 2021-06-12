@@ -11,7 +11,7 @@ namespace YouKpiBackend.ModelsEntity
         public string ProcessId { get; set; }
         public string ProcessName { get; set; }
         public DateTime? CzasStart { get; set; }
-        public DateTime? CzasStop { get; set; }
+        public DateTime CzasStop { get; set; }
         public int ClientsId { get; set; }
         public string Client { get; set; }
         public string PartId { get; set; }

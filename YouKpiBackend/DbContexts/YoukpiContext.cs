@@ -429,66 +429,50 @@ namespace YouKpiBackend.DbContexts
             modelBuilder.Entity<Maszyny>(entity =>
             {
                 entity.Property(e => e.Id)
-                    .HasColumnName("ID")
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.DataUruchomienia)
-                    .HasColumnName("DATA_URUCHOMIENIA")
-                    .HasColumnType("datetime");
+                entity.Property(e => e.DataUruchomienia).HasColumnType("datetime");
 
-                entity.Property(e => e.Krytycznosc)
-                    .HasColumnName("KRYTYCZNOSC")
-                    .HasMaxLength(1);
+                entity.Property(e => e.Krytycznosc).HasMaxLength(1);
 
                 entity.Property(e => e.MiejscePracy)
-                    .HasColumnName("MIEJSCE_PRACY")
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Nazwa)
-                    .HasColumnName("NAZWA")
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Opis)
-                    .HasColumnName("OPIS")
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.OsX)
-                    .HasColumnName("OS_X")
+                    .HasColumnName("Os_X")
                     .HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.OsY)
-                    .HasColumnName("OS_Y")
+                    .HasColumnName("Os_Y")
                     .HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.OsZ)
-                    .HasColumnName("OS_Z")
+                    .HasColumnName("Os_Z")
                     .HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.Rodzaj)
-                    .HasColumnName("RODZAJ")
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Status)
-                    .HasColumnName("STATUS")
-                    .HasMaxLength(50);
+                entity.Property(e => e.Status).HasMaxLength(50);
 
-                entity.Property(e => e.StawkaMiesieczna)
-                    .HasColumnName("STAWKA_MIESIECZNA")
-                    .HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.StawkaMiesieczna).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.TrybPracy)
-                    .HasColumnName("TRYB_PRACY")
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.WartoscMaszyny)
-                    .HasColumnName("WARTOSC_MASZYNY")
-                    .HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.WartoscMaszyny).HasColumnType("decimal(18, 2)");
             });
 
             modelBuilder.Entity<MozliweStatusyOferty>(entity =>
@@ -1079,24 +1063,19 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<StepsMachines>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
                 entity.Property(e => e.MachineId)
-                    .HasColumnName("MACHINE_ID")
                     .HasMaxLength(200)
                     .IsUnicode(false);
-
-                entity.Property(e => e.StepId).HasColumnName("STEP_ID");
 
                 entity.HasOne(d => d.Machine)
                     .WithMany(p => p.StepsMachines)
                     .HasForeignKey(d => d.MachineId)
-                    .HasConstraintName("FK__StepsMach__MACHI__0E391C95");
+                    .HasConstraintName("FK__StepsMach__Machi__2A6B46EF");
 
                 entity.HasOne(d => d.Step)
                     .WithMany(p => p.StepsMachines)
                     .HasForeignKey(d => d.StepId)
-                    .HasConstraintName("FK__StepsMach__STEP___0F2D40CE");
+                    .HasConstraintName("FK__StepsMach__StepI__2B5F6B28");
             });
 
             modelBuilder.Entity<Towary>(entity =>
