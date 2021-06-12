@@ -121,33 +121,21 @@ namespace YouKpiBackend.DbContexts
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.FormaPrawna)
-                    .HasColumnName("FORMA_PRAWNA")
-                    .HasMaxLength(2000);
+                entity.Property(e => e.FormaPrawna).HasMaxLength(2000);
 
-                entity.Property(e => e.KodPocztowy)
-                    .HasColumnName("KOD_POCZTOWY")
-                    .HasMaxLength(10);
+                entity.Property(e => e.KodPocztowy).HasMaxLength(10);
 
-                entity.Property(e => e.Miasto)
-                    .HasColumnName("MIASTO")
-                    .HasMaxLength(100);
+                entity.Property(e => e.Miasto).HasMaxLength(100);
 
-                entity.Property(e => e.Nazwa)
-                    .HasColumnName("NAZWA")
-                    .HasMaxLength(2000);
+                entity.Property(e => e.Nazwa).HasMaxLength(2000);
 
                 entity.Property(e => e.Nip)
                     .HasColumnName("NIP")
                     .HasMaxLength(20);
 
-                entity.Property(e => e.Numer)
-                    .HasColumnName("NUMER")
-                    .HasMaxLength(10);
+                entity.Property(e => e.Numer).HasMaxLength(10);
 
-                entity.Property(e => e.Ulica)
-                    .HasColumnName("ULICA")
-                    .HasMaxLength(200);
+                entity.Property(e => e.Ulica).HasMaxLength(200);
             });
 
             modelBuilder.Entity<Czesci>(entity =>
