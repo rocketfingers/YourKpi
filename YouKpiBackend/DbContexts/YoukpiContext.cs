@@ -550,26 +550,21 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<OfferLineProcess>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.OfferLineId).HasColumnName("OFFER_LINE_ID");
-
                 entity.Property(e => e.ProcessId)
                     .IsRequired()
-                    .HasColumnName("PROCESS_ID")
                     .HasMaxLength(30);
 
                 entity.HasOne(d => d.OfferLine)
                     .WithMany(p => p.OfferLineProcess)
                     .HasForeignKey(d => d.OfferLineId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OfferLine__OFFER__40058253");
+                    .HasConstraintName("FK__OfferLine__Offer__2F2FFC0C");
 
                 entity.HasOne(d => d.Process)
                     .WithMany(p => p.OfferLineProcess)
                     .HasForeignKey(d => d.ProcessId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OfferLine__PROCE__09746778");
+                    .HasConstraintName("FK__OfferLine__Proce__30242045");
             });
 
             modelBuilder.Entity<OfferLines>(entity =>
