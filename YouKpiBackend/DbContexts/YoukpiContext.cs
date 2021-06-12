@@ -390,56 +390,40 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<MagazynTowary>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.CenaJdnNetto).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.CenaJdnNetto)
-                    .HasColumnName("CENA_JDN_NETTO")
-                    .HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.DataPrzyjecia)
-                    .HasColumnName("DATA_PRZYJECIA")
-                    .HasColumnType("datetime");
+                entity.Property(e => e.DataPrzyjecia).HasColumnType("datetime");
 
                 entity.Property(e => e.ElementId)
-                    .HasColumnName("ELEMENT_ID")
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Ilosc).HasColumnName("ILOSC");
-
                 entity.Property(e => e.Jednostka)
-                    .HasColumnName("JEDNOSTKA")
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                entity.Property(e => e.KontrahentId).HasColumnName("KONTRAHENT_ID");
-
-                entity.Property(e => e.LokacjaId).HasColumnName("LOKACJA_ID");
-
                 entity.Property(e => e.Nazwa)
-                    .HasColumnName("NAZWA")
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
                 entity.Property(e => e.NrFakturyId)
-                    .HasColumnName("NR_FAKTURY_ID")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Element)
                     .WithMany(p => p.MagazynTowary)
                     .HasForeignKey(d => d.ElementId)
-                    .HasConstraintName("FK__MagazynTo__ELEME__3F9B6DFF");
+                    .HasConstraintName("FK__MagazynTo__Eleme__23BE4960");
 
                 entity.HasOne(d => d.Kontrahent)
                     .WithMany(p => p.MagazynTowary)
                     .HasForeignKey(d => d.KontrahentId)
-                    .HasConstraintName("FK__MagazynTo__KONTR__025D5595");
+                    .HasConstraintName("FK__MagazynTo__Kontr__24B26D99");
 
                 entity.HasOne(d => d.Lokacja)
                     .WithMany(p => p.MagazynTowary)
                     .HasForeignKey(d => d.LokacjaId)
-                    .HasConstraintName("FK__MagazynTo__LOKAC__090A5324");
+                    .HasConstraintName("FK__MagazynTo__Lokac__25A691D2");
             });
 
             modelBuilder.Entity<Maszyny>(entity =>
