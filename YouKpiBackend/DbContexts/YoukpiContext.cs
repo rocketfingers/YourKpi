@@ -558,7 +558,7 @@ namespace YouKpiBackend.DbContexts
                     .WithMany(p => p.OfferLineProcess)
                     .HasForeignKey(d => d.OfferLineId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OfferLine__Offer__2F2FFC0C");
+                    .HasConstraintName("FK__OfferLine__Offer__34E8D562");
 
                 entity.HasOne(d => d.Process)
                     .WithMany(p => p.OfferLineProcess)
@@ -569,13 +569,9 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<OfferLines>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
                 entity.Property(e => e.Medium).HasMaxLength(150);
 
                 entity.Property(e => e.PriceInOfferDay).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.ProductId).HasColumnName("PRODUCT_ID");
 
                 entity.Property(e => e.Sale).HasMaxLength(50);
 
@@ -586,12 +582,12 @@ namespace YouKpiBackend.DbContexts
                 entity.HasOne(d => d.Offer)
                     .WithMany(p => p.OfferLines)
                     .HasForeignKey(d => d.OfferId)
-                    .HasConstraintName("FK__OfferLine__Offer__32767D0B");
+                    .HasConstraintName("FK__OfferLine__Offer__33008CF0");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OfferLines)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__OfferLine__PRODU__64CCF2AE");
+                    .HasConstraintName("FK__OfferLine__Produ__33F4B129");
             });
 
             modelBuilder.Entity<OfferProcess>(entity =>
