@@ -54,7 +54,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Produkty.Select(x => new StoreElementSimpleViewModel(x.Id.ToString(), x.ProductId, x.Cena)).ToListAsync();
+                var res = await _ctx.Produkty.Select(x => new StoreElementSimpleViewModel(x.Id.ToString(), x.ProductName, x.Cena)).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
@@ -71,7 +71,7 @@ namespace YouKpiBackend.Controllers
                 var res = await _ctx.Produkty.Select(p => new ProductSimpleViewModel()
                 {
                     Id = p.Id,
-                    Name = p.ProductId
+                    Name = p.ProductName
                 }).ToListAsync();
                 return Ok(res);
             }

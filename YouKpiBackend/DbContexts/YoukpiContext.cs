@@ -1027,8 +1027,7 @@ namespace YouKpiBackend.DbContexts
 
                 entity.Property(e => e.Pn).HasColumnName("PN");
 
-                entity.Property(e => e.ProductId)
-                    .HasColumnName("PRODUCT_ID")
+                entity.Property(e => e.ProductName)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 

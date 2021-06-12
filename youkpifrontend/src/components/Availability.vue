@@ -206,7 +206,7 @@ export default {
       headers: [
         // { text: 'Id', value: 'id', visible: true },
         { text: 'Rozwiń', value: 'expand', visible: true },
-        { text: 'ProductID', value: 'productId', visible: true },
+        { text: 'ProductID', value: 'productName', visible: true },
         { text: 'W', value: 'w', visible: true },
         { text: 'Medium', value: 'medium', visible: true },
         { text: 'Dodatkowe wyposażenie', value: 'additionalEquipment', visible: true },
