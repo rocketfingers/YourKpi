@@ -330,31 +330,15 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<MagazynProdukty>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.CenaJdnNetto).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.CenaJdnNetto)
-                    .HasColumnName("CENA_JDN_NETTO")
-                    .HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.DataPrzyjecia)
-                    .HasColumnName("DATA_PRZYJECIA")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.ElementId).HasColumnName("ELEMENT_ID");
-
-                entity.Property(e => e.Ilosc).HasColumnName("ILOSC");
+                entity.Property(e => e.DataPrzyjecia).HasColumnType("datetime");
 
                 entity.Property(e => e.Jednostka)
-                    .HasColumnName("JEDNOSTKA")
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                entity.Property(e => e.KontrahentId).HasColumnName("KONTRAHENT_ID");
-
-                entity.Property(e => e.LokacjaId).HasColumnName("LOKACJA_ID");
-
                 entity.Property(e => e.NrFakturyId)
-                    .HasColumnName("NR_FAKTURY_ID")
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
