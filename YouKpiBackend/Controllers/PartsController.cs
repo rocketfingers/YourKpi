@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
-using YouKpiBackend.Extensions;
+using YouKpiBackend.Helpers.Extensions;
 using YouKpiBackend.ModelsEntity;
 using YouKpiBackend.ViewModels.Store;
 
