@@ -158,6 +158,18 @@
          "ObjectType": 0
       },
       {
+         "Name": "[log].[NLogAllErrors]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[log].[NLogAsp]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[log].[NLogOwn]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[ProdExe]",
          "ObjectType": 3
       },

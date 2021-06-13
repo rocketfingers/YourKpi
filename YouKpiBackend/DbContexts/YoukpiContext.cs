@@ -34,6 +34,9 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<MozliwyDn> MozliwyDn { get; set; }
         public virtual DbSet<MozliwyOrderType> MozliwyOrderType { get; set; }
         public virtual DbSet<MożliwaGrupaProcesu> MożliwaGrupaProcesu { get; set; }
+        public virtual DbSet<NlogAllErrors> NlogAllErrors { get; set; }
+        public virtual DbSet<NlogAsp> NlogAsp { get; set; }
+        public virtual DbSet<NlogOwn> NlogOwn { get; set; }
         public virtual DbSet<Offer> Offer { get; set; }
         public virtual DbSet<OfferLineProcess> OfferLineProcess { get; set; }
         public virtual DbSet<OfferLines> OfferLines { get; set; }
@@ -507,6 +510,95 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(40)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<NlogAllErrors>(entity =>
+            {
+                entity.ToTable("NLogAllErrors", "log");
+
+                entity.Property(e => e.Application)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Callsite).IsUnicode(false);
+
+                entity.Property(e => e.Exception).IsUnicode(false);
+
+                entity.Property(e => e.Ip)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Level)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Logged).HasColumnType("datetime");
+
+                entity.Property(e => e.Message).IsUnicode(false);
+
+                entity.Property(e => e.User)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<NlogAsp>(entity =>
+            {
+                entity.ToTable("NLogAsp", "log");
+
+                entity.Property(e => e.Application)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Ip)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Level)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Logged).HasColumnType("datetime");
+
+                entity.Property(e => e.Message).IsUnicode(false);
+
+                entity.Property(e => e.StatusCode)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Url)
+                    .HasMaxLength(5000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.User)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<NlogOwn>(entity =>
+            {
+                entity.ToTable("NLogOwn", "log");
+
+                entity.Property(e => e.Application)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Callsite).IsUnicode(false);
+
+                entity.Property(e => e.Ip)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Level)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Logged).HasColumnType("datetime");
+
+                entity.Property(e => e.Message).IsUnicode(false);
+
+                entity.Property(e => e.User)
+                    .HasMaxLength(500)
                     .IsUnicode(false);
             });
 
@@ -1102,7 +1194,6 @@ namespace YouKpiBackend.DbContexts
 
                 entity.Property(e => e.ProcessId)
                     .IsRequired()
-                    .HasColumnName("PROCESS_ID")
                     .HasMaxLength(30);
 
                 entity.Property(e => e.StepShouldEndBeforeDays).HasColumnName("stepShouldEndBeforeDays");

@@ -10,7 +10,7 @@ using YouKpiBackend.DbContexts;
 namespace YouKpiBackend.Migrations
 {
     [DbContext(typeof(YoukpiContext))]
-    [Migration("20210612182230_Initial")]
+    [Migration("20210613192122_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -687,6 +687,145 @@ namespace YouKpiBackend.Migrations
                         .HasColumnType("varchar(40)");
 
                     b.ToTable("MożliwaGrupaProcesu");
+                });
+
+            modelBuilder.Entity("YouKpiBackend.ModelsEntity.NlogAllErrors", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Application")
+                        .HasMaxLength(500)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<string>("Callsite")
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<string>("Exception")
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<string>("Ip")
+                        .HasMaxLength(30)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("Level")
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime?>("Logged")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Message")
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<string>("User")
+                        .HasMaxLength(500)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NLogAllErrors", "log");
+                });
+
+            modelBuilder.Entity("YouKpiBackend.ModelsEntity.NlogAsp", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Application")
+                        .HasMaxLength(500)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<string>("Ip")
+                        .HasMaxLength(30)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("Level")
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime?>("Logged")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Message")
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<string>("StatusCode")
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("Url")
+                        .HasMaxLength(5000)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(5000)");
+
+                    b.Property<string>("User")
+                        .HasMaxLength(500)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NLogAsp", "log");
+                });
+
+            modelBuilder.Entity("YouKpiBackend.ModelsEntity.NlogOwn", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Application")
+                        .HasMaxLength(500)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(500)");
+
+                    b.Property<string>("Callsite")
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<string>("Ip")
+                        .HasMaxLength(30)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("Level")
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime?>("Logged")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Message")
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
+
+                    b.Property<string>("User")
+                        .HasMaxLength(500)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NLogOwn", "log");
                 });
 
             modelBuilder.Entity("YouKpiBackend.ModelsEntity.Offer", b =>
@@ -1634,8 +1773,7 @@ namespace YouKpiBackend.Migrations
                     b.Property<string>("ProcessId")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasColumnName("PROCESS_ID");
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int>("Sekwencja")
                         .HasColumnType("int");
