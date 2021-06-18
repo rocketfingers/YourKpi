@@ -10,7 +10,7 @@ using YouKpiBackend.DbContexts;
 namespace YouKpiBackend.Migrations
 {
     [DbContext(typeof(YoukpiContext))]
-    [Migration("20210613192122_Initial")]
+    [Migration("20210618194548_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1177,98 +1177,6 @@ namespace YouKpiBackend.Migrations
                     b.ToTable("ProcessesProcess");
                 });
 
-            modelBuilder.Entity("YouKpiBackend.ModelsEntity.ProdExe", b =>
-                {
-                    b.Property<int>("CzasSpedzony")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Dn")
-                        .HasColumnType("int")
-                        .HasColumnName("DN");
-
-                    b.Property<string>("Id")
-                        .HasMaxLength(81)
-                        .HasColumnType("nvarchar(81)")
-                        .HasColumnName("id");
-
-                    b.Property<int?>("IdentyfikatorWyrobu")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IdentyfikatorZamowienia")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int?>("IloscStepow")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IloscWyrobow")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Klient")
-                        .HasMaxLength(150)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<string>("NazwaProcesu")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("NumerKlienta")
-                        .HasMaxLength(20)
-                        .IsUnicode(false)
-                        .HasColumnType("char(20)")
-                        .IsFixedLength(true);
-
-                    b.Property<int>("OfferId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("OfferLineId")
-                        .HasColumnType("int")
-                        .HasColumnName("OfferLineID");
-
-                    b.Property<DateTime?>("PlannedEnd")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("ProcessId")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasColumnName("processId");
-
-                    b.Property<string>("TypProcesu")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(1)")
-                        .HasColumnName("typProcesu");
-
-                    b.Property<string>("TypWyrobu")
-                        .HasMaxLength(30)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(30)");
-
-                    b.Property<string>("Wersja")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)")
-                        .HasColumnName("wersja");
-
-                    b.Property<long?>("WierszOferty")
-                        .HasColumnType("bigint");
-
-                    b.Property<int?>("WykonaneStepy")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Wynik")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ZakonczenieData")
-                        .HasColumnType("datetime");
-
-                    b.ToView("ProdExe");
-                });
-
             modelBuilder.Entity("YouKpiBackend.ModelsEntity.ProduktCzesci", b =>
                 {
                     b.Property<int>("Id")
@@ -1786,6 +1694,98 @@ namespace YouKpiBackend.Migrations
                         .HasColumnName("stepShouldEndBeforeDays");
 
                     b.ToView("vOtifReport");
+                });
+
+            modelBuilder.Entity("YouKpiBackend.ModelsEntity.VProdExe", b =>
+                {
+                    b.Property<int>("CzasSpedzony")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Dn")
+                        .HasColumnType("int")
+                        .HasColumnName("DN");
+
+                    b.Property<string>("Id")
+                        .HasMaxLength(81)
+                        .HasColumnType("nvarchar(81)")
+                        .HasColumnName("id");
+
+                    b.Property<int?>("IdentyfikatorWyrobu")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdentyfikatorZamowienia")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("IloscStepow")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IloscWyrobow")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Klient")
+                        .HasMaxLength(150)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<string>("NazwaProcesu")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("NumerKlienta")
+                        .HasMaxLength(20)
+                        .IsUnicode(false)
+                        .HasColumnType("char(20)")
+                        .IsFixedLength(true);
+
+                    b.Property<int>("OfferId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OfferLineId")
+                        .HasColumnType("int")
+                        .HasColumnName("OfferLineID");
+
+                    b.Property<DateTime?>("PlannedEnd")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ProcessId")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasColumnName("processId");
+
+                    b.Property<string>("TypProcesu")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(1)")
+                        .HasColumnName("typProcesu");
+
+                    b.Property<string>("TypWyrobu")
+                        .HasMaxLength(30)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("Wersja")
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)")
+                        .HasColumnName("wersja");
+
+                    b.Property<long?>("WierszOferty")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("WykonaneStepy")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Wynik")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ZakonczenieData")
+                        .HasColumnType("datetime");
+
+                    b.ToView("ProdExe");
                 });
 
             modelBuilder.Entity("YouKpiBackend.ModelsEntity.Czesci", b =>

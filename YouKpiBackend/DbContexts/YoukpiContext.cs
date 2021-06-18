@@ -46,7 +46,7 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<PracownikProcess> PracownikProcess { get; set; }
         public virtual DbSet<Process> Process { get; set; }
         public virtual DbSet<ProcessesProcess> ProcessesProcess { get; set; }
-        public virtual DbSet<ProdExe> ProdExe { get; set; }
+        public virtual DbSet<VProdExe> VProdExe { get; set; }
         public virtual DbSet<ProduktCzesci> ProduktCzesci { get; set; }
         public virtual DbSet<Produkty> Produkty { get; set; }
         public virtual DbSet<Projects> Projects { get; set; }
@@ -830,11 +830,11 @@ namespace YouKpiBackend.DbContexts
                     .HasConstraintName("FK_ProcessesRelatedProcess");
             });
 
-            modelBuilder.Entity<ProdExe>(entity =>
+            modelBuilder.Entity<VProdExe>(entity =>
             {
                 entity.HasNoKey();
 
-                entity.ToView("ProdExe");
+                entity.ToView("vProdExe");
 
                 entity.Property(e => e.Dn).HasColumnName("DN");
 
