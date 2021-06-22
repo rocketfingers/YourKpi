@@ -55,24 +55,24 @@ namespace YouKpiBackend.BusinessLibrary
         public async Task<UserPrepareTokenModel> Authenticate(string login, string password)
         {
             var hashedPassword = password.HashSha256();
-            var prac = await _context.Pracownik.FirstOrDefaultAsync(p => p.Login == login);
-            if (prac == null)
+            var pass = await _context.Pracownik.Where(p => p.Login == login).Select(p => p.Password).SingleOrDefaultAsync();
+            if (pass == null)
             {
                 throw new BadLoginOrPasswordException();
             }
-            if (prac.Password != hashedPassword)
+            if (pass != hashedPassword)
             {
                 throw new BadLoginOrPasswordException();
             }
-
-            UserPrepareTokenModel userModel = new UserPrepareTokenModel()
+            // nie trzeba sprawdzac null, bo juz byl
+            UserPrepareTokenModel userModel = await _context.Pracownik.Where(p => p.Login == login).Select( prac => new UserPrepareTokenModel
             {
                 Id = prac.Id,
                 Login = prac.Login,
                 Email = prac.Email,
                 IsAdministrator = prac.IsAdministrator,
                 Name = prac.Name
-            };
+            }).FirstOrDefaultAsync();
 
             return userModel;
         }
