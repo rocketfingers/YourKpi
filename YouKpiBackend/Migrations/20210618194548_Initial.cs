@@ -1138,125 +1138,125 @@ namespace YouKpiBackend.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "BusiessArea");
+            //    migrationBuilder.DropTable(
+            //        name: "BusiessArea");
 
-            migrationBuilder.DropTable(
-                name: "CompanyBasicInfo");
+            //    migrationBuilder.DropTable(
+            //        name: "CompanyBasicInfo");
 
-            migrationBuilder.DropTable(
-                name: "MagazynCzesci");
+            //    migrationBuilder.DropTable(
+            //        name: "MagazynCzesci");
 
-            migrationBuilder.DropTable(
-                name: "MagazynKomponenty");
+            //    migrationBuilder.DropTable(
+            //        name: "MagazynKomponenty");
 
-            migrationBuilder.DropTable(
-                name: "MagazynProdukty");
+            //    migrationBuilder.DropTable(
+            //        name: "MagazynProdukty");
 
-            migrationBuilder.DropTable(
-                name: "MagazynProduktyNiezgodne");
+            //    migrationBuilder.DropTable(
+            //        name: "MagazynProduktyNiezgodne");
 
-            migrationBuilder.DropTable(
-                name: "MagazynTowary");
+            //    migrationBuilder.DropTable(
+            //        name: "MagazynTowary");
 
-            migrationBuilder.DropTable(
-                name: "MozliweStatusyOferty");
+            //    migrationBuilder.DropTable(
+            //        name: "MozliweStatusyOferty");
 
-            migrationBuilder.DropTable(
-                name: "MozliwyDN");
+            //    migrationBuilder.DropTable(
+            //        name: "MozliwyDN");
 
-            migrationBuilder.DropTable(
-                name: "MozliwyOrderType");
+            //    migrationBuilder.DropTable(
+            //        name: "MozliwyOrderType");
 
-            migrationBuilder.DropTable(
-                name: "MożliwaGrupaProcesu");
+            //    migrationBuilder.DropTable(
+            //        name: "MożliwaGrupaProcesu");
 
-            migrationBuilder.DropTable(
-                name: "NLogAllErrors",
-                schema: "log");
+            //    migrationBuilder.DropTable(
+            //        name: "NLogAllErrors",
+            //        schema: "log");
 
-            migrationBuilder.DropTable(
-                name: "NLogAsp",
-                schema: "log");
+            //    migrationBuilder.DropTable(
+            //        name: "NLogAsp",
+            //        schema: "log");
 
-            migrationBuilder.DropTable(
-                name: "NLogOwn",
-                schema: "log");
+            //    migrationBuilder.DropTable(
+            //        name: "NLogOwn",
+            //        schema: "log");
 
-            migrationBuilder.DropTable(
-                name: "OfferLineProcess");
+            //    migrationBuilder.DropTable(
+            //        name: "OfferLineProcess");
 
-            migrationBuilder.DropTable(
-                name: "OfferProcess");
+            //    migrationBuilder.DropTable(
+            //        name: "OfferProcess");
 
-            migrationBuilder.DropTable(
-                name: "PracownikCzasStep");
+            //    migrationBuilder.DropTable(
+            //        name: "PracownikCzasStep");
 
-            migrationBuilder.DropTable(
-                name: "PracownikProcess");
+            //    migrationBuilder.DropTable(
+            //        name: "PracownikProcess");
 
-            migrationBuilder.DropTable(
-                name: "ProcessesProcess");
+            //    migrationBuilder.DropTable(
+            //        name: "ProcessesProcess");
 
-            migrationBuilder.DropTable(
-                name: "ProduktCzesci");
+            //    migrationBuilder.DropTable(
+            //        name: "ProduktCzesci");
 
-            migrationBuilder.DropTable(
-                name: "Projects");
+            //    migrationBuilder.DropTable(
+            //        name: "Projects");
 
-            migrationBuilder.DropTable(
-                name: "StepOfferWykonanie");
+            //    migrationBuilder.DropTable(
+            //        name: "StepOfferWykonanie");
 
-            migrationBuilder.DropTable(
-                name: "StepsMachines");
+            //    migrationBuilder.DropTable(
+            //        name: "StepsMachines");
 
-            migrationBuilder.DropTable(
-                name: "TypWyrobu");
+            //    migrationBuilder.DropTable(
+            //        name: "TypWyrobu");
 
-            migrationBuilder.DropTable(
-                name: "TypWyrobuIdDn");
+            //    migrationBuilder.DropTable(
+            //        name: "TypWyrobuIdDn");
 
-            migrationBuilder.DropTable(
-                name: "Towary");
+            //    migrationBuilder.DropTable(
+            //        name: "Towary");
 
-            migrationBuilder.DropTable(
-                name: "Kontrahent");
+            //    migrationBuilder.DropTable(
+            //        name: "Kontrahent");
 
-            migrationBuilder.DropTable(
-                name: "Lokacja");
+            //    migrationBuilder.DropTable(
+            //        name: "Lokacja");
 
-            migrationBuilder.DropTable(
-                name: "OfferLines");
+            //    migrationBuilder.DropTable(
+            //        name: "OfferLines");
 
-            migrationBuilder.DropTable(
-                name: "Czesci");
+            //    migrationBuilder.DropTable(
+            //        name: "Czesci");
 
-            migrationBuilder.DropTable(
-                name: "ReasonCodes");
+            //    migrationBuilder.DropTable(
+            //        name: "ReasonCodes");
 
-            migrationBuilder.DropTable(
-                name: "Maszyny");
+            //    migrationBuilder.DropTable(
+            //        name: "Maszyny");
 
-            migrationBuilder.DropTable(
-                name: "Steps");
+            //    migrationBuilder.DropTable(
+            //        name: "Steps");
 
-            migrationBuilder.DropTable(
-                name: "Offer");
+            //    migrationBuilder.DropTable(
+            //        name: "Offer");
 
-            migrationBuilder.DropTable(
-                name: "Produkty");
+            //    migrationBuilder.DropTable(
+            //        name: "Produkty");
 
-            migrationBuilder.DropTable(
-                name: "Komponenty");
+            //    migrationBuilder.DropTable(
+            //        name: "Komponenty");
 
-            migrationBuilder.DropTable(
-                name: "Process");
+            //    migrationBuilder.DropTable(
+            //        name: "Process");
 
-            migrationBuilder.DropTable(
-                name: "Client");
+            //    migrationBuilder.DropTable(
+            //        name: "Client");
 
-            migrationBuilder.DropTable(
-                name: "Pracownik");
+            //    migrationBuilder.DropTable(
+            //        name: "Pracownik");
         }
     }
 }

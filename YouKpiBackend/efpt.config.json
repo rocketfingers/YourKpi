@@ -170,7 +170,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[ProdExe]",
+         "Name": "[dbo].[vProdExe]",
          "ObjectType": 3
       },
       {
