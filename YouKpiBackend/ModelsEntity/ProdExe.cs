@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace YouKpiBackend.ModelsEntity
 {
-    public partial class ProdExe
+    public partial class VProdExe
     {
         public string Id { get; set; }
         public string TypProcesu { get; set; }
