@@ -23,7 +23,7 @@ namespace YouKpiBackend.BusinessLibrary
         {
             _context = context;
         }
-        public string BuildToken(LoginResponseViewModel user)
+        public string BuildToken(UserPrepareTokenModel user)
         {
             var claims = new List<Claim>
             {
@@ -52,27 +52,27 @@ namespace YouKpiBackend.BusinessLibrary
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        public async Task<LoginResponseViewModel> Authenticate(LoginRequestViewModel login)
+        public async Task<UserPrepareTokenModel> Authenticate(string login, string password)
         {
-            var hashedPassword = login.Password.HashSha256();
-            var prac = await _context.Pracownik.FirstOrDefaultAsync(p => p.Login == login.Login);
-            if (prac == null)
+            var hashedPassword = password.HashSha256();
+            var pass = await _context.Pracownik.Where(p => p.Login == login).Select(p => p.Password).SingleOrDefaultAsync();
+            if (pass == null)
             {
                 throw new BadLoginOrPasswordException();
             }
-            if (prac.Password != hashedPassword)
+            if (pass != hashedPassword)
             {
                 throw new BadLoginOrPasswordException();
             }
-
-            LoginResponseViewModel userModel = new LoginResponseViewModel()
+            // nie trzeba sprawdzac null, bo juz byl
+            UserPrepareTokenModel userModel = await _context.Pracownik.Where(p => p.Login == login).Select( prac => new UserPrepareTokenModel
             {
                 Id = prac.Id,
                 Login = prac.Login,
                 Email = prac.Email,
                 IsAdministrator = prac.IsAdministrator,
                 Name = prac.Name
-            };
+            }).FirstOrDefaultAsync();
 
             return userModel;
         }

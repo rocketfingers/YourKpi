@@ -196,7 +196,7 @@ export default {
       getAllPartsApi: 'api/Parts/GetAll',
 
       headers: [
-        { text: 'Id', value: 'productId' },
+        { text: 'Id', value: 'productName' },
         { text: 'Typ wyrobu id', value: 'typWyrobuId' },
         { text: 'NumerRysNorma', value: 'numerRysNorma' },
         { text: 'DN', value: 'dn' },

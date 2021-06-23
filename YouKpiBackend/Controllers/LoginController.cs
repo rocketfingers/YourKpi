@@ -53,7 +53,7 @@ namespace YouKpiBackend.Controllers
             try
             {
 
-                var user =  await _userLibrary.Authenticate(model);
+                var user =  await _userLibrary.Authenticate(model.Login, model.Password);
                 _logger.LogInformation($"Logged user id: {user.Id}, name: {user.Name}");
                 var token = _userLibrary.BuildToken(user);             
 

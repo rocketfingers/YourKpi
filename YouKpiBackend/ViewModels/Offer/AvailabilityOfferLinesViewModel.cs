@@ -7,7 +7,7 @@ namespace YouKpiBackend.ViewModels.Offer
     {
         public int Id { get; set; }
         public int? OfferId { get; set; }
-        public string ProductId { get; set; }
+        public string ProductName { get; set; }
         public int Quantity { get; set; }
         public string W { get; set; }
         public string Medium { get; set; }

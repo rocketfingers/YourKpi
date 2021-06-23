@@ -9,7 +9,17 @@ namespace YouKpiBackend.Helpers.Extensions
 {
     public static class StringExtensions
     {
-        public static string HashSha256(this string str)
+        /// <summary>Remove new lines in string and trim
+        /// </summary>
+        public static string RmNlTrim(this String oldString)
+        {
+            var newString = oldString.Replace("\n", "");
+            newString = newString.Trim();
+
+            return newString;
+        }
+    
+    public static string HashSha256(this string str)
         {
             using (SHA256 algorithm = SHA256.Create())
             {

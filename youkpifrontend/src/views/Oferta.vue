@@ -368,7 +368,7 @@ export default {
         .then(Response => {
           this.products = Response.data
           this.products.forEach(p => {
-            p.showName = p.id + ', ' + p.productId
+            p.showName = p.id + ', ' + p.productName
           })
           this.getOffer()
         })

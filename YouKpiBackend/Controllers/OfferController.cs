@@ -186,7 +186,7 @@ namespace YouKpiBackend.Controllers
                             OfferId = offerLine.OfferId,
                             Parts = availabilityParts,
                             PriceInOfferDay = offerLine.PriceInOfferDay,
-                            ProductId = offerLine.Product.ProductId.ToString(),
+                            ProductName = offerLine.Product.ProductName.ToString(),
                             Quantity = offerLine.Quantity,
                             W = offerLine.W,
                             Status = productStatus

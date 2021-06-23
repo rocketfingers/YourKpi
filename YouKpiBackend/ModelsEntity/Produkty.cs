@@ -23,8 +23,8 @@ namespace YouKpiBackend.ModelsEntity
         public string Uszczelnienie { get; set; }
         public decimal? Cena { get; set; }
         public string Waluta { get; set; }
-        public string ProductId { get; set; }
         public int Id { get; set; }
+        public string ProductName { get; set; }
 
         public virtual ICollection<MagazynProdukty> MagazynProdukty { get; set; }
         public virtual ICollection<MagazynProduktyNiezgodne> MagazynProduktyNiezgodne { get; set; }
