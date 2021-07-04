@@ -196,7 +196,7 @@ export default {
       getAllPartsApi: 'api/Parts/GetAll',
 
       headers: [
-        { text: 'Id', value: 'id' },
+        { text: 'Id', value: 'productName' },
         { text: 'Typ wyrobu id', value: 'typWyrobuId' },
         { text: 'NumerRysNorma', value: 'numerRysNorma' },
         { text: 'DN', value: 'dn' },
@@ -407,9 +407,9 @@ export default {
     },
     duplicateProduct (product) {
       if (this.saveProductAction()) {
-        this.showMsgText = 'Utworzono duplikat produktu: ' + product.id
+        this.showMsgText = 'Utworzono duplikat produktu: ' + product.productId
         var duplicatedProduct = JSON.parse(JSON.stringify(product))
-        duplicatedProduct.id = ''
+        duplicatedProduct.id = 0
         duplicatedProduct.produktCzesci.forEach(p => {
           p.id = 0
         })

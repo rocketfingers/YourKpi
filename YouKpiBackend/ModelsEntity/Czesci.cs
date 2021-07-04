@@ -18,9 +18,12 @@ namespace YouKpiBackend.ModelsEntity
         public string GatPodstawowy { get; set; }
         public string NumerRysNorma { get; set; }
         public string Wymiary { get; set; }
-        public int? KomponentId { get; set; }
         public decimal? Tpz { get; set; }
         public decimal? Tj { get; set; }
+        public string NumerProgramu { get; set; }
+        public int? CzasProgramisty { get; set; }
+        public int? KomponentId { get; set; }
+        public string Wykonanie { get; set; }
 
         public virtual Komponenty Komponent { get; set; }
         public virtual ICollection<MagazynCzesci> MagazynCzesci { get; set; }

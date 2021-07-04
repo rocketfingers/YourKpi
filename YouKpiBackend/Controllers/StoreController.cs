@@ -33,10 +33,10 @@ namespace YouKpiBackend.Controllers
             {
                 var lst = new List<StoreElementViewModel>();
                 lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynCzesci.ToListAsync()));
-                lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynProdukty.ToListAsync()));
+                lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynProdukty.Include(p => p.Element).ToListAsync()));
                 lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynKomponenty.ToListAsync()));
                 lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynTowary.ToListAsync()));
-                lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynProduktyNiezgodne.ToListAsync()));
+                lst.AddRange(_mapper.Map<List<StoreElementViewModel>>(await _ctx.MagazynProduktyNiezgodne.Include(p => p.Element).ToListAsync()));
 
                 return Ok(lst);
             }
@@ -136,7 +136,12 @@ namespace YouKpiBackend.Controllers
                             item2.CenaJdnNetto = entity.CenaJdnNetto;
                             item2.DataPrzyjecia = entity.DataPrzyjecia;
                             item2.Element = null;
-                            item2.ElementId = entity.ElementId;
+                            int? elId = null;
+                            if (int.TryParse(entity.ElementId, out int res))
+                            {
+                                elId = res;
+                            }
+                            item2.ElementId = elId;
                             item2.Ilosc = entity.Ilosc;
                             item2.Jednostka = entity.Jednostka;
                             item2.Kontrahent = null;
@@ -198,7 +203,12 @@ namespace YouKpiBackend.Controllers
                             item5.CenaJdnNetto = entity.CenaJdnNetto;
                             item5.DataPrzyjecia = entity.DataPrzyjecia;
                             item5.Element = null;
-                            item5.ElementId = entity.ElementId;
+                            int? elId = null;
+                            if (int.TryParse(entity.ElementId, out int res))
+                            {
+                                elId = res;
+                            }
+                            item5.ElementId = elId;
                             item5.Ilosc = entity.Ilosc;
                             item5.Jednostka = entity.Jednostka;
                             item5.Kontrahent = null;

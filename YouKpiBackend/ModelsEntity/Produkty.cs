@@ -14,7 +14,6 @@ namespace YouKpiBackend.ModelsEntity
             ProduktCzesci = new HashSet<ProduktCzesci>();
         }
 
-        public string Id { get; set; }
         public string TypWyrobuId { get; set; }
         public string NumerRysNorma { get; set; }
         public int Dn { get; set; }
@@ -24,6 +23,8 @@ namespace YouKpiBackend.ModelsEntity
         public string Uszczelnienie { get; set; }
         public decimal? Cena { get; set; }
         public string Waluta { get; set; }
+        public int Id { get; set; }
+        public string ProductName { get; set; }
 
         public virtual ICollection<MagazynProdukty> MagazynProdukty { get; set; }
         public virtual ICollection<MagazynProduktyNiezgodne> MagazynProduktyNiezgodne { get; set; }

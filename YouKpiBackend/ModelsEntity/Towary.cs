@@ -13,8 +13,11 @@ namespace YouKpiBackend.ModelsEntity
 
         public string Id { get; set; }
         public string Nazwa { get; set; }
-        public decimal? Cena { get; set; }
-        public string Waluta { get; set; }
+        public int? ClientId { get; set; }
+        public string WalutaZakupu { get; set; }
+        public string WalutaSprzedazy { get; set; }
+        public decimal? CenaSprzedazy { get; set; }
+        public decimal? CenaZakupu { get; set; }
 
         public virtual ICollection<MagazynTowary> MagazynTowary { get; set; }
     }

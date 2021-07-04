@@ -16,6 +16,7 @@
                 <NewCommodity
                   :currentItem="currentItem"
                   :editMode="editMode"
+                  :customers="customers"
                   @editedProduct="editcurrentItemRes"
                 ></NewCommodity>
               </v-form>
@@ -128,13 +129,18 @@ export default {
       getAll: 'api/Commodity/GetAll',
       addApi: 'api/Commodity/Create',
       editApi: 'api/Commodity/Update',
+      getAllCustomersApi: 'api/Customer/GetAll',
       deleteApi: 'api/Commodity/Delete',
       getAllContractorsSimple: 'api/Contractor/GetAllSimpleView',
       getAllLocationsSimple: 'api/Loaction/GetAllSimpleView',
-
+      customers: [],
       headers: [
         { text: 'Id', value: 'id' },
         { text: 'Nazwa', value: 'nazwa' },
+        { text: 'Cena zakupu', value: 'cenaZakupu' },
+        { text: 'Waluta zakupu', value: 'walutaZakupu' },
+        { text: 'Cena sprzedaży', value: 'cenaSprzedazy' },
+        { text: 'Waluta sprzedaży', value: 'walutaSprzedazy' },
         { text: 'Akcje', value: 'actions' }
       ],
       items: [],
@@ -156,6 +162,7 @@ export default {
     initialise () {
       this.tableLoading = true
       this.getItems()
+      this.getCustomers()
     },
     getItems () {
       var $this = this
@@ -218,7 +225,16 @@ export default {
         .catch((e) => {
         })
     },
-
+    getCustomers () {
+      this.$http.get(this.getAllCustomersApi)
+        .then(Response => {
+          this.customers = Response.data
+          this.customers.forEach(p => {
+            p.showName = p.id + ', ' + p.name + ', ' + p.nip
+          })
+          this.getProducts()
+        })
+    },
     edit (item, index) {
       this.formTitle = 'Edytuj ' + item.idDifferenceReasonCode
       this.editMode = true

@@ -303,7 +303,7 @@ export default {
               case 2:
                 var item2 = $this.products.find(prod => prod.id === p.elementId)
                 if (item2) {
-                  p.nazwa = item2.id
+                  p.nazwa = item2.name
                 } else {
                   p.nazwa = ''
                 }
@@ -423,6 +423,9 @@ export default {
       this.showNewDialog = true
     },
     addAction (item) {
+      // if (item.magazyn.id === 2 || item.magazyn.id === 5) {
+      //   item.elementId = item.id
+      // }
       this.$http
         .post(this.addApi, item)
         .then((Result) => {

@@ -84,7 +84,7 @@ namespace YouKpiBackend.Controllers
                 foreach (var offerLine in offer.OfferLines)
                 {
                     var availabilityParts = new List<AvailabilityPartsViewModel>();
-                    var productParts = await _ctx.ProduktCzesci.Where(p => p.ProduktyId == offerLine.ProductId).Include(p => p.Czesci).ThenInclude(p => p.Komponent).ToListAsync();
+                    var productParts = await _ctx.ProduktCzesci.Where(p => p.Id == offerLine.ProductId).Include(p => p.Czesci).ThenInclude(p => p.Komponent).ToListAsync();
                     foreach (var part in productParts)
                     {
                         var requiredPartsNo = part.IloscSztuk;
@@ -186,7 +186,7 @@ namespace YouKpiBackend.Controllers
                             OfferId = offerLine.OfferId,
                             Parts = availabilityParts,
                             PriceInOfferDay = offerLine.PriceInOfferDay,
-                            ProductId = offerLine.ProductId,
+                            ProductName = offerLine.Product.ProductName.ToString(),
                             Quantity = offerLine.Quantity,
                             W = offerLine.W,
                             Status = productStatus

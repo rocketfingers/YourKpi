@@ -93,6 +93,7 @@ namespace YouKpiBackend.Controllers
                 client.NrBudynku = entity.NrBudynku;
                 client.NrTelefonu = entity.NrTelefonu;
                 client.Email = entity.Email;
+                client.OsobaKontaktowa = entity.OsobaKontaktowa;
 
                 await _ctx.SaveChangesAsync();
 

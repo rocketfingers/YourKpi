@@ -54,7 +54,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Produkty.Select(x => new StoreElementSimpleViewModel(x.Id, "", x.Cena)).ToListAsync();
+                var res = await _ctx.Produkty.Select(x => new StoreElementSimpleViewModel(x.Id.ToString(), x.ProductName, x.Cena)).ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
@@ -71,6 +71,7 @@ namespace YouKpiBackend.Controllers
                 var res = await _ctx.Produkty.Select(p => new ProductSimpleViewModel()
                 {
                     Id = p.Id,
+                    Name = p.ProductName
                 }).ToListAsync();
                 return Ok(res);
             }
@@ -105,7 +106,7 @@ namespace YouKpiBackend.Controllers
                 //entity.Id = tempId;
                 var res = _ctx.Produkty.Add(entity);
                 await _ctx.SaveChangesAsync();
-
+                entity.Id = res.Entity.Id;
                 return Created("", entity);
             }
             catch (Exception ex)
@@ -141,7 +142,7 @@ namespace YouKpiBackend.Controllers
                 entity.ProduktCzesci.ToList().ForEach(part =>
                 {
                     part.Czesci = null;
-                    part.ProduktyId = product.Id;
+                    part.Id = product.Id;
                     product.ProduktCzesci.Add(part);
                 });
                 await _ctx.SaveChangesAsync();
@@ -155,7 +156,7 @@ namespace YouKpiBackend.Controllers
         }
 
         [HttpDelete("[action]")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {

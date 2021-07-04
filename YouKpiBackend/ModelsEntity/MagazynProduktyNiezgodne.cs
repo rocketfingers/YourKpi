@@ -7,7 +7,7 @@ namespace YouKpiBackend.ModelsEntity
     public partial class MagazynProduktyNiezgodne
     {
         public int Id { get; set; }
-        public string ElementId { get; set; }
+        public int? ElementId { get; set; }
         public int? KontrahentId { get; set; }
         public DateTime? DataPrzyjecia { get; set; }
         public int? LokacjaId { get; set; }

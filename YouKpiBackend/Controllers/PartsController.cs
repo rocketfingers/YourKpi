@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
-using YouKpiBackend.Extensions;
+using YouKpiBackend.Helpers.Extensions;
 using YouKpiBackend.ModelsEntity;
 using YouKpiBackend.ViewModels.Store;
 
@@ -130,6 +130,8 @@ namespace YouKpiBackend.Controllers
                 component.ProcessId = entity.ProcessId;
                 component.KomponentId = entity.KomponentId;
                 component.Wymiar = entity.Wymiar;
+                component.Ltid = entity.Ltid;
+
 
                 await _dbContext.SaveChangesAsync();
             }
@@ -155,9 +157,13 @@ namespace YouKpiBackend.Controllers
                 part.KomponentId = entity.KomponentId;
                 part.Tpz = entity.Tpz;
                 part.Tj = entity.Tj;
-                part.Komponent = entity.Komponent;
-                part.Komponent.MagazynKomponenty = null;
-                part.Komponent.Czesci = null;
+                part.NumerProgramu = entity.NumerProgramu;
+                part.CzasProgramisty = entity.CzasProgramisty;
+                part.Wykonanie = entity.Wykonanie;
+
+                //part.Komponent = entity.Komponent;
+                //part.Komponent.MagazynKomponenty = null;
+                //part.Komponent.Czesci = null;
                 await _dbContext.SaveChangesAsync();
 
                 return NoContent();

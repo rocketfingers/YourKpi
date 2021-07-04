@@ -141,6 +141,7 @@ export default {
         { text: 'Numer budynku', value: 'nrBudynku' },
         { text: 'Numer telefonu', value: 'nrTelefonu' },
         { text: 'Email', value: 'email' },
+        { text: 'Osoba kontaktowa', value: 'osobaKontaktowa' },
         { text: 'Akcje', value: 'actions' }
       ],
       items: [],

@@ -59,6 +59,8 @@ namespace YouKpiBackend.BusinessLibrary.Offer
                 .Include(p => p.OfferProcess)
                 .Include(p => p.OfferLines)
                 .ThenInclude(p => p.OfferLineProcess)
+                .Include(p => p.OfferLines)
+                .ThenInclude(p => p.Product)
                 .Where(o => o.Id == id).FirstOrDefaultAsync();
             return res;
         }
@@ -142,7 +144,7 @@ namespace YouKpiBackend.BusinessLibrary.Offer
         private void DrawOfferLineRow(ref XGraphics gfx, ref int height, XFont regularFont, ref PdfPage page, OfferLines ol)
         {
             var actualRow = NewLine(ref height, 0, tableLineHeight);
-            gfx.DrawString(ol.ProductId, regularFont, XBrushes.Black, new XRect(NewColumn(actualRow, col1Pos), new XSize(col2Pos - col1Pos, tableLineHeight)), XStringFormats.TopLeft);
+            gfx.DrawString(ol.Product.ProductName.ToString(), regularFont, XBrushes.Black, new XRect(NewColumn(actualRow, col1Pos), new XSize(col2Pos - col1Pos, tableLineHeight)), XStringFormats.TopLeft);
             gfx.DrawString(ol.Quantity.ToString(), regularFont, XBrushes.Black, new XRect(NewColumn(actualRow, col2Pos), new XSize(col3Pos - col2Pos, tableLineHeight)), XStringFormats.TopLeft);
             gfx.DrawString(ol.W, regularFont, XBrushes.Black, new XRect(NewColumn(actualRow, col3Pos), new XSize(col4Pos - col3Pos, tableLineHeight)), XStringFormats.TopLeft);
             gfx.DrawString(ol.Medium, regularFont, XBrushes.Black, new XRect(NewColumn(actualRow, col4Pos), new XSize(col5Pos - col4Pos, tableLineHeight)), XStringFormats.TopLeft);
