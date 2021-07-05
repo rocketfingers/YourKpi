@@ -8,7 +8,7 @@ GO
 
 
 
-CREATE VIEW [dbo].[vActivityHistory]
+CREATE or alter VIEW [dbo].[vActivityHistory]
 AS
 SELECT p.Id AS PracownikId, p.Name AS PracownikName, pro.Id AS ProcessId, pro.NazwaProcesu AS ProcessName, pcs.CzasStart, ISNULL(pcs.CzasStop, GETDATE()) AS CzasStop, cl.ID AS ClientsId, cl.Name AS Client, c.Id AS PartId, 
                   c.Nazwa AS PartName, prod.ProductName AS WyrobId, ol.Quantity AS IloscCzesci
