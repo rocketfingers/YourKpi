@@ -8,9 +8,8 @@
               outlined
               color
               label="Id"
-              :disabled="editMode"
+              disabled
               required
-              :rules="[requiredRule]"
               v-model="currentProduct.id"
             ></v-text-field>
           </v-flex>
