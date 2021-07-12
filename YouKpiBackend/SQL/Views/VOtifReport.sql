@@ -6,7 +6,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE VIEW [dbo].[vOtifReport]
+CREATE or alter VIEW [dbo].[vOtifReport]
 AS
 SELECT o.PlannedEnd AS plannedEndOffer, olp.ProcessId, p.NazwaProcesu, s.StepNum, s.Sekwencja, COALESCE (sow.ClosedOn, GETDATE()) AS ClosedOn, p.NazwaGrupyProcesu,
                       (SELECT COALESCE(SUM(Sekwencja), 0) AS Expr1

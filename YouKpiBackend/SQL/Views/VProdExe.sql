@@ -6,11 +6,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE VIEW [dbo].[vProdExe]
+CREATE or alter VIEW [dbo].[vProdExe]
 AS
 
 SELECT pro.Id + '-' + cast(ol.id AS varchar(50)) AS id, 'O' as typProcesu, ol.Id AS OfferLineID, o.Id AS OfferId, o.Name AS IdentyfikatorZamowienia, pro.id AS processId, ROW_NUMBER() OVER (PARTITION BY ol.OfferId, pro.id
-ORDER BY ol.id) AS WierszOferty, c.Name AS Klient, c.NIp AS NumerKlienta, o.PlannedEnd, pro.NazwaProcesu, getdate() AS ZakonczenieData, DATEDIFF(day, GETDATE(), o.plannedEnd) AS Wynik, prod.Id AS IdentyfikatorWyrobu, 
+ORDER BY ol.id) AS WierszOferty, c.Name AS Klient, c.NIp AS NumerKlienta, o.PlannedEnd, pro.NazwaProcesu, getdate() AS ZakonczenieData, DATEDIFF(day, GETDATE(), o.plannedEnd) AS Wynik, prod.ProductName AS IdentyfikatorWyrobu, 
 prod.[TypWyrobuId] AS TypWyrobu, typ.dn AS DN, ol.[Quantity] AS IloscWyrobow, prod.wersja AS wersja, CzasSpedzony = isnull
     ((SELECT sum([LiczbaMinut])
       FROM      [dbo].[PracownikCzasStep]
@@ -32,7 +32,7 @@ FROM     Offer o LEFT JOIN
 WHERE  o.Status = 'otwarte' AND ol.ID IS NOT NULL
 UNION ALL
 SELECT olp.ProcessId + '-' + cast(ol.id AS varchar(50)) AS id, pro.TypZlecenia as typProcesu , ol.Id AS OfferLineID, o.Id AS OfferId, o.Name AS IdentyfikatorZamowienia, olp.ProcessId AS processId, ROW_NUMBER() OVER (PARTITION BY ol.OfferId, pro.id
-ORDER BY ol.id) AS WierszOferty, c.Name AS Klient, c.NIp AS NumerKlienta, o.PlannedEnd, pro.NazwaProcesu, getdate() AS ZakonczenieData, DATEDIFF(day, GETDATE(), o.plannedEnd) AS Wynik, prod.Id AS IdentyfikatorWyrobu, 
+ORDER BY ol.id) AS WierszOferty, c.Name AS Klient, c.NIp AS NumerKlienta, o.PlannedEnd, pro.NazwaProcesu, getdate() AS ZakonczenieData, DATEDIFF(day, GETDATE(), o.plannedEnd) AS Wynik, prod.ProductName AS IdentyfikatorWyrobu, 
 prod.[TypWyrobuId] AS TypWyrobu, typ.dn AS DN, ol.[Quantity] AS IloscWyrobow, prod.wersja AS wersja, CzasSpedzony = isnull
     ((SELECT sum([LiczbaMinut])
       FROM      [dbo].[PracownikCzasStep]

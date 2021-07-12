@@ -4,41 +4,24 @@
       <v-flex xs5>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-layout row wrap>
-              <v-text-field
-                outlined
-                color
-                label="Id"
-                :disabled="editMode"
-                required
-                :rules="[requiredRule]"
-                @input="selectedSuffix = null"
-                v-model="currentProduct.productId"
-              ></v-text-field>
-              <v-flex xs1> </v-flex>
-              <v-autocomplete
-                outlined
-                color
-                label="Suffix"
-                :items="[
-                  'ANSI600',
-                  'CL150',
-                  'METAL',
-                  'L200',
-                  'L100',
-                  'H300',
-                  'WR',
-                  'BR',
-                  'PEEK',
-                ]"
-                required
-                @change="
-                  currentProduct.productId =
-                    currentProduct.productId + '.' + selectedSuffix
-                "
-                v-model="selectedSuffix"
-              ></v-autocomplete>
-            </v-layout>
+            <v-text-field
+              outlined
+              color
+              label="Id"
+              disabled
+              required
+              v-model="currentProduct.id"
+            ></v-text-field>
+          </v-flex>
+          <v-flex xs12>
+            <v-text-field
+              outlined
+              color
+              label="Nazwa"
+              required
+              :rules="[requiredRule]"
+              v-model="currentProduct.productName"
+            ></v-text-field>
           </v-flex>
           <v-flex xs12>
             <v-autocomplete
@@ -160,6 +143,30 @@
                   autocomplete
                 ></v-autocomplete>
               </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  outlined
+                  color
+                  type="number"
+                  min="-196"
+                  max="-20"
+                  :rules="[minRule]"
+                  label="Temp min"
+                  v-model="currentProduct.tempMin"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  outlined
+                  color
+                  type="number"
+                  min="120"
+                  max="500"
+                  :rules="[maxRule]"
+                  label="Temp max"
+                  v-model="currentProduct.TempMax"
+                ></v-text-field>
+              </v-flex>
             </v-layout>
           </v-flex>
         </v-layout>
@@ -193,13 +200,23 @@ export default {
   },
   data () {
     return {
-      selectedSuffix: '',
       requiredRule: (v) => !!v || 'To pole jest wymagane',
       numberRule: val => {
         if (val < 0) return 'Wprowadź wartość dodatnią'
         return true
       },
-
+      minRule: val => {
+        if (val < -196 || val > -20) return 'Wprowadź wartość pomiędzy -196, a -20'
+        return true
+      },
+      maxRule: val => {
+        if (val < 120 || val > 500) return 'Wprowadź wartość pomiędzy 120 a 500'
+        return true
+      },
+      intRule: val => {
+        if (val.includes(',') || val.includes('.')) return 'Wprowadź wartość całkowitą'
+        return true
+      },
       priceRule: val => {
         if (val < 0) return 'Wprowadz dodatnia wartosc'
         if (val > 500000) return 'Maksymalna wartość: 500 000'
@@ -218,7 +235,7 @@ export default {
   methods: {
     async duplicateProduct (product) {
       var res = await this.$dialog.confirm({
-        text: 'Czy na pewno chcesz utworzyć duplikat dla:  ' + product.productId + '? (aktualny produkt zostanie zapisany, zostaniesz przeniesiony do duplikatu)',
+        text: 'Czy na pewno chcesz utworzyć duplikat dla:  ' + product.id + '? (aktualny produkt zostanie zapisany, zostaniesz przeniesiony do duplikatu)',
         title: 'Uwaga'
       })
       if (res) {
