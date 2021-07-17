@@ -12,14 +12,13 @@ using Microsoft.Extensions.Hosting;
 
 namespace YouKpiBackend
 {
-    public static class IWebhostDataInitializer
+    public static class Services
     {
-        public static IHostBuilder SeedData(this IHostBuilder host)
+        public static void SeedData(this IServiceCollection services)
         {
-            using (var scope = host.Services.CreateScope())
+            using (var serviceProvider = services.BuildServiceProvider())
             {
-                var services = scope.ServiceProvider;
-                var context = services.GetService<YoukpiContext>();
+                var context = serviceProvider.GetService<YoukpiContext>();
                 string script = File.ReadAllText(Directory.GetCurrentDirectory() + @"\SQL\Views\VActivityHistory.sql");
                 context.Database.ExecuteSqlRaw(script);
 
@@ -29,7 +28,6 @@ namespace YouKpiBackend
                 script = File.ReadAllText(Directory.GetCurrentDirectory() + @"\SQL\Views\VOtifReport.sql");
                 context.Database.ExecuteSqlRaw(script);
             }
-            return host;
         }
     }
     

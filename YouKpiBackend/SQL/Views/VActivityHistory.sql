@@ -1,14 +1,4 @@
-﻿/****** Object:  View [dbo].[vActivityHistory]    Script Date: 18.06.2021 21:33:15 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-
-
-CREATE or alter VIEW [dbo].[vActivityHistory]
+﻿CREATE or alter VIEW [dbo].[vActivityHistory]
 AS
 SELECT p.Id AS PracownikId, p.Name AS PracownikName, pro.Id AS ProcessId, pro.NazwaProcesu AS ProcessName, pcs.CzasStart, ISNULL(pcs.CzasStop, GETDATE()) AS CzasStop, cl.ID AS ClientsId, cl.Name AS Client, c.Id AS PartId, 
                   c.Nazwa AS PartName, prod.ProductName AS WyrobId, ol.Quantity AS IloscCzesci
@@ -21,4 +11,4 @@ FROM     dbo.PracownikCzasStep AS pcs INNER JOIN
                   dbo.Offer AS o ON o.Id = ol.ID INNER JOIN
                   dbo.Client AS cl ON cl.ID = o.ClientsId
 WHERE  (pcs.CzasStart IS NOT NULL)
-GO
+

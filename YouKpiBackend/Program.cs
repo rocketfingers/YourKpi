@@ -44,8 +44,7 @@ namespace YouKpiBackend
                   logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
                   //logging.AddConsole();
               })
-              .UseNLog()
-              .SeedData();  // NLog: Setup NLog for Dependency injection
+              .UseNLog();  // NLog: Setup NLog for Dependency injection
      
     }
 }

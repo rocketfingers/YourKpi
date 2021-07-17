@@ -1,12 +1,4 @@
-﻿/****** Object:  View [dbo].[ProdExe]    Script Date: 18.06.2021 21:31:42 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-CREATE or alter VIEW [dbo].[vProdExe]
+﻿CREATE or alter VIEW [dbo].[vProdExe]
 AS
 
 SELECT pro.Id + '-' + cast(ol.id AS varchar(50)) AS id, 'O' as typProcesu, ol.Id AS OfferLineID, o.Id AS OfferId, o.Name AS IdentyfikatorZamowienia, pro.id AS processId, ROW_NUMBER() OVER (PARTITION BY ol.OfferId, pro.id
@@ -52,6 +44,6 @@ FROM     Offer o LEFT JOIN
                   OfferLineProcess olp ON olp.OfferLineId = ol.ID JOIN
                   Process pro ON pro.Id = olp.ProcessId
 WHERE  o.Status != 'otwarte' AND ol.ID IS NOT NULL
-GO
+
 
 
