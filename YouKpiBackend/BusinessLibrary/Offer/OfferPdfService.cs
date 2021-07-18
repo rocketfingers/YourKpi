@@ -99,7 +99,7 @@ namespace YouKpiBackend.BusinessLibrary.Offer
             col1Pos = 40;
             col2Pos = maxColCharNo[1] * sample + col1Pos + spaceBetweenColumns;
             col3Pos = maxColCharNo[2] * sample + col2Pos + spaceBetweenColumns;
-            col4Pos = maxColCharNo[3] * sample + col3Pos + spaceBetweenColumns;
+            col4Pos = maxColCharNo[3] * sample + col3Pos + spaceBetweenColumns + 10;
             col5Pos = maxColCharNo[4] * sample + col4Pos + spaceBetweenColumns;
             col6Pos = maxColCharNo[5] * sample + col5Pos + spaceBetweenColumns;
             col7Pos = maxColCharNo[6] * sample + col6Pos + spaceBetweenColumns;
@@ -127,7 +127,7 @@ namespace YouKpiBackend.BusinessLibrary.Offer
             var boldTableFont = new XFont("Times New Roman", 10, XFontStyle.Bold);
 
 
-            int height = marginTop;
+            int height = marginTop + 40;
             var framePoints = new XPoint[5]
                 {
                 new XPoint(marginLeft,marginTop),
@@ -139,12 +139,14 @@ namespace YouKpiBackend.BusinessLibrary.Offer
             var fieldSize = new XSize(page.Width - marginLeft - marginRight, lineHeight);
             var pageSize = new XSize(page.Width, page.Height);
             var blackPen = new XPen(XBrushes.Black);
-            gfx.DrawLines(blackPen, framePoints);
+            //gfx.DrawLines(blackPen, framePoints);
 
-
+            gfx.DrawImage(XImage.FromFile("Resources\\Chemitex logo - gradienty_m.jpg"), page.Width - marginRight - marginLeft - 160, marginTop , 160, 70);
             gfx.DrawString("Oferta", regularFont, XBrushes.Black, new XRect(NewLine(ref height, 0), pageSize), XStringFormats.TopCenter);
             gfx.DrawString(res.Name, boldFont, XBrushes.Black, new XRect(NewLine(ref height, 0), pageSize), XStringFormats.TopCenter);
             NewLine(ref height);
+
+            var projIdHeight = height;
             gfx.DrawString("Projekt id:", regularFont, XBrushes.Black, new XRect(NewLine(ref height), fieldSize), XStringFormats.TopLeft);
             gfx.DrawString(res.ProjectsId, boldFont, XBrushes.Black, new XRect(NewLine(ref height), fieldSize), XStringFormats.TopLeft);
 
@@ -157,16 +159,20 @@ namespace YouKpiBackend.BusinessLibrary.Offer
             gfx.DrawString("Data oferty:", regularFont, XBrushes.Black, new XRect(NewLine(ref height), fieldSize), XStringFormats.TopLeft);
             gfx.DrawString(res.OfferDate?.ToString("dd-MM-yyyy"), boldFont, XBrushes.Black, new XRect(NewLine(ref height), fieldSize), XStringFormats.TopLeft);
 
-            gfx.DrawString("Klient:", regularFont, XBrushes.Black, new XRect(NewLine(ref height), fieldSize), XStringFormats.TopLeft);
-            gfx.DrawString(res.Clients.Name, boldFont, XBrushes.Black, new XRect(NewLine(ref height), fieldSize), XStringFormats.TopLeft);
+            height = projIdHeight;
+            gfx.DrawString("Klient:", regularFont, XBrushes.Black, new XRect(NewLine(ref height, 400), fieldSize), XStringFormats.TopLeft);
+            gfx.DrawString(res.Clients.Name, boldFont, XBrushes.Black, new XRect(NewLine(ref height, 400), fieldSize), XStringFormats.TopLeft);
 
-            gfx.DrawString("Data zamówienia:", regularFont, XBrushes.Black, new XRect(NewLine(ref height), fieldSize), XStringFormats.TopLeft);
-            gfx.DrawString(res.OrderDate?.ToString("dd-MM-yyyy"), boldFont, XBrushes.Black, new XRect(NewLine(ref height), fieldSize), XStringFormats.TopLeft);
+            gfx.DrawString("Data zamówienia:", regularFont, XBrushes.Black, new XRect(NewLine(ref height, 400), fieldSize), XStringFormats.TopLeft);
+            gfx.DrawString(res.OrderDate?.ToString("dd-MM-yyyy"), boldFont, XBrushes.Black, new XRect(NewLine(ref height, 400), fieldSize), XStringFormats.TopLeft);
 
-            gfx.DrawString("Planowane zakończenie:", regularFont, XBrushes.Black, new XRect(NewLine(ref height), fieldSize), XStringFormats.TopLeft);
-            gfx.DrawString(res.PlannedEnd?.ToString("dd-MM-yyyy"), boldFont, XBrushes.Black, new XRect(NewLine(ref height), fieldSize), XStringFormats.TopLeft);
+            gfx.DrawString("Planowane zakończenie:", regularFont, XBrushes.Black, new XRect(NewLine(ref height, 400), fieldSize), XStringFormats.TopLeft);
+            gfx.DrawString(res.PlannedEnd?.ToString("dd-MM-yyyy"), boldFont, XBrushes.Black, new XRect(NewLine(ref height, 400), fieldSize), XStringFormats.TopLeft);
 
             NewLine(ref height);
+            NewLine(ref height);
+            NewLine(ref height);
+
 
             gfx.DrawString("Pozycje oferty", regularFont, XBrushes.Black, new XRect(NewLine(ref height, 0), pageSize), XStringFormats.TopCenter);
             gfx.DrawLine(blackPen, NewLine(ref height), new XPoint(page.Width - marginLeft - marginRight, height));
@@ -186,6 +192,7 @@ namespace YouKpiBackend.BusinessLibrary.Offer
             //gfx.DrawLine(blackPen, new XPoint(col5Pos, oldHeight), new XPoint(col5Pos, height + interline));
             //gfx.DrawLine(blackPen, new XPoint(col6Pos, oldHeight), new XPoint(col6Pos, height + interline));
             //gfx.DrawLine(blackPen, new XPoint(col7Pos, oldHeight), new XPoint(col7Pos, height + interline));
+
 
         }
 
