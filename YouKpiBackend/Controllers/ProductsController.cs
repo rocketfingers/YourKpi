@@ -125,6 +125,7 @@ namespace YouKpiBackend.Controllers
             try
             {
                 var product = _ctx.Produkty.Include(p => p.ProduktCzesci).FirstOrDefault(p => p.Id == entity.Id);
+                product.ProductName = entity.ProductName;
                 product.TypWyrobuId = entity.TypWyrobuId;
                 product.NumerRysNorma = entity.NumerRysNorma;
                 product.Dn = entity.Dn;
@@ -142,9 +143,10 @@ namespace YouKpiBackend.Controllers
                 entity.ProduktCzesci.ToList().ForEach(part =>
                 {
                     part.Czesci = null;
-                    part.Id = product.Id;
+                    part.ProduktId = product.Id;
                     product.ProduktCzesci.Add(part);
                 });
+
                 await _ctx.SaveChangesAsync();
 
                 return NoContent();
