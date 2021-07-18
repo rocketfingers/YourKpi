@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using System.Collections.Generic;
+using PdfSharpCore.Drawing.Layout;
 
 namespace YouKpiBackend.BusinessLibrary.Offer
 {
@@ -125,6 +126,8 @@ namespace YouKpiBackend.BusinessLibrary.Offer
             var boldFont = new XFont("Times New Roman", 12, XFontStyle.Bold);
             var regularTableFont = new XFont("Times New Roman", 10, XFontStyle.Regular);
             var boldTableFont = new XFont("Times New Roman", 10, XFontStyle.Bold);
+            var smallClauseFont = new XFont("Times New Roman", 9, XFontStyle.Regular);
+
 
 
             int height = marginTop + 40;
@@ -141,7 +144,7 @@ namespace YouKpiBackend.BusinessLibrary.Offer
             var blackPen = new XPen(XBrushes.Black);
             //gfx.DrawLines(blackPen, framePoints);
 
-            gfx.DrawImage(XImage.FromFile("Resources\\Chemitex logo - gradienty_m.jpg"), page.Width - marginRight - marginLeft - 160, marginTop , 160, 70);
+            gfx.DrawImage(XImage.FromFile("Resources\\Chemitex logo - gradienty_m.jpg"), page.Width - marginRight - marginLeft - 160, marginTop, 160, 70);
             gfx.DrawString("Oferta", regularFont, XBrushes.Black, new XRect(NewLine(ref height, 0), pageSize), XStringFormats.TopCenter);
             gfx.DrawString(res.Name, boldFont, XBrushes.Black, new XRect(NewLine(ref height, 0), pageSize), XStringFormats.TopCenter);
             NewLine(ref height);
@@ -192,7 +195,10 @@ namespace YouKpiBackend.BusinessLibrary.Offer
             //gfx.DrawLine(blackPen, new XPoint(col5Pos, oldHeight), new XPoint(col5Pos, height + interline));
             //gfx.DrawLine(blackPen, new XPoint(col6Pos, oldHeight), new XPoint(col6Pos, height + interline));
             //gfx.DrawLine(blackPen, new XPoint(col7Pos, oldHeight), new XPoint(col7Pos, height + interline));
-
+            NewLine(ref height);
+            NewLine(ref height);
+            var xtxtf = new XTextFormatter(gfx);
+            xtxtf.DrawString(File.ReadAllText("Resources\\ClausePdfText.txt"), smallClauseFont, XBrushes.Black, new XRect(NewLine(ref height), pageSize));
 
         }
 
