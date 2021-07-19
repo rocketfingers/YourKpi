@@ -198,8 +198,8 @@ namespace YouKpiBackend.BusinessLibrary.Offer
             NewLine(ref height);
             NewLine(ref height);
             var xtxtf = new XTextFormatter(gfx);
-            xtxtf.DrawString(File.ReadAllText("Resources\\ClausePdfText.txt"), smallClauseFont, XBrushes.Black, new XRect(NewLine(ref height), pageSize));
-
+            xtxtf.Alignment = XParagraphAlignment.Center;
+            xtxtf.DrawString(File.ReadAllText("Resources\\ClausePdfText.txt"), smallClauseFont, XBrushes.Black, new XRect(NewLine(ref height, 0), pageSize));
         }
 
 
