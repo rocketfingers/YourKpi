@@ -45,5 +45,6 @@ namespace YouKpiBackend
                   //logging.AddConsole();
               })
               .UseNLog();  // NLog: Setup NLog for Dependency injection
+     
     }
 }
