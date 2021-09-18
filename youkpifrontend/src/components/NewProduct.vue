@@ -4,41 +4,24 @@
       <v-flex xs5>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-layout row wrap>
-              <v-text-field
-                outlined
-                color
-                label="Id"
-                :disabled="editMode"
-                required
-                :rules="[requiredRule]"
-                @input="selectedSuffix = null"
-                v-model="currentProduct.productId"
-              ></v-text-field>
-              <v-flex xs1> </v-flex>
-              <v-autocomplete
-                outlined
-                color
-                label="Suffix"
-                :items="[
-                  'ANSI600',
-                  'CL150',
-                  'METAL',
-                  'L200',
-                  'L100',
-                  'H300',
-                  'WR',
-                  'BR',
-                  'PEEK',
-                ]"
-                required
-                @change="
-                  currentProduct.productId =
-                    currentProduct.productId + '.' + selectedSuffix
-                "
-                v-model="selectedSuffix"
-              ></v-autocomplete>
-            </v-layout>
+            <v-text-field
+              outlined
+              color
+              label="Id"
+              disabled
+              required
+              v-model="currentProduct.id"
+            ></v-text-field>
+          </v-flex>
+          <v-flex xs12>
+            <v-text-field
+              outlined
+              color
+              label="Nazwa"
+              required
+              :rules="[requiredRule]"
+              v-model="currentProduct.productName"
+            ></v-text-field>
           </v-flex>
           <v-flex xs12>
             <v-autocomplete
@@ -65,27 +48,29 @@
           <v-flex 12>
             <v-layout row wrap>
               <v-flex xs5>
-                <v-text-field
+                <v-select
                   outlined
-                  :rules="[requiredRule, numberRule]"
+                  :rules="[requiredRule]"
                   color
                   label="DN"
-                  type="number"
                   min="0"
                   v-model.number="currentProduct.dn"
-                ></v-text-field>
+                  :items="[
+                    6, 10, 15, 20, 25, 32, 40, 50, 65, 80, 100, 125, 150, 200,
+                    250, 300, 350, 400, 450, 500,
+                  ]"
+                ></v-select>
               </v-flex>
               <v-spacer></v-spacer>
               <v-flex xs5>
-                <v-text-field
+                <v-select
                   outlined
                   color
-                  :rules="[requiredRule, numberRule]"
+                  :rules="[requiredRule]"
                   label="PN"
-                  type="number"
-                  min="0"
                   v-model.number="currentProduct.pn"
-                ></v-text-field>
+                  :items="[16, 40, 63, 100, 110, 160, 260]"
+                ></v-select>
               </v-flex>
             </v-layout>
           </v-flex>
@@ -111,31 +96,41 @@
       <v-flex xs5>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-text-field
+            <v-autocomplete
               outlined
               :rules="[requiredRule]"
               color
               label="ANSI"
               v-model="currentProduct.ansi"
-            ></v-text-field>
+              :items="['100', '150', '300', '600', '900', '1500', '2500']"
+            ></v-autocomplete>
           </v-flex>
           <v-flex xs12>
-            <v-text-field
+            <v-select
               outlined
               color
               :rules="[requiredRule]"
               label="Wersja"
               v-model="currentProduct.wersja"
-            ></v-text-field>
+              :items="['I', 'II']"
+            ></v-select>
           </v-flex>
           <v-flex xs12>
-            <v-text-field
+            <v-autocomplete
               outlined
               color
               :rules="[requiredRule]"
               label="Uszczelnienie"
               v-model="currentProduct.uszczelnienie"
-            ></v-text-field>
+              :items="[
+                'PTFE',
+                'PTFE+C',
+                'PTFE+C+G',
+                'DERLIN',
+                'PEEK',
+                'Metal-Metal',
+              ]"
+            ></v-autocomplete>
           </v-flex>
           <v-flex xs12>
             <v-layout row wrap>
@@ -158,6 +153,26 @@
                   :items="['PLN', 'EUR', 'USD', 'GBP']"
                   v-model="currentProduct.waluta"
                   autocomplete
+                ></v-autocomplete>
+              </v-flex>
+              <v-flex xs12>
+                <v-autocomplete
+                  outlined
+                  color
+                  :rules="[minRule]"
+                  label="Temp min"
+                  v-model="currentProduct.tempMin"
+                  :items="[-196, -30, -20]"
+                ></v-autocomplete>
+              </v-flex>
+              <v-flex xs12>
+                <v-autocomplete
+                  outlined
+                  color
+                  :rules="[maxRule]"
+                  label="Temp max"
+                  v-model="currentProduct.TempMax"
+                  :items="[120, 180, 200, 250]"
                 ></v-autocomplete>
               </v-flex>
             </v-layout>
@@ -193,13 +208,23 @@ export default {
   },
   data () {
     return {
-      selectedSuffix: '',
       requiredRule: (v) => !!v || 'To pole jest wymagane',
       numberRule: val => {
         if (val < 0) return 'Wprowadź wartość dodatnią'
         return true
       },
-
+      minRule: val => {
+        if (val < -196 || val > -20) return 'Wprowadź wartość pomiędzy -196, a -20'
+        return true
+      },
+      maxRule: val => {
+        if (val < 120 || val > 500) return 'Wprowadź wartość pomiędzy 120 a 500'
+        return true
+      },
+      intRule: val => {
+        if (val.includes(',') || val.includes('.')) return 'Wprowadź wartość całkowitą'
+        return true
+      },
       priceRule: val => {
         if (val < 0) return 'Wprowadz dodatnia wartosc'
         if (val > 500000) return 'Maksymalna wartość: 500 000'
@@ -218,7 +243,7 @@ export default {
   methods: {
     async duplicateProduct (product) {
       var res = await this.$dialog.confirm({
-        text: 'Czy na pewno chcesz utworzyć duplikat dla:  ' + product.productId + '? (aktualny produkt zostanie zapisany, zostaniesz przeniesiony do duplikatu)',
+        text: 'Czy na pewno chcesz utworzyć duplikat dla:  ' + product.id + '? (aktualny produkt zostanie zapisany, zostaniesz przeniesiony do duplikatu)',
         title: 'Uwaga'
       })
       if (res) {

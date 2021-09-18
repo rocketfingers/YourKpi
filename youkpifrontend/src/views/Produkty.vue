@@ -196,7 +196,7 @@ export default {
       getAllPartsApi: 'api/Parts/GetAll',
 
       headers: [
-        { text: 'Id', value: 'productName' },
+        { text: 'Nazwa', value: 'productName' },
         { text: 'Typ wyrobu id', value: 'typWyrobuId' },
         { text: 'NumerRysNorma', value: 'numerRysNorma' },
         { text: 'DN', value: 'dn' },
@@ -341,7 +341,7 @@ export default {
       if (productTemplate) {
         this.currentProduct = productTemplate
       } else {
-        this.currentProduct = { produktCzesci: [] }
+        this.currentProduct = { id: 0, produktCzesci: [] }
       }
 
       this.editMode = false
