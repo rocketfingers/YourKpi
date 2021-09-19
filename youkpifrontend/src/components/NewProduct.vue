@@ -48,27 +48,29 @@
           <v-flex 12>
             <v-layout row wrap>
               <v-flex xs5>
-                <v-text-field
+                <v-select
                   outlined
-                  :rules="[requiredRule, numberRule]"
+                  :rules="[requiredRule]"
                   color
                   label="DN"
-                  type="number"
                   min="0"
                   v-model.number="currentProduct.dn"
-                ></v-text-field>
+                  :items="[
+                    6, 10, 15, 20, 25, 32, 40, 50, 65, 80, 100, 125, 150, 200,
+                    250, 300, 350, 400, 450, 500,
+                  ]"
+                ></v-select>
               </v-flex>
               <v-spacer></v-spacer>
               <v-flex xs5>
-                <v-text-field
+                <v-select
                   outlined
                   color
-                  :rules="[requiredRule, numberRule]"
+                  :rules="[requiredRule]"
                   label="PN"
-                  type="number"
-                  min="0"
                   v-model.number="currentProduct.pn"
-                ></v-text-field>
+                  :items="[16, 40, 63, 100, 110, 160, 260]"
+                ></v-select>
               </v-flex>
             </v-layout>
           </v-flex>
@@ -103,31 +105,41 @@
       <v-flex xs5>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-text-field
+            <v-autocomplete
               outlined
               :rules="[requiredRule]"
               color
               label="ANSI"
               v-model="currentProduct.ansi"
-            ></v-text-field>
+              :items="['100', '150', '300', '600', '900', '1500', '2500']"
+            ></v-autocomplete>
           </v-flex>
           <v-flex xs12>
-            <v-text-field
+            <v-select
               outlined
               color
               :rules="[requiredRule]"
               label="Wersja"
               v-model="currentProduct.wersja"
-            ></v-text-field>
+              :items="['I', 'II']"
+            ></v-select>
           </v-flex>
           <v-flex xs12>
-            <v-text-field
+            <v-autocomplete
               outlined
               color
               :rules="[requiredRule]"
               label="Uszczelnienie"
               v-model="currentProduct.uszczelnienie"
-            ></v-text-field>
+              :items="[
+                'PTFE',
+                'PTFE+C',
+                'PTFE+C+G',
+                'DERLIN',
+                'PEEK',
+                'Metal-Metal',
+              ]"
+            ></v-autocomplete>
           </v-flex>
           <v-flex xs12>
             <v-layout row wrap>
@@ -153,28 +165,24 @@
                 ></v-autocomplete>
               </v-flex>
               <v-flex xs12>
-                <v-text-field
+                <v-autocomplete
                   outlined
                   color
-                  type="number"
-                  min="-196"
-                  max="-20"
                   :rules="[minRule]"
                   label="Temp min"
                   v-model="currentProduct.tempMin"
-                ></v-text-field>
+                  :items="[-196, -30, -20]"
+                ></v-autocomplete>
               </v-flex>
               <v-flex xs12>
-                <v-text-field
+                <v-autocomplete
                   outlined
                   color
-                  type="number"
-                  min="120"
-                  max="500"
                   :rules="[maxRule]"
                   label="Temp max"
                   v-model="currentProduct.TempMax"
-                ></v-text-field>
+                  :items="[120, 180, 200, 250]"
+                ></v-autocomplete>
               </v-flex>
             </v-layout>
           </v-flex>
