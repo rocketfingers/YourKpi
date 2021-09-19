@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
@@ -30,7 +31,8 @@ namespace YouKpiBackend.Controllers
                 var res = _ctx.Produkty
                     .Include(p => p.ProduktCzesci)
                     .ThenInclude(p => p.Czesci)
-                    .ThenInclude(p => p.Komponent);
+                    .ThenInclude(p => p.Komponent)
+                    .Include(p => p.ProduktyRysunkiInfo);
 
                 foreach (var item in res) /// TODO: Zapetlona referencja... Naprawic to mozna dodajac warstwe viewmodeli
                 {
@@ -38,6 +40,10 @@ namespace YouKpiBackend.Controllers
                     {
                         pc.Czesci.ProduktCzesci = null;
                     }
+
+                    var actualDwg = item.ProduktyRysunkiInfo.OrderBy(p => p.Id).LastOrDefault();
+                    item.ProduktyRysunkiInfo.Clear();
+                    item.ProduktyRysunkiInfo.Add(actualDwg);
                 }
 
                 var lst = await res.ToListAsync();
@@ -78,6 +84,22 @@ namespace YouKpiBackend.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet("[action]/{drawingInfoId}")]
+        public async Task<IActionResult> GetDrawingContent(int drawingInfoId)
+        {
+            try
+            {
+                var dwgs = await _ctx.ProduktyRysunki.Where(p => p.Id == drawingInfoId).FirstOrDefaultAsync();
+                var bytes = dwgs.Base64FileContent ?? new byte[0];
+
+                return File(bytes, "application/octet-stream", "content");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(501, ex.Message);
             }
         }
 
@@ -156,6 +178,44 @@ namespace YouKpiBackend.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> UploadFile(IFormCollection formFile)
+        {
+            try
+            {
+                var file = formFile.Files[0];
+                var fileNameSplited = file.FileName.Split('.');
+                int.TryParse(formFile["productId"], out int productId);
+
+                var item = new ProduktyRysunkiInfo()
+                {
+                    Nazwa = file.FileName,
+                    ProduktId = productId,
+                    DataDodania = DateTime.Now,
+                    ProduktyRysunki = new ProduktyRysunki()
+                    {
+                        Rozszerzenie = fileNameSplited.Last()
+                    }
+                };
+
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    var bytes = ms.ToArray();
+                    item.ProduktyRysunki.Base64FileContent = bytes;
+                }
+                _ctx.ProduktyRysunkiInfo.Add(item);
+
+                await _ctx.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         [HttpDelete("[action]")]
         public async Task<IActionResult> Delete(int id)

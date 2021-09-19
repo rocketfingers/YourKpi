@@ -12,6 +12,7 @@ namespace YouKpiBackend.ModelsEntity
             MagazynProduktyNiezgodne = new HashSet<MagazynProduktyNiezgodne>();
             OfferLines = new HashSet<OfferLines>();
             ProduktCzesci = new HashSet<ProduktCzesci>();
+            ProduktyRysunkiInfo = new HashSet<ProduktyRysunkiInfo>();
         }
 
         public string TypWyrobuId { get; set; }
@@ -30,5 +31,6 @@ namespace YouKpiBackend.ModelsEntity
         public virtual ICollection<MagazynProduktyNiezgodne> MagazynProduktyNiezgodne { get; set; }
         public virtual ICollection<OfferLines> OfferLines { get; set; }
         public virtual ICollection<ProduktCzesci> ProduktCzesci { get; set; }
+        public virtual ICollection<ProduktyRysunkiInfo> ProduktyRysunkiInfo { get; set; }
     }
 }

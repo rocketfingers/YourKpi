@@ -49,6 +49,8 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<VProdExe> VProdExe { get; set; }
         public virtual DbSet<ProduktCzesci> ProduktCzesci { get; set; }
         public virtual DbSet<Produkty> Produkty { get; set; }
+        public virtual DbSet<ProduktyRysunki> ProduktyRysunki { get; set; }
+        public virtual DbSet<ProduktyRysunkiInfo> ProduktyRysunkiInfo { get; set; }
         public virtual DbSet<Projects> Projects { get; set; }
         public virtual DbSet<ReasonCodes> ReasonCodes { get; set; }
         public virtual DbSet<StepOfferWykonanie> StepOfferWykonanie { get; set; }
@@ -604,7 +606,7 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<Offer>(entity =>
             {
-                entity.Property(e => e.Name)
+                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
 
@@ -829,7 +831,6 @@ namespace YouKpiBackend.DbContexts
                     .HasForeignKey(d => d.RelatedProcessId)
                     .HasConstraintName("FK_ProcessesRelatedProcess");
             });
-
             modelBuilder.Entity<VProdExe>(entity =>
             {
                 entity.HasNoKey();
@@ -941,6 +942,24 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Wersja)
                     .IsRequired()
                     .HasMaxLength(5);
+            });
+
+            modelBuilder.Entity<ProduktyRysunkiInfo>(entity =>
+            {
+                entity.HasIndex(e => e.ProduktId);
+
+                entity.HasOne(d => d.Produkt)
+                    .WithMany(p => p.ProduktyRysunkiInfo)
+                    .HasForeignKey(d => d.ProduktId);
+
+                entity.HasIndex(e => e.ProduktyRysunkiId);
+
+                entity.HasOne(d => d.ProduktyRysunki);
+            });
+
+            modelBuilder.Entity<ProduktyRysunki>(entity =>
+            {
+            
             });
 
             modelBuilder.Entity<Projects>(entity =>
