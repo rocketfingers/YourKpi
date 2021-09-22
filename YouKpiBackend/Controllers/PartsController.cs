@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
@@ -28,10 +29,17 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                return Ok(await _dbContext.Czesci.Include(p => p.Komponent).ToListAsync());
+                var res = _dbContext.Czesci.Include(p => p.Komponent).Include(p => p.CzesciRysunkiInfo);
+                foreach (var item in res) /// TODO: do servisu albo decyzji - czy usuwac stare pliki i jak brac najnowszy
+                {
+                    var actualDwg = item.CzesciRysunkiInfo.OrderBy(p => p.Id).LastOrDefault();
+                    item.CzesciRysunkiInfo.Clear();
+                    item.CzesciRysunkiInfo.Add(actualDwg);
+                }
+                return Ok(await res.ToListAsync());
             }
             catch (Exception ex)
-            {
+            { 
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -112,6 +120,58 @@ namespace YouKpiBackend.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> UploadFile(IFormCollection formFile)
+        {
+            try
+            {
+                var file = formFile.Files[0];
+                var fileNameSplited = file.FileName.Split('.');
+
+                var item = new CzesciRysunkiInfo()
+                {
+                    Nazwa = file.FileName,
+                    CzescId = formFile["partId"].ToString(),
+                    DataDodania = DateTime.Now,
+                    CzesciRysunki = new CzesciRysunki()
+                    {
+                        Rozszerzenie = fileNameSplited.Last()
+                    }
+                };
+
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    var bytes = ms.ToArray();
+                    item.CzesciRysunki.Base64FileContent = bytes;
+                }
+                _dbContext.CzesciRysunkiInfo.Add(item);
+
+                await _dbContext.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("[action]/{drawingInfoId}")]
+        public async Task<IActionResult> GetDrawingContent(int drawingInfoId)
+        {
+            try
+            {
+                var dwgs = await _dbContext.CzesciRysunki.Where(p => p.CzesciRysunkiInfo.Id == drawingInfoId).FirstOrDefaultAsync();
+                var bytes = dwgs.Base64FileContent ?? new byte[0];
+
+                return File(bytes, "application/octet-stream", "content");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(501, ex.Message);
             }
         }
 

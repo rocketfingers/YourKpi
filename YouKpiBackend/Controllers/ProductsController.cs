@@ -31,6 +31,9 @@ namespace YouKpiBackend.Controllers
                 var res = _ctx.Produkty
                     .Include(p => p.ProduktCzesci)
                     .ThenInclude(p => p.Czesci)
+                    .ThenInclude(p => p.CzesciRysunkiInfo)
+                    .Include(p => p.ProduktCzesci)
+                    .ThenInclude(p => p.Czesci)
                     .ThenInclude(p => p.Komponent)
                     .Include(p => p.ProduktyRysunkiInfo);
 
@@ -92,7 +95,7 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var dwgs = await _ctx.ProduktyRysunki.Where(p => p.Id == drawingInfoId).FirstOrDefaultAsync();
+                var dwgs = await _ctx.ProduktyRysunki.Where(p => p.ProduktyRysunkiInfo.Id == drawingInfoId).FirstOrDefaultAsync();
                 var bytes = dwgs.Base64FileContent ?? new byte[0];
 
                 return File(bytes, "application/octet-stream", "content");

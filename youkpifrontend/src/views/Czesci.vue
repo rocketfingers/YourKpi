@@ -23,6 +23,10 @@
 
             <v-toolbar dark elevation-4 color="primary lighten-1">
               <span class="headline">{{ formTitle }}</span>
+              <v-spacer></v-spacer>
+              <v-btn icon @click="showDialog = false" dark>
+                <v-icon>close</v-icon>
+              </v-btn>
             </v-toolbar>
             <v-card>
               <v-form ref="newPartForm">
@@ -34,6 +38,7 @@
                   :readonly="false"
                   :processes="processes"
                   :parts="data"
+                  :partFiles="currentPartDrawings"
                 ></NewPart>
               </v-form>
               <v-card-actions class="blue lighten-5">
@@ -135,6 +140,7 @@ export default {
       putEditApi: 'api/Parts/Update',
       deleteApi: 'api/Parts/Delete',
       getAllProcesses: 'api/Process/GetAll',
+      uploadDrawingApi: 'api/Parts/UploadFile',
 
       defaultItem: {
         id: '',
@@ -162,7 +168,8 @@ export default {
       ],
       editMode: false,
       components: [],
-      processes: []
+      processes: [],
+      currentPartDrawings: []
     }
   },
   computed: {
@@ -176,21 +183,27 @@ export default {
   },
   watch: {
     showDialog (val) {
-      val || this.close()
+      if (val === false) {
+        this.close()
+      }
     }
   },
   methods: {
-
     editItem (item) {
       this.editMode = true
-
       this.editedIndex = this.data.indexOf(item)
       this.editedItem = Object.assign({}, item)
+      if (item.czesciRysunkiInfo && item.czesciRysunkiInfo[0]) {
+        this.currentPartDrawings.push(item.czesciRysunkiInfo[0])
+      } else {
+        this.currentPartDrawings = []
+      }
 
       this.showDialog = true
     },
-    editCurrentProductRes (edited) {
+    editCurrentProductRes (edited, currentPartDrawings) {
       this.editedItem = edited
+      this.currentPartDrawings = currentPartDrawings
     },
     getProcesses () {
       var $this = this
@@ -264,6 +277,9 @@ export default {
       if (!this.$refs.newPartForm.validate()) {
         return
       }
+      if (this.currentPartDrawings && this.currentPartDrawings[0].name) {
+        this.addDrawing(this.currentPartDrawings[0])
+      }
       // Native form submission is not yet supported
       if (this.editedIndex > -1) {
         this.$http.put(this.putEditApi,
@@ -274,8 +290,6 @@ export default {
           this.initialise()
         })
       } else {
-        // // eslint-disable-next-line no-debugger
-        // debugger
         this.$http.post(this.postNewApi,
           this.editedItem)
           .then(Result => {
@@ -286,10 +300,30 @@ export default {
           })
       }
     },
+    addDrawing (drawing) {
+      if (drawing) {
+        const formData = new FormData()
+        formData.append('drawing', drawing)
+        formData.append('partId', this.editedItem.id)
+
+        this.$http
+          .post(this.uploadDrawingApi, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then((result) => {
+          })
+      }
+    },
     initialise () {
+      this.tableLoading = true
+      this.currentPartDrawings = []
       this.editedItem = Object.assign({ komponent: { } }, this.defaultItem)
       v.axiosInstance.get(this.getAllApi)
         .then(Response => {
+          // eslint-disable-next-line no-debugger
+          debugger
           this.data = Response.data
           this.data.forEach(p => {
             if (p.komponent != null) {

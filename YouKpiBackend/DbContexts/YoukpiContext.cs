@@ -51,6 +51,8 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<Produkty> Produkty { get; set; }
         public virtual DbSet<ProduktyRysunki> ProduktyRysunki { get; set; }
         public virtual DbSet<ProduktyRysunkiInfo> ProduktyRysunkiInfo { get; set; }
+        public virtual DbSet<CzesciRysunki> CzesciRysunki { get; set; }
+        public virtual DbSet<CzesciRysunkiInfo> CzesciRysunkiInfo { get; set; }
         public virtual DbSet<Projects> Projects { get; set; }
         public virtual DbSet<ReasonCodes> ReasonCodes { get; set; }
         public virtual DbSet<StepOfferWykonanie> StepOfferWykonanie { get; set; }
@@ -960,6 +962,23 @@ namespace YouKpiBackend.DbContexts
             modelBuilder.Entity<ProduktyRysunki>(entity =>
             {
             
+            });
+            modelBuilder.Entity<CzesciRysunkiInfo>(entity =>
+            {
+                entity.HasIndex(e => e.CzescId);
+
+                entity.HasOne(d => d.Czesc)
+                    .WithMany(p => p.CzesciRysunkiInfo)
+                    .HasForeignKey(d => d.CzescId);
+
+                entity.HasIndex(e => e.CzesciRysunkiId);
+
+                entity.HasOne(d => d.CzesciRysunki);
+            });
+
+            modelBuilder.Entity<CzesciRysunki>(entity =>
+            {
+
             });
 
             modelBuilder.Entity<Projects>(entity =>

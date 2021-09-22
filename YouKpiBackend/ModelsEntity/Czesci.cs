@@ -11,6 +11,7 @@ namespace YouKpiBackend.ModelsEntity
             MagazynCzesci = new HashSet<MagazynCzesci>();
             PracownikCzasStep = new HashSet<PracownikCzasStep>();
             ProduktCzesci = new HashSet<ProduktCzesci>();
+            CzesciRysunkiInfo = new HashSet<CzesciRysunkiInfo>();
         }
 
         public string Id { get; set; }
@@ -29,5 +30,7 @@ namespace YouKpiBackend.ModelsEntity
         public virtual ICollection<MagazynCzesci> MagazynCzesci { get; set; }
         public virtual ICollection<PracownikCzasStep> PracownikCzasStep { get; set; }
         public virtual ICollection<ProduktCzesci> ProduktCzesci { get; set; }
+        public virtual ICollection<CzesciRysunkiInfo> CzesciRysunkiInfo { get; set; }
+
     }
 }
