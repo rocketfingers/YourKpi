@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YouKpiBackend.DbContexts;
 
 namespace YouKpiBackend.Migrations
 {
     [DbContext(typeof(YoukpiContext))]
-    partial class YoukpiContextModelSnapshot : ModelSnapshot
+    [Migration("20210918172644_RozbudowaRysunkow")]
+    partial class RozbudowaRysunkow
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,57 +198,6 @@ namespace YouKpiBackend.Migrations
                     b.HasIndex("KomponentId");
 
                     b.ToTable("Czesci");
-                });
-
-            modelBuilder.Entity("YouKpiBackend.ModelsEntity.CzesciRysunki", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<byte[]>("Base64FileContent")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Rozszerzenie")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CzesciRysunki");
-                });
-
-            modelBuilder.Entity("YouKpiBackend.ModelsEntity.CzesciRysunkiInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("CzescId")
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<int?>("CzesciRysunkiId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataDodania")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DodanoPrzezId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nazwa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CzescId");
-
-                    b.HasIndex("CzesciRysunkiId")
-                        .IsUnique()
-                        .HasFilter("[CzesciRysunkiId] IS NOT NULL");
-
-                    b.ToTable("CzesciRysunkiInfo");
                 });
 
             modelBuilder.Entity("YouKpiBackend.ModelsEntity.Komponenty", b =>
@@ -1898,21 +1849,6 @@ namespace YouKpiBackend.Migrations
                     b.Navigation("Komponent");
                 });
 
-            modelBuilder.Entity("YouKpiBackend.ModelsEntity.CzesciRysunkiInfo", b =>
-                {
-                    b.HasOne("YouKpiBackend.ModelsEntity.Czesci", "Czesc")
-                        .WithMany("CzesciRysunkiInfo")
-                        .HasForeignKey("CzescId");
-
-                    b.HasOne("YouKpiBackend.ModelsEntity.CzesciRysunki", "CzesciRysunki")
-                        .WithOne("ProduktyRysunkiInfo")
-                        .HasForeignKey("YouKpiBackend.ModelsEntity.CzesciRysunkiInfo", "CzesciRysunkiId");
-
-                    b.Navigation("Czesc");
-
-                    b.Navigation("CzesciRysunki");
-                });
-
             modelBuilder.Entity("YouKpiBackend.ModelsEntity.MagazynCzesci", b =>
                 {
                     b.HasOne("YouKpiBackend.ModelsEntity.Czesci", "Element")
@@ -2252,18 +2188,11 @@ namespace YouKpiBackend.Migrations
 
             modelBuilder.Entity("YouKpiBackend.ModelsEntity.Czesci", b =>
                 {
-                    b.Navigation("CzesciRysunkiInfo");
-
                     b.Navigation("MagazynCzesci");
 
                     b.Navigation("PracownikCzasStep");
 
                     b.Navigation("ProduktCzesci");
-                });
-
-            modelBuilder.Entity("YouKpiBackend.ModelsEntity.CzesciRysunki", b =>
-                {
-                    b.Navigation("ProduktyRysunkiInfo");
                 });
 
             modelBuilder.Entity("YouKpiBackend.ModelsEntity.Komponenty", b =>

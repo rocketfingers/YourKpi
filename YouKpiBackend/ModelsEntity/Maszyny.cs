@@ -9,6 +9,7 @@ namespace YouKpiBackend.ModelsEntity
         public Maszyny()
         {
             PracownikCzasStep = new HashSet<PracownikCzasStep>();
+            //StepOfferWykonanie = new HashSet<StepOfferWykonanie>();
             StepsMachines = new HashSet<StepsMachines>();
         }
 
@@ -28,6 +29,7 @@ namespace YouKpiBackend.ModelsEntity
         public decimal? OsZ { get; set; }
 
         public virtual ICollection<PracownikCzasStep> PracownikCzasStep { get; set; }
+        //public virtual ICollection<StepOfferWykonanie> StepOfferWykonanie { get; set; }
         public virtual ICollection<StepsMachines> StepsMachines { get; set; }
     }
 }

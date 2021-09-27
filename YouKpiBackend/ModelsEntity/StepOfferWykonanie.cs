@@ -17,7 +17,10 @@ namespace YouKpiBackend.ModelsEntity
         public DateTime? ClosedOn { get; set; }
         public DateTime? StartedOn { get; set; }
         public int? ReasonCodeId { get; set; }
+        //public int? MachineId { get; set; }
+        //public string MachineId1 { get; set; }
 
+        //public virtual Maszyny MachineId1Navigation { get; set; }
         public virtual ReasonCodes ReasonCode { get; set; }
     }
 }

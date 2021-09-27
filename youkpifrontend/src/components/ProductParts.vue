@@ -140,6 +140,12 @@
                     ></v-text-field>
                   </template>
                   <template v-else>
+                    <template v-if="header.value == 'drawing'">
+                      <v-icon
+                        v-show="props.item.czesci.czesciRysunkiInfo.length > 0"
+                        >checked</v-icon
+                      >
+                    </template>
                     <template v-if="header.value == 'czescitpz'">
                       {{ props.item.czesci.tpz }}
                     </template>
@@ -186,6 +192,8 @@
               <td>
                 {{ calculateNoOfParts(props) }}
               </td>
+              <td></td>
+
               <td>
                 {{ calculateTpz(props) }}
               </td>
@@ -229,6 +237,7 @@ export default {
         { text: 'Id części', value: 'czesciId', visible: true },
         { text: 'Nazwa', value: 'czesciNazwa' },
         { text: 'Ilość sztuk', value: 'iloscSztuk', visible: true },
+        { text: 'Rysunek', value: 'drawing', visible: true },
         { text: 'TPZ', value: 'czescitpz' },
         { text: 'TJ', value: 'czescitj' },
         { text: 'Wart.BoM (cena*zuzycie)', value: 'componentValue' },

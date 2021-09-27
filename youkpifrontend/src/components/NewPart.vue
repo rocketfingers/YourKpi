@@ -3,7 +3,7 @@
     <v-card-text>
       <v-container grid-list-md>
         <v-layout row wrap justify-space-around>
-          <v-flex xs5>
+          <v-flex xs12 md5>
             <v-layout row wrap>
               <v-flex xs12>
                 <v-text-field
@@ -84,8 +84,17 @@
               </v-flex>
             </v-layout>
           </v-flex>
-          <v-flex xs1> </v-flex>
-          <v-flex xs5>
+          <v-flex xs12 md2>
+            <v-layout justify-space-around>
+              <FileManagement
+                title="Rysunek"
+                @editedFiles="filesChanged"
+                :files="partFiles"
+                :openFileUrl="openFileUrl"
+              ></FileManagement>
+            </v-layout>
+          </v-flex>
+          <v-flex xs12 md5>
             <v-layout row wrap>
               <v-flex xs12>
                 <v-text-field
@@ -194,11 +203,13 @@
 
 <script>
 import NewComponent from '../components/NewComponent'
+import FileManagement from '../components/FileManagement.vue'
 
 export default {
   name: 'NewPart',
   components: {
-    NewComponent: NewComponent
+    NewComponent: NewComponent,
+    FileManagement: FileManagement
   },
   props: {
     editedItem: Object,
@@ -207,10 +218,14 @@ export default {
     hideComponent: Boolean,
     readonly: Boolean,
     processes: Array,
-    parts: Array
+    parts: Array,
+    partFiles: Array
   },
   data () {
     return {
+      // api
+      openFileUrl: 'api/Parts/GetDrawingContent/',
+
       requiredRule: (v) => !!v || 'To pole jest wymagane',
       numberRule: val => {
         if (val < 0) return 'Wprowadz dodatnia wartosc'
@@ -253,11 +268,20 @@ export default {
       } else {
         this.notValidateComponent = false
       }
-      this.$emit('editedProduct', this.editedItem)
+      this.$emit('editedProduct', this.editedItem, this.partFiles)
+    },
+    partFiles (val) {
+      this.$emit('editedProduct', this.editedItem, this.partFiles)
     }
-
   },
   methods: {
+
+    filesChanged (files) {
+      if (files) {
+        this.partFiles = files
+      }
+    },
+
     editCurrentProductRes (editedProduct) {
       this.editedItem.komponent = editedProduct
     },
