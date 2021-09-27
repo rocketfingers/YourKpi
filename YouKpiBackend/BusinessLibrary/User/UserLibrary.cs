@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,20 @@ namespace YouKpiBackend.BusinessLibrary
     public class UserLibrary
     {
         readonly YoukpiContext _context;
+        readonly ILogger<UserLibrary> _logger;
 
-        public UserLibrary(YoukpiContext context)
+        public UserLibrary(YoukpiContext context, ILogger<UserLibrary> logger)
         {
             _context = context;
+            _logger = logger;
+        }
+
+        public async Task ChangePassword(int userId, string newPassword, int changedBy)
+        {
+            var user = await _context.Pracownik.FirstAsync(p => p.Id == userId);
+            user.Password = newPassword.HashSha256();
+            await _context.SaveChangesAsync();
+            _logger.LogInformation($"Password of user {userId} changed by {changedBy}");
         }
         public string BuildToken(UserPrepareTokenModel user)
         {
