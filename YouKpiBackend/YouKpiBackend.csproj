@@ -32,10 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ModelsEntity\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Resources\Chemitex logo - gradienty_m.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

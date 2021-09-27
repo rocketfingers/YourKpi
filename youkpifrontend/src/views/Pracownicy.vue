@@ -121,6 +121,33 @@
                               </template>
                             </v-text-field>
                           </v-flex>
+                          <v-flex xs12 v-if="editedIndex >= 0">
+                            <v-layout row wrap>
+                              <v-flex xs7>
+                                <v-text-field
+                                  v-model="password"
+                                  :append-icon="
+                                    show1 ? 'mdi-eye' : 'mdi-eye-off'
+                                  "
+                                  :type="show1 ? 'text' : 'password'"
+                                  name="input-10-1"
+                                  label="Nowe hasło"
+                                  hint="Przynajmniej 8 znaków"
+                                  counter
+                                  @click:append="showPassword = !showPassword"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-spacer></v-spacer>
+                              <v-flex xs4>
+                                <v-btn
+                                  round
+                                  color="primary"
+                                  @click="changePassword"
+                                  >zmiana hasła</v-btn
+                                >
+                              </v-flex>
+                            </v-layout>
+                          </v-flex>
                         </v-layout>
                       </v-flex>
                     </v-layout>
@@ -265,6 +292,9 @@ export default {
   },
   data () {
     return {
+      // password
+      password: '',
+      showPassword: false,
       // Settings
       title: 'Pracownicy',
       editTitle: 'Edytuj pracownikat',
@@ -273,6 +303,8 @@ export default {
       postNewApi: 'api/Users/Create',
       putEditApi: 'api/Users/Update',
       deleteApi: 'api/Users/Delete',
+      uriUserChangePassword: 'api/Users/UserChangePassword',
+
       defaultItem: {
         id: 0
       },
@@ -315,6 +347,25 @@ export default {
     }
   },
   methods: {
+    changePassword () {
+      if (this.password.length < 8) {
+        this.$dialog.error({
+          text: 'Nowe hasło musi mieć przynajmniej 8 znakó!',
+          title: 'Error'
+        })
+        return
+      }
+      v.axiosInstance.post(this.uriUserChangePassword, { userId: this.editedItem.Id, newPassword: this.password })
+        .then(
+          this.$dialog.info({
+            text: 'Hasło zostało zmienione',
+            title: 'Info'
+          })
+        )
+        .finally(
+          this.showDialog = false
+        )
+    },
     openUserProcessDialog (item) {
       this.editedItem = Object.assign({}, item)
       this.showDialogUserProcess = true

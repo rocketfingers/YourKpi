@@ -20,6 +20,7 @@
                   @duplicateProduct="duplicateProduct"
                   :productTypes="productTypes"
                   :parts="parts"
+                  :productFiles="currentProductDrawings"
                 ></NewProduct>
               </v-form>
             </v-flex>
@@ -29,6 +30,7 @@
           <v-btn
             large
             color="blue darken-1"
+            outlined
             text
             @click.native="showNewProductDialog = false"
           >
@@ -39,6 +41,7 @@
           <v-btn
             text
             large
+            outlined
             color="blue darken-1"
             @click.native="saveProductAction"
           >
@@ -194,6 +197,7 @@ export default {
       deleteProductApi: 'api/Products/Delete',
       getAllProductTypesApi: 'api/ProductTypes/GetAll',
       getAllPartsApi: 'api/Parts/GetAll',
+      uploadDrawingApi: 'api/Products/UploadFile',
 
       headers: [
         { text: 'Nazwa', value: 'productName' },
@@ -226,12 +230,19 @@ export default {
       emptyProduct: { produktCzesci: [] },
       showMsg: false,
       showMsgText: '',
-      parentProduct: {}
+      parentProduct: {},
+      currentProductDrawings: []
 
     }
   },
   computed: {},
-  watch: {},
+  watch: {
+    showNewProductDialog (val) {
+      if (val === false) {
+        this.currentProductDrawings = []
+      }
+    }
+  },
   methods: {
     initialise () {
       this.tableLoading = true
@@ -244,8 +255,7 @@ export default {
       this.$http.get(this.getAllPartsApi)
         .then(Response => {
           $this.parts = Response.data
-          // // eslint-disable-next-line no-debugger
-          // debugger
+
           $this.parts.forEach(p => {
             p.showName = p.id + ', ' + p.nazwa
             if (!p.komponent) {
@@ -329,6 +339,9 @@ export default {
       if (!this.$refs.newProductForm.validate()) {
         return false
       }
+      if (this.currentProductDrawings[0].name) {
+        this.addDrawing(this.currentProductDrawings[0])
+      }
       if (this.editedIndex > 0) {
         this.editProductAction(this.currentProduct)
         this.showNewProductDialog = false
@@ -337,13 +350,28 @@ export default {
       }
       return true
     },
+    addDrawing (drawing) {
+      if (drawing) {
+        const formData = new FormData()
+        formData.append('drawing', drawing)
+        formData.append('productId', this.currentProduct.id)
+
+        this.$http
+          .post(this.uploadDrawingApi, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then((result) => {
+          })
+      }
+    },
     addProduct (productTemplate) {
       if (productTemplate) {
         this.currentProduct = productTemplate
       } else {
         this.currentProduct = { id: 0, produktCzesci: [] }
       }
-
       this.editMode = false
       this.productTitle = 'Dodaj produkt'
       this.editedIndex = -1
@@ -377,9 +405,7 @@ export default {
         this.$http
           .post(this.addProductApi, product)
           .then((Result) => {
-            this.products.unshift(product)
             this.initialise()
-
             if (this.parentProduct) {
               this.showMsgText = 'Utworzono duplikat produktu'
               this.showMsg = true
@@ -400,10 +426,17 @@ export default {
       this.editMode = true
       this.editedIndex = index
       this.showNewProductDialog = true
+
       this.currentProduct = product
+      if (product.produktyRysunkiInfo[0]) {
+        this.currentProductDrawings.push(product.produktyRysunkiInfo[0])
+      } else {
+        this.currentProductDrawings = []
+      }
     },
-    editCurrentProductRes (editedProduct) {
+    editCurrentProductRes (editedProduct, currentProductDrawings) {
       this.currentProduct = editedProduct
+      this.currentProductDrawings = currentProductDrawings
     },
     duplicateProduct (product) {
       if (this.saveProductAction()) {

@@ -126,6 +126,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[ProduktyRysunki]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Projects]",
          "ObjectType": 0
       },
@@ -170,19 +174,19 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[vProdExe]",
-         "ObjectType": 3
-      },
-      {
          "Name": "[dbo].[vActivityHistory]",
          "ObjectType": 3
       },
       {
          "Name": "[dbo].[vOtifReport]",
          "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[vProdExe]",
+         "ObjectType": 3
       }
    ],
-   "UiHint": "youkpi.YouKPI",
+   "UiHint": "youkpi.youkpistaging",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
    "UseDbContextSplitting": false,

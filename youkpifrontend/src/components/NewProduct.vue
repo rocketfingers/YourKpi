@@ -92,6 +92,15 @@
             </v-flex>
           </v-btn>
         </v-layout>
+
+        <v-layout justify-space-around>
+          <FileManagement
+            title="Rysunek"
+            @editedFiles="filesChanged"
+            :files="productFiles"
+            :openFileUrl="openFileUrl"
+          ></FileManagement>
+        </v-layout>
       </v-flex>
       <v-flex xs5>
         <v-layout row wrap>
@@ -193,21 +202,27 @@
 
 <script>
 import ProductParts from '../components/ProductParts'
+import FileManagement from '../components/FileManagement.vue'
 
 export default {
   name: 'NewProduct',
   components: {
-    ProductParts: ProductParts
+    ProductParts: ProductParts,
+    FileManagement: FileManagement
   },
   props: {
     currentProduct: Object,
     productTypes: Array,
     editMode: Boolean,
     parts: Array,
-    readonly: Boolean
+    readonly: Boolean,
+    productFiles: Array
   },
   data () {
     return {
+      // api
+      openFileUrl: 'api/Products/GetDrawingContent/',
+
       requiredRule: (v) => !!v || 'To pole jest wymagane',
       numberRule: val => {
         if (val < 0) return 'Wprowadź wartość dodatnią'
@@ -229,7 +244,8 @@ export default {
         if (val < 0) return 'Wprowadz dodatnia wartosc'
         if (val > 500000) return 'Maksymalna wartość: 500 000'
         return true
-      }
+      },
+      newFileDialog: false
 
     }
   },
@@ -237,10 +253,18 @@ export default {
   },
   watch: {
     currentProduct (val) {
-      this.$emit('editedProduct', this.currentProduct)
+      this.$emit('editedProduct', this.currentProduct, this.productFiles)
+    },
+    productFiles (val) {
+      this.$emit('editedProduct', this.currentProduct, this.productFiles)
     }
   },
   methods: {
+    filesChanged (files) {
+      if (files) {
+        this.productFiles = files
+      }
+    },
     async duplicateProduct (product) {
       var res = await this.$dialog.confirm({
         text: 'Czy na pewno chcesz utworzyć duplikat dla:  ' + product.id + '? (aktualny produkt zostanie zapisany, zostaniesz przeniesiony do duplikatu)',
