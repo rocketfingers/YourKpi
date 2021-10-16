@@ -59,7 +59,11 @@
                   color="blue darken-1"
                   text
                   @click.native="save"
-                  >Zapisz<v-icon dark>save</v-icon></v-btn
+                  :disabled="isSaving"
+                >
+                  {{ !isSaving ? "Zapisz" : "Zapisywanie w toku!" }}
+
+                  <v-icon dark>save</v-icon></v-btn
                 >
               </v-card-actions>
             </v-card>
@@ -141,7 +145,7 @@ export default {
       deleteApi: 'api/Parts/Delete',
       getAllProcesses: 'api/Process/GetAll',
       uploadDrawingApi: 'api/Parts/UploadFile',
-
+      isSaving: false,
       defaultItem: {
         id: '',
         nazwa: '',
@@ -277,9 +281,15 @@ export default {
       if (!this.$refs.newPartForm.validate()) {
         return
       }
-      if (this.currentPartDrawings && this.currentPartDrawings[0].name) {
+      this.isSaving = true
+
+      if (this.currentPartDrawings && this.currentPartDrawings.length > 0 && this.currentPartDrawings[0].name) {
         this.addDrawing(this.currentPartDrawings[0])
+      } else {
+        this.addOrEditPart()
       }
+    },
+    addOrEditPart () {
       // Native form submission is not yet supported
       if (this.editedIndex > -1) {
         this.$http.put(this.putEditApi,
@@ -288,6 +298,7 @@ export default {
           Object.assign(this.data[this.editedIndex], this.editedItem)
           this.close()
           this.initialise()
+          this.isSaving = false
         })
       } else {
         this.$http.post(this.postNewApi,
@@ -297,6 +308,7 @@ export default {
             this.data.push(this.editedItem)
             this.close()
             this.initialise()
+            this.isSaving = false
           })
       }
     },
@@ -313,6 +325,7 @@ export default {
             }
           })
           .then((result) => {
+            this.addOrEditPart()
           })
       }
     },
@@ -322,8 +335,6 @@ export default {
       this.editedItem = Object.assign({ komponent: { } }, this.defaultItem)
       v.axiosInstance.get(this.getAllApi)
         .then(Response => {
-          // eslint-disable-next-line no-debugger
-          debugger
           this.data = Response.data
           this.data.forEach(p => {
             if (p.komponent != null) {

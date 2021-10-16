@@ -44,8 +44,9 @@
             outlined
             color="blue darken-1"
             @click.native="saveProductAction"
+            :disabled="isSaving"
           >
-            Zapisz
+            {{ !isSaving ? "Zapisz" : "Zapisywanie w toku!" }}
             <v-icon dark>save</v-icon>
           </v-btn>
         </v-card-actions>
@@ -229,6 +230,7 @@ export default {
       parts: [],
       emptyProduct: { produktCzesci: [] },
       showMsg: false,
+      isSaving: false,
       showMsgText: '',
       parentProduct: {},
       currentProductDrawings: []
@@ -339,16 +341,22 @@ export default {
       if (!this.$refs.newProductForm.validate()) {
         return false
       }
-      if (this.currentProductDrawings[0].name) {
+      this.isSaving = true
+      if (this.currentProductDrawings && this.currentProductDrawings.length > 0 && this.currentProductDrawings[0].name) {
         this.addDrawing(this.currentProductDrawings[0])
+      } else {
+        this.addOrEditProduct()
       }
+
+      return true
+    },
+    addOrEditProduct () {
       if (this.editedIndex > 0) {
         this.editProductAction(this.currentProduct)
         this.showNewProductDialog = false
       } else {
         this.addProductAction(this.currentProduct)
       }
-      return true
     },
     addDrawing (drawing) {
       if (drawing) {
@@ -363,6 +371,7 @@ export default {
             }
           })
           .then((result) => {
+            this.addOrEditProduct()
           })
       }
     },
@@ -406,6 +415,7 @@ export default {
           .post(this.addProductApi, product)
           .then((Result) => {
             this.initialise()
+            this.isSaving = false
             if (this.parentProduct) {
               this.showMsgText = 'Utworzono duplikat produktu'
               this.showMsg = true
@@ -428,7 +438,7 @@ export default {
       this.showNewProductDialog = true
 
       this.currentProduct = product
-      if (product.produktyRysunkiInfo[0]) {
+      if (product.produktyRysunkiInfo && product.produktyRysunkiInfo[0]) {
         this.currentProductDrawings.push(product.produktyRysunkiInfo[0])
       } else {
         this.currentProductDrawings = []
@@ -457,8 +467,11 @@ export default {
         .put(this.editProductApi, product)
         .then((Result) => {
           this.initialise()
+          this.isSaving = false
         })
-        .catch((e) => {})
+        .catch((e) => {
+
+        })
     },
     async deleteProduct (product, index) {
       var res = await this.$dialog.confirm({
