@@ -27,6 +27,10 @@ namespace YouKpiBackend
 
                 script = File.ReadAllText(Directory.GetCurrentDirectory() + @"\SQL\Views\VOtifReport.sql");
                 context.Database.ExecuteSqlRaw(script);
+
+                //Seed danych
+                //script = File.ReadAllText(Directory.GetCurrentDirectory() + @"\SQL\Seed\InsertMediumsDictionary.sql");
+                //context.Database.ExecuteSqlRaw(script);
             }
         }
     }

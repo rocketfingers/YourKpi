@@ -19,6 +19,7 @@ namespace YouKpiBackend.DbContexts
 
         public virtual DbSet<BusiessArea> BusiessArea { get; set; }
         public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<MediumsDictionary> MediumsDictionary { get; set; }
         public virtual DbSet<CompanyBasicInfo> CompanyBasicInfo { get; set; }
         public virtual DbSet<Czesci> Czesci { get; set; }
         public virtual DbSet<Komponenty> Komponenty { get; set; }
@@ -75,6 +76,15 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(40)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<MediumsDictionary>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(150)
                     .IsUnicode(false);
             });
 
@@ -608,9 +618,9 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<Offer>(entity =>
             {
-                 entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.Name)
+                   .IsRequired()
+                   .HasMaxLength(50);
 
                 entity.Property(e => e.OfferDate).HasColumnType("datetime");
 
@@ -961,7 +971,7 @@ namespace YouKpiBackend.DbContexts
 
             modelBuilder.Entity<ProduktyRysunki>(entity =>
             {
-            
+
             });
             modelBuilder.Entity<CzesciRysunkiInfo>(entity =>
             {

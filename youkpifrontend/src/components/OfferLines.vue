@@ -192,11 +192,20 @@
                       v-model="props.item.w"
                       :rules="[requiredRule]"
                     ></v-text-field>
-                    <v-text-field
+                    <!-- <v-text-field
                       v-else-if="header.value == 'medium'"
                       v-model="props.item.medium"
                       :rules="[requiredRule]"
-                    ></v-text-field>
+                    ></v-text-field> -->
+                    <v-autocomplete
+                      v-if="header.value == 'medium'"
+                      v-model="props.item.medium"
+                      :rules="[requiredRule]"
+                      :items="mediums"
+                      item-text="name"
+                      item-value="name"
+                      color
+                    ></v-autocomplete>
                     <v-text-field
                       v-else-if="header.value == 'additionalEquipment'"
                       v-model="props.item.additionalEquipment"
@@ -290,6 +299,9 @@ export default {
   },
   data () {
     return {
+      // api
+      getAllMediums: 'api/Mediums/GetAll',
+
       headers: [
         // { text: 'Id', value: 'tempId', visible: true },
         { text: 'Rozwiń', value: 'expand', visible: true },
@@ -325,8 +337,8 @@ export default {
       showProcessSelectorDialog: false,
       processesSelectorTitle: 'Wybierz procesy',
       currentOfferLine: {},
-      expanded: []
-
+      expanded: [],
+      mediums: []
     }
   },
   computed: {
@@ -356,6 +368,16 @@ export default {
 
   },
   methods: {
+    getMediums () {
+      var $this = this
+      this.$http
+        .get(this.getAllMediums)
+        .then((Response) => {
+          $this.mediums = Response.data
+        })
+        .catch((e) => {
+        })
+    },
     changeProduct (item) {
       // // eslint-disable-next-line no-debugger
       // debugger
@@ -434,8 +456,6 @@ export default {
     },
     editOfferLineProcesses (offerLine, selectedProcesses) {
       if (this.currentOffer.offerLines) {
-        // eslint-disable-next-line no-debugger
-        debugger
         this.currentOffer.offerLines.forEach(ol => {
           if (ol.id === offerLine.id && ol.productId === offerLine.productId) {
             ol.offerLineProcess = []
@@ -463,6 +483,7 @@ export default {
     }
   },
   created () {
+    this.getMediums()
   },
   destroyed () {
   }
