@@ -80,9 +80,16 @@
         </v-layout>
       </v-flex>
     </v-layout>
+
     <v-layout>
       <v-flex xs12>
         <Steps :currentProcess="editedProcess" :readonly="false"> </Steps>
+      </v-flex>
+    </v-layout>
+    <v-layout>
+      <v-flex xs12>
+        <Competences :currentProcess="editedProcess" :readonly="false">
+        </Competences>
       </v-flex>
     </v-layout>
   </div>
@@ -90,11 +97,13 @@
 
 <script>
 import Steps from '../components/Steps'
+import Competences from '../components/Competences'
 
 export default {
   name: 'NewProduct',
   components: {
-    Steps: Steps
+    Steps: Steps,
+    Competences: Competences
   },
   props: {
     editedProcess: Object,

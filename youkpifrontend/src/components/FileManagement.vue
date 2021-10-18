@@ -109,8 +109,6 @@ export default {
   methods: {
     assignSelectedFiles (val) {
       this.selectedFileList = (val && val.length > 0 && val[0] !== {}) ? val : []
-      // eslint-disable-next-line no-debugger
-      debugger
     },
     changeFilesState (fieldName, fileList) {
       this.selectedFileList = fileList

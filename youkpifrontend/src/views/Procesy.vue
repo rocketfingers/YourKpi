@@ -1,5 +1,37 @@
 <template>
   <div>
+    <v-dialog v-model="showCompetencesDialog" max-width="1800" persistent>
+      <v-card>
+        <v-toolbar dark elevation-4 color="primary lighten-1">
+          <span class="headline"
+            >Wymagane kompetencje dla procesu:
+            <b> {{ editedProcess.nazwaProcesu }}</b></span
+          >
+          <v-spacer></v-spacer>
+          <v-btn icon @click="showCompetencesDialog = false" dark>
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-layout row wrap justify-space-around class="ma-4">
+          <v-flex xs11>
+            <Competences :currentProcess="editedProcess" :readonly="true">
+            </Competences>
+          </v-flex>
+        </v-layout>
+        <v-card-actions class="blue lighten-5">
+          <v-spacer></v-spacer>
+          <v-btn
+            large
+            color="blue darken-1"
+            @click.native="showCompetencesDialog = false"
+          >
+            Zamknij
+            <v-icon dark>close</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <v-dialog v-model="showNewDialog" max-width="1800" persistent>
       <v-card>
         <v-toolbar dark elevation-4 color="primary lighten-1">
@@ -82,6 +114,23 @@
                     >fa-arrow-up</v-icon
                   >
                 </td>
+                <td :key="index" v-else-if="header.value === 'competences'">
+                  <v-layout justify-space-between>
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on }">
+                        <v-icon
+                          v-show="props.item.processCompetences.length > 0"
+                          v-on="on"
+                          @click="showCompetences(props.item, index)"
+                          color="green"
+                          class="mr-2"
+                          >fa-graduation-cap</v-icon
+                        >
+                      </template>
+                      <span>Kompetencje</span>
+                    </v-tooltip>
+                  </v-layout>
+                </td>
                 <td :key="index" v-else-if="header.value === 'actions'">
                   <v-layout justify-space-between>
                     <v-flex xs4>
@@ -137,12 +186,14 @@
 <script>
 import Steps from '../components/Steps'
 import NewProcess from '../components/NewProcess'
+import Competences from '../components/Competences'
 
 export default {
   name: 'Produkty',
   components: {
     Steps: Steps,
-    NewProcess: NewProcess
+    NewProcess: NewProcess,
+    Competences: Competences
   },
   props: {},
   data () {
@@ -152,7 +203,7 @@ export default {
       getAllProcesses: 'api/Process/GetAll',
       deleteProcessApi: 'api/Process/Delete',
       editProcessApi: 'api/Process/Update',
-
+      showCompetencesDialog: false,
       expanded: [],
       headers: [
         { text: 'Rozwiń', value: 'expand', visible: true },
@@ -161,6 +212,7 @@ export default {
         { text: 'Business area', value: 'businessArea', visible: true },
         { text: 'Nazwa procesu', value: 'nazwaProcesu', visible: true },
         { text: 'Typ zlecenia', value: 'typZlecenia', visible: true },
+        { text: 'Kompetencje', value: 'competences', visible: true },
         { text: 'Akcje', value: 'actions', visible: true }
 
       ],
@@ -187,13 +239,9 @@ export default {
         .get(this.getAllProcesses)
         .then((Response) => {
           $this.items = Response.data
-          // eslint-disable-next-line no-debugger
-          debugger
           $this.items.forEach(p => {
             p.showName = p.id + ', ' + p.nazwaProcesu
             p.procesyPowiazane = []
-            // alert(p.processesProcessProcess.length)
-
             p.processesProcessProcess.forEach(pprp => {
               p.procesyPowiazane.push(pprp.relatedProcessId)
             })
@@ -207,6 +255,11 @@ export default {
     expandRow (item) {
       item.expand(!item.isExpanded)
     },
+    showCompetences (item, index) {
+      this.editedIndex = index
+      this.editedProcess = item
+      this.showCompetencesDialog = true
+    },
     saveProcessAction () {
       if (!this.$refs.newProcessForm.validate()) {
         return
@@ -218,11 +271,9 @@ export default {
         })
       } else {
         var relatedProcesses = []
-        // eslint-disable-next-line no-debugger
-        debugger
         var $this = this
         this.editedProcess.procesyPowiazane.forEach(p => {
-          var processInRelated = $this.editedProcess.processesProcessProcess.find(ppp => ppp.relatedProcessId === p)
+          var processInRelated = $this.editedProcess?.processesProcessProcess?.find(ppp => ppp.relatedProcessId === p)
           if (!processInRelated) {
             relatedProcesses.push(
               {

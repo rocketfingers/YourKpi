@@ -14,6 +14,7 @@ namespace YouKpiBackend.ModelsEntity
             ProcessesProcessProcess = new HashSet<ProcessesProcess>();
             ProcessesProcessRelatedProcess = new HashSet<ProcessesProcess>();
             Steps = new HashSet<Steps>();
+            ProcessCompetences = new HashSet<ProcessCompetences>();
         }
 
         public string Id { get; set; }
@@ -29,5 +30,6 @@ namespace YouKpiBackend.ModelsEntity
         public virtual ICollection<ProcessesProcess> ProcessesProcessProcess { get; set; }
         public virtual ICollection<ProcessesProcess> ProcessesProcessRelatedProcess { get; set; }
         public virtual ICollection<Steps> Steps { get; set; }
+        public virtual ICollection<ProcessCompetences> ProcessCompetences { get; set; }
     }
 }

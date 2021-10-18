@@ -3,12 +3,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
-using YouKpiBackend.ViewModels;
 
 namespace YouKpiBackend.Controllers
 {
@@ -27,7 +25,13 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Process.Include(p => p.Steps).Include(p => p.ProcessesProcessProcess).ToListAsync();
+                var res = await _ctx.Process
+                    .Include(p => p.Steps)
+                    .Include(p => p.ProcessesProcessProcess)
+                    .Include(p => p.ProcessCompetences)
+                    .Include(p => p.ProcessCompetences)
+                    .ThenInclude(p => p.CompetenceLevel)
+                    .ToListAsync();
                 return Ok(res);
             }
             catch (Exception ex)
@@ -67,7 +71,11 @@ namespace YouKpiBackend.Controllers
             }
             try
             {
-                var processEntity = _ctx.Process.Include(p => p.Steps).Include(p => p.ProcessesProcessProcess).FirstOrDefault(c => c.Id == entity.Id);
+                var processEntity = _ctx.Process
+                    .Include(p => p.Steps)
+                    .Include(p => p.ProcessesProcessProcess)
+                    .Include(p => p.ProcessCompetences)
+                    .FirstOrDefault(c => c.Id == entity.Id);
                 processEntity.Steps.ToList().ForEach(p =>
                 {
                     _ctx.Entry(p).State = EntityState.Deleted;
@@ -86,6 +94,18 @@ namespace YouKpiBackend.Controllers
                 entity.ProcessesProcessProcess.ToList().ForEach(p =>
                 {
                     _ctx.ProcessesProcess.Add(p);
+                });
+
+                processEntity.ProcessCompetences.ToList().ForEach(p =>
+                {
+                    _ctx.Entry(p).State = EntityState.Deleted;
+                });
+
+                entity.ProcessCompetences.ToList().ForEach(p =>
+                {
+                    p.ProcessId = processEntity.Id;
+                    p.CompetenceLevel = null;
+                    _ctx.ProcessCompetences.Add(p);
                 });
 
                 await _ctx.SaveChangesAsync();

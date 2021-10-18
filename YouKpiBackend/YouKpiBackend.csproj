@@ -49,9 +49,5 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="SQL\Seed\" />
-  </ItemGroup>
-
 
 </Project>

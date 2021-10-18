@@ -19,20 +19,23 @@ namespace YouKpiBackend
             using (var serviceProvider = services.BuildServiceProvider())
             {
                 var context = serviceProvider.GetService<YoukpiContext>();
-                string script = File.ReadAllText(Directory.GetCurrentDirectory() + @"\SQL\Views\VActivityHistory.sql");
-                context.Database.ExecuteSqlRaw(script);
-
-                script = File.ReadAllText(Directory.GetCurrentDirectory() + @"\SQL\Views\VProdExe.sql");
-                context.Database.ExecuteSqlRaw(script);
-
-                script = File.ReadAllText(Directory.GetCurrentDirectory() + @"\SQL\Views\VOtifReport.sql");
-                context.Database.ExecuteSqlRaw(script);
-
-                //Seed danych
-                //script = File.ReadAllText(Directory.GetCurrentDirectory() + @"\SQL\Seed\InsertMediumsDictionary.sql");
-                //context.Database.ExecuteSqlRaw(script);
+                new List<string>()
+                {
+                    //Seed widoków
+                    @"\SQL\Views\VActivityHistory.sql",
+                    @"\SQL\Views\VProdExe.sql",
+                    @"\SQL\Views\VOtifReport.sql"
+                    //Seed danych
+                    //@"\SQL\Seed\InsertMediumsDictionary.sql",
+                    //@"\SQL\Seed\InsertCompetencesLevels.sql"
+                }.ForEach(scriptPath => ExecuteScriptFile(scriptPath, context));
             }
         }
+
+        private static void ExecuteScriptFile(string relPath, YoukpiContext context)
+        {
+            string script = File.ReadAllText(Directory.GetCurrentDirectory() + relPath);
+            context.Database.ExecuteSqlRaw(script);
+        }
     }
-    
 }

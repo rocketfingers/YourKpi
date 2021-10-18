@@ -20,6 +20,8 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<BusiessArea> BusiessArea { get; set; }
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<MediumsDictionary> MediumsDictionary { get; set; }
+        public virtual DbSet<CompetencesLevels> CompetencesLevels { get; set; }
+        public virtual DbSet<ProcessCompetences> ProcessCompetences { get; set; }
         public virtual DbSet<CompanyBasicInfo> CompanyBasicInfo { get; set; }
         public virtual DbSet<Czesci> Czesci { get; set; }
         public virtual DbSet<Komponenty> Komponenty { get; set; }
@@ -86,6 +88,45 @@ namespace YouKpiBackend.DbContexts
                 entity.Property(e => e.Name)
                     .HasMaxLength(150)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<CompetencesLevels>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Nazwa)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<ProcessCompetences>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Nazwa)
+                 .IsUnicode(false);
+
+                entity.Property(e => e.Wartosc)
+                 .IsUnicode(false);
+                 
+                entity.Property(e => e.Cel)
+                 .IsUnicode(false);
+
+                entity.Property(e => e.OkresOceny)
+                 .IsUnicode(false);
+
+                entity.Property(e => e.Typ)
+                .IsUnicode(false);
+
+                entity.HasOne(d => d.Processes)
+                  .WithMany(p => p.ProcessCompetences)
+                  .HasForeignKey(d => d.ProcessId)
+                  .HasConstraintName("FK_PROCESS_PROCESSCOMPETENCE_ID");
+
+                entity.HasOne(d => d.CompetenceLevel)
+                    .WithMany(p => p.ProcessCompetences)
+                    .HasForeignKey(d => d.CompetenceLevelId)
+                    .HasConstraintName("FK_PROCESS_COMPETENCELEVEL_ID");
             });
 
             modelBuilder.Entity<Client>(entity =>

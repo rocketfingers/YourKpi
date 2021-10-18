@@ -192,11 +192,6 @@
                       v-model="props.item.w"
                       :rules="[requiredRule]"
                     ></v-text-field>
-                    <!-- <v-text-field
-                      v-else-if="header.value == 'medium'"
-                      v-model="props.item.medium"
-                      :rules="[requiredRule]"
-                    ></v-text-field> -->
                     <v-autocomplete
                       v-if="header.value == 'medium'"
                       v-model="props.item.medium"
