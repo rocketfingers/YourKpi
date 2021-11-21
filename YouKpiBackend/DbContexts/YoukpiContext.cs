@@ -51,6 +51,8 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<ProcessesProcess> ProcessesProcess { get; set; }
         public virtual DbSet<VProdExe> VProdExe { get; set; }
         public virtual DbSet<ProduktCzesci> ProduktCzesci { get; set; }
+        public virtual DbSet<ProcessArea> ProcessArea { get; set; }
+        public virtual DbSet<ProcessSubject> ProcessSubject { get; set; }
         public virtual DbSet<Produkty> Produkty { get; set; }
         public virtual DbSet<ProduktyRysunki> ProduktyRysunki { get; set; }
         public virtual DbSet<ProduktyRysunkiInfo> ProduktyRysunkiInfo { get; set; }
@@ -866,6 +868,7 @@ namespace YouKpiBackend.DbContexts
                     .IsUnicode(false)
                     .IsFixedLength()
                     .HasDefaultValueSql("('R')");
+
             });
 
             modelBuilder.Entity<ProcessesProcess>(entity =>
@@ -958,6 +961,13 @@ namespace YouKpiBackend.DbContexts
                     .HasConstraintName("ProduktCzesci_Produkty_FK");
             });
 
+            modelBuilder.Entity<ProcessArea>(entity =>
+            {
+            });
+
+            modelBuilder.Entity<ProcessSubject>(entity =>
+            {
+            });
             modelBuilder.Entity<Produkty>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");

@@ -24,6 +24,12 @@ namespace YouKpiBackend.ModelsEntity
         public string KontoGłówne { get; set; }
         public string TypZlecenia { get; set; }
 
+        public int? ProcessSubjectId { get; set; }
+        public virtual ProcessSubject ProcessSubject { get; set; }
+
+        public int? ProcessAreaId { get; set; }
+        public virtual ProcessArea ProcessArea { get; set; }
+
         public virtual ICollection<OfferLineProcess> OfferLineProcess { get; set; }
         public virtual ICollection<OfferProcess> OfferProcess { get; set; }
         public virtual ICollection<PracownikCzasStep> PracownikCzasStep { get; set; }

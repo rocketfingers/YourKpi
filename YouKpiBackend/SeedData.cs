@@ -28,6 +28,9 @@ namespace YouKpiBackend
                     //Seed danych
                     //@"\SQL\Seed\InsertMediumsDictionary.sql",
                     //@"\SQL\Seed\InsertCompetencesLevels.sql"
+                    //@"\SQL\Seed\InsertProcessSubjects.sql"
+                    //@"\SQL\Seed\InsertProcessAreas.sql"
+
                 }.ForEach(scriptPath => ExecuteScriptFile(scriptPath, context));
             }
         }
