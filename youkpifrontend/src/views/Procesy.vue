@@ -48,6 +48,8 @@
                 :editedProcess="editedProcess"
                 :editMode="editMode"
                 :processes="items"
+                :processesSubjects="processesSubjects"
+                :processesAreas="processesAreas"
                 @editedProcess="editedProcessRes"
               ></NewProcess>
             </v-form>
@@ -201,6 +203,8 @@ export default {
       // api
       addApi: 'api/Process/Create',
       getAllProcesses: 'api/Process/GetAll',
+      getAllProcessesAreas: 'api/ProcessArea/GetAll',
+      getAllProcessesSubjects: 'api/ProcessSubject/GetAll',
       deleteProcessApi: 'api/Process/Delete',
       editProcessApi: 'api/Process/Update',
       showCompetencesDialog: false,
@@ -223,7 +227,9 @@ export default {
       title: 'Dodaj proces',
       editedProcess: { steps: [] },
       editedIndex: -1,
-      editMode: false
+      editMode: false,
+      processesAreas: [],
+      processesSubjects: []
     }
   },
   computed: {},
@@ -232,6 +238,22 @@ export default {
     initialise () {
       this.tableLoading = true
       this.getProcesses()
+      this.getProcessesAreasFromApi()
+      this.getProcessesSubjectsFromApi()
+    },
+    getProcessesAreasFromApi () {
+      this.$http
+        .get(this.getAllProcessesAreas)
+        .then((Response) => {
+          this.processesAreas = Response.data
+        })
+    },
+    getProcessesSubjectsFromApi () {
+      this.$http
+        .get(this.getAllProcessesSubjects)
+        .then((Response) => {
+          this.processesSubjects = Response.data
+        })
     },
     getProcesses () {
       var $this = this
@@ -336,6 +358,8 @@ export default {
       this.editMode = true
       this.editedIndex = index
       this.showNewDialog = true
+      // // eslint-disable-next-line no-debugger
+      // debugger
       this.editedProcess = process
     },
     editedProcessRes (editedProcess) {

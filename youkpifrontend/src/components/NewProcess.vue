@@ -33,6 +33,19 @@
               v-model="editedProcess.businessArea"
             ></v-text-field>
           </v-flex>
+          <v-flex xs12>
+            <v-autocomplete
+              outlined
+              color
+              :rules="[requiredRule]"
+              label="Process area"
+              :items="processesAreas"
+              item-value="id"
+              item-text="nazwa"
+              required
+              v-model="editedProcess.processAreaId"
+            ></v-autocomplete>
+          </v-flex>
         </v-layout>
       </v-flex>
       <v-flex xs1> </v-flex>
@@ -77,6 +90,19 @@
               v-model="editedProcess.procesyPowiazane"
             ></v-autocomplete>
           </v-flex>
+          <v-flex xs12>
+            <v-autocomplete
+              outlined
+              color
+              :rules="[requiredRule]"
+              label="Process subject"
+              :items="processesSubjects"
+              item-value="id"
+              item-text="nazwa"
+              required
+              v-model="editedProcess.processSubjectId"
+            ></v-autocomplete>
+          </v-flex>
         </v-layout>
       </v-flex>
     </v-layout>
@@ -108,7 +134,9 @@ export default {
   props: {
     editedProcess: Object,
     editMode: Boolean,
-    processes: Array
+    processes: Array,
+    processesAreas: Array,
+    processesSubjects: Array
   },
   data () {
     return {

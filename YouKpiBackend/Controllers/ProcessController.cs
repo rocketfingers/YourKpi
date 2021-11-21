@@ -31,6 +31,8 @@ namespace YouKpiBackend.Controllers
                     .Include(p => p.ProcessCompetences)
                     .Include(p => p.ProcessCompetences)
                     .ThenInclude(p => p.CompetenceLevel)
+                    .Include(p => p.ProcessSubject)
+                    .Include(p =>p.ProcessArea)
                     .ToListAsync();
                 return Ok(res);
             }
@@ -83,6 +85,8 @@ namespace YouKpiBackend.Controllers
 
                 processEntity.TypZlecenia = entity.TypZlecenia;
                 processEntity.BusinessArea = entity.BusinessArea;
+                processEntity.ProcessSubjectId = entity.ProcessSubjectId;
+                processEntity.ProcessAreaId = entity.ProcessAreaId;
                 processEntity.NazwaGrupyProcesu = entity.NazwaGrupyProcesu;
                 processEntity.NazwaProcesu = entity.NazwaProcesu;
                 processEntity.Steps = entity.Steps;
