@@ -24,12 +24,12 @@ namespace YouKpiBackend
                     //Seed widoków
                     @"\SQL\Views\VActivityHistory.sql",
                     @"\SQL\Views\VProdExe.sql",
-                    @"\SQL\Views\VOtifReport.sql"
+                    @"\SQL\Views\VOtifReport.sql",
                     //Seed danych
                     //@"\SQL\Seed\InsertMediumsDictionary.sql",
                     //@"\SQL\Seed\InsertCompetencesLevels.sql"
-                    //@"\SQL\Seed\InsertProcessSubjects.sql"
-                    //@"\SQL\Seed\InsertProcessAreas.sql"
+                    @"\SQL\Seed\InsertProcessSubjects.sql",
+                    @"\SQL\Seed\InsertProcessAreas.sql"
 
                 }.ForEach(scriptPath => ExecuteScriptFile(scriptPath, context));
             }

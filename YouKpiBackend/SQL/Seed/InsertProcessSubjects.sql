@@ -1,953 +1,1152 @@
-﻿INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('abandonment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('absence');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('account');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('assets');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('acquisition ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('action(s)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('activities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('activities/events');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('analyses');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('adjustments');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('adjustments/deductions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('benefits');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('responsibilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('metrics');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('advances');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('baselines');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('goals');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('agreements/contracts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('alerts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('alignment principles');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('alliance ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('allocations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('system');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('deductions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('applicant data');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('applicant information');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('applicant record');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('approaches');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('approval limits');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('approval responsibilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('AR policies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('AR reports');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('architectural exceptions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('architecture conformance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('architecture governance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('architecture principles');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('asset ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resources');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('audit ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('audits');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('authentication mechanisms');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('authorization');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('availability');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('available skills');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('B strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('back plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('back procedures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('background information');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('balances');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('bank ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('bargaining process');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('baseline forecasts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('baseline metrics');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('benchmark');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('benefit');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('best practices');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('billing data');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('bills of material');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('board');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('boarding program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('brand');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('budget');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('building');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('bundling opportunities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('Business ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('buy decision');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('buy solution');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('candidate');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('capabilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('capacities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('capital program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('card accounts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('card requests');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('cases');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('cash');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('cause analysis');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('cause(s)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('center accounting');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('certification');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('champion(s)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('change');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('channel');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('chargeback invoices');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('claim');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('claims');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('collect data');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('committee');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('communication ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('community relations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('compensation plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('competencies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('competition');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('competitive analysis');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('competitors');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('compliance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('component criteria');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('component maintenance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('component portfolio');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('component reuse');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('components');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('concepts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('consensus forecast');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('constrained plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('constraints');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('construction permissions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('construction resources');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('construction strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('contacts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('content strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('contingency plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('continuity');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('contract manufacturers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('contract terms');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('contracts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('control');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('copyright needs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('core competencies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('corporate incentives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('cost drivers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('cost effectiveness');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('cost improvement');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('cost management');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('costs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('credit');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('credit card');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('credit cards');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('credit limits');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('credit policies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('credit reviews');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('critical activities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('cultural changes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('cultural issues');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('currencies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('currency conversion');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('currency transactions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('business');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('processes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('customer');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('customers and accounts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('website');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('customs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('costing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('cycle time');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('damage cause');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('data');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('deal options');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('default accounts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('accounts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('Deliver Analytics');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('delivery');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('demand ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('forecasts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('demographics');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('demotion process');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('deployment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('depreciation expense');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('design activities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('design specifications');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('design team');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('destination');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('detailed schedule');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('measures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('guidelines');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('lifecycle');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('partners');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('development ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('direction');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('directors');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('discovery research');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('dispatch plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('dispute cases');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('distribute payments');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('distribution requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('diversity plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('divesture options');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('documents');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('doskonalenie');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('drawings');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('duty');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('earnings information');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('ecological concerns');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('economic trends');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('EFTs)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('EHS performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('EHS policy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('EHS program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('elective reviews');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('electronic commerce');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('emerging regulations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('employee');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('engagement rules');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('engagement surveys');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('enterprise');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('enterprise architecture');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('enterprise quality');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('enterprise risk');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('environmental readiness');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('EQMS performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('equipment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('escalation mechanisms');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('establish contracts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('ethical issues');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('ethics');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('ethics policies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('evaluate feasibility');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('evaluate success');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('events');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('exception governance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('exceptions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('exchange risk');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('exchange trades');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('roadmap');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('controls');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('models');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('exit strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('expatriates');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('expense policies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('expense reimbursements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('experience');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('experience qualifications');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('experience requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('experience strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('experts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('exports and imports');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('exposure risk');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('external environment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('External Relationships');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('external reviews');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('external services');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('facilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('failures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('feasible alternatives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('feedback');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('financial forecasts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('financial health');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('financial performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('financial reporting');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('Financial Resources');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('financial review');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('financial statements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('financial systems');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('fixed costs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('flow forecasts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('force');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('forecast');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('forecast accuracy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('forecasting approach');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('foreign taxes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('framework');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('fraudulent claims');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('fulfillment process');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('fulfillment schedule');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('fulfillment transactions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('function');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('function risk');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('functional processes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('functional requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('funding models');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('funding options');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('funds/consolidation');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('future state');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('gain/loss');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('gap analysis');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('general accounting');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('goods inventory');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('goods management');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('governance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('government bodies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('government relations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('groups');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('hazards');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('hedge currency');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('hedges');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('HR');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('Human Capital');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('ideas');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('implementation ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('improvement ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('incentive plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('incentives plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('incoming feedback');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('indicators');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('indicators (metrics)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('induction program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('industry ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('influencing factors');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('information');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('infrastructure');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('inquiries');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('inspection documents');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('installation testing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('insurance coverage');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('integration');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('intelligence analysis');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('intercompany transactions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('intermediary relationships');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('internal approvals');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('internal audits');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('internal capabilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('internal controls');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('internal environment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('internal operations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('internal parties');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('internal reviews');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('international rates');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('into system');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('introduction/launch');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('inventory accounting');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('investment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('issue');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('issuer exposure');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('IT');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('job descriptions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('job requisitions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('job schedule');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('journal entries');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('journey maps');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('key account');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('key initiatives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('key processes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('KM approaches');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('KM capabilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('KM initiatives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('KM methodologies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('KM strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('KM) capability');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('knowledge');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('knowledge repository');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('labor policies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('labor relations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('launch review');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('law programs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('layout constraints');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('leadership programs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('ledger');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('legal aspects');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('legal services');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('lender relations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('level agreement');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('level agreements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('level measures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('level plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('level risks');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('licenses');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('life cycle');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('lifecycle planning');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('lifetime value');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('line schedule');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('liquidity');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('load plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('load plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('lobby activities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('logistics network');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('logistics strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('lot use');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('loyalty program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('maintenance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('offer');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('manage hypotheses');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('manage meetings');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('manage personas');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('manage pricing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management accounting');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management activities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management adjustments');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management approaches');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management consolidation');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management constraints');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management framework');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management goals');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management governance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management measures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management mechanisms');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management methodologies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management models');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management partnerships');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management process');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management processes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management reports');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management roles');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management strategies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management system');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('management training');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('managing relationships');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('manual checks');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('manufacturing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('manufacturing goals');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('market');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('marketing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('master data');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('master files');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('master lists');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('material classification');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('material flow');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('material inventory');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('material receipts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('material specifications');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('materials');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('materials plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('materials policies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('materials strategies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('measurement methods');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('mechanisms');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('media relations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('meet demand');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('members');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('merger options');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('methods');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('mission');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('mission statement');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('mitigate');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('mitigation measures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('model');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('model governance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('monitoring frequency');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('motivation programs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('needs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('net profit');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('netting transactions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('network-wide');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('new assets');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('new branding');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('new organization');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('new products');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('new roles');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('new technologies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('next steps');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('non-conformance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('notification outcome');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('numbering system');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('objectives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('objectives/targets');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('obtain funding');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('offering modifications');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('offers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('offers accordingly');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('online systems');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('operating procedures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('operating units');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('operational availability');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('operational capabilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('operational status');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('operations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('opportunities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('opportunity pipeline');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('optimization');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('option');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('options');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('order fulfillment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('order information');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('organization');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('organizational characteristics');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('organizational design');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('organizational goals');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('organizational units');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('other hours');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('other initiatives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('outbound product');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('outbound transportation');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('outcomes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('outside counsel');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('outsourcing needs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('outsourcing policies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('packaging strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('party details');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('paths');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('pay');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('payable (AP)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('payables taxes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('payment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('payments');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('payroll');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('payroll ');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('payroll taxes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('penetration testing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('people objectives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('performance assessments');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('performance indicators');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('performance management');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('performance measures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('performance metrics');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('performance objectives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('performance program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('performance strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('performance targets');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('performance trends');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('personnel accounts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('physical positions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('Physical Products');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('pipeline');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('plan attainment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('planning constraints');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('planning/strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('policies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('policies and offerings');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('policy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('Poprawa Procesu');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('portfolio');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('portfolio adjustments');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('portfolio governance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('portfolio strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('positioning');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('potential customers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('potential impact');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('potential partners');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('PR) strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('press releases');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('prevention program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('price changes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('pricing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('pricing analysis');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('pricing performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('pricing plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('pricing programs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('pricing strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('pricing targets');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('priorities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('priority');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('procedure');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('procedure workflow');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('procedures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('process');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('process assessment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('process collections');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('process control');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('process efficiency');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('process eliminations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('process exceptions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('process framework');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('process frameworks');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('process ownership');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('process performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('procurement plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product copy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product costing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product delivered');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product images');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product mix');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product profitability');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product repair');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product revenue');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product servicing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product upgrades');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('product’ offering');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('production performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('production process');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('production runs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('production schedule');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('productive assets');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('products');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('products and services');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('products/services');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('profitability analysis');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('program execution');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('programs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('project');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('project accounting');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('project approval');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('project management approach');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('project outcomes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('project plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('project plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('Project resources');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('project scope');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('projects');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('promotional activities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('promotions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('property concerns');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('prototypes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('provide support');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('purchase orders');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('purchasing requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quality activities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quality characteristics');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quality controls');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quality partnerships');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quality plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quality requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quality samples');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quality specifications');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quality strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quality targets');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quality testing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('quotes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('rate risk');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('rate trades');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('rate transactions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('recall');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('recall effectiveness');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('recall performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('recall strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('recall termination');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('receivable (AR)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('receivable entries');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('record reason');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('recovery action');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('recovery claims');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('recovery workout');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('recruitment channels');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('recruitment program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('recruitment vendors');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('redesign workshops');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('referral programs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('regulatory agencies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('regulatory audits');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('regulatory compliance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('regulatory issues');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('regulatory requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('re-hire');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('reject decision');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('related communications');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('related entries');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('relations program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('relationships');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('release compliance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('release deployment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('release impact');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('release outcome');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('release risk');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('release standards');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('reliability problems');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('re-manufacturing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('remedial actions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('remediate risk');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('remediation efforts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('remediation plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('remediation requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('repair expenses');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('repairs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('replenishment planning');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('report performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('reporting');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('reporting process');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('reporting processes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('reports');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('repositories');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('require change');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('required capabilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('required competencies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('required resources');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('requisition dates');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('requisitions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('research and assessments');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('research initiatives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('research projects');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resilience strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('Resiliency');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resolution');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resolve threats');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resource administration');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resource allocation');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resource availability');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resource demand');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resource deployment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resource plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resource planning');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resource requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('resources strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('response program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('responsible executives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('responsible party');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('restitution');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('restrictions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('restructuring opportunities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('result(s)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('retention');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('retirement');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('retires');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('return');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('returned parts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('returned products');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('returns');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('revenue accounting');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('reversals');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('revise forecast');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('reward approaches');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('reward plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('rewards');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('risk');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('risk analysis');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('risk and opportunities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('risk governance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('risk ownership');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('risk policy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('risk tolerance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('risk tolerances');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('risks');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('risks resiliency');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('rollout issues');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('rollout plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('routings');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('safety (EHS)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('safety impacts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sale');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sale trends and patterns');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sales activities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sales analysis');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sales budgets');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sales calls');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sales forecast');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sales orders');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sales partners');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sales plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sales strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sales team');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('salvage activities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sample significance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sampling plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('satisfaction');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('satisfy inquiries');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('schedule');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('scheduling estimates');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('scope');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('scorecard(s)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('scoring requirement');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('security');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('security requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('segments');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('selection tools');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('separation');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sequence');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service catalog');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service concepts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service contacts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service delivery');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service demand');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service expectations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service experience');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service framework');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service levels');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service management');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service order');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service policy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service portfolio');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service project');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service representatives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('service strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('services');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('services catalog');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('services delivered');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('services interdependencies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('services strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('services/solutions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('shareholders');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sheet risk');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('shortfalls therein');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sick leave');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('simulate plant');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sites');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('skills taxonomy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('SLA compliance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution approach');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution architecture');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution architectures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution communications');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution design');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution development');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution implementation');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution lifecycle');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution operations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution packaging');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution remediation');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution rollout');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('solution validation');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('source');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sourcing relationships');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sourcing strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('specification data');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('specifications');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('spend profile');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('staff productivity');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('staffing requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('stakeholder requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('stakeholders');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('standards');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('stewardship responsibilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('strategic alignment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('strategic initiatives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('strategic intelligence');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('strategic options');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('strategic priorities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('strategic priority');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('strategic relationships');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('strategic vision');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('strategies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('strategy models');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('structure');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('subsidiaries');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('succession plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sunset" plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('supplier capacity');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('supplier information');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('supplier recovery');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('suppliers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('supply');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('supply capabilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('supply chain methodologies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('supply constraints');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support capabilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support compliance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support learning');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support model');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support needs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support planning');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support portfolio');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support procedures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support providers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support resources');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support structure');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('support systems');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('sustainability strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('system (EQMS)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('systems');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('systems HRIS');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('systems model');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('target audience');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('target segments');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('targets');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('targets/contracts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('tax compliance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('tax data');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('tax forms');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('tax plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('tax returns');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('tax strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('taxes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('technical assessment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('technical requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('technical training');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('technologies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('technology');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('Technology (IT)');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('technology aspects');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('technology capabilities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('technology concepts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('technology innovation');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('technology innovations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('technology solutions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('templates');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('term vision');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('test equipment');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('testing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('testing procedures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('tests');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('tests and interviews');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('the change');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('the customer');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('the market');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('the objectives');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('the organization');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('the partnerships');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('the project');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('the relationships');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('threat assessments');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('threat impact');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('time optimization');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('time worked');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('to change');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('to customer');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('to proceed');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('to promise');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('to requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('tools');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('traceability');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('traceability data');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('trade');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('trade preferences');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('trade services');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('trademarks');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('train employees');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('training');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('training effectiveness');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('training materials');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('training plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('training program');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('training programs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('training schedule');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('transactions');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('transfers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('transformation needs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('transformation plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('transformation roadmap');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('transformation strategy');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('transportation fleet');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('treasury');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('treasury operations');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('treasury policies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('treasury procedures');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('trial balance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('unconstrained plan');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('unit');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('unit strategies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('unit/organization');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('update plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('update systems');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('updates');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('usage audits');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('user authorization');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('user directory');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('user requests');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('user support');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('utilization');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('validate suppliers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('value contribution');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('value criteria');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('value drivers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('value portfolio');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('value proposition');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('variable costs');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('variance analysis');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('vendor performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('viable concepts');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('vision');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('volumes');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('warehouse transfers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('warehousing');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('warranty');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('warranty claim');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('warranty claims');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('warranty issues');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('warranty offering');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('warranty performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('warranty policies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('warranty waste');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('win plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('with agencies');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('with authorities');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('with customers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('with suppliers');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('work performance');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('work plans');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('work requirements');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('work safety');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('workforce scheduling');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('Wyrób niezgodny');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('z serwisu');
-INSERT INTO[dbo].[ProcessSubject]([Nazwa])VALUES('Zarzadzanie auditem');
+﻿INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('badania rynku','market research',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Badania rynku','market study',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('budżet marketingowy','marketing budget',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('budżety marketingowe','marketing budgets',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane rynkowe','market data',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('inwestycja marketingowa','marketing investment',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kalendarze marketingowe)','marketing calendars)',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Komunikacja marketingowa','marketing communication',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('marketing','marketing',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości rynkowe','market opportunities',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan marketingowy','marketing plan',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany marketingowe','marketing plans',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rynki','markets',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('segmenty rynku','market segments',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Rynek','the market',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia marketingowa','marketing strategy',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('środowisko rynkowe','market environment',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('treści marketingowe','marketing content',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('udział w rynku','market share',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wiadomości marketingowe','marketing messages',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('klient','customer',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Klient','customers',0,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('architektura informacji','information architecture',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('architektura korporacyjna','enterprise architecture',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('architektura rozwiązania','solution architecture',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('architektury rozwiązań','solution architectures',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('aspekty prawne','legal aspects',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('aspekty technologiczne','technology aspects',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('bezpieczeństwo','security',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('bezpieczeństwo (BHP)','safety (EHS)',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('bezpieczeństwo infrastruktury','infrastructure security',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('bezpieczeństwo pracy','work safety',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('bieżące procesy','current processes',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('budżet','budget',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('budżety sprzedaży','sales budgets',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ciągłość biznesu','business continuity',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ciągłość','continuity',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ciągłość działania','operations continuity',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ciągłość IT','IT continuity',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cykl rozwoju','development lifecycle',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cykl życia rozwiązania','solution lifecycle',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Czas cyklu','cycle time',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('deklaracja misji','mission statement',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Klient','customer',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan','plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan bez ograniczeń','unconstrained plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan cenowy','pricing plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Plan inwestycyjny','investment plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan jakości','quality plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan kompensacyjny','compensation plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Plan komunikacji','communication plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan konta','account plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan materiałów','materials plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan nagród','reward plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan obciążeń','load plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan pobierania próbek','sampling plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan podatkowy','tax plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan poziomu','level plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan produkcji','production schedule',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Plan projektu','project plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan różnorodności','diversity plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan sukcesji','succession plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan treningowy','training plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan treningu','training schedule',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan ulepszeń','improvement plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan wdrożenia','implementation plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan wysyłki','dispatch plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan zachęt','incentives plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan zakupów','procurement plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plan zasobów','resource plan',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('planowanie ciągłości','continuity planning',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('planowanie cyklu życia','lifecycle planning',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('planowanie operacji','operations planning',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('planowanie siły roboczej','workforce scheduling',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('planowanie uzupełnień','replenishment planning',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('planowanie zasobów','resource planning',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('planowanie/strategia','planning/strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany','plans',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany awaryjne','contingency plans',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany komunikacji','communication plans',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany ładowania','load plans',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany naprawcze','remediation plans',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany pracy','work plans',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany projektów','project plans',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany sprzedaży','sales plans',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany transformacji','transformation plans',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany wdrożenia','rollout plans',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('plany zarządzania','management plans',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Prognoza','forecast',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('prognoza konsensusu','consensus forecast',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Prognoza sprzedaży','sales forecast',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('prognozy bazowe','baseline forecasts',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('prognozy finansowe','financial forecasts',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('prognozy popytu','demand forecasts',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('prognozy przepływu','flow forecasts',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program','program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Program BHP','EHS program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program kapitałowy','capital program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program lojalnościowy','loyalty program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program odpowiedzi','response program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program pokładowy','boarding program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program profilaktyczny','prevention program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program rekrutacyjny','recruitment program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program relacji','relations program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program świadczeń','benefits program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program treningowy','training program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program wprowadzający','induction program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program występów','performance program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('program zgodności','compliance program',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('programy','programs',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('programy cenowe','pricing programs',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('programy HR','HR programs',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('programy motywacyjne','motivation programs',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('programy polecające','referral programs',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('programy prawnicze','law programs',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('programy przywódcze','leadership programs',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('programy szkoleniowe','training programs',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('projekt','project',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('projekt organizacyjny','organizational design',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('projekt rozwiązania','solution design',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('projekt usługowy','service project',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('projektowanie','projects',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('projekty badawcze','research projects',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('projekty informatyczne','IT projects',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('projekty inwestycyjne','investment projects',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('projekty usprawniające','improvement projects',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia analityczna','analytics strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia biznesowa','business strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia budowy','construction strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia doskonalenia','improvement strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia dostawy','delivery strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia doświadczenia','experience strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia hedgingowa','hedging strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia innowacji','innovation strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia integracji','integration strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia jakości','quality strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia kanału','channel strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Strategia KM','KM strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia komunikacji','communication strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia logistyczna','logistics strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia obsługi','service strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia odporności','resilience strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia pakowania','packaging strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia podatkowa','tax strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia portfela','portfolio strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia pozyskiwania','sourcing strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia produktu','product strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia przywołania','recall strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia sojuszu','alliance strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia sprzedaży','sales strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia transformacji','transformation strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia treści','content strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia usług','services strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia wsparcia','support strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia wydajności','performance strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia wyjściowa','exit strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia zarządzania','governance strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia zarządzania','management strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia zasobów','resources strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategia zrównoważonego rozwoju','sustainability strategy',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategiczne inicjatywy','strategic initiatives',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategiczne wyrównanie','strategic alignment',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategie','strategies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategie biznesowe','business strategies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategie dostawy','delivery strategies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Strategie HR','HR strategies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategie jednostek','unit strategies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategie konserwacji','maintenance strategies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategie materiałowe','materials strategies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strategie zarządzania','management strategies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('symulacja fabryki','simulate plant',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wizja','vision',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wizja informatyczna','IT visioning',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wizja strategiczna','strategic vision',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność','performance',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('handel elektroniczny','electronic commerce',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('harmonogram','schedule',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('harmonogram operacji','operations schedule',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('harmonogram pracy','job schedule',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('harmonogram realizacji','fulfillment schedule',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('harmonogram wdrażania','deployment schedule',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('harmonogramowanie szacunków','scheduling estimates',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('HR','HR',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('inicjatywy badawcze','research initiatives',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Inicjatywy KM','KM initiatives',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('inne inicjatywy','other initiatives',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('innowacja technologiczna','technology innovation',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('innowacje technologiczne','technology innovations',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('koncepcje','concepts',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('koncepcje technologiczne','technology concepts',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('koncepcje usług','service concepts',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Model biznesowy','business model',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('model systemów','systems model',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('model wsparcia','support model',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('model zarządzania','governance model',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('modele danych','data models',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('modele finansowania','funding models',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('modele strategii','strategy models',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('modele zarządzania','management models',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwe alternatywy','feasible alternatives',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kanały rekrutacyjne','recruitment channels',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kandydaci','candidates',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Kapitał Ludzki','Human Capital',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pomysły','ideas',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko','risk',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko aktywności','activity risk',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko arkusza','sheet risk',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko ekspozycji','exposure risk',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko funkcji','function risk',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko i szanse','risk and opportunities',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko informatyczne','IT risk',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko odporności','risks resiliency',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko przedsiębiorstwa','enterprise risk',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko stawki','rate risk',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko walutowe','exchange risk',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzyko wdrożenia','deployment risk',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ryzykowna własność','risk ownership',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania','needs',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania','requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania audytu','audit requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania bezpieczeństwa','security requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania dotyczące doświadczenia','experience requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania dotyczące dystrybucji','distribution requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania dotyczące kanału','channel requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania dotyczące zakupów','purchasing requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania dotyczące zarządzania','management requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania dotyczące zasobów','resource requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania dotyczące zgodności','compliance requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania funkcjonalne','functional requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania informacyjne','information requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania informatyczne','IT requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania integracyjne','integration requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania interesariuszy','stakeholder requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania jakościowe','quality requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania kadrowe','staffing requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania klienta','customer requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania konserwacyjne','maintenance requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania obiektu','facility requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania pracy','work requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania remediacyjne','remediation requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania rozwojowe','development requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania serwisowe','service requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania techniczne','technical requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagania wdrożeniowe','implementation requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Wymaganych zasobów','required resources',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymiana walut','currency conversion',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymogi regulacyjne','regulatory requirements',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymóg punktacji','scoring requirement',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Wynajem','hires',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzać cenami','manage pricing',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzać hipotezami','manage hypotheses',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzać personami','manage personas',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzać spotkaniami','manage meetings',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie analityczne','analytic governance',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie architekturą','architecture governance',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zarządzanie audytem','Zarzadzanie auditem',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie dostawami','delivery governance',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie kosztami','cost management',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie ładem','management governance',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie modelem','model governance',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie portfelem','portfolio governance',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie relacjami','managing relationships',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie ryzykiem','risk governance',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie towarami','goods management',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zarządzanie usługami','service management',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie wydajnością','performance management',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zarządzanie wyjątkami','exception governance',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zarządzanie zmianami','change management',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasady','policies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zasady AR','AR policies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasady architektury','architecture principles',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasady gwarancji','warranty policies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasady i oferty','policies and offerings',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasady outsourcingu','outsourcing policies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasady rachunkowości','accounting policies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasady wdrażania','deployment policies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasady wyrównania','alignment principles',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasady zaangażowania','engagement rules',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kluczowe inicjatywy','key initiatives',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kluczowe procesy','key processes',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kompetencje','competencies',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kosztorysowanie cyklu','cycle costing',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Plan operacyjny','line schedule',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rozwój kompetencji','competency development',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rozwój pracownika','employee development',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rysunki','drawings',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('standardy','standards',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('standardy komunikacji','communication standards',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('standardy przemysłowe','industry standards',1,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('autoryzacja użytkownika','user authorization',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('budowa aktywów','asset construction',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cechy organizacyjne','organizational characteristics',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele','objectives',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele analityczne','analytic objectives',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele biznesowe','business objectives',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele cenowe','pricing targets',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele dostawy','delivery goals',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele jakościowe','quality targets',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele kanałów dystrybucji','channel objectives',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Cele organizacyjne','organizational goals',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele produkcyjne','manufacturing goals',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele wydajności','performance targets',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele zarządzania','management goals',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele zgodności','compliance objectives',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cele/umowy','targets/contracts',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cennik','pricing',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Wymagania','requirements',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dostępność','availability',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dostępność operacyjna','operational availability',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dostępność zasobów','resource availability',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wsparcie planowania','support planning',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wsparcie portfela','support portfolio',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wsparcie użytkownika','user support',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wsparcie wydajności','support performance',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wsparcie zgodności','support compliance',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wspiercie nauki','support learning',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Informacja','information',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('informacje biznesowe','business information',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('informacje o dostawcy','supplier information',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('informacje o koncie','account information',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('informacje o modelu biznesowym','business model information',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('informacje o wnioskodawcy','applicant information',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('informacje o zarobkach','earnings information',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('informacje ogólne','background information',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Kompetencje kluczowe','core competencies',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kompetencje pracowników','employee competencies',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('komunikacja wdrożeniowa','implementation communications',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('komunikacja z pracownikami','employee communication',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('komunikaty prasowe','press releases',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('nowa organizacja','new organization',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('nowe aktywa','new assets',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Nowe Produkty','new products',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('nowe regulacje','emerging regulations',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('nowe role','new roles',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('nowe technologie','new technologies',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('nowy branding','new branding',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('trend przychodów klientów','customer revenue trend',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('trendy gospodarcze','economic trends',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('trendy i wzory sprzedaży','sale trends and patterns',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('trendy w branży','industry trends',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('trendy wydajności','performance trends',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('trening regeneracyjny','recovery workout',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('trening techniczny','technical training',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('własność procesu','process ownership',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kosztorysowanie produktu','product costing',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kryteria składowe','component criteria',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kryteria wartości','value criteria',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('krytyczne działania','critical activities',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('źródła danych','data sources',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('źródło','source',2,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('benchmarking','benchmarking',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rekrutacja dostawców','recruitment vendors',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dostęp do informacji','information access',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dostępne umiejętności','available skills',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zdolności ','capabilities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości','opportunities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości benchmarkingu','benchmarking capabilities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Możliwości biznesowe','Business Capabilities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości dostaw','supply capabilities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości infrastruktury','infrastructure capabilities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Możliwości IT','IT capabilities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości kanału','channel capabilities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Możliwości KM','KM capabilities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości operacyjne','operational capabilities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości poprawy','improvement opportunities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości restrukturyzacyjne','restructuring opportunities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości sojuszu','alliance opportunities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości technologiczne','technology capabilities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('możliwości wsparcia','support capabilities',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('oczekiwania klienta','customer expectations',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('oczekiwania w zakresie obsługi','service expectations',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ograniczenia','constraints',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ograniczenia','restrictions',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ograniczenia biznesowe','business constraints',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ograniczenia infrastrukturalne','infrastructure constraints',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ograniczenia planowania','planning constraints',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ograniczenia podaży','supply constraints',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ograniczenia układu','layout constraints',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ograniczenia zarządzania','management constraints',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ograniczony plan','constrained plan',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opakowanie rozwiązania','solution packaging',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opakowanie wdrożeniowe','deployment packaging',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opcje','options',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opcje finansowania','funding options',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opcje łączenia','merger options',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opcje przejęcia','acquisition options',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opcje strategiczne','strategic options',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opcje transakcji','deal options',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opcje zbycia','divesture options',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('polityka','policy',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Polityka BHP','EHS policy',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Polityka cenowa','pricing strategy',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('polityka etyczna','ethics policies',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('polityka inwestycyjna','investment policy',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('polityka kredytowa','credit policies',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('polityka materiałowa','materials policies',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Polityka personalna','HR policies',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('polityka pracy','labor policies',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('polityka ryzyka','risk policy',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('polityka serwisowa','service policy',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('polityka wydatków','expense policies',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('polityka zarządzania','governance policies',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procedury kontrolne','control procedures',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procedury operacyjne','operating procedures',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procedury skarbowe','treasury procedures',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procedury testowe','testing procedures',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procedury wsparcia','support procedures',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procedury wsteczne','back procedures',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procedury zgodności','compliance procedures',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('proces','process',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('proces degradacji','demotion process',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('proces dostarczenia','delivery process',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('proces negocjacyjny','bargaining process',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('proces produkcji','production process',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('proces raportowania','reporting process',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('proces realizacji','fulfillment process',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('proces zapytania','inquiry process',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('proces zarządzania','management process',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('proces zmian','change process',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procesy','processes',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procesy biznesowe','business processes',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procesy dokumentacyjne','document processes',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procesy doskonalenia','improvement processes',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procesy dostawy','delivery processes',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procesy funkcjonalne','functional processes',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procesy raportowania','reporting processes',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procesy zarządzania','management processes',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przebieg procedury','procedure workflow',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ramy procesów','process frameworks',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ramy usług','service framework',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ramy zarządzania','management framework',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('realne koncepcje','viable concepts',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wdrożenie rozwiązania','solution implementation',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wdrożenie rozwiązania','solution rollout',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wdrożenie wersji','release deployment',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wdrożenie zasobów','resource deployment',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rentowność produktu','product profitability',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('benchmark','benchmark',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('repozytoria','repositories',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('repozytorium wiedzy','knowledge repository',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zgodność zwolnienia produktu','release compliance',3,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('doradztwo podatkowe','tax compliance',4,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('doskonalenie','doskonalenie',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('elementy umożliwiające zmianę','change enablers',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przepływ materiału','material flow',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('fundusze/konsolidacja','funds/consolidation',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('funkcja zgodności','compliance function',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('funkcjonować','function',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('gotowość środowiskowa','environmental readiness',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('gotówka','cash',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('grupa docelowa','target audience',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Gwarancja','warranty',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('handel','trade',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('identyfikowalność','traceability',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('infrastruktura','infrastructure',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('inne godziny','other hours',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('interesariusze','stakeholders',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('inwentarz materiałowy','material inventory',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('inwentarz towarów','goods inventory',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('inwestycja','investment',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('istniejące aktywa','existing assets',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('istniejące kontrolki','existing controls',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('istniejące modele','existing models',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('jakość przedsiębiorstwa','enterprise quality',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('jednostka','unit',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('jednostka/organizacja','unit/organization',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('jednostki operacyjne','operating units',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('jednostki organizacyjne','organizational units',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kalendarz komunikacji','communication calendar',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kanał/segment','channel/segment',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kanały komunikacji','communication channels',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('karta kredytowa','credit card',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('katalog usług','services catalog',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('katalog użytkownika','user directory',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kierunek','direction',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('klasyfikacja materiałów','material classification',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('klienci i rachunki','customers and accounts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('klient/zapas','customer/stock',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('KAM','key account',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kody kont','account codes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kolekcje procesowe','process collections',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('life cycle','life cycle',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('komisja','committee',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kondycja finansowa','financial health',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('konfiguracja infrastruktury','infrastructure configuration',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('konkurenci','competitors',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('konserwacja aktywów','asset maintenance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('konserwacja komponentów','component maintenance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('konsolidacja zarządzania','management consolidation',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('konta bankowe','bank accounts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('konta domyślne','default accounts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('konta personalne','personnel accounts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kontakty serwisowe','service contacts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kontrakty','contracts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kopia produktu','product copy',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dostosowania','adjustments',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('korekty końcowe','end adjustments',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('korekty portfela','portfolio adjustments',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('korekty zarządzania','management adjustments',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('korekty/odliczenia','adjustments/deductions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('korzyści','benefits',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('koszty','costs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Koszty kadrowe','HR costs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('koszty naprawy','repair expenses',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('koszty stałe','fixed costs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('koszty zmienne','variable costs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kredyt','credit',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kredyt klienta','customer credit',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('księga główna','ledger',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('księgowość','accounting ',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Księgowość aktywów','asset accounting',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('księgowość inwentaryzacyjna','inventory accounting',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('księgowość projektu','project accounting',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('outsourcing rozwiązanie','buy solution',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kwestie gwarancyjne','warranty issues',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kwestie kulturowe','cultural issues',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kwestie regulacyjne','regulatory issues',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('licencje','licenses',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('licencje IT','IT licenses',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('limity kredytowe','credit limits',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('limity zatwierdzenia','approval limits',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('lista płac','payroll',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('listy główne','master lists',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('łączenie możliwości','bundling opportunities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Kontakty  ','contacts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('magazynowanie','warehousing',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('mapa drogowa transformacji','transformation roadmap',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('mapa drogowa wykonania','execution roadmap',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('mapy podróży','journey maps',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Marka','brand',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('materiały','materials',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('materiały treningowe','training materials',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('mechanizmy','mechanisms',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('mechanizmy eskalacji','escalation mechanisms',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('mechanizmy uwierzytelniania','authentication mechanisms',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('mechanizmy zarządzania','management mechanisms',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Metodologie KM','KM methodologies',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('metodologie łańcucha dostaw','supply chain methodologies',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('metodyki zarządzania','management methodologies',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('miary poziomu','level measures',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Miejsce docelowe','destination',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('mix produktów','product mix',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('misja','mission',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('mistrz (mistrzowie)','champion(s)',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('nabywać aktywa','acquire assets',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('nagrody','rewards',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('najlepsze praktyki','best practices',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('należności (AR)','receivable (AR)',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('naprawa produktu','product repair',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Reklamacje Klientó','customer complaints',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('narzędzia','tools',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('narzędzia selekcji','selection tools',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('następne kroki','next steps',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('informacje dla klientów','customer information',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('niezgodność','non-conformance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obawy dotyczące własności','property concerns',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obawy ekologiczne','ecological concerns',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obiekt','facility',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obowiązek','duty',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obowiązki','responsibilities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obowiązki administracyjne','administration responsibilities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obowiązki dotyczące zgodności','compliance obligations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obowiązki zatwierdzające','approval responsibilities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obowiązki związane z zarządzaniem','stewardship responsibilities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obowiązujące odliczenia','applicable deductions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obsługa klienta','customer service',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('obsługa zapytań','inquiries handling',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('odpady gwarancyjne','warranty waste',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Odporność','Resiliency',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('odporność biznesowa','business resiliency',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('odpowiedzialność kierownictwa','responsible executives',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('odpowiedzialność','accountability',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('odprawa celna','customs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('odrzucić decyzję','reject decision',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('odwołać zakończenie','recall termination',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('odwrócenia','reversals',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('odzyskiwanie danych','data recovery',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('odzyskiwanie dostawcy','supplier recovery',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('oferowanie modyfikacji','offering modifications',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('oferta','offer',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('oferta gwarancyjna','warranty offering',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Oferta produktów','product’ offering',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('oferty','offers',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('operacje','operations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('operacje biznesowe','business operations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('operacje ciągłości','continuity operations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('operacje dostawy','delivery operations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('operacje obiektów','facilities operations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('operacje rozwiązania','solution operations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('operacje skarbowe','treasury operations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('operacje wewnętrzne','internal operations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opisy stanowisk pracy','job descriptions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Opłacalność','cost effectiveness',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opłaty bankowe','bank fees',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rozwój metod pomiaru','develop measures',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('opracowywanie rozwiązań','solution development',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('optymalizacja','optimization',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('optymalizacja czasu','time optimization',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('organizacja','organization',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('organy rządowe','government bodies',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('orzecznictwo','certification',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('osiągnięcie planu','plan attainment',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('otoczenie zewnętrzne','external environment',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('outplacement pracowniczy','employee outplacement',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('parametry konserwacji','maintenance parameters',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('partnerstwa','partnerships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('partnerstwa jakości','quality partnerships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('partnerstwa zarządcze','management partnerships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('partnerzy handlowi','sales partners',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('partnerzy rozwoju','development partners',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('partnerzy zewnętrzni','external partners',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pliki danych','data files',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pliki główne','master files',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('płacić','pay',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('płatne (AP)','payable (AP)',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('płatności','payments',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('płynność','liquidity',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('podatki','taxes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('podatki dochodowe','payroll taxes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('podatki zagraniczne','foreign taxes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('podejścia','approaches',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('podejścia do zarządzania','management approaches',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Podejścia KM','KM approaches',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('podejście do dostawy','delivery approach',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('podejście do nagrody','reward approaches',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('podejście do rozwiązania','solution approach',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('podejście do zarządzania','governance approach',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('podejście do zarządzania projektami','project management approach',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('podejście prognostyczne','forecasting approach',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zdolności','capacities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Pojemność','capacity',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pojemność dostawcy','supplier capacity',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('polisy skarbowe','treasury policies',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ponowne wykorzystanie komponentów','component reuse',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ponowne zatrudnienie','re-hire',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('poprawa kosztów','cost improvement',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Poprawa Procesu','Poprawa Procesu',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('poprawa/zmiana','improvement/change',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('portfel dostaw','delivery portfolio',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('portfel kontrolny','control portfolio',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('portfel wartości','value portfolio',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('portfolio komponentów','component portfolio',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('portfolio usług','service portfolio',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('porzucenie','abandonment',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('potencjalni klienci','potential customers',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('potencjalni partnerzy','potential partners',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('potencjalny wpływ','potential impact',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Pipeline możliwości','opportunity pipeline',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('potrzeby kadrowe','HR needs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('potrzeby klienta','customer needs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('potrzeby outsourcingowe','outsourcing needs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('potrzeby transformacji','transformation needs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('potrzeby wsparcia','support needs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('potrzeby związane z prawami autorskimi','copyright needs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('powiązane komunikaty','related communications',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('powiązane wpisy','related entries',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('powoduje)','cause(s)',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('powrót','return',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('poziom porozumienia','level agreement',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('poziom ryzyka','level risks',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('poziom usług','service levels',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pozwolenia na budowę','construction permissions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pozycje fizyczne','physical positions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pozycje gotówkowe','cash positions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pozycje zabezpieczające','hedging positions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pozycjonowanie','positioning',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pozyskać finansowanie','obtain funding',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pozyskiwanie relacji','sourcing relationships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('PR) strategia','PR) strategy',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pracownik','employee',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('prawo','claim',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('preferencje handlowe','trade preferences',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('priorytet','priority',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('priorytet strategiczny','strategic priority',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('priorytety strategiczne','strategic priorities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('problemy z niezawodnością','reliability problems',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('problemy z wdrażaniem','rollout issues',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procedura','procedure',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('procedury','procedures',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('producenci kontraktowi','contract manufacturers',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('produkcja','manufacturing',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('produkt wychodzący','outbound product',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('produkty','products',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Produkty fizyczne','Physical Products',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('produkty i usługi','products and services',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Produkty i usługi','products/services',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('profil klienta','customer profile',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('profil wydatków','spend profile',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('promocje','promotions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('propozycja wartości','value proposition',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('prośba klienta','customer request',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('prośby o kartę','card requests',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('prośby użytkowników','user requests',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('prototypy','prototypes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('próbki jakości','quality samples',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przechodzenie na emeryturę','retires',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przedsiębiorstwo','enterprise',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przedstawiciele serwisu','service representatives',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przegląd zarządu','board review',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przekazy pieniężne','cash remittances',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Przepływy środków pieniężnych','cash flows',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przerwy w ciągłości','continuity gaps',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przesunięcia magazynowe','warehouse transfers',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przeszkolić pracowników','train employees',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przychody z produktu','product revenue',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przychodzące informacje zwrotne','incoming feedback',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przyczyna uszkodzenia','damage cause',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przydziały','allocations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przydziel zasoby','assign resources',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wezwania','recall',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wyniki wezwań','recall performance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przyszły stan','future state',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('punkty integracji)','integration points)',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('punkty kontaktu z klientem','customer touchpoints',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rachunki','accounts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rachunki kartowe','card accounts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rachunkowość ogólna','general accounting',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rachunkowość przychodów','revenue accounting',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rachunkowość zarządcza','management accounting',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('reklamacja','warranty claim',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wpis wnioskodawcy','applicant record',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje','relationships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje analityka','analyst relations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje bankowe','banking relationships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje branżowe','industry relationships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje inwestorskie','investor relationships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje między pracownikami','employee relations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje pośrednie','intermediary relationships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje społeczne','community relations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje strategiczne','strategic relationships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje z klientami','customer relationships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje z mediami','media relations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('relacje z pożyczkodawcami','lender relations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Relacje zewnętrzne','External Relationships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Remediacja IT','IT remediation',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('remont','repairs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('restytucja','restitution',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zmiana','change',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Rezolucja','resolution',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Dyrekcja','directors',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('role kierownicze','management roles',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('roszczenia','claims',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('roszczenia gwarancyjne','warranty claims',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('roszczenia windykacyjne','recovery claims',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rozlokowanie','deployment',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rozmowy sprzedażowe','sales calls',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rozwiązać zagrożenia','resolve threats',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rozwiązania technologiczne','technology solutions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rozwiązanie','solution',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rozwiązanie komunikacji','solution communications',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rozwiązanie problemu','solution remediation',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Pipeline   ','pipeline',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Ryzyka IT','IT risks',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('salda','balances',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('salda kont','account balances',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('saldo inwestycji','investment balance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('saldo próbne','trial balance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('saldowanie transakcji','netting transactions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('segment klientów','customer segment',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('segmenty','segments',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('segmenty docelowe','target segments',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('serie produkcyjne','production runs',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('serwis produktów','product servicing',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('sieć logistyczna','logistics network',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Komponenty','components',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('specyfikacje','specifications',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('specyfikacje jakości','quality specifications',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('specyfikacje materiałowe','material specifications',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('specyfikacje projektowe','design specifications',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('spotkania z klientami/warsztaty','customer meetings/workshops',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('spółki zależne','subsidiaries',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('sprawozdania finansowe','financial statements',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('sprawozdawczość finansowa','financial reporting',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('sprawy','cases',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('sprawy biznesowe','business cases',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('sprawy sporne','dispute cases',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('sprostać terminom','meet demand',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('sprzęt testowy','test equipment',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('feedback','feedback',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('status operacyjny','operational status',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('stawki międzynarodowe','international rates',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Kontrola','controls',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('stosunki pracy','labor relations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('stosunki rządowe','government relations',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Strategia','Strategy',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('strony wewnętrzne','internal parties',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('struktura procesu','process framework',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zasoby','resources',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('system','system',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('system (SZJ)','system (EQMS)',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('System AP','AP system',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('system numeracji','numbering system',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('System zarządzania','management system',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('systemy','systems',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('systemy autoryzacji','authorization systems',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('systemy finansowe','financial systems',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('systemy HRIS','systems HRIS',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('systemy online','online systems',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('systemy wsparcia','support systems',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('szablony','templates',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('szczegółowy harmonogram','detailed schedule',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('szczegóły imprezy','party details',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Szczegóły zamówienia','order information',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('szkolenia informatyczne','IT training',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('szkolenie','training',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('szkolenie operacyjne','operations training',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('szkolenie w zakresie zarządzania','management training',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ścieżki','paths',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Środki HR','HR measures',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('środki łagodzące','mitigation measures',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('środki zarządzania','management measures',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('środowisko biznesowe','business environment',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('środowisko wewnętrzne','internal environment',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('świadczenia pracownicze','employee benefits',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('świadczone usługi','services delivered',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('taksonomia umiejętności','skills taxonomy',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('technologia','technology',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Technologia (IT)','Technology (IT)',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('technologie','technologies',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('teczka','portfolio',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('telefony sprzedażowe dla klientów','customer sales calls',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('termin wizja','term vision',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('terminy zapotrzebowania','requisition dates',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('IT','IT',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('tolerancje ryzyka','risk tolerances',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('transakcje','transactions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('transakcje giełdowe','exchange trades',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('transakcje międzyfirmowe','intercompany transactions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('transakcje realizacji','fulfillment transactions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('transakcje walutowe','currency transactions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('transakcje zabezpieczające','hedging transactions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('transfery','transfers',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('transport wychodzący','outbound transportation',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('trasy','routings',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('udziałowcy','shareholders',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ulepszenia','improvements',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ulepszenia)','improvement(s)',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('umowy sojusznicze','alliance agreements',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('umowy z klientami','customer contracts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('umowy/umowy','agreements/contracts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('upoważnienie','authorization',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('przeglądy zarządzania','launch review',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('urzędy certyfikacji','certification authorities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('usługi handlowe','trade services',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('usługi informatyczne','IT services',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('usługi prawne','legal services',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('usługi zewnętrzne','external services',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('usługi/rozwiązania','services/solutions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('utrzymanie','maintenance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('uwolnij się od ryzyka','release risk',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('uzgadnianie świadczeń','benefit reconciliation',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('walidacja rozwiązania','solution validation',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('waluta zabezpieczająca','hedge currency',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('waluty','currencies',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('warsztaty przeprojektowania','redesign workshops',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('czynniki wartości','value drivers',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wartość klienta','customer value',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wartość wkładu','value contribution',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('warunki kontraktu','contract terms',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('weryfikacja dostawców','validate suppliers',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wewnętrzne możliwości','internal capabilities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('witryny straony www','sites',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wolumeny','volumes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wpisy do dziennika','journal entries',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wpisy należności','receivable entries',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wpływ na bezpieczeństwo','safety impacts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wpływ na biznes','business impact',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wpływ zagrożenia','threat impact',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wpływy materialne','material receipts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wprowadzenie/uruchomienie','introduction/launch',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('współzależności usług','services interdependencies',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Wydajność BHP','EHS performance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydanie','issue',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydarzenia','events',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydatki budżetowe','budget spending',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydawanie standardów','release standards',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wygraj plany','win plans',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wyjątki','exceptions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wyjątki architektoniczne','architectural exceptions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wyjątki procesu','process exceptions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wykonanie gwarancji','warranty performance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wykonanie programu','program execution',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wykorzystanie','utilization',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wykorzystanie mocy produkcyjnych','capacity utilization',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagać zmiany','require change',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagane kompetencje','required competencies',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymagane możliwości','required capabilities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wynik finansowy','financial performance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wynik powiadomienia','notification outcome',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wynik wydania','release outcome',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wyniki','outcomes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Wyniki IT','IT outcomes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wyniki projektu','project outcomes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wyniki sojuszu','alliance results',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wyniki wdrożeń','deployments outcomes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wyniki)','result(s)',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Sprzedaż','sale',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Wyrób niezgodny','Wyrób niezgodny',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wytyczne dotyczące rozwoju','development guidelines',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wywiad strategiczny','strategic intelligence',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('partnerzy','partners',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wzorce zakupowe klientów','customer purchase patterns',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('agencje','with agencies',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dostawcy','suppliers',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('serwis produktów','z serwisu',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Władze','authorities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zabezpieczenie klienta','customer collateral',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zachęty korporacyjne','corporate incentives',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zadowolenie','satisfaction',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zagadnienia etyczne','ethical issues',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zagrożenia','hazards',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zajęcia','activities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zajęcia/wydarzenia','activities/events',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zakład kontrolny','control plant',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zakończenie wdrożenia','implementation completion',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zakres','scope',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zakres projektu','project scope',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zakres ubezpieczenia','insurance coverage',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zaktualizuj plany','update plans',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zaległe rachunki','delinquent accounts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zaliczki','advances',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zamówienia klientów','customer orders',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zapewnić wsparcie','provide support',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zapisz powód','record reason',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zapłata','payment',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zapotrzebowania','requisitions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zapotrzebowania na pracę','job requisitions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zapotrzebowania pracownicze','employee requisitions',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zapotrzebowanie na usługi','service demand',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zapotrzebowanie na zasoby','resource demand',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zapytania','inquiries',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zaradzić ryzyku','remediate risk',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasoby budowlane','construction resources',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasoby dostawy','delivery resources',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zasoby finansowe','Financial Resources',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zasoby projektu','Project resources',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zasoby wsparcia','support resources',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zaspokoić zapytania','satisfy inquiries',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zatwierdzenie projektu','project approval',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zawieranie umowy','establish contracts',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zażalenia pracowników','employee grievances',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zbierać dane','collect data',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zdefiniowane możliwości','defined capabilities',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zdjęcia produktów','product images',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zespoły klientów','customer teams',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zespół projektowy','design team',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zespół sprzedaży','sales team',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zestawienia materiałowe','bills of material',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zewnętrzna porada','outside counsel',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zgodność','compliance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zgodność architektury','architecture conformance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zgodność z przepisami','regulatory compliance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zgodność z SLA','SLA compliance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Zlecenia kupna','purchase orders',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zlecenia sprzedaży','sales orders',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zlecenie serwisowe','service order',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ofertowanie','make offer',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zmiana','the change',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zmiana infrastruktury','infrastructure change',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zmiana IT','IT change',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zmiana/wydanie','change/release',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zmiany','changes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zmiany cen','price changes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zmiany kulturowe','cultural changes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wymaganie','force',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('znaczenie próbki','sample significance',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('znaki towarowe','trademarks',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zobowiązania podatki','payables taxes',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zrewidować prognozę','revise forecast',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('związki sojusznicze','alliance relationships',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zwolnienie lekarskie','sick leave',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Żądania IT','IT requests',5,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('czynniki kosztowe','cost drivers',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('czynniki wpływające','influencing factors',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('działania doskonalące','improvement activities',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('działania jakościowe','quality activities',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Działania kontrolne','control activities',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('działania naprawcze','remediation efforts',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('działania projektowe','design activities',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('działania promocyjne','promotional activities',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('działania ratownicze','salvage activities',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('działania sprzedażowe','sales activities',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('działania lobby','lobby activities',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('działania w zakresie zgodności','compliance activities',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('działania zapobiegawcze','remedial actions',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('działania zarządcze','management activities',6,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('agencje regulacyjne','regulatory agencies',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('akcja odzyskiwania','recovery action',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('badania i oceny','research and assessments',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('badania odkrywcze','discovery research',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('badania pracowników','employee research',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('branding pracodawcy','employer branding',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane','data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane identyfikowalności','traceability data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane informatyczne','IT data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane kandydata','applicant data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane klienta','customer data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane obsługi klienta','customer service data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane podatkowe','tax data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane podstawowe','master data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane podstawowe klienta','customer master data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane porównawcze','benchmark data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane pracowników','employee data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane reklamacyjne klientów','customer complaint data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane rozliczeniowe','billing data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dane specyfikacji','specification data',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('demografia','demographics',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Analiza','analyses',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dokładność prognozy','forecast accuracy',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Analityka','Analytics',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('doświadczenia klientów','customer experiences',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('doświadczenie','experience',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('doświadczenie kwalifikacje','experience qualifications',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('doświadczenie w obsłudze','service experience',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dożywotnia wartość','lifetime value',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('efektywność szkolenia','training effectiveness',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ekspozycja emitenta','issuer exposure',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wyposażenie','equipment',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('infrastruktura','infrastructure components',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kompletacja dostawy','delivery completion',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Ochrona danych','data protection',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('regeneracja','re-manufacturing',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('testowanie','testing',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('testowanie instalacji','installation testing',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('testowanie jakości','quality testing',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('testowanie zdolności','capability testing',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('testy','tests',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('testy i wywiady','tests and interviews',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('testy penetracyjne','penetration testing',7,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('administracja zasobami','resource administration',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('administracja świadczeniami','administer benefits',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('aktualizacja systemów','update systems',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('aktualizacje','updates',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('aktualizacje produktów','product upgrades',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('aktywa','assets',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('aktywa produkcyjne','productive assets',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('aktywność na stronie www','customer website activity',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('alerty','alerts',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('alokacja zasobów','resource allocation',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('amortyzacja','depreciation expense',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('analiza cen','pricing analysis',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('analiza konkurencji','competitive analysis',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Analiza luki','gap analysis',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('analiza przyczyn','cause analysis',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('analiza rentowności','profitability analysis',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('analiza sprzedaży','sales analysis',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('analiza wariancji','variance analysis',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('analiza wywiadowcza','intelligence analysis',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ankiety zaangażowania','engagement surveys',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('aplikacje do kont','account applications',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('aprobaty wewnętrzne','internal approvals',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('awarie','failures',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('budynek','building',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('budynki','facilities',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cechy jakościowe','quality characteristics',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('centrum księgowe','center accounting',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('cykl konserwacji','maintenance lifecycle',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('czas przepracowany','time worked',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('częstotliwość monitorowania','monitoring frequency',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('System','system',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dokumenty','documents',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dostawcy','suppliers',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wsparcie dostawców','support providers',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dystrybuować płatności','distribute payments',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('eksperci','experts',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('eksport i import','exports and imports',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ekwiwalenty pieniężne','cash equivalents',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('elastyczność dostaw','delivery resiliency',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('eliminacje procesów','process eliminations',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ewidencja aktywów','asset records',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('faktury obciążenia zwrotnego','chargeback invoices',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('fakultatywne recenzje','elective reviews',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('fałszywe roszczenia','fraudulent claims',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('flota transportowa','transportation fleet',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('formularze podatkowe','tax forms',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pomiary','measures',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ocena finansowa','financial review',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ocena procesu','process assessment',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ocena ryzyka','risk analysis',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ocena techniczna','technical assessment',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ocenić sukces','evaluate success',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('ocenić wykonalność','evaluate feasibility',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('oceny wydajności','performance assessments',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('oceny zagrożeń','threat assessments',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('oceny zgodności','compliance assessments',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Ocena transakcji','rate trades',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('realizacja zamówień','order fulfillment',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('recenzje kredytowe','credit reviews',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('recenzje wewnętrzne','internal reviews',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('recenzje zewnętrzne','external reviews',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność cenowa','pricing performance',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność dostawcy','vendor performance',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność dostawy','delivery performance',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Wydajność EQMS','EQMS performance',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność IT','IT performance',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność obsługi','service performance',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność personelu','staff productivity',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność pracowników','employee performance',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność pracy','work performance',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność procesu','process efficiency',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność procesu','process performance',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wydajność produkcji','production performance',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('karty wyników','scorecard(s)',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zwrot kosztów','expense reimbursements',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zwrot podatku','tax returns',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zwroty','returns',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zwrócone części','returned parts',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zwrócone produkty','returned products',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zysk netto','net profit',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('zysk/strata','gain/loss',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Walidacja produktu','Product validation',8,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('audyty','audits',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('audyty regulacyjne','regulatory audits',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('audyty użytkowania','usage audits',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('audyty wewnętrzne','internal audits',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('certyfikaty','certifications',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('certyfikaty i umiejętności','certifications and skills',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dokumenty kontrolne','inspection documents',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dostarczać','supply',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Dostawa','delivery',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Dostawa usługi','service delivery',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('rozliczenie','delivery workloads',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('emerytura','retirement',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('etyka','ethics',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('raport o wydajności','report performance',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('raportowanie','reporting',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('raportowanie zgodności','compliance reporting',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('raporty','reports',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('Raporty AR','AR reports',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('raporty zarządcze','management reports',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wskaźniki - KPI, KRI','indicators',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wskaźniki (metryki)','indicators (metrics)',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wskaźniki bazowe','baseline metrics',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wskaźniki efektywności','performance indicators',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wskaźniki pracownicze','employee metrics',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wskaźniki utrzymania klientów','customer retention rates',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('wskaźniki wydajności','performance metrics',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('metody pomiaru','measurement methods',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pomiary','metrics',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('pomiary Klienta','customer metrics',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('KPI miary wydajności','performance measures',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('raporty zgodności','compliance reports',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('skuteczność kontroli','control effectiveness',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('skuteczność przypominania','recall effectiveness',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kontrola','control',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kontrola dostawy','delivery control',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kontrola procesu','process control',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kontrola wdrażania','deployment control',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kontrole jakości','quality controls',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kontrole ręczne','manual checks',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('kontrole wewnętrzne','internal controls',9,null)
+INSERT INTO [dbo].[ProcessSubject]([Nazwa],[NazwaEn],[ProcessLevel],[SubjectAreaId])VALUES('dostarczony produkt','product delivered',10,null)
