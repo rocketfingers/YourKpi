@@ -49,6 +49,8 @@ namespace YouKpiBackend.DbContexts
         public virtual DbSet<PracownikProcess> PracownikProcess { get; set; }
         public virtual DbSet<Process> Process { get; set; }
         public virtual DbSet<ProcessesProcess> ProcessesProcess { get; set; }
+        public virtual DbSet<ProcessesProcessSubjects> ProcessesProcessSubjects { get; set; }
+        public virtual DbSet<ProcessesProcessAreas> ProcessesProcessAreas { get; set; }
         public virtual DbSet<VProdExe> VProdExe { get; set; }
         public virtual DbSet<ProduktCzesci> ProduktCzesci { get; set; }
         public virtual DbSet<ProcessArea> ProcessArea { get; set; }
@@ -870,7 +872,24 @@ namespace YouKpiBackend.DbContexts
                     .HasDefaultValueSql("('R')");
 
             });
+            modelBuilder.Entity<ProcessesProcessSubjects>(entity =>
+            {
+                entity.Property(e => e.ProcessId).HasMaxLength(30);
 
+                entity.HasOne(d => d.Process)
+                    .WithMany(p => p.ProcessSubjects)
+                    .HasForeignKey(d => d.ProcessId)
+                    .HasConstraintName("FK_ProcessesProcessSubjects");
+            });
+            modelBuilder.Entity<ProcessesProcessAreas>(entity =>
+            {
+                entity.Property(e => e.ProcessId).HasMaxLength(30);
+
+                entity.HasOne(d => d.Process)
+                    .WithMany(p => p.ProcessAreas)
+                    .HasForeignKey(d => d.ProcessId)
+                    .HasConstraintName("FK_ProcessesProcessAreas");
+            });
             modelBuilder.Entity<ProcessesProcess>(entity =>
             {
                 entity.Property(e => e.ProcessId).HasMaxLength(30);

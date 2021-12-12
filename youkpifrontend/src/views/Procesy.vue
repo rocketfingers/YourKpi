@@ -237,15 +237,14 @@ export default {
   methods: {
     initialise () {
       this.tableLoading = true
-      this.getProcesses()
       this.getProcessesAreasFromApi()
-      this.getProcessesSubjectsFromApi()
     },
     getProcessesAreasFromApi () {
       this.$http
         .get(this.getAllProcessesAreas)
         .then((Response) => {
           this.processesAreas = Response.data
+          this.getProcessesSubjectsFromApi()
         })
     },
     getProcessesSubjectsFromApi () {
@@ -253,6 +252,7 @@ export default {
         .get(this.getAllProcessesSubjects)
         .then((Response) => {
           this.processesSubjects = Response.data
+          this.getProcesses()
         })
     },
     getProcesses () {
@@ -267,6 +267,12 @@ export default {
             p.processesProcessProcess.forEach(pprp => {
               p.procesyPowiazane.push(pprp.relatedProcessId)
             })
+            p.processAreas = this.processesAreas.filter(
+              pa => (p.processAreas.find(pra => pra.processAreaId === pa.id))
+            )
+            p.processSubjects = this.processesSubjects.filter(
+              ps => (p.processSubjects.find(psa => psa.processSubjectId === ps.id))
+            )
           })
           this.tableLoading = false
         })
@@ -294,6 +300,7 @@ export default {
       } else {
         var relatedProcesses = []
         var $this = this
+
         this.editedProcess.procesyPowiazane.forEach(p => {
           var processInRelated = $this.editedProcess?.processesProcessProcess?.find(ppp => ppp.relatedProcessId === p)
           if (!processInRelated) {

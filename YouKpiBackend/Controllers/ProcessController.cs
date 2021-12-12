@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using YouKpiBackend.DbContexts;
 using YouKpiBackend.ModelsEntity;
+using YouKpiBackend.ViewModels;
 
 namespace YouKpiBackend.Controllers
 {
@@ -15,9 +17,12 @@ namespace YouKpiBackend.Controllers
     public class ProcessController : Controller
     {
         private readonly YoukpiContext _ctx;
-        public ProcessController(YoukpiContext ctx)
+        private readonly IMapper _mapper;
+
+        public ProcessController(YoukpiContext ctx, IMapper mapper)
         {
             _ctx = ctx;
+            _mapper = mapper;
         }
 
         [HttpGet("[action]")]
@@ -25,16 +30,20 @@ namespace YouKpiBackend.Controllers
         {
             try
             {
-                var res = await _ctx.Process
+                var lst = await _ctx.Process
                     .Include(p => p.Steps)
                     .Include(p => p.ProcessesProcessProcess)
                     .Include(p => p.ProcessCompetences)
                     .Include(p => p.ProcessCompetences)
                     .ThenInclude(p => p.CompetenceLevel)
-                    .Include(p => p.ProcessSubject)
-                    .Include(p =>p.ProcessArea)
+                    .Include(p => p.ProcessAreas)
+                    .ThenInclude(p => p.ProcessArea)
+                    .Include(p => p.ProcessSubjects)
+                    .ThenInclude(p => p.ProcessSubject)
                     .ToListAsync();
-                return Ok(res);
+
+                //todo var res = _mapper.Map<List<ProcessViewModel>>(lst);
+                return Ok(lst);
             }
             catch (Exception ex)
             {
@@ -77,6 +86,10 @@ namespace YouKpiBackend.Controllers
                     .Include(p => p.Steps)
                     .Include(p => p.ProcessesProcessProcess)
                     .Include(p => p.ProcessCompetences)
+                    .Include(p => p.ProcessAreas)
+                    .ThenInclude(p => p.ProcessArea)
+                    .Include(p => p.ProcessSubjects)
+                    .ThenInclude(p => p.ProcessSubject)
                     .FirstOrDefault(c => c.Id == entity.Id);
                 processEntity.Steps.ToList().ForEach(p =>
                 {
@@ -85,8 +98,6 @@ namespace YouKpiBackend.Controllers
 
                 processEntity.TypZlecenia = entity.TypZlecenia;
                 processEntity.BusinessArea = entity.BusinessArea;
-                processEntity.ProcessSubjectId = entity.ProcessSubjectId;
-                processEntity.ProcessAreaId = entity.ProcessAreaId;
                 processEntity.NazwaGrupyProcesu = entity.NazwaGrupyProcesu;
                 processEntity.NazwaProcesu = entity.NazwaProcesu;
                 processEntity.Steps = entity.Steps;
@@ -98,6 +109,32 @@ namespace YouKpiBackend.Controllers
                 entity.ProcessesProcessProcess.ToList().ForEach(p =>
                 {
                     _ctx.ProcessesProcess.Add(p);
+                });
+
+                processEntity.ProcessSubjects.ToList().ForEach(p =>
+                {
+                    _ctx.Entry(p).State = EntityState.Deleted;
+                });
+
+                entity.ProcessSubjects.ToList().ForEach(p =>
+                {
+                    p.ProcessSubjectId = p.Id;
+                    p.Id = 0;
+                    p.ProcessId = entity.Id;
+                    _ctx.ProcessesProcessSubjects.Add(p);
+                });
+
+                processEntity.ProcessAreas.ToList().ForEach(p =>
+                {
+                    _ctx.Entry(p).State = EntityState.Deleted;
+                });
+
+                entity.ProcessAreas.ToList().ForEach(p =>
+                {
+                    p.ProcessAreaId = p.Id;
+                    p.Id = 0;
+                    p.ProcessId = entity.Id;
+                    _ctx.ProcessesProcessAreas.Add(p);
                 });
 
                 processEntity.ProcessCompetences.ToList().ForEach(p =>

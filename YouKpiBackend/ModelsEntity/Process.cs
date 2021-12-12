@@ -15,6 +15,8 @@ namespace YouKpiBackend.ModelsEntity
             ProcessesProcessRelatedProcess = new HashSet<ProcessesProcess>();
             Steps = new HashSet<Steps>();
             ProcessCompetences = new HashSet<ProcessCompetences>();
+            ProcessSubjects = new HashSet<ProcessesProcessSubjects>();
+            ProcessAreas = new HashSet<ProcessesProcessAreas>();
         }
 
         public string Id { get; set; }
@@ -24,12 +26,8 @@ namespace YouKpiBackend.ModelsEntity
         public string KontoGłówne { get; set; }
         public string TypZlecenia { get; set; }
 
-        public int? ProcessSubjectId { get; set; }
-        public virtual ProcessSubject ProcessSubject { get; set; }
-
-        public int? ProcessAreaId { get; set; }
-        public virtual ProcessArea ProcessArea { get; set; }
-
+        public virtual ICollection<ProcessesProcessSubjects> ProcessSubjects { get; set; }
+        public virtual ICollection<ProcessesProcessAreas> ProcessAreas { get; set; }
         public virtual ICollection<OfferLineProcess> OfferLineProcess { get; set; }
         public virtual ICollection<OfferProcess> OfferProcess { get; set; }
         public virtual ICollection<PracownikCzasStep> PracownikCzasStep { get; set; }

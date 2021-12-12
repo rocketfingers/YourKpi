@@ -40,10 +40,12 @@
               :rules="[requiredRule]"
               label="Process area"
               :items="processesAreas"
-              item-value="id"
               item-text="nazwa"
+              return-object
+              multiple
               required
-              v-model="editedProcess.processAreaId"
+              clearable
+              v-model="editedProcess.processAreas"
             ></v-autocomplete>
           </v-flex>
         </v-layout>
@@ -96,11 +98,13 @@
               color
               :rules="[requiredRule]"
               label="Process subject"
+              multiple
+              clearable
               :items="processesSubjects"
-              item-value="id"
+              return-object
               item-text="nazwa"
               required
-              v-model="editedProcess.processSubjectId"
+              v-model="editedProcess.processSubjects"
             ></v-autocomplete>
           </v-flex>
         </v-layout>
