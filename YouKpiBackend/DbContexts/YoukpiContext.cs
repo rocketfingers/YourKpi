@@ -871,6 +871,10 @@ namespace YouKpiBackend.DbContexts
                     .IsFixedLength()
                     .HasDefaultValueSql("('R')");
 
+                entity.HasOne(d => d.ProcessManager)
+                    .WithMany(p => p.ManagerOfProcesses)
+                    .HasForeignKey(d => d.ProcessManagerId)
+                    .HasConstraintName("FK_Process_ManagerOfProcess");
             });
             modelBuilder.Entity<ProcessesProcessSubjects>(entity =>
             {

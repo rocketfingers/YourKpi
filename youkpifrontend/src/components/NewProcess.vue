@@ -48,6 +48,20 @@
               v-model="editedProcess.processAreas"
             ></v-autocomplete>
           </v-flex>
+          <v-flex xs12>
+            <v-autocomplete
+              outlined
+              color
+              :rules="[requiredRule]"
+              label="Menedżer procesu"
+              :items="employees"
+              item-text="name"
+              item-value="id"
+              required
+              clearable
+              v-model="editedProcess.processManagerId"
+            ></v-autocomplete>
+          </v-flex>
         </v-layout>
       </v-flex>
       <v-flex xs1> </v-flex>
@@ -140,6 +154,7 @@ export default {
     editMode: Boolean,
     processes: Array,
     processesAreas: Array,
+    employees: Array,
     processesSubjects: Array
   },
   data () {

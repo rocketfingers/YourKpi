@@ -50,6 +50,7 @@
                 :processes="items"
                 :processesSubjects="processesSubjects"
                 :processesAreas="processesAreas"
+                :employees="employees"
                 @editedProcess="editedProcessRes"
               ></NewProcess>
             </v-form>
@@ -207,6 +208,7 @@ export default {
       getAllProcessesSubjects: 'api/ProcessSubject/GetAll',
       deleteProcessApi: 'api/Process/Delete',
       editProcessApi: 'api/Process/Update',
+      getAllEmployess: 'api/Users/GetAll',
       showCompetencesDialog: false,
       expanded: [],
       headers: [
@@ -244,6 +246,14 @@ export default {
         .get(this.getAllProcessesAreas)
         .then((Response) => {
           this.processesAreas = Response.data
+          this.getEmployeesFromApi()
+        })
+    },
+    getEmployeesFromApi () {
+      this.$http
+        .get(this.getAllEmployess)
+        .then((Response) => {
+          this.employees = Response.data
           this.getProcessesSubjectsFromApi()
         })
     },

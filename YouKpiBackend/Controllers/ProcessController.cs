@@ -40,6 +40,7 @@ namespace YouKpiBackend.Controllers
                     .ThenInclude(p => p.ProcessArea)
                     .Include(p => p.ProcessSubjects)
                     .ThenInclude(p => p.ProcessSubject)
+                    .Include(p => p.ProcessManager)
                     .ToListAsync();
 
                 //todo var res = _mapper.Map<List<ProcessViewModel>>(lst);
@@ -90,6 +91,7 @@ namespace YouKpiBackend.Controllers
                     .ThenInclude(p => p.ProcessArea)
                     .Include(p => p.ProcessSubjects)
                     .ThenInclude(p => p.ProcessSubject)
+                    .Include(p => p.ProcessManager)
                     .FirstOrDefault(c => c.Id == entity.Id);
                 processEntity.Steps.ToList().ForEach(p =>
                 {
@@ -101,6 +103,7 @@ namespace YouKpiBackend.Controllers
                 processEntity.NazwaGrupyProcesu = entity.NazwaGrupyProcesu;
                 processEntity.NazwaProcesu = entity.NazwaProcesu;
                 processEntity.Steps = entity.Steps;
+                processEntity.ProcessManagerId = entity.ProcessManagerId;
                 processEntity.ProcessesProcessProcess.ToList().ForEach(p =>
                 {
                     _ctx.Entry(p).State = EntityState.Deleted;
