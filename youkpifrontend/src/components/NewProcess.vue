@@ -99,9 +99,9 @@
               label="Procesy powiązane (SLA)"
               :items="processes"
               item-text="showName"
-              multiple
               item-value="id"
               required
+              @change="connectedProcessesChange(editedProcess.procesyPowiazane)"
               clearable
               v-model="editedProcess.procesyPowiazane"
             ></v-autocomplete>
@@ -174,6 +174,46 @@ export default {
     }
   },
   methods: {
+    connectedProcessesChange (connectedProcess) {
+      if (!this.editedProcess.id) {
+        this.$dialog.confirm({
+          text: 'Dodaj id procesu!',
+          title: 'Uwaga'
+        })
+        this.editedProcess.procesyPowiazane = null
+      } else {
+        var connectedProcessObj = this.processes.find(p => p.id === connectedProcess)
+        if (!this.editedProcess.steps || connectedProcessObj.steps.length === 0) {
+          this.$dialog.confirm({
+            text: 'Brak zdefiniowanych kroków w procesie: ' + connectedProcess + '. Aby powiązać ten proces najpierw zdefiniuj jego kroki!',
+            title: 'Uwaga'
+          })
+          this.editedProcess.steps = []
+        } else {
+          this.editedProcess.steps = []
+          const lastStep = connectedProcessObj.steps.reduce((max, step) => max.stepNum > step.stepNum ? max : step)
+          lastStep.stepNum = 0
+          lastStep.isEdited = false
+          this.editedProcess.steps.push(lastStep)
+
+          for (var i = 1; i <= 10; i++) {
+            var newStep =
+           {
+             id: 0,
+             stepId: this.editedProcess.id + '.' + i,
+             tempId: -1 - i,
+             actions: '',
+             isEdited: true,
+             stepName: '',
+             stepNum: i,
+             processesId: this.editedProcess.id
+           }
+
+            this.editedProcess.steps.push(newStep)
+          }
+        }
+      }
+    }
     // editOfferProcesses (offer, selectedProcesses) {
     //   if (this.editedProcess) {
     //     if (this.editedProcess.id === offer.id) {

@@ -275,7 +275,9 @@ export default {
             p.showName = p.id + ', ' + p.nazwaProcesu
             p.procesyPowiazane = []
             p.processesProcessProcess.forEach(pprp => {
-              p.procesyPowiazane.push(pprp.relatedProcessId)
+              // TODO zmieniono wymagania - ze bedzie tylko jeden powiązany proces
+              // to chyba jeszcze nie jest pewne....
+              p.procesyPowiazane = pprp.relatedProcessId
             })
             p.processAreas = this.processesAreas.filter(
               pa => (p.processAreas.find(pra => pra.processAreaId === pa.id))
@@ -310,7 +312,9 @@ export default {
       } else {
         var relatedProcesses = []
         var $this = this
-
+        if (!Array.isArray(this.editedProcess.procesyPowiazane)) {
+          this.editedProcess.procesyPowiazane = [this.editedProcess.procesyPowiazane]
+        }
         this.editedProcess.procesyPowiazane.forEach(p => {
           var processInRelated = $this.editedProcess?.processesProcessProcess?.find(ppp => ppp.relatedProcessId === p)
           if (!processInRelated) {

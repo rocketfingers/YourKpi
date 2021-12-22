@@ -59,14 +59,14 @@
             class="elevation-1"
             v-model="search"
           ></v-text-field>
-          <v-btn
+          <!-- <v-btn
             color="primary"
             dark
             class="mb-2"
             @click="addStepToProcess()"
             v-if="!readonly"
             >Dodaj</v-btn
-          >
+          > -->
         </v-toolbar>
         <v-data-table
           :headers="headers"
@@ -74,6 +74,7 @@
           :expanded.sync="expanded"
           item-key="tempId"
           :search="search"
+          :footer-props="footer"
           disable-sort
           calculate-widths
         >
@@ -104,7 +105,9 @@
                         <template v-slot:activator="{ on }">
                           <v-icon
                             v-on="on"
-                            v-show="!props.item.isEdited"
+                            v-show="
+                              !props.item.isEdited && props.item.stepNum !== 0
+                            "
                             @click="editOffer(props.item, index)"
                             color="green"
                             class="mr-2"
@@ -114,7 +117,7 @@
                         <span>Edytuj</span>
                       </v-tooltip>
                     </v-flex>
-                    <v-flex xs4>
+                    <!-- <v-flex xs4>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
                           <v-icon
@@ -126,7 +129,7 @@
                         </template>
                         <span>Usuń</span>
                       </v-tooltip>
-                    </v-flex>
+                    </v-flex> -->
                   </v-layout>
                 </td>
                 <td :key="index" v-else-if="header.value === 'expand'">
@@ -151,6 +154,7 @@
                       :rules="[requiredRule]"
                     ></v-text-field>
                     <v-text-field
+                      :disabled="true"
                       v-else-if="header.value == 'stepNum'"
                       v-model="props.item.stepNum"
                       @input="caluculateStepId(props.item)"
@@ -229,6 +233,7 @@ export default {
   },
   data () {
     return {
+
       headers: [
         { text: 'Id', value: 'stepId', visible: true },
         { text: 'Nazwa', value: 'stepName', visible: true },

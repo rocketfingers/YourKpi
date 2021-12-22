@@ -32,6 +32,7 @@ namespace YouKpiBackend.Controllers
             {
                 var lst = await _ctx.Process
                     .Include(p => p.Steps)
+                    //TODO przerobić jeśli będzie potwierdzenie, że powiązany moze być tylko jeden proces
                     .Include(p => p.ProcessesProcessProcess)
                     .Include(p => p.ProcessCompetences)
                     .Include(p => p.ProcessCompetences)
